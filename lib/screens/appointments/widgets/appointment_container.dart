@@ -157,7 +157,7 @@ class _AppointmentContainerState extends State<AppointmentContainer> {
                                     Row(
                                       children: [
                                         Text(
-                                          "Order #${appointmentsProvider.appointments![index].id.toString()}",
+                                          "Order #${appointmentsProvider.appointments![index].appointmentNumber.toString()}",
                                           style: TextStyle(
                                               fontFamily: 'futuraMd',
                                               fontWeight: FontWeight.bold),
@@ -240,15 +240,24 @@ class _AppointmentContainerState extends State<AppointmentContainer> {
                                               )
                                       ],
                                     ),
-                                    Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.location_on,
-                                          size: 27,
-                                        ),
-                                        Text(
-                                            "${appointmentsProvider.appointments![index].clientLocation!.description}")
-                                      ],
+                                    InkWell(
+                                      onTap: (){
+                                        print("off a7");
+                                        Provider.of<AppointmentsProvider>(context, listen: false)
+                                            .launchLocationOnGoogleMap(appointmentsProvider.appointments![index].clientLocation!.latitude.toString(),
+                                            appointmentsProvider.appointments![index].clientLocation!.longitude.toString()
+                                        );
+                                      },
+                                      child: Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.location_on,
+                                            size: 27,
+                                          ),
+                                          Text(
+                                              "${appointmentsProvider.appointments![index].clientLocation!.description}")
+                                        ],
+                                      ),
                                     ),
                                     appointmentsProvider
                                                 .appointments![index].status !=

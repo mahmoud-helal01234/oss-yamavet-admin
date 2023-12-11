@@ -274,6 +274,10 @@ class _OfferScreenState extends State<OfferScreen> {
                             children: [
                               GestureDetector(
                                   onTap: () {
+                                    setState(() {
+                                      linkController.text = sliderOffersProvider.sliderOffers![index].link!;
+
+                                    });
                                     dialogBuilder(
                                         context,
                                         "https://yama-vet.com/${sliderOffersProvider.sliderOffers[index].imgPath}",
@@ -303,11 +307,7 @@ class _OfferScreenState extends State<OfferScreen> {
                                               ImagePickerOptions(
                                                   imageQuality: 65),
                                           onChange: (file) {
-                                            print(
-                                                "I changed the file to: ${file.path}");
-                                            setState(() {
-                                              updated_file = File(file.path);
-                                            });
+
                                           },
                                         ),
                                         () async {

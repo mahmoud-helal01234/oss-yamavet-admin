@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker_widget/image_picker_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:yama_vet_admin/controllers/AppointmentsProvider.dart';
 import 'package:yama_vet_admin/controllers/CategoriesProvider.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
 import 'package:yama_vet_admin/core/utils/strings.dart';
@@ -185,6 +186,8 @@ class _EditCategoryState extends State<EditCategory> {
                             borderRadius: BorderRadius.circular(5)),
                         color: primary,
                         onPressed: () async {
+
+
                           setState(() {
                             id = categoriesProvider.categories[index].id;
                           });

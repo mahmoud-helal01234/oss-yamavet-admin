@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:yama_vet_admin/controllers/CategoriesProvider.dart';
 
 import '../core/utils/colors.dart';
 import '../data/models/dtos/Appointment.dart';
@@ -29,72 +31,18 @@ class AppointmentsProvider extends ChangeNotifier {
 
   String? statusFilter;
 
+  int? doctorIdFilter;
+
+
+
   UpdateAppointmentRequest? updateAppointmentRequest;
 
   int? selectedPetId = 0;
 
-  void toggleServiceIdToPetForUpdateAppointmentRequest(int serviceId) {
-    for (int index = 0;
-        index < updateAppointmentRequest!.petIds!.length;
-        index++) {
-      if (selectedPetId == updateAppointmentRequest!.petIds![index].petId) {
-        for (int serviceIndex = 0;
-            serviceIndex <
-                updateAppointmentRequest!.petIds![index].serviceIds!.length;
-            serviceIndex++) {
-          if (updateAppointmentRequest!
-                  .petIds![index].serviceIds![serviceIndex] ==
-              serviceId) {
-            updateAppointmentRequest!.petIds![index].serviceIds!
-                .removeAt(serviceIndex);
-            notifyListeners();
-            return;
-          }
-        }
-        updateAppointmentRequest!.petIds![index].serviceIds!.add(serviceId);
-        notifyListeners();
-        return;
-      }
-    }
-  }
+  void launchLocationOnGoogleMap(String lat,String long){
 
-  void initiateUpdateAppointmentRequest(int appointmentIndex) {
-    List<PetIds> petIds = [];
-    for (int index = 0;
-        index < appointments[appointmentIndex].appointmentDetails!.length;
-        index++) {
-      List<int> petServices = [];
-      for (int serviceIndex = 0;
-          serviceIndex <
-              appointments[appointmentIndex]
-                  .appointmentDetails![index]
-                  .services!
-                  .length;
-          serviceIndex++) {
-        petServices.add(appointments[appointmentIndex]
-            .appointmentDetails![index]
-            .services![serviceIndex]
-            .id!);
-      }
-
-      petIds.add(PetIds(
-          petId: appointments[appointmentIndex]
-              .appointmentDetails![index]
-              .pet!
-              .id!,
-          serviceIds: petServices));
-    }
-
-    updateAppointmentRequest = UpdateAppointmentRequest(
-        id: appointments[appointmentIndex].id.toString(),
-        locationId: 4.toString(),
-        price: appointments[appointmentIndex].price,
-        petIds: petIds);
-  }
-
-  void selectPet(int newPetId) {
-    selectedPetId = newPetId;
-    notifyListeners();
+      String url = "https://www.google.com/maps/search/?api=1&query=$lat,$long"  ;
+      launchUrl(Uri.parse(url));
   }
 
   void filterAppointments() {
@@ -132,35 +80,23 @@ class AppointmentsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Future update(BuildContext context,AddAppointmentRequest addAppointmentRequest) async {
-  //
-  //   await ApiService().post("appointment",
-  //       addAppointmentRequest.toJson(), context:context,componentName: "Appointment");
-  //
-  //   getAppointments(context);
-  // }
+  Future update(BuildContext context) async {
 
-  Future update(BuildContext context,
-      UpdateAppointmentRequest updateAppointmentRequest) async {
-    await ApiService().post(
-        "appointment/update", updateAppointmentRequest.toJson(),
-        context: context,
-        componentName: "Appointment",
-        operationName: "Updated");
+    await ApiService().post("appointment/update",
+        updateAppointmentRequest!.toJson(), context:context,componentName:
+        "Appointment",operationName: "Updated");
 
-    await getAppointments(context);
-    filterAppointments();
+    getAppointments(context);
   }
 
   Future accept(BuildContext context, int index) async {
-
     await ApiService().getAction(
         "appointment/accept/${Provider.of<AppointmentsProvider>(context, listen: false).appointments[index].id!}",
         context: context,
-        componentName: "Appointment",actionName: "Accepted");
+        componentName: "Appointment",
+        actionName: "Accepted");
     getAppointments(context);
     Navigator.pop(context);
-
   }
 
   void changeAppointmentStatusByIndex(int index, String status) {
@@ -192,8 +128,6 @@ class AppointmentsProvider extends ChangeNotifier {
   }
 
   isServiceIdForSelectedPetIdAndAppointmentUpdateRequest(int serviceId) {
-    print("tested");
-
     for (int i = 0; i < updateAppointmentRequest!.petIds!.length; i++) {
       if (updateAppointmentRequest!.petIds![i].petId == selectedPetId) {
         print(updateAppointmentRequest!.petIds![i].petId.toString() +
@@ -217,4 +151,94 @@ class AppointmentsProvider extends ChangeNotifier {
     }
     return false;
   }
+
+  void initiateUpdateAppointmentRequest(int appointmentIndex) {
+    List<PetIds> petIds = [];
+
+    for (int index = 0;
+        index < appointments[appointmentIndex].appointmentDetails!.length;
+        index++) {
+      List<int> petServices = [];
+
+      for (int serviceIndex = 0;
+          serviceIndex <
+              appointments[appointmentIndex]
+                  .appointmentDetails![index]
+                  .services!
+                  .length;
+          serviceIndex++) {
+        petServices.add(appointments[appointmentIndex]
+            .appointmentDetails![index]
+            .services![serviceIndex]
+            .id!);
+      }
+
+      petIds.add(PetIds(
+          petId: appointments[appointmentIndex]
+              .appointmentDetails![index]
+              .pet!
+              .id!,
+          serviceIds: petServices));
+    }
+
+    updateAppointmentRequest = UpdateAppointmentRequest(
+        id: appointments[appointmentIndex].id.toString(), petIds: petIds);
+
+    log("updateAppointmentRequest:");
+    log(jsonEncode(updateAppointmentRequest!.toJson()));
+  }
+
+  void toggleServiceIdToPetForUpdateAppointmentRequest(int serviceId) {
+    for (int index = 0;
+    index < updateAppointmentRequest!.petIds!.length;
+    index++) {
+      if (selectedPetId == updateAppointmentRequest!.petIds![index].petId) {
+        for (int serviceIndex = 0;
+        serviceIndex <
+            updateAppointmentRequest!.petIds![index].serviceIds!.length;
+        serviceIndex++) {
+          if (updateAppointmentRequest!
+              .petIds![index].serviceIds![serviceIndex] ==
+              serviceId) {
+            updateAppointmentRequest!.petIds![index].serviceIds!
+                .removeAt(serviceIndex);
+            notifyListeners();
+            return;
+          }
+        }
+        updateAppointmentRequest!.petIds![index].serviceIds!.add(serviceId);
+        notifyListeners();
+        return;
+      }
+    }
+    log("updateAppointmentRequest:");
+    log(jsonEncode(updateAppointmentRequest!.toJson()));
+  }
+
+  double calculateTotalForUpdateAppointmentRequest(context) {
+
+
+    double totalPrice = 0;
+    for (int i = 0; i < updateAppointmentRequest!.petIds!.length; i++) {
+
+      List<int> serviceIds = [];
+      for (int serviceIndex = 0;
+      serviceIndex <
+          updateAppointmentRequest!.petIds![i].serviceIds!.length;
+      serviceIndex++) {
+        serviceIds.add(
+            updateAppointmentRequest!.petIds![i].serviceIds![serviceIndex]);
+      }
+      totalPrice +=
+          Provider.of<CategoriesProvider>(context, listen: false)
+              .getTotalPriceForServiceIds(serviceIds);
+    }
+    return totalPrice;
+  }
+
+  void selectPet(int newPetId) {
+    selectedPetId = newPetId;
+    notifyListeners();
+  }
+
 }

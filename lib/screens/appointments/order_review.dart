@@ -104,7 +104,10 @@ class _OrderReviewState extends State<OrderReview> {
                               Consumer<AppointmentsProvider>(
                                   builder: (context, appointmentsProvider, child) {
                                     return Text(
-                                    "Appointments Overview #[${appointmentsProvider.appointments[widget.appointmentIndex].id}]",
+                                    "Appointments Overview #[${
+                                        appointmentsProvider.
+                                        appointments[widget.
+                                        appointmentIndex].appointmentNumber}]",
                                     style: TextStyle(
                                         fontFamily: 'futurBold',
                                         color: primary,
@@ -283,18 +286,18 @@ class _OrderReviewState extends State<OrderReview> {
                                       ),
                                     ],
                                   ),
-                                  Provider.of<AppointmentsProvider>(context, listen: true).appointments[widget.appointmentIndex].appointmentRate != null ?
+                                  Provider.of<AppointmentsProvider>(context, listen: true).appointments[widget.appointmentIndex].doctor!.totalRate != null ?
                                   Row(
                                     children: [
                                       Text(
-                                        Provider.of<AppointmentsProvider>(context, listen: true).appointments[widget.appointmentIndex].appointmentRate!.toString(),
+                                        Provider.of<AppointmentsProvider>(context, listen: true).appointments[widget.appointmentIndex].doctor!.totalRate!.toString(),
                                         style: const TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 20),
+                                            fontSize: 18),
                                       ),
                                       const Text(
                                         "/5",
-                                        style: TextStyle(fontSize: 15),
+                                        style: TextStyle(fontSize: 15 ),
                                       ),
                                     ],
                                   ) : Container(),

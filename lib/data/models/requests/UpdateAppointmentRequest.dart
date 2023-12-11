@@ -1,15 +1,13 @@
 class UpdateAppointmentRequest {
   String? id;
-  String? locationId;
-  int? price;
   List<PetIds>? petIds;
 
-  UpdateAppointmentRequest({this.id, this.locationId, this.price, this.petIds});
+  UpdateAppointmentRequest({this.id,  this.petIds});
 
   UpdateAppointmentRequest.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    locationId = json['location_id'];
-    price = json['price'];
+
+
     if (json['pet_ids'] != null) {
       petIds = <PetIds>[];
       json['pet_ids'].forEach((v) {
@@ -21,8 +19,7 @@ class UpdateAppointmentRequest {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['location_id'] = this.locationId;
-    data['price'] = this.price;
+
     if (this.petIds != null) {
       data['pet_ids'] = this.petIds!.map((v) => v.toJson()).toList();
     }

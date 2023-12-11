@@ -17,64 +17,65 @@ class FilterRow extends StatelessWidget {
           ? MainAxisAlignment.spaceEvenly
           : MainAxisAlignment.spaceAround,
       children: [
-        Row(
-          children: [
-            SizedBox(
-              width: mediaWidth > 650 ? .06 * mediaWidth : 0,
-            ),
-            MaterialButton(
-              minWidth: MediaQuery.sizeOf(context).width > 650 ? 70 : 50,
-              color: primary,
-              elevation: 5,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5)),
-              onPressed: () {
-                setDoctors();
-              },
-              child: const Text(
-                "Apply filter",
-                style: TextStyle(
-                    fontSize: 15, color: Colors.white, fontFamily: 'futur'),
-              ),
-            )
-          ],
-        ),
-        SizedBox(
-          width: mediaWidth > 650 ? .15 * mediaWidth : 0,
-        ),
-        Row(
-          children: [
-            Text(
-              "Total :",
-              style: TextStyle(
-                  fontSize: 20, color: primary, fontWeight: FontWeight.w600),
-            ),
-            const Text(
-              "8,000",
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 17),
-            ),
-            const Text(
-              " \$",
-              style:
-                  TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
-            )
-          ],
-        ),
-        SizedBox(
-          width: mediaWidth > 650 ? .1 * mediaWidth : 0,
-        ),
-        MaterialButton(
-          minWidth: MediaQuery.sizeOf(context).width > 650 ? 70 : 50,
-          color: primary,
-          elevation: 5,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-          onPressed: () {},
-          child: const Text(
-            "Clear filter",
-            style: TextStyle(
-                fontSize: 15, color: Colors.white, fontFamily: 'futur'),
-          ),
-        )
+        // Row(
+        //   children: [
+        //     SizedBox(
+        //       width: mediaWidth > 650 ? .06 * mediaWidth : 0,
+        //     ),
+        //     MaterialButton(
+        //       minWidth: MediaQuery.sizeOf(context).width > 650 ? 70 : 50,
+        //       color: primary,
+        //       elevation: 5,
+        //       shape: RoundedRectangleBorder(
+        //           borderRadius: BorderRadius.circular(5)),
+        //       onPressed: () {
+        //         setDoctors();
+        //       },
+        //       child: const Text(
+        //         "Apply filter",
+        //         style: TextStyle(
+        //             fontSize: 15, color: Colors.white, fontFamily: 'futur'),
+        //       ),
+        //     )
+        //   ],
+        // ),
+        // SizedBox(
+        //   width: mediaWidth > 650 ? .15 * mediaWidth : 0,
+        // ),
+        // Row(
+        //   children: [
+        //     Text(
+        //       "Total :",
+        //       style: TextStyle(
+        //           fontSize: 20, color: primary, fontWeight: FontWeight.w600),
+        //     ),
+        //     const Text(
+        //       "8,000",
+        //       style: TextStyle(fontWeight: FontWeight.w500, fontSize: 17),
+        //     ),
+        //     const Text(
+        //       " \$",
+        //       style:
+        //           TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
+        //     )
+        //   ],
+        // ),
+
+        // SizedBox(
+        //   width: mediaWidth > 650 ? .1 * mediaWidth : 0,
+        // ),
+        // MaterialButton(
+        //   minWidth: MediaQuery.sizeOf(context).width > 650 ? 70 : 50,
+        //   color: primary,
+        //   elevation: 5,
+        //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+        //   onPressed: () {},
+        //   child: const Text(
+        //     "Clear filter",
+        //     style: TextStyle(
+        //         fontSize: 15, color: Colors.white, fontFamily: 'futur'),
+        //   ),
+        // )
       ],
     );
   }

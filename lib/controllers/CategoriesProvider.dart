@@ -23,6 +23,19 @@ class CategoriesProvider extends ChangeNotifier {
     addServiceOpened = !addServiceOpened;
     notifyListeners();
   }
+  
+  double getTotalPriceForServiceIds(List<int> serviceIds){
+
+    double totalPrice = 0;
+    for(int index = 0;index < categories.length;index++){
+      for(int serviceIndex = 0;serviceIndex < categories[index].services!.length;serviceIndex++){
+        if(serviceIds.contains(categories[index].services![serviceIndex].id)) {
+          totalPrice += categories[index].services![serviceIndex].price!;
+        }
+      }
+    }
+    return totalPrice;
+  }
   void replace(List<Category> newCategories){
 
     categories = newCategories;
