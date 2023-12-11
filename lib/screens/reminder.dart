@@ -1,0 +1,390 @@
+import 'package:flutter/material.dart';
+import 'package:yama_vet_admin/core/utils/colors.dart';
+import 'package:yama_vet_admin/screens/menu.dart';
+import 'package:yama_vet_admin/widgets/client_row.dart';
+import 'package:yama_vet_admin/widgets/client_row_search.dart';
+import 'package:yama_vet_admin/widgets/reminder_body.dart';
+
+class ReminderScreen extends StatefulWidget {
+  const ReminderScreen({super.key});
+
+  @override
+  State<ReminderScreen> createState() => _ReminderScreenState();
+}
+
+class _ReminderScreenState extends State<ReminderScreen> {
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  bool selected = false;
+  @override
+  Widget build(BuildContext context) {
+    double mediaHeight = MediaQuery.sizeOf(context).height;
+    double mediaWidth = MediaQuery.sizeOf(context).height;
+    return Scaffold(
+        key: scaffoldKey,
+        backgroundColor: scaffoldColor,
+        drawer: const Drawer(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(50),
+                    bottomLeft: Radius.circular(40))),
+            width: 200,
+            child: MenuScreen()),
+        body: SafeArea(
+            child: Expanded(
+                child: SingleChildScrollView(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+              SizedBox(
+                height: .02 * MediaQuery.sizeOf(context).height,
+              ),
+              Row(children: [
+                SizedBox(
+                  width: .05 * MediaQuery.sizeOf(context).width,
+                ),
+                GestureDetector(
+                    onTap: () {
+                      scaffoldKey.currentState!.openDrawer();
+                    },
+                    child: Image.asset("assets/images/menuIcon.png")),
+              ]),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: mediaWidth > 650 ? 30 : 0,
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                        size: 20,
+                        weight: 100.5,
+                        color: Colors.black,
+                      )),
+                  SizedBox(
+                    width:
+                        mediaHeight > 900 ? .27 * mediaWidth : .1 * mediaWidth,
+                  ),
+                  Text(
+                    "Reminder",
+                    style: TextStyle(
+                        fontFamily: 'futurBold', color: primary, fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: mediaHeight > 900 ? 20 : 0,
+                  ),
+                ],
+              ),
+              Center(
+                child: MaterialButton(
+                  color: primary,
+                  minWidth: MediaQuery.sizeOf(context).width > 650
+                      ? .9 * MediaQuery.sizeOf(context).width
+                      : .9 * MediaQuery.sizeOf(context).width,
+                  elevation: 10,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)),
+                  onPressed: () {
+                    dialogBuilder(context, false);
+                  },
+                  child: const Text(
+                    "Send Reminder",
+                    style: TextStyle(
+                        fontSize: 17, color: Colors.white, fontFamily: 'futur'),
+                  ),
+                ),
+              ),
+              ReminderBody(
+                doctorName: 'Rachel Green',
+                sendDate: 'sent : 17/5/2023',
+                text: """Hi Rachel Green,
+We hope you and your furry friend are doing well. A friendly reminder about your pet's upcoming health check-in on [20/7/2023] at [1:23 pm]. Ensure your pet is comfortable, and feel free to jot down any specific concerns or questions.""",
+                width: MediaQuery.sizeOf(context).width > 650
+                    ? .7 * mediaWidth
+                    : .9 * MediaQuery.sizeOf(context).width,
+                height: MediaQuery.sizeOf(context).width > 650 ? 200 : 150,
+                textAlign: TextAlign.center,
+              ),
+              ReminderBody(
+                doctorName: 'Monica Geller',
+                sendDate: 'sent : 15/5/2023',
+                text: "Pet Health Check-in Tomorrow!",
+                width: mediaWidth > 650 ? .7 * mediaWidth : .45 * mediaWidth,
+                height: mediaWidth > 650 ? 50 : 40,
+                textAlign: TextAlign.start,
+              ),
+              ReminderBody(
+                doctorName: 'Rachel Green',
+                sendDate: 'sent : 17/5/2023',
+                text: """Hi Rachel Green,
+We hope you and your furry friend are doing well. A friendly reminder about your pet's upcoming health check-in on [20/7/2023] at [1:23 pm]. Ensure your pet is comfortable, and feel free to jot down any specific concerns or questions.""",
+                width: mediaWidth > 650 ? .7 * mediaWidth : .45 * mediaWidth,
+                height: mediaWidth > 650 ? 200 : 180,
+                textAlign: TextAlign.center,
+              ),
+            ])))));
+  }
+}
+
+Future<void> dialogBuilder(BuildContext context, bool selected) {
+  bool ontap = false;
+
+  double mediaHeight = MediaQuery.sizeOf(context).height; //!900
+  double mediaWidth = MediaQuery.sizeOf(context).width; //!400
+  return showDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder:
+              (BuildContext context, void Function(void Function()) setState) {
+            return GestureDetector(
+              child: Card(
+                margin: EdgeInsets.only(
+                    top: ontap ? 20 : .45 * mediaHeight,
+                    bottom: ontap ? 150 : 0),
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30))),
+                elevation: 30,
+                // color: Colors.white,
+                child: GestureDetector(
+                  child: Container(
+                    width: mediaWidth,
+                    height: .5 * mediaHeight,
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(30),
+                            topRight: Radius.circular(30)),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black54,
+                              spreadRadius: 1,
+                              blurRadius: 20)
+                        ]),
+                    child: Column(children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          Container(
+                            width: 50,
+                            height: 55,
+                            decoration: BoxDecoration(
+                                color: primary,
+                                borderRadius: BorderRadius.circular(5)),
+                            child: Center(
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 10),
+                                child:
+                                    Image.asset("assets/images/female_one.png"),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          const Text(
+                            "Select Client \n\n",
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                          const Spacer(),
+                          IconButton(
+                              onPressed: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (
+                                      BuildContext context,
+                                    ) {
+                                      return StatefulBuilder(
+                                        builder: (BuildContext context,
+                                            void Function(void Function())
+                                                setState) {
+                                          return Dialog(
+                                            alignment: Alignment.bottomRight,
+                                            backgroundColor:
+                                                const Color(0xffefefef),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        10)), //this right here
+                                            child: Container(
+                                              height: 350,
+                                              width: mediaWidth,
+                                              decoration: BoxDecoration(
+                                                  color:
+                                                      const Color(0xffefefef),
+                                                  border: Border.all(
+                                                      color: primary)),
+                                              child: SingleChildScrollView(
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    // Container(
+                                                    //   width: mediaWidth > 650
+                                                    //       ? 900
+                                                    //       : 600,
+                                                    //   height: 40,
+                                                    //   decoration: BoxDecoration(
+                                                    //       color: const Color(
+                                                    //           0xffefefef),
+                                                    //       border: Border.all(
+                                                    //           color: primary)),
+                                                    //   child: TextField(
+                                                    //     decoration:
+                                                    //         InputDecoration(
+                                                    //             border:
+                                                    //                 InputBorder
+                                                    //                     .none,
+                                                    //             prefixIcon:
+                                                    //                 RotatedBox(
+                                                    //                     quarterTurns:
+                                                    //                         1,
+                                                    //                     child:
+                                                    //                         Icon(
+                                                    //                       Icons
+                                                    //                           .search,
+                                                    //                       color:
+                                                    //                           primary,
+                                                    //                     )),
+                                                    //             hintText:
+                                                    //                 'Search Client by Name ',
+                                                    //             hintStyle: TextStyle(
+                                                    //                 color: Colors
+                                                    //                         .grey[
+                                                    //                     500],
+                                                    //                 fontWeight:
+                                                    //                     FontWeight
+                                                    //                         .w500,
+                                                    //                 fontSize:
+                                                    //                     15)),
+                                                    //   ),
+                                                    // ),
+                                                    SizedBox(
+                                                      height: mediaWidth > 650
+                                                          ? 20
+                                                          : 10,
+                                                    ),
+                                                    //*
+                                                    ClientSearch(),
+                                                    Divider(
+                                                      color: Colors.white,
+                                                      thickness: 2,
+                                                    ),
+                                                    ClientSearch(),
+                                                    Divider(
+                                                      color: Colors.white,
+                                                      thickness: 2,
+                                                    ),
+                                                    ClientSearch(),
+                                                    Divider(
+                                                      color: Colors.white,
+                                                      thickness: 2,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    });
+                              },
+                              icon: const Icon(
+                                Icons.arrow_forward_ios,
+                                color: Colors.grey,
+                              ))
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          const Text(
+                            "DD/MM/YY",
+                            style: TextStyle(
+                                color: Colors.grey,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          const Spacer(),
+                          Container(
+                            margin: EdgeInsets.only(
+                                right: mediaWidth > 650 ? 30 : 10),
+                            width: 30,
+                            height: 30,
+                            decoration: BoxDecoration(
+                                color: primary,
+                                borderRadius: BorderRadius.circular(5)),
+                            child: const Icon(
+                              Icons.calendar_month_outlined,
+                              color: Colors.white,
+                            ),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      GestureDetector(
+                        child: Container(
+                          width: .9 * mediaWidth,
+                          height: 170,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: Colors.grey)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: GestureDetector(
+                              child: TextField(
+                                onTap: () {
+                                  setState(
+                                    () {
+                                      ontap = !ontap;
+                                    },
+                                  );
+                                },
+                                onSubmitted: (value) {
+                                  setState(
+                                    () {
+                                      ontap = !ontap;
+                                    },
+                                  );
+                                },
+                                decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: 'Reminder message...',
+                                    hintStyle: TextStyle(
+                                      color: Colors.grey,
+                                    )),
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    ]),
+                  ),
+                ),
+              ),
+            );
+          },
+        );
+      });
+}
