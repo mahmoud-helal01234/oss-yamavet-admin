@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yama_vet_admin/controllers/CategoriesProvider.dart';
@@ -68,7 +69,7 @@ class _UpdateServicesState extends State<UpdateService> {
               width: .9 * mediaWidth,
               height: .2 * mediaHeight,
               decoration:
-                  BoxDecoration(border: Border.all(color: primary, width: 2)),
+                  BoxDecoration(border: Border.all(color: primary, width: 2.w)),
               child: Consumer<CategoriesProvider>(
                   builder: (context, categoriesProvider, child) {
                     return ListView.builder(
@@ -78,7 +79,7 @@ class _UpdateServicesState extends State<UpdateService> {
                         child: Column(
                           children: [
                             SizedBox(
-                              height: 20,
+                              height: 20.h,
                             ),
                             InkWell(
                               onTap: () {},
@@ -86,22 +87,22 @@ class _UpdateServicesState extends State<UpdateService> {
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
                                   Container(
-                                    width: mediaWidth > 650 ? 400 : 235,
-                                    height: mediaWidth > 650 ? 40 : 30,
+                                    width: mediaWidth > 650 ? 400.w : 235.w,
+                                    height: mediaWidth > 650 ? 40.h : 30.h,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
+                                        borderRadius: BorderRadius.circular(5.sp),
                                         border: Border.all(color: Colors.grey)),
                                     child: Padding(
                                       padding: EdgeInsets.only(
-                                          left: 5,
-                                          top: 2,
-                                          bottom: mediaWidth > 650 ? 5 : 0),
+                                          left: 5.w,
+                                          top: 2.h,
+                                          bottom: mediaWidth > 650 ? 5.h : 0),
                                       child: TextField(
                                         controller: name_en,
                                         decoration: InputDecoration(
                                             border: InputBorder.none,
                                             hintStyle: TextStyle(
-                                                fontSize: 14,
+                                                fontSize: 14.sp,
                                                 color: Colors.grey,
                                                 fontWeight: FontWeight.w500),
                                             hintText:
@@ -110,19 +111,19 @@ class _UpdateServicesState extends State<UpdateService> {
                                     ),
                                   ),
                                   Container(
-                                    width: mediaWidth > 650 ? 100 : 80,
-                                    height: 30,
+                                    width: mediaWidth > 650 ? 100.w : 80.w,
+                                    height: 30.h,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
+                                        borderRadius: BorderRadius.circular(5.sp),
                                         border: Border.all(color: Colors.grey)),
                                     child: Padding(
-                                      padding: EdgeInsets.only(left: 5),
+                                      padding: EdgeInsets.only(left: 5.w),
                                       child: TextField(
                                         controller: price,
                                         decoration: InputDecoration(
                                             border: InputBorder.none,
                                             hintStyle: TextStyle(
-                                                fontSize: 14,
+                                                fontSize: 14.sp,
                                                 color: Colors.grey,
                                                 fontWeight: FontWeight.w500),
                                             hintText: '35\t\t\t\t\t\t\t\t \$'),
@@ -133,20 +134,20 @@ class _UpdateServicesState extends State<UpdateService> {
                               ),
                             ),
                             SizedBox(
-                              height: 10,
+                              height: 10.h,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Container(
-                                  width: mediaWidth > 650 ? 400 : 235,
-                                  height: mediaWidth > 650 ? 40 : 30,
+                                  width: mediaWidth > 650 ? 400.w : 235.w,
+                                  height: mediaWidth > 650 ? 40.h : 30.h,
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
+                                      borderRadius: BorderRadius.circular(5.sp),
                                       border: Border.all(color: Colors.grey)),
                                   child: Padding(
                                     padding: EdgeInsets.only(
-                                        right: 5, top: mediaWidth > 650 ? 15 : 10),
+                                        right: 5.w, top: mediaWidth > 650 ? 15.h : 10.h),
                                     child: TextField(
                                       controller: name_ar,
                                       textDirection: TextDirection.rtl,
@@ -154,7 +155,7 @@ class _UpdateServicesState extends State<UpdateService> {
 
                                           border: InputBorder.none,
                                           hintStyle: TextStyle(
-                                              fontSize: 15,
+                                              fontSize: 15.sp,
                                               color: Colors.grey,
                                               fontWeight: FontWeight.w500),
                                           hintText: 'تطعيم الكلاب ضد الانفلونزا',
@@ -165,7 +166,7 @@ class _UpdateServicesState extends State<UpdateService> {
                               ],
                             ),
                             SizedBox(
-                              height: mediaWidth > 650 ? 10 : 0,
+                              height: mediaWidth > 650 ? 10.h : 0,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -173,9 +174,9 @@ class _UpdateServicesState extends State<UpdateService> {
                                 MaterialButton(
                                   elevation: 5,
                                   shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5)),
+                                      borderRadius: BorderRadius.circular(5.sp)),
                                   minWidth: .57 * mediaWidth,
-                                  height: mediaWidth > 650 ? 35 : 30,
+                                  height: mediaWidth > 650 ? 35.h : 30.h,
                                   color: primary,
                                   onPressed: () async {
 
@@ -193,7 +194,7 @@ class _UpdateServicesState extends State<UpdateService> {
                                     style: TextStyle(
                                         fontFamily: 'futur',
                                         color: Colors.white,
-                                        fontSize: 17),
+                                        fontSize: 17.sp),
                                   ),
                                 ),
                                 MaterialButton(
@@ -203,7 +204,7 @@ class _UpdateServicesState extends State<UpdateService> {
                                   minWidth: mediaWidth > 650
                                       ? .2 * mediaWidth
                                       : .08 * mediaWidth,
-                                  height: 30,
+                                  height: 30.h,
                                   color: Colors.red,
                                   onPressed: () {
                                     Provider.of<CategoriesProvider>(context, listen: false)
@@ -214,7 +215,7 @@ class _UpdateServicesState extends State<UpdateService> {
                                     style: TextStyle(
                                         fontFamily: 'futur',
                                         color: Colors.white,
-                                        fontSize: 17),
+                                        fontSize: 17.sp),
                                   ),
                                 ),
                               ],

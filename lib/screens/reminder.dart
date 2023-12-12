@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
 import 'package:yama_vet_admin/screens/menu.dart';
 import 'package:yama_vet_admin/widgets/client_row.dart';
@@ -22,112 +23,111 @@ class _ReminderScreenState extends State<ReminderScreen> {
     return Scaffold(
         key: scaffoldKey,
         backgroundColor: scaffoldColor,
-        drawer: const Drawer(
+        drawer:  Drawer(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(50),
-                    bottomLeft: Radius.circular(40))),
-            width: 200,
+                    topLeft: Radius.circular(50.sp),
+                    bottomLeft: Radius.circular(40.sp))),
+            width: 200.w,
             child: MenuScreen()),
         body: SafeArea(
-            child: Expanded(
-                child: SingleChildScrollView(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+            child: SingleChildScrollView(
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                          SizedBox(
+            height: .02 * MediaQuery.sizeOf(context).height,
+                          ),
+                          Row(children: [
+            SizedBox(
+              width: .05 * MediaQuery.sizeOf(context).width,
+            ),
+            GestureDetector(
+                onTap: () {
+                  scaffoldKey.currentState!.openDrawer();
+                },
+                child: Image.asset("assets/images/menuIcon.png")),
+                          ]),
+                           SizedBox(
+            height: 20.h,
+                          ),
+                          Row(
+            children: [
               SizedBox(
-                height: .02 * MediaQuery.sizeOf(context).height,
+                width: mediaWidth > 650 ? 30.w : 0,
               ),
-              Row(children: [
-                SizedBox(
-                  width: .05 * MediaQuery.sizeOf(context).width,
-                ),
-                GestureDetector(
-                    onTap: () {
-                      scaffoldKey.currentState!.openDrawer();
-                    },
-                    child: Image.asset("assets/images/menuIcon.png")),
-              ]),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: mediaWidth > 650 ? 30 : 0,
-                  ),
-                  IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(
-                        Icons.arrow_back_ios_new_rounded,
-                        size: 20,
-                        weight: 100.5,
-                        color: Colors.black,
-                      )),
-                  SizedBox(
-                    width:
-                        mediaHeight > 900 ? .27 * mediaWidth : .1 * mediaWidth,
-                  ),
-                  Text(
-                    "Reminder",
-                    style: TextStyle(
-                        fontFamily: 'futurBold', color: primary, fontSize: 20),
-                  ),
-                  SizedBox(
-                    height: mediaHeight > 900 ? 20 : 0,
-                  ),
-                ],
-              ),
-              Center(
-                child: MaterialButton(
-                  color: primary,
-                  minWidth: MediaQuery.sizeOf(context).width > 650
-                      ? .9 * MediaQuery.sizeOf(context).width
-                      : .9 * MediaQuery.sizeOf(context).width,
-                  elevation: 10,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5)),
+              IconButton(
                   onPressed: () {
-                    dialogBuilder(context, false);
+                    Navigator.pop(context);
                   },
-                  child: const Text(
-                    "Send Reminder",
-                    style: TextStyle(
-                        fontSize: 17, color: Colors.white, fontFamily: 'futur'),
-                  ),
-                ),
+                  icon:  Icon(
+                    Icons.arrow_back_ios_new_rounded,
+                    size: 20.sp,
+                    weight: 100.5,
+                    color: Colors.black,
+                  )),
+              SizedBox(
+                width:
+                    mediaHeight > 900 ? .27 * mediaWidth : .1 * mediaWidth,
               ),
-              ReminderBody(
-                doctorName: 'Rachel Green',
-                sendDate: 'sent : 17/5/2023',
-                text: """Hi Rachel Green,
-We hope you and your furry friend are doing well. A friendly reminder about your pet's upcoming health check-in on [20/7/2023] at [1:23 pm]. Ensure your pet is comfortable, and feel free to jot down any specific concerns or questions.""",
-                width: MediaQuery.sizeOf(context).width > 650
-                    ? .7 * mediaWidth
-                    : .9 * MediaQuery.sizeOf(context).width,
-                height: MediaQuery.sizeOf(context).width > 650 ? 200 : 150,
-                textAlign: TextAlign.center,
+              Text(
+                "Reminder",
+                style: TextStyle(
+                    fontFamily: 'futurBold', color: primary, fontSize: 20.sp),
               ),
-              ReminderBody(
-                doctorName: 'Monica Geller',
-                sendDate: 'sent : 15/5/2023',
-                text: "Pet Health Check-in Tomorrow!",
-                width: mediaWidth > 650 ? .7 * mediaWidth : .45 * mediaWidth,
-                height: mediaWidth > 650 ? 50 : 40,
-                textAlign: TextAlign.start,
+              SizedBox(
+                height: mediaHeight > 900 ? 20.sp : 0,
               ),
-              ReminderBody(
-                doctorName: 'Rachel Green',
-                sendDate: 'sent : 17/5/2023',
-                text: """Hi Rachel Green,
-We hope you and your furry friend are doing well. A friendly reminder about your pet's upcoming health check-in on [20/7/2023] at [1:23 pm]. Ensure your pet is comfortable, and feel free to jot down any specific concerns or questions.""",
-                width: mediaWidth > 650 ? .7 * mediaWidth : .45 * mediaWidth,
-                height: mediaWidth > 650 ? 200 : 180,
-                textAlign: TextAlign.center,
+            ],
+                          ),
+                          Center(
+            child: MaterialButton(
+              color: primary,
+              minWidth: MediaQuery.sizeOf(context).width > 650
+                  ? .9 * MediaQuery.sizeOf(context).width
+                  : .9 * MediaQuery.sizeOf(context).width,
+              elevation: 10,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.sp)),
+              onPressed: () {
+                dialogBuilder(context, false);
+              },
+              child:  Text(
+                "Send Reminder",
+                style: TextStyle(
+                    fontSize: 17.sp, color: Colors.white, fontFamily: 'futur'),
               ),
-            ])))));
+            ),
+                          ),
+                          ReminderBody(
+            doctorName: 'Rachel Green',
+            sendDate: 'sent : 17/5/2023',
+            text: """Hi Rachel Green,
+            We hope you and your furry friend are doing well. A friendly reminder about your pet's upcoming health check-in on [20/7/2023] at [1:23 pm]. Ensure your pet is comfortable, and feel free to jot down any specific concerns or questions.""",
+            width: MediaQuery.sizeOf(context).width > 650
+                ? .7 * mediaWidth
+                : .9 * MediaQuery.sizeOf(context).width,
+            height: MediaQuery.sizeOf(context).width > 650 ? 200.h : 150.h,
+            textAlign: TextAlign.center,
+                          ),
+                          ReminderBody(
+            doctorName: 'Monica Geller',
+            sendDate: 'sent : 15/5/2023',
+            text: "Pet Health Check-in Tomorrow!",
+            width: mediaWidth > 650 ? .7 * mediaWidth : .45 * mediaWidth,
+            height: mediaWidth > 650 ? 50.h : 40.h,
+            textAlign: TextAlign.start,
+                          ),
+                          ReminderBody(
+            doctorName: 'Rachel Green',
+            sendDate: 'sent : 17/5/2023',
+            text: """Hi Rachel Green,
+            We hope you and your furry friend are doing well. A friendly reminder about your pet's upcoming health check-in on [20/7/2023] at [1:23 pm]. Ensure your pet is comfortable, and feel free to jot down any specific concerns or questions.""",
+            width: mediaWidth > 650 ? .7 * mediaWidth : .45 * mediaWidth,
+            height: mediaWidth > 650 ? 200.h : 180.h,
+            textAlign: TextAlign.center,
+                          ),
+                        ]))));
   }
 }
 
@@ -146,22 +146,22 @@ Future<void> dialogBuilder(BuildContext context, bool selected) {
             return GestureDetector(
               child: Card(
                 margin: EdgeInsets.only(
-                    top: ontap ? 20 : .45 * mediaHeight,
-                    bottom: ontap ? 150 : 0),
-                shape: const RoundedRectangleBorder(
+                    top: ontap ? 20.h : .45 * mediaHeight,
+                    bottom: ontap ? 150.h : 0),
+                shape:RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30))),
+                        topLeft: Radius.circular(30.sp),
+                        topRight: Radius.circular(30.sp))),
                 elevation: 30,
                 // color: Colors.white,
                 child: GestureDetector(
                   child: Container(
                     width: mediaWidth,
                     height: .5 * mediaHeight,
-                    decoration: const BoxDecoration(
+                    decoration:BoxDecoration(
                         borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(30),
-                            topRight: Radius.circular(30)),
+                            topLeft: Radius.circular(30.sp),
+                            topRight: Radius.circular(30.sp)),
                         color: Colors.white,
                         boxShadow: [
                           BoxShadow(
@@ -170,30 +170,30 @@ Future<void> dialogBuilder(BuildContext context, bool selected) {
                               blurRadius: 20)
                         ]),
                     child: Column(children: [
-                      const SizedBox(
-                        height: 20,
+                      SizedBox(
+                        height: 20.h,
                       ),
                       Row(
                         children: [
-                          const SizedBox(
-                            width: 15,
+                          SizedBox(
+                            width: 15.w,
                           ),
                           Container(
-                            width: 50,
-                            height: 55,
+                            width: 50.w,
+                            height: 55.h,
                             decoration: BoxDecoration(
                                 color: primary,
-                                borderRadius: BorderRadius.circular(5)),
+                                borderRadius: BorderRadius.circular(5.sp)),
                             child: Center(
                               child: Padding(
-                                padding: const EdgeInsets.only(bottom: 10),
+                                padding:  EdgeInsets.only(bottom: 10.h),
                                 child:
                                     Image.asset("assets/images/female_one.png"),
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            width: 5,
+                          SizedBox(
+                            width: 5.w,
                           ),
                           const Text(
                             "Select Client \n\n",
@@ -218,9 +218,9 @@ Future<void> dialogBuilder(BuildContext context, bool selected) {
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(
-                                                        10)), //this right here
+                                                        10.sp)), //this right here
                                             child: Container(
-                                              height: 350,
+                                              height: 350.h,
                                               width: mediaWidth,
                                               decoration: BoxDecoration(
                                                   color:
@@ -276,8 +276,8 @@ Future<void> dialogBuilder(BuildContext context, bool selected) {
                                                     // ),
                                                     SizedBox(
                                                       height: mediaWidth > 650
-                                                          ? 20
-                                                          : 10,
+                                                          ? 20.h
+                                                          : 10.h,
                                                     ),
                                                     //*
                                                     ClientSearch(),
@@ -311,12 +311,12 @@ Future<void> dialogBuilder(BuildContext context, bool selected) {
                         ],
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 10.h,
                       ),
                       Row(
                         children: [
-                          const SizedBox(
-                            width: 20,
+                          SizedBox(
+                            width: 20.w,
                           ),
                           const Text(
                             "DD/MM/YY",
@@ -327,13 +327,13 @@ Future<void> dialogBuilder(BuildContext context, bool selected) {
                           const Spacer(),
                           Container(
                             margin: EdgeInsets.only(
-                                right: mediaWidth > 650 ? 30 : 10),
-                            width: 30,
-                            height: 30,
+                                right: mediaWidth > 650 ? 30.w : 10.w),
+                            width: 30.w,
+                            height: 30.h,
                             decoration: BoxDecoration(
                                 color: primary,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: const Icon(
+                                borderRadius: BorderRadius.circular(5.sp)),
+                            child: Icon(
                               Icons.calendar_month_outlined,
                               color: Colors.white,
                             ),
@@ -341,17 +341,17 @@ Future<void> dialogBuilder(BuildContext context, bool selected) {
                         ],
                       ),
                       SizedBox(
-                        height: 15,
+                        height: 15.h,
                       ),
                       GestureDetector(
                         child: Container(
                           width: .9 * mediaWidth,
-                          height: 170,
+                          height: 170.h,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(color: Colors.grey)),
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding:  EdgeInsets.all(8.0.sp),
                             child: GestureDetector(
                               child: TextField(
                                 onTap: () {

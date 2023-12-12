@@ -1,13 +1,17 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
 import 'package:yama_vet_admin/data/models/dtos/Appointment.dart';
 
 import '../../../controllers/AppointmentsProvider.dart';
 
 class LocationAndCashStatusRow extends StatefulWidget {
-  LocationAndCashStatusRow({super.key, required this.appointmentIndex});
+  LocationAndCashStatusRow({super.key, required this.appointmentIndex, required this.role});
 
+  final String role;
   bool status = false;
   final int appointmentIndex;
 
@@ -17,7 +21,21 @@ class LocationAndCashStatusRow extends StatefulWidget {
 }
 
 class _LocationAndCashStatusRowState extends State<LocationAndCashStatusRow> {
+  String role = '';
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+  void initawaits() async{
+    SharedPreferences sharedPreferences =
+    await SharedPreferences.getInstance();
+    setState(() {
+      role = sharedPreferences.getString("role")!;
+    });
 
+    log(role);
+  }
   @override
   Widget build(BuildContext context) {
     double mediaHeight = MediaQuery
@@ -68,9 +86,9 @@ class _LocationAndCashStatusRowState extends State<LocationAndCashStatusRow> {
 
         Spacer(),
 
-        Consumer<AppointmentsProvider>(
+         Consumer<AppointmentsProvider>(
             builder: (context, appointmentsProvider, child) {
-              return Container(
+              return (widget.role != "vet")?Container(
                   margin: EdgeInsets.only(right: mediaWidth > 650 ? 30 : 20),
                   // width: appointmentsProvider.appointments[widget.appointmentIndex].cash == "not_collected"
                   //     ? mediaWidth > 650
@@ -189,7 +207,7 @@ class _LocationAndCashStatusRowState extends State<LocationAndCashStatusRow> {
                                   ]);
                             },
                             child: const Icon(Icons.keyboard_arrow_down_sharp)),
-                      ]));
+                      ])):Container();
             }
         ),
       ],

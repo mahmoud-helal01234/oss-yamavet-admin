@@ -29,17 +29,29 @@ class ApiService {
   Future<dynamic?> get(String endPoint,
       {BuildContext? context, String componentName = ""}) async {
     try {
+      if (context != null) {
+        context.loaderOverlay.show();
+      }
       String token = await getToken();
       http.Response response = await http.get(Uri.parse('$baseApiUrl$endPoint'),
           headers: {"api-token": "yama-vets", "Authorization": "Bearer$token"});
       log("response body:" + response.body);
       log("response status code:" + response.statusCode.toString());
       if (response.statusCode == 200) {
+        if (context != null) {
+          context.loaderOverlay.hide();
+        }
         return jsonDecode(response.body);
       } else {
+        if (context != null) {
+          context.loaderOverlay.hide();
+        }
         throw Exception('Failed to fetch items');
       }
     } catch (ex) {
+      if (context != null) {
+        context.loaderOverlay.hide();
+      }
       throw Exception('Failed to fetch items');
     }
   }
@@ -91,11 +103,61 @@ class ApiService {
     }
   }
 
+  Future<dynamic> postNotAuth(String endPoint, Map<String, dynamic> itemData,
+      {BuildContext? context,
+        String componentName = "",
+        String operationName = "Logged in"}) async {
+    try {
+
+      if (context != null) {
+        context.loaderOverlay.show();
+      }
+
+
+      final response = await http.post(
+        Uri.parse('$baseApiUrl$endPoint'),
+        body: jsonEncode(itemData),
+        headers: {
+          'Content-Type': 'application/json',
+          'api-token': 'yama-vets'
+        },
+      );
+      log("response body:" + response.body);
+      log("response status code:" + response.statusCode.toString());
+
+      if (response.statusCode == 200) {
+
+        if (context != null) {
+          context.loaderOverlay.hide();
+          QuickAlert.show(
+              context: context,
+              type: QuickAlertType.success,
+              text: '$componentName $operationName Successfully',
+              autoCloseDuration: const Duration(seconds: 2),
+              showConfirmBtn: true,
+              confirmBtnColor: primary);
+          return jsonDecode(response.body);
+        } else {
+          if (context != null) {
+            context.loaderOverlay.hide();
+          }
+
+          throw Exception('Failed to add item');
+        }
+      }
+    } catch (ex) {
+      if (context != null) {
+        context.loaderOverlay.hide();
+      }
+    }
+  }
+
   Future<dynamic> post(String endPoint, Map<String, dynamic> itemData,
       {BuildContext? context,
       String componentName = "",
       String operationName = "Added"}) async {
     try {
+
       if (context != null) {
         context.loaderOverlay.show();
       }
@@ -140,6 +202,8 @@ class ApiService {
       }
     }
   }
+
+
 
   Future<void> postWithFiles(String endPoint, Map<String, String> itemData,
       Map<String, File> filesData,

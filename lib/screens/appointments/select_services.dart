@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:yama_vet_admin/controllers/CategoriesProvider.dart';
@@ -44,12 +45,12 @@ class _SelectServicesState extends State<SelectServices> {
 
     return Scaffold(
         key: scaffoldKey,
-        drawer: const Drawer(
+        drawer:  Drawer(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(50),
-                    bottomLeft: Radius.circular(40))),
-            width: 200,
+                    topLeft: Radius.circular(50.sp),
+                    bottomLeft: Radius.circular(40.sp))),
+            width: 200.w,
             child: MenuScreen()),
         body: SafeArea(
             child: SingleChildScrollView(
@@ -69,8 +70,8 @@ class _SelectServicesState extends State<SelectServices> {
                     },
                     child: Image.asset("assets/images/menuIcon.png")),
               ]),
-              const SizedBox(
-                height: 10,
+             SizedBox(
+                height: 10.h,
               ),
               Row(
                 children: [
@@ -78,24 +79,24 @@ class _SelectServicesState extends State<SelectServices> {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: const Icon(
+                      icon:  Icon(
                         Icons.arrow_back_ios_new_rounded,
-                        size: 20,
+                        size: 20.sp,
                         weight: 100.5,
                         color: Colors.black,
                       )),
                   Text(
                     "Book an appointment",
                     style: TextStyle(
-                        fontFamily: 'futurBold', color: primary, fontSize: 20),
+                        fontFamily: 'futurBold', color: primary, fontSize: 20.sp),
                   )
                 ],
               ),
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: 10.h,
               ),
               Container(
-                height: 90,
+                height: 90.h,
                 child: Consumer<AppointmentsProvider>(
                     builder: (context, appointmentsProvider, child) {
                   return ListView.builder(
@@ -112,8 +113,8 @@ class _SelectServicesState extends State<SelectServices> {
                 }),
               ),
 
-              const SizedBox(
-                height: 10,
+              SizedBox(
+                height: 10.h,
               ),
               Divider(
                 thickness: 1,
@@ -121,14 +122,14 @@ class _SelectServicesState extends State<SelectServices> {
                 endIndent: 20,
                 indent: 20,
               ),
-              const SizedBox(
-                height: 5,
+              SizedBox(
+                height: 5.h,
               ),
               Center(
                 child: Text(
                   "Fluffy’s Services",
                   style: GoogleFonts.roboto(
-                      fontSize: 20,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.w600,
                       color: primary),
                 ),
@@ -137,15 +138,15 @@ class _SelectServicesState extends State<SelectServices> {
                 height: .02 * MediaQuery.sizeOf(context).height,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 20, bottom: 10),
+                padding:EdgeInsets.only(left: 20.w, bottom: 10.h),
                 child: Text("Choose Specialties",
                     style: GoogleFonts.roboto(
-                        fontSize: 17, fontWeight: FontWeight.w600)),
+                        fontSize: 17.sp, fontWeight: FontWeight.w600)),
               ),
               Consumer<CategoriesProvider>(
                   builder: (context, categoriesProvider, child) {
                 return Container(
-                  height: 100,
+                  height: 100.h,
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: categoriesProvider.categories.length,
@@ -165,7 +166,7 @@ class _SelectServicesState extends State<SelectServices> {
                             containerColor: selectedCategoryIndex == index
                                 ? primary
                                 : Colors.white,
-                            imgwidth: 70,
+                            imgwidth: 70.w,
                           ),
                         );
                       }),
@@ -185,15 +186,15 @@ class _SelectServicesState extends State<SelectServices> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsets.only(left: 20, top: 5, bottom: 5),
+                             EdgeInsets.only(left: 20.w, top: 5.h, bottom: 5.h),
                         child: Text("Select Services",
                             style: GoogleFonts.roboto(
-                                fontSize: 17, fontWeight: FontWeight.w600)),
+                                fontSize: 17.sp, fontWeight: FontWeight.w600)),
                       ),
                       Consumer<CategoriesProvider>(
                           builder: (context, categoriesProvider, child) {
                         return Container(
-                          height: 200,
+                          height: 200.h,
                           child: ListView.builder(
                               itemCount: categoriesProvider
                                   .categories[selectedCategoryIndex]
@@ -269,10 +270,10 @@ class _SelectServicesState extends State<SelectServices> {
 
                   Container(
                     width: mediaWidth,
-                    decoration: const BoxDecoration(
+                    decoration:BoxDecoration(
                         borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(30),
-                            topRight: Radius.circular(30)),
+                            topLeft: Radius.circular(30.sp),
+                            topRight: Radius.circular(30.sp)),
                         color: Colors.white,
                         boxShadow: [
                           BoxShadow(
@@ -285,18 +286,18 @@ class _SelectServicesState extends State<SelectServices> {
                         Row(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 20, top: 20),
+                              padding:EdgeInsets.only(left: 20.w, top: 20.h),
                               child: Text("Total",
                                   style: TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 15.sp,
                                     color: primary,
                                     fontWeight: FontWeight.w500,
                                   )),
                             ),
                             const Spacer(),
                             Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 20, top: 20, right: 10),
+                              padding:EdgeInsets.only(
+                                  left: 20.w, top: 20.h, right: 10.w),
                               child: Consumer<AppointmentsProvider>(builder:
                                   (context, appointmentsProvider, child) {
                                 return Text(
@@ -324,7 +325,7 @@ class _SelectServicesState extends State<SelectServices> {
 
                           },
                           text: 'Update',
-                          size: 20,
+                          size: 20.sp,
                           buttomWidth: .75 * MediaQuery.sizeOf(context).width,
                           height: .05 * mediaHeight,
                         )

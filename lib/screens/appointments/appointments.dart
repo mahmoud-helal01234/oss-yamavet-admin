@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:map_launcher/map_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
@@ -30,13 +31,12 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   List<DoctorModel> doctors = [];
   List<ClientsModel> clients = [];
 
-
   @override
   void initState() {
     super.initState();
   }
 
-  void openGoogleMaps(double lat,double long) async {
+  void openGoogleMaps(double lat, double long) async {
     final availableMaps = await MapLauncher.installedMaps;
 
     if (availableMaps.isNotEmpty) {
@@ -59,153 +59,151 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
     return Scaffold(
         key: scaffoldKey,
         backgroundColor: scaffoldColor,
-        drawer: const Drawer(
+        drawer: Drawer(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(50),
-                    bottomLeft: Radius.circular(40))),
-            width: 200,
+                    topLeft: Radius.circular(50.sp),
+                    bottomLeft: Radius.circular(40.sp))),
+            width: 200.w,
             child: MenuScreen()),
         body: SafeArea(
-            child: Expanded(
-                child: SingleChildScrollView(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          SizedBox(
+            height: .02 * MediaQuery.sizeOf(context).height,
+          ),
+          Row(children: [
+            SizedBox(
+              width: .05 * MediaQuery.sizeOf(context).width,
+            ),
+            GestureDetector(
+                onTap: () {
+                  scaffoldKey.currentState!.openDrawer();
+                },
+                child: Image.asset("assets/images/menuIcon.png")),
+          ]),
+          SizedBox(
+            height: 20.h,
+          ),
+          Row(
+            children: [
               SizedBox(
-                height: .02 * MediaQuery.sizeOf(context).height,
+                width: mediaWidth > 650 ? 30.w : 0,
               ),
-              Row(children: [
-                SizedBox(
-                  width: .05 * MediaQuery.sizeOf(context).width,
-                ),
-                GestureDetector(
-                    onTap: () {
-                      scaffoldKey.currentState!.openDrawer();
-                    },
-                    child: Image.asset("assets/images/menuIcon.png")),
-              ]),
-              const SizedBox(
-                height: 20,
+              IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.arrow_back_ios_new_rounded,
+                    size: 20.sp,
+                    weight: 100.5,
+                    color: Colors.black,
+                  )),
+              SizedBox(
+                width: mediaHeight > 900 ? .35 * mediaWidth : .15 * mediaWidth,
               ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: mediaWidth > 650 ? 30 : 0,
-                  ),
-                  IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(
-                        Icons.arrow_back_ios_new_rounded,
-                        size: 20,
-                        weight: 100.5,
-                        color: Colors.black,
-                      )),
-                  SizedBox(
-                    width:
-                        mediaHeight > 900 ? .35 * mediaWidth : .15 * mediaWidth,
-                  ),
-                  Text(
-                    "Appointments",
-                    style: TextStyle(
-                        fontFamily: 'futurBold', color: primary, fontSize: 20),
-                  ),
-                  SizedBox(
-                    height: mediaHeight > 900 ? 20 : 0,
-                  ),
-                ],
+              Text(
+                "Appointments",
+                style: TextStyle(
+                    fontFamily: 'futurBold', color: primary, fontSize: 20.sp),
               ),
               SizedBox(
-                height: mediaWidth > 650 ? 20 : 10,
+                height: mediaHeight > 900 ? 20.h : 0,
               ),
-              FilterRow(),
+            ],
+          ),
+          SizedBox(
+            height: mediaWidth > 650 ? 20.h : 10.h,
+          ),
+          FilterRow(),
 
-              const AppointmentStatusFilter(),
-              // const SizedBox(
-              //   height: 20,
-              // ),
-              // Center(
-              //   child: Container(
-              //     width: .95 * mediaWidth,
-              //     height: 40,
-              //     decoration: BoxDecoration(
-              //         borderRadius: BorderRadius.circular(5),
-              //         border: Border.all(color: primary, width: 1.5)),
-              //     child: Row(
-              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //       children: [
-              //         Padding(
-              //           padding: const EdgeInsets.all(8.0),
-              //           child: Text(
-              //             text ?? "Doctors",
-              //             style: const TextStyle(
-              //                 fontFamily: 'futur',
-              //                 fontSize: 17,
-              //                 color: Colors.black),
-              //           ),
-              //         ),
-              //         IconButton(
-              //           icon: const Icon(Icons.keyboard_arrow_down_sharp),
-              //           onPressed: () {
-              //             doctorMenu(context);
-              //           },
-              //         )
-              //       ],
-              //     ),
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 10,
-              // ),
-              // Center(
-              //   child: Container(
-              //     width: .95 * mediaWidth,
-              //     height: 40,
-              //     decoration: BoxDecoration(
-              //         borderRadius: BorderRadius.circular(5),
-              //         border: Border.all(color: primary, width: 1.5)),
-              //     child: Row(
-              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //       children: [
-              //         const Padding(
-              //           padding: EdgeInsets.all(8.0),
-              //           child: Text(
-              //             "Clients",
-              //             style: TextStyle(
-              //                 fontFamily: 'futur',
-              //                 fontSize: 17,
-              //                 color: Colors.black),
-              //           ),
-              //         ),
-              //         IconButton(
-              //           icon: const Icon(Icons.keyboard_arrow_down_sharp),
-              //           onPressed: () {
-              //             clietsMenu(context);
-              //           },
-              //         )
-              //       ],
-              //     ),
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 10,
-              // ),
-              // StatusRow(status: status, cash: 'cash'),
-              // SizedBox(
-              //   height: 10,
-              // ),
-              AppointmentContainer(
-                textEmergancy: 'Max',
-                textColor: Colors.white,
-                textalign: TextAlign.start,
-                paddingtext: EdgeInsets.only(left: 5),
-                init: true,
-                pic: 1,
-              ),
-                          SizedBox(height: 600)
-            ])))));
+          const AppointmentStatusFilter(),
+          SizedBox(
+            height: mediaWidth > 650 ? 19.h : 9.h,
+          ),
+          // const SizedBox(
+          //   height: 20,
+          // ),
+          // Center(
+          //   child: Container(
+          //     width: .95 * mediaWidth,
+          //     height: 40,
+          //     decoration: BoxDecoration(
+          //         borderRadius: BorderRadius.circular(5),
+          //         border: Border.all(color: primary, width: 1.5)),
+          //     child: Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //       children: [
+          //         Padding(
+          //           padding: const EdgeInsets.all(8.0),
+          //           child: Text(
+          //             text ?? "Doctors",
+          //             style: const TextStyle(
+          //                 fontFamily: 'futur',
+          //                 fontSize: 17,
+          //                 color: Colors.black),
+          //           ),
+          //         ),
+          //         IconButton(
+          //           icon: const Icon(Icons.keyboard_arrow_down_sharp),
+          //           onPressed: () {
+          //             doctorMenu(context);
+          //           },
+          //         )
+          //       ],
+          //     ),
+          //   ),
+          // ),
+          // const SizedBox(
+          //   height: 10,
+          // ),
+          // Center(
+          //   child: Container(
+          //     width: .95 * mediaWidth,
+          //     height: 40,
+          //     decoration: BoxDecoration(
+          //         borderRadius: BorderRadius.circular(5),
+          //         border: Border.all(color: primary, width: 1.5)),
+          //     child: Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //       children: [
+          //         const Padding(
+          //           padding: EdgeInsets.all(8.0),
+          //           child: Text(
+          //             "Clients",
+          //             style: TextStyle(
+          //                 fontFamily: 'futur',
+          //                 fontSize: 17,
+          //                 color: Colors.black),
+          //           ),
+          //         ),
+          //         IconButton(
+          //           icon: const Icon(Icons.keyboard_arrow_down_sharp),
+          //           onPressed: () {
+          //             clietsMenu(context);
+          //           },
+          //         )
+          //       ],
+          //     ),
+          //   ),
+          // ),
+          // const SizedBox(
+          //   height: 10,
+          // ),
+          // StatusRow(status: status, cash: 'cash'),
+          // SizedBox(
+          //   height: 10,
+          // ),
+          AppointmentContainer(
+            textEmergancy: 'Max',
+            textColor: Colors.white,
+            textalign: TextAlign.start,
+            paddingtext: EdgeInsets.only(left: 5.w),
+            init: true,
+            pic: 1,
+          ),
+        ])));
   }
 
   void doctorMenu(
@@ -216,16 +214,16 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
     showMenu(
       // shadowColor: primary,
       constraints: BoxConstraints(
-          minWidth: mediaWidth > 650 ? 800 : 270,
-          maxWidth: mediaWidth > 650 ? mediaWidth : 370),
+          minWidth: mediaWidth > 650 ? 800.w : 270.w,
+          maxWidth: mediaWidth > 650 ? mediaWidth : 370.w),
       color: const Color(0xffefefef),
       // elevation: 5,
       context: context,
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(5.sp),
           side: BorderSide(color: primary)),
-      position: RelativeRect.fromLTRB(
-          mediaWidth > 650 ? 2 : 1, mediaWidth > 400 ? 340 : 340, 1, 1),
+      position: RelativeRect.fromLTRB(mediaWidth > 650 ? 2.w : 1.w,
+          mediaWidth > 400 ? 340.h : 340.h, 1.w, 1.w),
       items: [
         PopupMenuItem(
             onTap: () {
@@ -264,16 +262,16 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
     showMenu(
       // shadowColor: primary,
       constraints: BoxConstraints(
-          minWidth: mediaWidth > 650 ? 800 : 270,
-          maxWidth: mediaWidth > 650 ? mediaWidth : 370),
+          minWidth: mediaWidth > 650 ? 800.w : 270.w,
+          maxWidth: mediaWidth > 650 ? mediaWidth : 370.w),
       color: const Color(0xffefefef),
       // elevation: 5,
       context: context,
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(5.sp),
           side: BorderSide(color: primary)),
-      position: RelativeRect.fromLTRB(
-          mediaWidth > 650 ? 2 : 1, mediaWidth > 400 ? 200 : 500, 1, 1),
+      position: RelativeRect.fromLTRB(mediaWidth > 650 ? 2.w : 1.w,
+          mediaWidth > 400 ? 200.h : 500.h, 1.w, 1.h),
       items: [
         PopupMenuItem(
             onTap: () {

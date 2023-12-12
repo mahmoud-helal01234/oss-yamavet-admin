@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -71,7 +72,7 @@ class _AppointmentContainerState extends State<AppointmentContainer> {
     return  Container(
 
             width: mediaWidth,
-            height: mediaHeight * 0.67,
+            height: mediaHeight * 0.75,
             child: Consumer<AppointmentsProvider>(
                 builder: (context, appointmentsProvider, child) {
               return ListView.builder(
@@ -181,9 +182,9 @@ class _AppointmentContainerState extends State<AppointmentContainer> {
                                       height: 5,
                                     ),
                                     Padding(
-                                        padding: widget.paddingtext,
-                                        child: Row(
-                                          children: betName(index),
+                                        padding: (appointmentsProvider.appointments![index].type != 'emergancy')?widget.paddingtext: EdgeInsets.only(left: 100,right: 100),
+                                        child:  (appointmentsProvider.appointments![index].type == 'emergancy')?Text("Vet Emergency",style: TextStyle(color: Colors.red,fontSize: 20),):Row(
+                                          children:betName(index),
                                         )),
                                     const SizedBox(
                                       height: 10,
@@ -335,8 +336,8 @@ class _AppointmentContainerState extends State<AppointmentContainer> {
                                   ],
                                 )),
                             Positioned(
-                                left: mediaHeight > 900 ? 300 : 70,
-                                bottom: mediaWidth > 650 ? 90 : 25,
+                                left: 70.w,
+                                bottom: mediaWidth > 650 ? 90.h : 25.h,
                                 child: StepperScreen(
                                     lineColor: primary,
                                     stepperColor: primary,

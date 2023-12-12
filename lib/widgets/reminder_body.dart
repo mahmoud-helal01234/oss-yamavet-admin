@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
 
 class ReminderBody extends StatelessWidget {
@@ -25,21 +26,21 @@ class ReminderBody extends StatelessWidget {
         Row(
           children: [
             SizedBox(
-              width: 20,
+              width: 20.w,
             ),
             Card(
               elevation: 10,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30)),
+                  borderRadius: BorderRadius.circular(30.sp)),
               child: CircleAvatar(
-                radius: 30,
+                radius: 30.sp,
                 backgroundColor: primary,
                 backgroundImage:
                     ExactAssetImage("assets/images/female_one.png"),
               ),
             ),
             SizedBox(
-              width: 5,
+              width: 5.w,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,46 +58,46 @@ class ReminderBody extends StatelessWidget {
             ),
             Spacer(),
             Padding(
-              padding: EdgeInsets.only(right: mediaWidth > 650 ? 20 : 10),
+              padding: EdgeInsets.only(right: mediaWidth > 650 ? 20.w : 10.w),
               child: MaterialButton(
                 // elevation: 5,
-                minWidth: 100,
-                height: 30,
+                minWidth: 100.w,
+                height: 30.h,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5)),
+                    borderRadius: BorderRadius.circular(5.sp)),
                 color: Colors.red,
                 onPressed: () {},
-                child: const Text("Delete",
+                child:Text("Delete",
                     style: TextStyle(
                         fontFamily: 'futur',
                         color: Colors.white,
-                        fontSize: 15)),
+                        fontSize: 15.sp)),
               ),
             ),
           ],
         ),
         SizedBox(
-          height: 10,
+          height: 10.h,
         ),
         Center(
           child: Card(
             elevation: 7,
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.sp)),
             child: Container(
               width: width,
               height: height,
               decoration: BoxDecoration(
                   color: Color(0xffefefef),
-                  borderRadius: BorderRadius.circular(10)),
+                  borderRadius: BorderRadius.circular(10.sp)),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0.sp),
                 child: Text(
                   text,
                   style: TextStyle(
-                      height: 2,
+                      height: 2.h,
                       fontSize:
-                          MediaQuery.sizeOf(context).width > 650 ? 17 : 13),
+                          MediaQuery.sizeOf(context).width > 650 ? 17.w : 13.w),
                   textAlign: textAlign,
                 ),
               ),
@@ -104,7 +105,7 @@ class ReminderBody extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 10,
+          height: 10.h,
         ),
         Divider(
           color: Colors.grey,

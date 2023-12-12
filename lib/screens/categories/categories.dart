@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker_widget/image_picker_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:quickalert/models/quickalert_type.dart';
@@ -42,14 +43,12 @@ class _CategoryChooseState extends State<CategoryChoose> {
     getCategories();
   }
 
-
   Future<void> getCategories() async {
     setState(() {
       _isLoading = true;
     });
 
-    Provider.of<CategoriesProvider>(context, listen: false)
-        .get(context);
+    Provider.of<CategoriesProvider>(context, listen: false).get(context);
     setState(() {
       _isLoading = false;
     });
@@ -154,252 +153,251 @@ class _CategoryChooseState extends State<CategoryChoose> {
     return Scaffold(
         key: scaffoldKey,
         backgroundColor: scaffoldColor,
-        drawer: const Drawer(
+        drawer: Drawer(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(50),
-                    bottomLeft: Radius.circular(40))),
-            width: 200,
+                    topLeft: Radius.circular(50.sp),
+                    bottomLeft: Radius.circular(40.sp))),
+            width: 200.w,
             child: MenuScreen()),
         body: SafeArea(
             child: SingleChildScrollView(
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                          SizedBox(
-            height: .02 * MediaQuery.sizeOf(context).height,
-                          ),
-                          Row(children: [
-            SizedBox(
-              width: .05 * MediaQuery.sizeOf(context).width,
-            ),
-            GestureDetector(
-                onTap: () {
-                  scaffoldKey.currentState!.openDrawer();
-                },
-                child: Image.asset("assets/images/menuIcon.png")),
-                          ]),
-                          const SizedBox(
-            height: 20,
-                          ),
-                          Row(
-            children: [
               SizedBox(
-                width: mediaWidth > 650 ? 30 : 0,
+                height: .02 * MediaQuery.sizeOf(context).height,
               ),
-              IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(
-                    Icons.arrow_back_ios_new_rounded,
-                    size: mediaWidth > 650 ? 30 : 20,
-                    weight: 100.5,
-                    color: Colors.black,
-                  )),
-              SizedBox(
-                width:
-                    mediaHeight > 900 ? .3 * mediaWidth : .15 * mediaWidth,
-              ),
-              Text(
-                "Category/Service",
-                style: TextStyle(
-                    fontFamily: 'futurBold', color: primary, fontSize: 20),
-              ),
-              SizedBox(
-                height: mediaHeight > 900 ? 20 : 0,
-              ),
-            ],
-                          ),
-                          Padding(
-            padding:
-                EdgeInsets.only(left: mediaHeight > 900 ? 50 : 20, top: 10),
-            child: Text(
-              "Categories",
-              style: TextStyle(
-                  fontSize: mediaHeight > 900 ? 25 : 17,
-                  fontWeight: FontWeight.w600),
-            ),
-                          ),
-                          SizedBox(
-            height: mediaWidth > 650 ? 20 : 10,
-                          ),
-                          _isLoading!
-              ? Center(
-                  child: CircularProgressIndicator(
-                    color: primary,
-                  ),
-                )
-              : Container(
-                  width: 400,
-                  height: 150,
-                  child: Consumer<CategoriesProvider>(
-                      builder: (context, categoriesProvider, child) {
-                    return ListView.builder(
-                      padding: EdgeInsets.only(left: 10),
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: categoriesProvider.categories.length,
-                      itemBuilder: (BuildContext context, int index) {
-
-                        return Column(
-                          children: [
-                            GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    id = categoriesProvider
-                                        .categories[index].id;
-                                    ddd = categoriesProvider
-                                        .categories[index].id;
-                                  });
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (_) => Vaccination(
-                                              categoryIndex: index)));
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: CircleAvatar(
-                                    radius: 40,
-                                    backgroundImage: NetworkImage(
-                                        "https://yama-vet.com/${categoriesProvider.categories[index].imgPath}"),
-                                  ),
-                                )),
-                            Text(categoriesProvider
-                                .categories[index].nameEn!),
-                          ],
-                        );
-                      },
-                    );
-                  }),
+              Row(children: [
+                SizedBox(
+                  width: .05 * MediaQuery.sizeOf(context).width,
                 ),
-                          const SizedBox(
-            height: 20,
-                          ),
-                          Row(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                width: mediaWidth > 650 ? .2 * mediaWidth : .1 * mediaWidth,
-              ),
-              Column(
-                children: [
-                  GestureDetector(
+                GestureDetector(
                     onTap: () {
-                      setState(() {
-                        ontap = !ontap;
-                      });
+                      scaffoldKey.currentState!.openDrawer();
                     },
-                    child: Container(
-                      width: 70,
-                      height: 65,
-                      child: DottedBorder(
-                          color: primary,
-                          strokeWidth: 2,
-                          dashPattern: [10, 5],
-                          borderType: BorderType.Circle,
-                          child: Center(
-                              child: Image.asset("assets/images/add.png"))),
-                    ),
+                    child: Image.asset("assets/images/menuIcon.png")),
+              ]),
+              SizedBox(
+                height: 20.h,
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: mediaWidth > 650 ? 30.w : 0,
                   ),
-                  const SizedBox(
-                    height: 10,
+                  IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                        size: mediaWidth > 650 ? 30.sp : 20.sp,
+                        weight: 100.5,
+                        color: Colors.black,
+                      )),
+                  SizedBox(
+                    width:
+                        mediaHeight > 900 ? .3 * mediaWidth : .15 * mediaWidth,
                   ),
                   Text(
-                    "Add\nCategory",
+                    "Category/Service",
                     style: TextStyle(
-                        color: primary, fontWeight: FontWeight.w500),
-                    textAlign: TextAlign.center,
-                  )
+                        fontFamily: 'futurBold', color: primary, fontSize: 20.sp),
+                  ),
+                  SizedBox(
+                    height: mediaHeight > 900 ? 20.sp : 0,
+                  ),
                 ],
               ),
-            ],
-                          ),
-                          const SizedBox(
-            height: 20,
-                          ),
-                          ontap
-              ? Center(
-                  child: Container(
-                    width: .8 * mediaWidth,
-                    height: .3 * mediaHeight,
-                    decoration: BoxDecoration(
-                        // color: Colors.white,
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(color: primary, width: 2)),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: 70,
-                          height: 70,
+              Padding(
+                padding:
+                    EdgeInsets.only(left: mediaHeight > 900 ? 50.w : 20.w, top: 10.h),
+                child: Text(
+                  "Categories",
+                  style: TextStyle(
+                      fontSize: mediaHeight > 900 ? 25.sp : 17.sp,
+                      fontWeight: FontWeight.w600),
+                ),
+              ),
+              SizedBox(
+                height: mediaWidth > 650 ? 20.h : 10.h,
+              ),
+              _isLoading!
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        color: primary,
+                      ),
+                    )
+                  : Container(
+                      width: 400.w,
+                      height: 150.h,
+                      child: Consumer<CategoriesProvider>(
+                          builder: (context, categoriesProvider, child) {
+                        return ListView.builder(
+                          padding: EdgeInsets.only(left: 10.w),
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: categoriesProvider.categories.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Column(
+                              children: [
+                                GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        id = categoriesProvider
+                                            .categories[index].id;
+                                        ddd = categoriesProvider
+                                            .categories[index].id;
+                                      });
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (_) => Vaccination(
+                                                  categoryIndex: index)));
+                                    },
+                                    child: Padding(
+                                      padding:  EdgeInsets.all(8.0.sp),
+                                      child: CircleAvatar(
+                                        radius: 40.sp,
+                                        backgroundImage: NetworkImage(
+                                            "https://yama-vet.com/${categoriesProvider.categories[index].imgPath}"),
+                                      ),
+                                    )),
+                                Text(categoriesProvider
+                                    .categories[index].nameEn!),
+                              ],
+                            );
+                          },
+                        );
+                      }),
+                    ),
+               SizedBox(
+                height: 20.h,
+              ),
+              Row(
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: mediaWidth > 650 ? .2 * mediaWidth : .1 * mediaWidth,
+                  ),
+                  Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            ontap = !ontap;
+                          });
+                        },
+                        child: Container(
+                          width: 70.w,
+                          height: 65.h,
                           child: DottedBorder(
                               color: primary,
-                              strokeWidth: 1,
-                              dashPattern: [10, 4],
+                              strokeWidth: 2,
+                              dashPattern: [10, 5],
                               borderType: BorderType.Circle,
-                              child: Container(
-                                width: 300,
-                                child: Center(
-                                  child: ImagePickerWidget(
-                                    editIcon: const Icon(
-                                      Icons.camera_alt,
-                                      color: Colors.white,
-                                      size: 25,
-                                    ),
-                                    backgroundColor: Colors.white,
-                                    diameter: 50,
-                                    fit: BoxFit.none,
-                                    initialImage: AssetImage(
-                                        "assets/images/upload.png"),
-                                    shape: ImagePickerWidgetShape.circle,
-                                    isEditable: true,
-                                    shouldCrop: true,
-                                    imagePickerOptions: ImagePickerOptions(
-                                        imageQuality: 65),
-                                    onChange: (file) {
-                                      print(
-                                          "I changed the file to: ${file.path}");
-                                      setState(() {
-                                        choosen_file = File(file.path);
-                                      });
-                                    },
-                                  ),
-                                ),
-                              )),
+                              child: Center(
+                                  child: Image.asset("assets/images/add.png"))),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        EditAndAddContainer(
-                          enText: 'Category name',
-                          arText: 'اسم الفئة',
-                          arController: name_er,
-                          enController: name_en,
-                        ),
-                        CustomAddButton(
-                          onPress: () async {
-                            print("before");
-                            Provider.of<CategoriesProvider>(context,
-                                    listen: false)
-                                .create(
-                                    context,
-                                    AddCategoryRequest(context,
-                                        file: choosen_file,
-                                        nameAr: name_er.text,
-                                        nameEn: name_en.text));
-                            print("after");
-                          },
-                          minwidth: .7 * mediaWidth,
-                        ),
-                      ],
-                    ),
+                      ),
+                       SizedBox(
+                        height: 10.h,
+                      ),
+                      Text(
+                        "Add\nCategory",
+                        style: TextStyle(
+                            color: primary, fontWeight: FontWeight.w500),
+                        textAlign: TextAlign.center,
+                      )
+                    ],
                   ),
-                )
-              : Container(),
-                        ]))));
+                ],
+              ),
+               SizedBox(
+                height: 20.h,
+              ),
+              ontap
+                  ? Center(
+                      child: Container(
+                        width: .8 * mediaWidth,
+                        height: .3 * mediaHeight,
+                        decoration: BoxDecoration(
+                            // color: Colors.white,
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(color: primary, width: 2)),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            Container(
+                              width: 70.w,
+                              height: 70.h,
+                              child: DottedBorder(
+                                  color: primary,
+                                  strokeWidth: 1,
+                                  dashPattern: [10, 4],
+                                  borderType: BorderType.Circle,
+                                  child: Container(
+                                    width: 300.w,
+                                    child: Center(
+                                      child: ImagePickerWidget(
+                                        editIcon:  Icon(
+                                          Icons.camera_alt,
+                                          color: Colors.white,
+                                          size: 25.sp,
+                                        ),
+                                        backgroundColor: Colors.white,
+                                        diameter: 50.sp,
+                                        fit: BoxFit.none,
+                                        initialImage: AssetImage(
+                                            "assets/images/upload.png"),
+                                        shape: ImagePickerWidgetShape.circle,
+                                        isEditable: true,
+                                        shouldCrop: true,
+                                        imagePickerOptions: ImagePickerOptions(
+                                            imageQuality: 65),
+                                        onChange: (file) {
+                                          print(
+                                              "I changed the file to: ${file.path}");
+                                          setState(() {
+                                            choosen_file = File(file.path);
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  )),
+                            ),
+                            SizedBox(
+                              height: 10.h
+                            ),
+                            EditAndAddContainer(
+                              enText: 'Category name',
+                              arText: 'اسم الفئة',
+                              arController: name_er,
+                              enController: name_en,
+                            ),
+                            CustomAddButton(
+                              onPress: () async {
+                                print("before");
+                                Provider.of<CategoriesProvider>(context,
+                                        listen: false)
+                                    .create(
+                                        context,
+                                        AddCategoryRequest(context,
+                                            file: choosen_file,
+                                            nameAr: name_er.text,
+                                            nameEn: name_en.text));
+                                print("after");
+                              },
+                              minwidth: .7 * mediaWidth,
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  : Container(),
+            ]))));
   }
 }

@@ -5,6 +5,7 @@ class LoginRequest {
   LoginRequest({this.phone, this.deviceId});
 
   LoginRequest.fromJson(Map<String, dynamic> json) {
+
     phone = json['phone'];
     deviceId = json['device_id'];
   }

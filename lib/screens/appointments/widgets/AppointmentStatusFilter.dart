@@ -55,7 +55,7 @@ class AppointmentStatusFilter extends StatelessWidget {
                     width: mediaWidth > 650 ? 120 : 100,
                     decoration: BoxDecoration(
                         color: Provider.of<AppointmentsProvider>(context, listen: true).statusFilter == "accepted" ?
-                        primary:Colors.blue,
+                        primary:Colors.white,
                         borderRadius: BorderRadius.circular(7),
                         border: Border.all(color: primary, width: 1.5)),
                     child: const Center(
@@ -81,7 +81,7 @@ class AppointmentStatusFilter extends StatelessWidget {
                     width: mediaWidth > 650 ? 120 : 100,
                     decoration: BoxDecoration(
                         color: Provider.of<AppointmentsProvider>(context, listen: true).statusFilter == "completed" ?
-                        primary:Colors.blue,
+                        primary:Colors.white,
                         borderRadius: BorderRadius.circular(7),
                         border: Border.all(color: primary, width: 1.5)),
                     child: const Center(

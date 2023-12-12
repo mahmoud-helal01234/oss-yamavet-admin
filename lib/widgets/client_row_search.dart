@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
 
 class ClientSearch extends StatefulWidget {
@@ -15,22 +16,22 @@ class _ClientSearchState extends State<ClientSearch> {
     return Row(
       children: [
         SizedBox(
-          width: 10,
+          width: 10.w,
         ),
         Container(
-          width: 50,
-          height: 55,
+          width: 50.w,
+          height: 55.h,
           decoration: BoxDecoration(
               color: primary, borderRadius: BorderRadius.circular(5)),
           child: Center(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 10),
+              padding:  EdgeInsets.only(bottom: 10.h),
               child: Image.asset("assets/images/female_one.png"),
             ),
           ),
         ),
-        const SizedBox(
-          width: 5,
+        SizedBox(
+          width: 5.w,
         ),
         const Text(
           "Rachel Green \n\n",

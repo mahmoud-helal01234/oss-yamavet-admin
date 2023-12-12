@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
@@ -29,7 +30,7 @@ class _OrderOverViewContainerState extends State<OrderOverViewContainer> {
   Widget build(BuildContext context) {
     print("index:"+widget.appointmentIndex.toString());
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      margin:  EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
       width: .9 * MediaQuery
           .sizeOf(context)
           .width,
@@ -37,15 +38,18 @@ class _OrderOverViewContainerState extends State<OrderOverViewContainer> {
           .sizeOf(context)
           .height,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(10.sp),
           border: Border.all(color: primary)),
-      child: Column(
+      child: Consumer<AppointmentsProvider>(
+        builder: (context, appointmentsProvider, child) {
+          return   (appointmentsProvider.appointments[widget
+              .appointmentIndex].type !="emergancy")?
+            Column(
         children: [
           Container(
-            height : 100,
-            child: Consumer<AppointmentsProvider>(
-                builder: (context, appointmentsProvider, child) {
-                  return ListView.builder(
+            height : 100.h,
+            child:
+                   ListView.builder(
                     itemCount: appointmentsProvider.appointments[widget
                         .appointmentIndex].appointmentDetails!.length,
 
@@ -54,7 +58,7 @@ class _OrderOverViewContainerState extends State<OrderOverViewContainer> {
                         children: [
 
                           Container(
-                            height: 100,
+                            height: 100.h,
                             child: ListView.builder(
 
                               itemCount: appointmentsProvider.appointments[widget
@@ -64,27 +68,27 @@ class _OrderOverViewContainerState extends State<OrderOverViewContainer> {
                                   Row(
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.all(5),
+                                        padding:EdgeInsets.all(5.sp),
                                         child:
                                         Text(
                                             "${appointmentsProvider.appointments[widget
                                                 .appointmentIndex].appointmentDetails![index].services![serviceIndex].nameAr} \t"),
                                       ),
                                       Padding(
-                                          padding: const EdgeInsets.all(5),
+                                          padding:EdgeInsets.all(5.sp),
                                           child: Text(
                                               "${appointmentsProvider.appointments[widget
                                                   .appointmentIndex].appointmentDetails![index].services![serviceIndex].nameEn} \t")
                                       ),
                                       Spacer(),
                                       Padding(
-                                        padding: const EdgeInsets.all(5),
+                                        padding:EdgeInsets.all(5.sp),
                                         child: Text(
                                             "${appointmentsProvider.appointments[widget
                                                 .appointmentIndex].appointmentDetails![index].services![serviceIndex].price}"),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.only(right: 5),
+                                        padding:EdgeInsets.only(right: 5.sp),
                                         child: Text(
                                           "\$",
                                           style: TextStyle(color: Colors.green),
@@ -99,25 +103,25 @@ class _OrderOverViewContainerState extends State<OrderOverViewContainer> {
                         ],
                       );
                     },
-                  );
-                }
-            ),
+                  )
+
+
           ),
           Row(
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 10, top: 10),
+                padding:  EdgeInsets.only(left: 10.w, top: 10.h),
                 child: Text("Total",
                     style: TextStyle(
-                      fontSize: 15,
+                      fontSize: 15.sp,
                       color: primary,
                       fontWeight: FontWeight.w500,
                     )),
               ),
               const Spacer(),
               Padding(
-                padding: const EdgeInsets.only(
-                    left: 20, top: 10, right: 10),
+                padding:  EdgeInsets.only(
+                    left: 20.w, top: 10.h, right: 10.w),
                 child: Text(
                   "30\$",
                   style: TextStyle(
@@ -127,8 +131,14 @@ class _OrderOverViewContainerState extends State<OrderOverViewContainer> {
             ],
           ),
         ],
-      ),
-    );
+      ):
+         Padding(
+           padding:  EdgeInsets.only(left: 10.w, right: 10.w),
+           child: Text(appointmentsProvider.appointments[widget
+               .appointmentIndex].content.toString()),
+         );
+        },
+    ));
   }
 }
 

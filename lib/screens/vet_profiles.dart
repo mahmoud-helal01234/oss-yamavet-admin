@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker_widget/image_picker_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -49,123 +50,122 @@ class _VetProfilesState extends State<VetProfiles> {
     return Scaffold(
         key: scaffoldKey,
         backgroundColor: scaffoldColor,
-        drawer: const Drawer(
+        drawer:  Drawer(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(50),
-                    bottomLeft: Radius.circular(40))),
-            width: 200,
+                    topLeft: Radius.circular(50.w),
+                    bottomLeft: Radius.circular(40.w))),
+            width: 200.w,
             child: MenuScreen()),
         body: SafeArea(
-            child: Expanded(
-                child: SingleChildScrollView(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-              SizedBox(
-                height: .02 * MediaQuery.sizeOf(context).height,
-              ),
-              Row(children: [
-                SizedBox(
-                  width: .05 * MediaQuery.sizeOf(context).width,
-                ),
-                GestureDetector(
-                    onTap: () {
-                      scaffoldKey.currentState!.openDrawer();
-                    },
-                    child: Image.asset("assets/images/menuIcon.png")),
-              ]),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(children: [
-                SizedBox(
-                  width: mediaHeight > 900 ? 30 : 0,
-                ),
-                IconButton(
+            child: SingleChildScrollView(
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                          SizedBox(
+            height: .02 * MediaQuery.sizeOf(context).height,
+                          ),
+                          Row(children: [
+            SizedBox(
+              width: .05 * MediaQuery.sizeOf(context).width,
+            ),
+            GestureDetector(
+                onTap: () {
+                  scaffoldKey.currentState!.openDrawer();
+                },
+                child: Image.asset("assets/images/menuIcon.png")),
+                          ]),
+                          SizedBox(
+            height: 20.h,
+                          ),
+                          Row(children: [
+            SizedBox(
+              width: mediaHeight > 900 ? 30.w : 0,
+            ),
+            IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon:  Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  size: 20.sp,
+                  weight: 100.5,
+                  color: Colors.black,
+                )),
+            SizedBox(
+              width:
+                  mediaHeight > 900 ? .25 * mediaWidth : .15 * mediaWidth,
+            ),
+            Text(
+              'Vet Profile',
+              style: TextStyle(
+                  fontFamily: 'futurBold', color: primary, fontSize: 20.sp),
+            ),
+                          ]),
+                          Container(
+            width: .9 * mediaWidth,
+            height: 50.h,
+            child: ListView.builder(
+              itemCount: 1,
+              itemBuilder: (BuildContext context, int index) {
+                return Center(
+                  child: MaterialButton(
+                    color: primary,
+                    minWidth: mediaHeight > 900
+                        ? .65 * mediaWidth
+                        : .43 * mediaWidth,
+                    elevation: 10,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.sp)),
                     onPressed: () {
-                      Navigator.pop(context);
+                      dialogBuilder(
+                        context,
+                      );
                     },
-                    icon: const Icon(
-                      Icons.arrow_back_ios_new_rounded,
-                      size: 20,
-                      weight: 100.5,
-                      color: Colors.black,
-                    )),
-                SizedBox(
-                  width:
-                      mediaHeight > 900 ? .25 * mediaWidth : .15 * mediaWidth,
-                ),
-                Text(
-                  'Vet Profile',
-                  style: TextStyle(
-                      fontFamily: 'futurBold', color: primary, fontSize: 20),
-                ),
-              ]),
-              Container(
-                width: .9 * mediaWidth,
-                height: 50,
-                child: ListView.builder(
-                  itemCount: 1,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Center(
-                      child: MaterialButton(
-                        color: primary,
-                        minWidth: mediaHeight > 900
-                            ? .65 * mediaWidth
-                            : .43 * mediaWidth,
-                        elevation: 10,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5)),
-                        onPressed: () {
-                          dialogBuilder(
-                            context,
-                          );
-                        },
-                        child: const Text(
-                          "Create Account",
-                          style: TextStyle(
-                              fontSize: 17,
-                              color: Colors.white,
-                              fontFamily: 'futur'),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              SizedBox(
-                height: mediaHeight > 900 ? 20 : 10,
-              ),
-              // Center(
-              //   child: Container(
-              //     width:
-              //         mediaHeight > 900 ? .65 * mediaWidth : .43 * mediaWidth,
-              //     height: 40,
-              //     decoration: BoxDecoration(
-              //         borderRadius: BorderRadius.circular(5),
-              //         border: Border.all(color: Colors.grey)),
-              //     child: const TextField(
-              //       decoration: InputDecoration(
-              //           border: InputBorder.none,
-              //           prefixIcon: RotatedBox(
-              //             quarterTurns: 1,
-              //             child: Icon(
-              //               Icons.search,
-              //               color: Colors.grey,
-              //               weight: 20,
-              //             ),
-              //           ),
-              //           hintText: ' Search Doctors by Name ',
-              //           hintStyle: TextStyle(fontSize: 17, color: Colors.grey)),
-              //     ),
-              //   ),
-              // ),
-              // SizedBox(
-              //   height: mediaHeight > 900 ? 20 : 10,
-              // ),
-              GestureDetector(child: VetRow()),
-            ])))));
+                    child:  Text(
+                      "Create Account",
+                      style: TextStyle(
+                          fontSize: 17.sp,
+                          color: Colors.white,
+                          fontFamily: 'futur'),
+                    ),
+                  ),
+                );
+              },
+            ),
+                          ),
+                          SizedBox(
+            height: mediaHeight > 900 ? 20.h : 10.h,
+                          ),
+                          // Center(
+                          //   child: Container(
+                          //     width:
+                          //         mediaHeight > 900 ? .65 * mediaWidth : .43 * mediaWidth,
+                          //     height: 40,
+                          //     decoration: BoxDecoration(
+                          //         borderRadius: BorderRadius.circular(5),
+                          //         border: Border.all(color: Colors.grey)),
+                          //     child: const TextField(
+                          //       decoration: InputDecoration(
+                          //           border: InputBorder.none,
+                          //           prefixIcon: RotatedBox(
+                          //             quarterTurns: 1,
+                          //             child: Icon(
+                          //               Icons.search,
+                          //               color: Colors.grey,
+                          //               weight: 20,
+                          //             ),
+                          //           ),
+                          //           hintText: ' Search Doctors by Name ',
+                          //           hintStyle: TextStyle(fontSize: 17, color: Colors.grey)),
+                          //     ),
+                          //   ),
+                          // ),
+                          // SizedBox(
+                          //   height: mediaHeight > 900 ? 20 : 10,
+                          // ),
+                          GestureDetector(child: VetRow()),
+                        ]))));
   }
 
   Future<void> dialogBuilder(
@@ -194,19 +194,19 @@ class _VetProfilesState extends State<VetProfiles> {
                     //       ? .3 * mediaHeight
                     //       : .25 * mediaHeight,
                     // ),
-                    shape: const RoundedRectangleBorder(
+                    shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(30),
-                            topRight: Radius.circular(30))),
+                            topLeft: Radius.circular(30.w),
+                            topRight: Radius.circular(30.w))),
                     elevation: 30,
                     // color: Colors.white,
                     child: Container(
                       width: mediaWidth,
                       height: .71 * mediaHeight,
-                      decoration: const BoxDecoration(
+                      decoration:  BoxDecoration(
                           borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              topRight: Radius.circular(30)),
+                              topLeft: Radius.circular(30.w),
+                              topRight: Radius.circular(30.w)),
                           color: Colors.white,
                           boxShadow: [
                             BoxShadow(
@@ -222,7 +222,7 @@ class _VetProfilesState extends State<VetProfiles> {
                               height: .05 * mediaHeight,
                             ),
                             ImagePickerWidget(
-                              editIcon: const Icon(
+                              editIcon:Icon(
                                 Icons.camera_alt,
                                 color: Colors.white,
                                 size: 25,
@@ -271,25 +271,25 @@ class _VetProfilesState extends State<VetProfiles> {
                                   // shadowColor: primary,
                                     constraints: BoxConstraints(
                                         minWidth: mediaWidth > 650
-                                            ? 800
-                                            : 270,
+                                            ? 800.w
+                                            : 270.w,
                                         maxWidth: mediaWidth > 650
                                             ? mediaWidth
-                                            : 370),
-                                    color: const Color(0xffefefef),
+                                            : 370.w),
+                                    color: Color(0xffefefef),
                                     // elevation: 5,
                                     context: context,
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
-                                        BorderRadius.circular(5),
+                                        BorderRadius.circular(5.sp),
                                         side: BorderSide(
                                             color: primary)),
                                     position:
                                     RelativeRect.fromLTRB(
-                                        mediaWidth > 650 ? 2 : 50,
-                                        400,
-                                        1,
-                                        1),
+                                        mediaWidth > 650 ? 2.w : 50.w,
+                                        400.h,
+                                        1.w,
+                                        1.h),
                                     items: [
                                       PopupMenuItem(
                                           onTap: () {
@@ -305,7 +305,7 @@ class _VetProfilesState extends State<VetProfiles> {
                                                     void
                                                     Function())
                                                 setState) {
-                                              return const Text("Vet");
+                                              return  Text("Vet");
                                             },
                                           )),
                                       PopupMenuItem(
@@ -329,13 +329,13 @@ class _VetProfilesState extends State<VetProfiles> {
                               },
                               child: Container(
                                 width: .8 * mediaWidth,
-                                height: 45,
+                                height: 45.h,
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(10.sp),
                                     border: Border.all(color: primary)),
                                 child: Padding(
                                   padding:
-                                      const EdgeInsets.only(top: 3, bottom: 2),
+                                      EdgeInsets.only(top: 3.h, bottom: 2.h),
                                   child: TextField(
                                     controller: roleController,
                                     enabled: false,
@@ -344,7 +344,7 @@ class _VetProfilesState extends State<VetProfiles> {
                                         border: InputBorder.none,
                                         prefixIcon: Icon(
                                           Icons.admin_panel_settings,
-                                          size: 30,
+                                          size: 30.sp,
                                           color: primary,
                                         ),
                                         suffixIcon: GestureDetector(
@@ -353,25 +353,25 @@ class _VetProfilesState extends State<VetProfiles> {
                                                 // shadowColor: primary,
                                                 constraints: BoxConstraints(
                                                     minWidth: mediaWidth > 650
-                                                        ? 800
-                                                        : 270,
+                                                        ? 800.w
+                                                        : 270.w,
                                                     maxWidth: mediaWidth > 650
                                                         ? mediaWidth
-                                                        : 370),
-                                                color: const Color(0xffefefef),
+                                                        : 370.w),
+                                                color: Color(0xffefefef),
                                                 // elevation: 5,
                                                 context: context,
                                                 shape: RoundedRectangleBorder(
                                                     borderRadius:
-                                                        BorderRadius.circular(5),
+                                                        BorderRadius.circular(5.sp),
                                                     side: BorderSide(
                                                         color: primary)),
                                                 position:
                                                 RelativeRect.fromLTRB(
-                                                    mediaWidth > 650 ? 2 : 50,
-                                                    400,
-                                                    1,
-                                                    1),
+                                                    mediaWidth > 650 ? 2.w : 50.w,
+                                                    400.h,
+                                                    1.w,
+                                                    1.h),
                                                 items: [
                                                   PopupMenuItem(
                                                       onTap: () {
@@ -424,41 +424,41 @@ class _VetProfilesState extends State<VetProfiles> {
                                 ),
                               ),
                             ),
-                            const SizedBox(
-                              height: 20,
+                            SizedBox(
+                              height: 20.h,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 MaterialButton(
                                   elevation: 10,
-                                  minWidth: 140,
-                                  height: 40,
+                                  minWidth: 140.w,
+                                  height: 40.h,
                                   shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5)),
+                                      borderRadius: BorderRadius.circular(5.sp)),
                                   color: const Color(0xffba94b9),
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  child: const Text("Cancel",
+                                  child: Text("Cancel",
                                       style: TextStyle(
                                           fontFamily: 'futur',
                                           color: Colors.white,
-                                          fontSize: 20)),
+                                          fontSize: 20.sp)),
                                 ),
-                                const SizedBox(
-                                  width: 10,
+                                SizedBox(
+                                  width: 10.w,
                                 ),
                                 StatefulBuilder(
                                   builder: (BuildContext context,
                                       void Function(void Function()) setState) {
                                     return MaterialButton(
                                       elevation: 10,
-                                      minWidth: 140,
-                                      height: 40,
+                                      minWidth: 140.w,
+                                      height: 40.h,
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(5)),
+                                              BorderRadius.circular(5.sp)),
                                       color: primary,
                                       onPressed: () async {
 
@@ -472,11 +472,11 @@ class _VetProfilesState extends State<VetProfiles> {
 
 
                                       },
-                                      child:  const Text("Create",
+                                      child: Text("Create",
                                               style: TextStyle(
                                                   fontFamily: 'futur',
                                                   color: Colors.white,
-                                                  fontSize: 20)),
+                                                  fontSize: 20.sp)),
                                     );
                                   },
                                 ),

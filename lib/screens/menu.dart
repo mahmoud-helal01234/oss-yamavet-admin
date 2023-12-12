@@ -1,11 +1,16 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:yama_vet_admin/controllers/ConfigurationsProvider.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
-import 'package:url_launcher/link.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
 import '../core/utils/strings.dart';
@@ -49,9 +54,9 @@ class _MenuScreenState extends State<MenuScreen> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: const Icon(
+              icon:  Icon(
                 Icons.close,
-                weight: 100,
+                weight: 100.sp,
               ))
         ],
       ),
@@ -118,10 +123,10 @@ class _MenuScreenState extends State<MenuScreen> {
                         Icons.send_to_mobile_sharp,
                         color: lightpurple,
                       )),
-                  const Text(
+                   Text(
                     "Contact Us",
                     style: TextStyle(
-                        fontFamily: 'futur', color: Colors.white, fontSize: 20),
+                        fontFamily: 'futur', color: Colors.white, fontSize: 20.sp),
                   ),
                 ],
               ),
@@ -132,31 +137,37 @@ class _MenuScreenState extends State<MenuScreen> {
                 ? .6 * mediaHeight
                 : .49 * MediaQuery.sizeOf(context).height,
           ),
-          Row(
-            children: [
-              const SizedBox(
-                width: 20,
-              ),
-              //* go to register screen
-              IconButton(
-                  onPressed: () async {
-                    SharedPreferences sharedPreferences =
-                        await SharedPreferences.getInstance();
-                    sharedPreferences.clear();
-                    Navigator.of(context).pushNamedAndRemoveUntil(login, (Route<dynamic> route) => false);
+          InkWell(
+            onTap: () async{
+              log("log out");
+              SharedPreferences sharedPreferences =
+                  await SharedPreferences.getInstance();
+              sharedPreferences.clear();
+              Navigator.of(context).pushNamedAndRemoveUntil(login, (Route<dynamic> route) => false);
 
-                    // api logout
-                  },
-                  icon: Icon(
-                    Icons.exit_to_app,
-                    color: lightpurple,
-                  )),
-              const Text(
-                "Logout",
-                style: TextStyle(
-                    fontFamily: 'futur', color: Colors.white, fontSize: 17),
-              )
-            ],
+              // api logout
+            },
+            child: Row(
+              children: [
+                 SizedBox(
+                  width: 20.w,
+                ),
+                //* go to register screen
+                IconButton(
+                    onPressed: ()  {
+
+                    },
+                    icon: Icon(
+                      Icons.exit_to_app,
+                      color: lightpurple,
+                    )),
+                 Text(
+                  "Logout",
+                  style: TextStyle(
+                      fontFamily: 'futur', color: Colors.white, fontSize: 17.sp),
+                )
+              ],
+            ),
           )
         ],
       ),

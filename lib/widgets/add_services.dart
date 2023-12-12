@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
@@ -46,33 +47,33 @@ class _AddServicesState extends State<AddServices> {
         width: .95 * mediaWidth,
         height: .2 * mediaHeight,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(color: primary, width: 2)),
+            borderRadius: BorderRadius.circular(5.sp),
+            border: Border.all(color: primary, width: 2.w)),
         child: ListView.builder(
           itemCount: 1,
           itemBuilder: (BuildContext context, int index) {
             return Column(
               children: [
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 20.h,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Container(
-                      width: mediaWidth > 650 ? 400 : 250,
-                      height: 30,
+                      width: mediaWidth > 650 ? 400.w : 250.w,
+                      height: 30.h,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
+                          borderRadius: BorderRadius.circular(5.sp),
                           border: Border.all(color: Colors.grey)),
                       child: Padding(
-                        padding: EdgeInsets.only(left: 5, top: 10),
+                        padding: EdgeInsets.only(left: 5.w, top: 10.h),
                         child: TextField(
                           controller: name_en,
                           decoration: InputDecoration(
                               border: InputBorder.none,
                               hintStyle: TextStyle(
-                                  fontSize: 15,
+                                  fontSize: 15.sp,
                                   color: Colors.grey,
                                   fontWeight: FontWeight.w500),
                               hintText: 'Service'),
@@ -80,19 +81,19 @@ class _AddServicesState extends State<AddServices> {
                       ),
                     ),
                     Container(
-                      width: 80,
-                      height: 30,
+                      width: 80.w,
+                      height: 30.h,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
+                          borderRadius: BorderRadius.circular(5.sp),
                           border: Border.all(color: Colors.grey)),
                       child: Padding(
-                        padding: EdgeInsets.only(left: 5),
+                        padding: EdgeInsets.only(left: 5.w),
                         child: TextField(
                           controller: price,
                           decoration: InputDecoration(
                               border: InputBorder.none,
                               hintStyle: TextStyle(
-                                  fontSize: 14,
+                                  fontSize: 14.sp,
                                   color: Colors.grey,
                                   fontWeight: FontWeight.w500),
                               hintText: 'Price\t\t\t\t\t \$'),
@@ -102,26 +103,26 @@ class _AddServicesState extends State<AddServices> {
                   ],
                 ),
                 SizedBox(
-                  height: mediaWidth > 650 ? 20 : 10,
+                  height: mediaWidth > 650 ? 20.h : 10.h,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Container(
-                      width: mediaWidth > 650 ? 400 : 250,
-                      height: 30,
+                      width: mediaWidth > 650 ? 400.w : 250.w,
+                      height: 30.h,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
+                          borderRadius: BorderRadius.circular(5.sp),
                           border: Border.all(color: Colors.grey)),
                       child: Padding(
-                        padding: EdgeInsets.only(right: 5, top: 10),
+                        padding: EdgeInsets.only(right: 5.w, top: 10.h),
                         child: TextField(
                           textDirection: TextDirection.rtl,
                           controller: name_ar,
                           decoration: InputDecoration(
                               border: InputBorder.none,
                               hintStyle: TextStyle(
-                                  fontSize: 15,
+                                  fontSize: 15.sp,
                                   color: Colors.grey,
                                   fontWeight: FontWeight.w500),
                               hintText: 'خدمة',
@@ -132,16 +133,16 @@ class _AddServicesState extends State<AddServices> {
                   ],
                 ),
                 SizedBox(
-                  height: mediaWidth > 650 ? 10 : 10,
+                  height: mediaWidth > 650 ? 10.h : 10.h,
                 ),
                 Container(
                   width: .8 * mediaWidth,
-                  height: 30,
+                  height: 30.h,
                   child: MaterialButton(
                     elevation: 5,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
-                    height: mediaWidth > 650 ? 35 : 30,
+                        borderRadius: BorderRadius.circular(5.sp)),
+                    height: mediaWidth > 650 ? 35.h : 30.h,
                     color: primary,
                     onPressed: () async {
 
@@ -153,14 +154,13 @@ class _AddServicesState extends State<AddServices> {
                               nameAr: name_ar.text,
                               nameEn: name_en.text,
                               price: double.tryParse(price.text) ));
-
                     },
                     child: Text(
                       "Add ",
                       style: TextStyle(
                           fontFamily: 'futur',
                           color: Colors.white,
-                          fontSize: mediaWidth > 650 ? 22 : 17),
+                          fontSize: mediaWidth > 650 ? 22.sp : 17.sp),
                     ),
                   ),
                 )

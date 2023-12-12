@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField(
@@ -14,19 +15,19 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width,
-      height: 45,
+      height: 45.h,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.grey)),
       child: Padding(
-        padding: EdgeInsets.only(top: 3, bottom: 2),
+        padding: EdgeInsets.only(top: 3.h, bottom: 2.h),
         child: TextField(
           controller: controller,
           decoration: InputDecoration(
               border: InputBorder.none,
               prefixIcon: Icon(
                 icon,
-                size: 30,
+                size: 30.sp,
                 color: Colors.grey,
               ),
               hintText: hinttext,

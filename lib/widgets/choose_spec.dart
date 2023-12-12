@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
@@ -32,16 +33,16 @@ class _SpecialtiesContainerState extends State<SpecialtiesContainer> {
               width: widget.imgwidth,
             ),
             Container(
-              width: 90,
-              height: 20,
+              width: 90.w,
+              height: 20.h,
               decoration: BoxDecoration(
                   color: widget.containerColor,
-                  borderRadius: BorderRadius.circular(5)),
+                  borderRadius: BorderRadius.circular(5.sp)),
               child: Center(
                 child: Text(
                   widget.text,
                   style: GoogleFonts.roboto(
-                      fontSize: 13,
+                      fontSize: 13.sp,
                       fontWeight: FontWeight.w400,
                       color: widget.textColor),
                 ),

@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
 import 'package:yama_vet_admin/core/utils/strings.dart';
 import 'package:yama_vet_admin/screens/menu.dart';
@@ -16,32 +20,43 @@ class DashBoard extends StatefulWidget {
 
 class _DashBoardState extends State<DashBoard> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-@override
+  String role = '';
+
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    Provider.of<ConfigurationsProvider>(context, listen: false)
-        .get(context);
+    Provider.of<ConfigurationsProvider>(context, listen: false).get(context);
+    initawaits();
   }
+
+  void initawaits() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      role = sharedPreferences.getString("role")!;
+    });
+
+    log(role);
+  }
+
   @override
   Widget build(BuildContext context) {
     double mediaWidth = MediaQuery.sizeOf(context).width;
     return Scaffold(
         key: scaffoldKey,
         backgroundColor: scaffoldColor,
-        drawer: const Drawer(
+        drawer: Drawer(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(50),
-                    bottomLeft: Radius.circular(40))),
-            width: 200,
+                    topLeft: Radius.circular(50.w),
+                    bottomLeft: Radius.circular(40.w))),
+            width: 200.w,
             child: MenuScreen()),
         body: SafeArea(
-            child: Expanded(
-                child: SingleChildScrollView(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+            child: SingleChildScrollView(
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
               SizedBox(
                 height: mediaWidth > 650
                     ? .05 * mediaWidth
@@ -65,105 +80,153 @@ class _DashBoardState extends State<DashBoard> {
                   style: TextStyle(
                       fontFamily: 'futurBold',
                       color: primary,
-                      fontSize: mediaWidth > 650 ? 25 : 20),
+                      fontSize: mediaWidth > 650 ? 25.sp : 20.sp),
                 ),
               ),
               SizedBox(
-                height: mediaWidth > 650 ? 50 : 10,
+                height: mediaWidth > 650 ? 50.h : 10.h,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  //* offers screen
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, offers);
-                    },
-                    child: DashCard(
-                      img: "assets/images/offers.png",
-                      text: 'Offers',
-                      size: mediaWidth > 650 ? 25 : 17,
+              (role != "vet")
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        //* offers screen
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, offers);
+                          },
+                          child: DashCard(
+                            img: "assets/images/offers.png",
+                            text: 'Offers',
+                            size: mediaWidth > 650 ? 25.sp : 17.sp,
+                          ),
+                        ),
+                        //* categories screen
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, categories);
+                          },
+                          child: DashCard(
+                            img: "assets/images/services.png",
+                            text: 'Categories/Services',
+                            size: mediaWidth > 650 ? 25.sp : 15.sp,
+                          ),
+                        ),
+                      ],
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        //* oppointments screen
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, appointments);
+                          },
+                          child: DashCard(
+                            img: "assets/images/appointments.png",
+                            text: 'appointments',
+                            size: mediaWidth > 650 ? 25.sp : 17.sp,
+                          ),
+                        ),
+                        //*reminder screen
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, reminder);
+                          },
+                          child: DashCard(
+                            img: "assets/images/reminder.png",
+                            text: 'Reminder',
+                            size: mediaWidth > 650 ? 25.sp : 15.sp,
+                          ),
+                        )
+                      ],
                     ),
-                  ),
-                  //* categories screen
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, categories);
-                    },
-                    child: DashCard(
-                      img: "assets/images/services.png",
-                      text: 'Categories/Services',
-                      size: mediaWidth > 650 ? 25 : 15,
-                    ),
-                  ),
-                ],
-              ),
               SizedBox(
-                height: mediaWidth > 650 ? 20 : 10,
+                height: mediaWidth > 650 ? 20.h : 10.h,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  //*clients screen
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, clients);
-                    },
-                    child: DashCard(
-                      img: "assets/images/clients.png",
-                      text: 'Clients',
-                      size: mediaWidth > 650 ? 25 : 17,
+              (role != "vet")
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        //*clients screen
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, clients);
+                          },
+                          child: DashCard(
+                            img: "assets/images/clients.png",
+                            text: 'Clients',
+                            size: mediaWidth > 650 ? 25.sp : 17.sp,
+                          ),
+                        ),
+                        //* vet screen
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, vetProfiles);
+                          },
+                          child: DashCard(
+                            img: "assets/images/vets.png",
+                            text: 'Vets',
+                            size: mediaWidth > 650 ? 25.sp : 15.sp,
+                          ),
+                        ),
+                      ],
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        //* offers screen
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, offers);
+                          },
+                          child: DashCard(
+                            img: "assets/images/offers.png",
+                            text: 'Offers',
+                            size: mediaWidth > 650 ? 25.sp : 17.sp,
+                          ),
+                        ),
+                        //* categories screen
+                      ],
                     ),
-                  ),
-                  //* vet screen
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, vetProfiles);
-                    },
-                    child: DashCard(
-                      img: "assets/images/vets.png",
-                      text: 'Vets',
-                      size: mediaWidth > 650 ? 25 : 15,
-                    ),
-                  ),
-                ],
-              ),
               SizedBox(
-                height: mediaWidth > 650 ? 20 : 10,
+                height: mediaWidth > 650 ? 20.h : 10.h,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  //* oppointments screen
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, appointments);
-                    },
-                    child: DashCard(
-                      img: "assets/images/appointments.png",
-                      text: 'appointments',
-                      size: mediaWidth > 650 ? 25 : 17,
-                    ),
-                  ),
-                  //*reminder screen
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, reminder);
-                    },
-                    child: DashCard(
-                      img: "assets/images/reminder.png",
-                      text: 'Reminder',
-                      size: mediaWidth > 650 ? 25 : 15,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
+              (role != "vet")
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        //* oppointments screen
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, appointments);
+                          },
+                          child: DashCard(
+                            img: "assets/images/appointments.png",
+                            text: 'appointments',
+                            size: mediaWidth > 650 ? 25.sp : 17.sp,
+                          ),
+                        ),
+                        //*reminder screen
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, reminder);
+                          },
+                          child: DashCard(
+                            img: "assets/images/reminder.png",
+                            text: 'Reminder',
+                            size: mediaWidth > 650 ? 25.sp : 15.sp,
+                          ),
+                        )
+                      ],
+                    )
+                  : Container(),
+              SizedBox(
+                height: 10.h,
               ),
               Center(
                 child: Image.asset("assets/images/dash.png"),
               )
-            ])))));
+            ]))));
   }
 }

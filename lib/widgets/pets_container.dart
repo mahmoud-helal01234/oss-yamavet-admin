@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
 
@@ -24,29 +25,29 @@ class _PetsContainerState extends State<PetsContainer> {
         });
       },
       child: Container(
-        margin: EdgeInsets.only(left: 15),
-        width: 70,
-        height: 100,
+        margin: EdgeInsets.only(left: 15.w),
+        width: 70.w,
+        height: 100.h,
         decoration: BoxDecoration(
             color: !ontap ? lightgray : primary,
-            borderRadius: BorderRadius.circular(20)),
+            borderRadius: BorderRadius.circular(20.sp)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CircleAvatar(
-              radius: 25,
+              radius: 25.sp,
               backgroundImage:
               NetworkImage(
                   "https://yama-vet.com/${widget.img}"),
 
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: 10.sp,
             ),
             Text(
               widget.text,
               style: GoogleFonts.roboto(
-                  fontSize: 13,
+                  fontSize: 13.sp,
                   fontWeight: FontWeight.w500,
                   color: !ontap ? Colors.black : Colors.white),
             )

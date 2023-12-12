@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker_widget/image_picker_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -76,33 +77,33 @@ class _EditCategoryState extends State<EditCategory> {
         width: .42 * mediaWidth,
         height: .3 * mediaHeight,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(color: primary, width: 2)),
+            borderRadius: BorderRadius.circular(5.sp),
+            border: Border.all(color: primary, width: 2.w)),
         child: ListView.builder(
           itemCount: 1,
           itemBuilder: (BuildContext context, int index) {
             return Column(children: [
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               Stack(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(5),
+                    padding:EdgeInsets.all(5.sp),
                     child: DottedBorder(
                       color: primary,
                       strokeWidth: 2,
                       dashPattern: [5, 5],
                       borderType: BorderType.Circle,
                       child: CircleAvatar(
-                        radius: 28,
+                        radius: 28.sp,
                         backgroundColor: Colors.transparent,
                         child: CircleAvatar(
-                          radius: 35,
+                          radius: 35.sp,
                           backgroundColor: Color(0xff0aaeac),
                           child: Image.asset(
                             "assets/images/vaci.png",
-                            width: 100,
+                            width: 100.w,
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -113,21 +114,21 @@ class _EditCategoryState extends State<EditCategory> {
                       bottom: 0,
                       right: 0,
                       child: Container(
-                        width: 25,
-                        height: 25,
+                        width: 25.w,
+                        height: 25.h,
                         decoration: BoxDecoration(
                             color: primary,
-                            borderRadius: BorderRadius.circular(20)),
+                            borderRadius: BorderRadius.circular(20.sp)),
                         child: ImagePickerWidget(
                           editIcon: Center(
-                            child: const Icon(
+                            child: Icon(
                               Icons.camera_alt,
                               color: Colors.white,
-                              size: 17,
+                              size: 17.sp,
                             ),
                           ),
                           backgroundColor: primary,
-                          diameter: 50,
+                          diameter: 50.sp,
                           fit: BoxFit.none,
                           // initialImage: AssetImage("assets/images/upload.png"),
                           shape: ImagePickerWidgetShape.circle,
@@ -146,7 +147,7 @@ class _EditCategoryState extends State<EditCategory> {
                 ],
               ),
               SizedBox(
-                height: 10,
+                height: 10.sp,
               ),
               EditAndAddContainer(
                 enText: 'Vaccination',
@@ -159,10 +160,10 @@ class _EditCategoryState extends State<EditCategory> {
                 children: [
                   MaterialButton(
                     elevation: 10,
-                    minWidth: 140,
-                    height: 25,
+                    minWidth: 140.w,
+                    height: 25.h,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
+                        borderRadius: BorderRadius.circular(5.sp)),
                     color: Color(0xffba94b9),
                     onPressed: () {
                       Navigator.pop(context);
@@ -171,19 +172,19 @@ class _EditCategoryState extends State<EditCategory> {
                         style: TextStyle(
                             fontFamily: 'futur',
                             color: Colors.white,
-                            fontSize: 15)),
+                            fontSize: 15.sp)),
                   ),
                   SizedBox(
-                    width: 10,
+                    width: 10.w,
                   ),
                   Consumer<CategoriesProvider>(
                       builder: (context, categoriesProvider, child) {
                         return MaterialButton(
                         elevation: 10,
-                        minWidth: 140,
-                        height: 25,
+                        minWidth: 140.w,
+                        height: 25.h,
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5)),
+                            borderRadius: BorderRadius.circular(5.sp)),
                         color: primary,
                         onPressed: () async {
 
@@ -197,7 +198,7 @@ class _EditCategoryState extends State<EditCategory> {
                             style: TextStyle(
                                 fontFamily: 'futur',
                                 color: Colors.white,
-                                fontSize: 15)),
+                                fontSize: 15.sp)),
                       );
                     }
                   ),

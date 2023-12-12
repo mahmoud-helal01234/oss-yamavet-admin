@@ -12,7 +12,8 @@ class ConfigurationsProvider extends ChangeNotifier {
 
   Future<void> get(BuildContext context) async {
 
-    ConfigurationsResponse configurationsResponse = ConfigurationsResponse.fromJson(await ApiService().get("appointment_configration"));
+    ConfigurationsResponse configurationsResponse = ConfigurationsResponse.fromJson(
+        await ApiService().get("appointment_configration"));
     configurations = configurationsResponse.data!;
     notifyListeners();
   }

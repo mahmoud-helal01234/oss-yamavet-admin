@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../core/utils/colors.dart';
 
 class CustomAddButton extends StatelessWidget {
@@ -15,7 +16,7 @@ class CustomAddButton extends StatelessWidget {
         elevation: 5,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
         minWidth: minwidth,
-        height: mediaWidth > 650 ? 35 : 30,
+        height: mediaWidth > 650 ? 35.h : 30.h,
         color: primary,
         onPressed: onPress,
         child: Text(
@@ -23,7 +24,7 @@ class CustomAddButton extends StatelessWidget {
           style: TextStyle(
               fontFamily: 'futur',
               color: Colors.white,
-              fontSize: mediaWidth > 650 ? 22 : 17),
+              fontSize: mediaWidth > 650 ? 22.sp : 17.sp),
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:yama_vet_admin/controllers/ClientsProvider.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
@@ -28,8 +29,8 @@ class _ClientRowState extends State<ClientRow> {
     return Consumer<ClientsProvider>(
         builder: (context, clientsProvider, child) {
       return Container(
-        width: 400,
-        height: 500,
+        width: 400.w,
+        height: 500.h,
         child: ListView.builder(
           itemCount: clientsProvider.clients.length,
           itemBuilder: (BuildContext context, int index) {
@@ -55,23 +56,23 @@ class _ClientRowState extends State<ClientRow> {
                     // mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(
-                        width: 15,
+                        width: 15.w,
                       ),
                       Container(
-                        width: 50,
-                        height: 55,
+                        width: 50.w,
+                        height: 55.h,
                         decoration: BoxDecoration(
                             color: primary,
-                            borderRadius: BorderRadius.circular(5)),
+                            borderRadius: BorderRadius.circular(5.sp)),
                         child: Center(
                           child: Padding(
-                            padding: const EdgeInsets.only(bottom: 10),
+                            padding:EdgeInsets.only(bottom: 10.h),
                             child: Image.asset("assets/images/female_one.png"),
                           ),
                         ),
                       ),
                       SizedBox(
-                        width: 5,
+                        width: 5.w,
                       ),
                       Text(clientsProvider.clients[index].name!),
                       Spacer(),
@@ -94,7 +95,7 @@ class _ClientRowState extends State<ClientRow> {
                               }),
                           Icon(
                             Icons.arrow_forward_ios,
-                            size: 20,
+                            size: 20.sp,
                             color: Colors.grey,
                           )
                         ],
@@ -104,9 +105,9 @@ class _ClientRowState extends State<ClientRow> {
                 ),
                 Divider(
                   color: Colors.grey,
-                  indent: 10,
-                  endIndent: 10,
-                  thickness: .5,
+                  indent: 10.h,
+                  endIndent: 10.h,
+                  thickness: .5.w,
                 )
               ],
             );

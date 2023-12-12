@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../controllers/UsersProvider.dart';
@@ -48,8 +49,8 @@ class _VetRowState extends State<VetRow> {
                 InkWell(
                   onTap: () {},
                   child: Container(
-                    width: 100,
-                    height: 70,
+                    width: 100.w,
+                    height: 70.h,
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             image: NetworkImage(
@@ -71,8 +72,8 @@ class _VetRowState extends State<VetRow> {
                       Row(
                         children: [
                           Image.asset("assets/images/icon_doctor.png"),
-                          const SizedBox(
-                            width: 5,
+                           SizedBox(
+                            width: 5.w,
                           ),
                           Text(usersProvider.users[index].name!),
                           SizedBox(
@@ -84,7 +85,7 @@ class _VetRowState extends State<VetRow> {
                         color: Colors.red,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5)),
-                        height: 30,
+                        height: 30.h,
                         onPressed: () async {
                           await Provider.of<UsersProvider>(context,
                                   listen: false)
@@ -123,7 +124,7 @@ class _VetRowState extends State<VetRow> {
                         Text(
                           usersProvider.users[index].totalRate ?? "",
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
+                              fontWeight: FontWeight.bold, fontSize: 20.sp),
                         ),
                         Text(
                           "/5",

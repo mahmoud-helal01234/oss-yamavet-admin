@@ -1,5 +1,6 @@
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // ignore: must_be_immutable
 class StepperScreen extends StatefulWidget {
@@ -21,7 +22,6 @@ class StepperScreen extends StatefulWidget {
 }
 
 class _StepperScreenState extends State<StepperScreen> {
- 
   int activeStep2 = 0;
   int reachedStep = 0;
   int upperBound = 5;
@@ -35,24 +35,24 @@ class _StepperScreenState extends State<StepperScreen> {
       setState(() => progress = 0);
     }
   }
-  Map<String,int> statusToStepMap = {
 
-    "initiated" : 0,
-    "accepted" : 1,
-    "completed" : 2
+  Map<String, int> statusToStepMap = {
+    "initiated": 0,
+    "accepted": 1,
+    "completed": 2
   };
 
   @override
   Widget build(BuildContext context) {
     return EasyStepper(
       lineStyle: LineStyle(
-          lineThickness: 2,
+          lineThickness: 2.sp,
           lineType: LineType.normal,
           defaultLineColor: widget.lineColor,
           finishedLineColor: widget.finishColor,
-          lineLength: 80),
+          lineLength: 80.sp),
 
-      padding: EdgeInsets.all(8),
+      padding: EdgeInsets.all(8.sp),
       activeStep: statusToStepMap[widget.status]!,
       // lineLength: 70,
       // lineSpace: 0,
@@ -63,19 +63,18 @@ class _StepperScreenState extends State<StepperScreen> {
       finishedStepTextColor: Colors.black87,
       // internalPadding: 0,
       showLoadingAnimation: false,
-      stepRadius: 8,
+      stepRadius: 8.sp,
       showStepBorder: false,
       // lineDotRadius: 1.5,
       maxReachedStep: 2,
       steps: [
         EasyStep(
             customStep: CircleAvatar(
-              radius: 8,
+              radius: 8.sp,
               backgroundColor: Colors.white,
               child: CircleAvatar(
-                radius: 7,
-                backgroundColor:
-                widget.stepperColor,
+                radius: 7.sp,
+                backgroundColor: widget.stepperColor,
               ),
             ),
             // title: 'Initiated',
@@ -86,12 +85,13 @@ class _StepperScreenState extends State<StepperScreen> {
             )),
         EasyStep(
             customStep: CircleAvatar(
-              radius: 8,
+              radius: 8.sp,
               backgroundColor: Colors.white,
               child: CircleAvatar(
-                radius: 7,
-                backgroundColor:
-                statusToStepMap[widget.status]! >= 1 ? widget.stepperColor : Colors.white,
+                radius: 7.sp,
+                backgroundColor: statusToStepMap[widget.status]! >= 1
+                    ? widget.stepperColor
+                    : Colors.white,
               ),
             ),
             customTitle: Text(
@@ -101,12 +101,13 @@ class _StepperScreenState extends State<StepperScreen> {
             )),
         EasyStep(
             customStep: CircleAvatar(
-              radius: 8,
+              radius: 8.sp,
               backgroundColor: Colors.white,
               child: CircleAvatar(
-                radius: 7,
-                backgroundColor:
-                statusToStepMap[widget.status]! >= 2  ? widget.stepperColor : Colors.white,
+                radius: 7.sp,
+                backgroundColor: statusToStepMap[widget.status]! >= 2
+                    ? widget.stepperColor
+                    : Colors.white,
               ),
             ),
             customTitle: Text(
@@ -115,11 +116,12 @@ class _StepperScreenState extends State<StepperScreen> {
               textAlign: TextAlign.center,
             )),
       ],
-      onStepReached: (index) => setState(() => widget.status = getKeyByValue(index)!),
+      onStepReached: (index) =>
+          setState(() => widget.status = getKeyByValue(index)!),
     );
   }
 
-  String? getKeyByValue( int value) {
+  String? getKeyByValue(int value) {
     for (var entry in statusToStepMap.entries) {
       if (entry.value == value) {
         return entry.key;
