@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
@@ -11,60 +12,111 @@ import '../data/models/dtos/Appointment.dart';
 import 'dart:convert';
 
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../data/models/dtos/AppointmentDetails.dart';
 import '../data/models/requests/UpdateAppointmentRequest.dart';
 import '../data/models/responses/AppointmentResponse.dart';
-import 'package:http/http.dart' as http;
-import 'package:yama_vet_admin/core/utils/strings.dart';
 
 import '../data/services/ApiService.dart';
 
 class AppointmentsProvider extends ChangeNotifier {
   List<Appointment> appointments = [];
-  List<bool> appointmentsShown = [];
 
-  void replace(List<Appointment> newAppointments) {
-    appointments = newAppointments;
-    notifyListeners();
-  }
+  // List<bool> appointmentsShown = [];
 
   String? statusFilter;
 
+  String? cashStatusFilter;
+
   int? doctorIdFilter;
+  String? selectedDoctorName;
 
+  int? clientIdFilter;
+  String? selectedClientName;
 
+  DateTime? from;
+  DateTime? to;
 
   UpdateAppointmentRequest? updateAppointmentRequest;
 
   int? selectedPetId = 0;
 
-  void launchLocationOnGoogleMap(String lat,String long){
-
-      String url = "https://www.google.com/maps/search/?api=1&query=$lat,$long"  ;
-      launchUrl(Uri.parse(url));
+  void launchLocationOnGoogleMap(String lat, String long) {
+    String url = "https://www.google.com/maps/search/?api=1&query=$lat,$long";
+    launchUrl(Uri.parse(url));
   }
 
-  void filterAppointments() {
-    appointmentsShown = List.filled(appointments.length, true, growable: true);
+  // void filterAppointments() {
+  //   // appointmentsShown = List.filled(appointments.length, true, growable: true);
+  //
+  //   for (int index = 0; index < appointments.length; index++) {
+  //     // if (statusFilter != null && appointments[index].status != statusFilter) {
+  //     //   appointmentsShown[index] = false;
+  //     //   continue;
+  //     // }
+  //
+  //     // if (doctorIdFilter != null && appointments[index].doctor != null && appointments[index].doctor. != null != statusFilter) {
+  //     //   appointmentsShown[index] = false;
+  //     //   continue;
+  //     // }
+  //     if (doctorNameFilter != null && appointments[index].doctor != null &&
+  //         appointments[index].doctor!.name! != null &&
+  //         appointments[index].doctor!.name! != doctorNameFilter) {
+  //       // appointmentsShown[index] = false;
+  //       continue;
+  //     }
+  //   }
+  //   notifyListeners();
+  // }
 
-    for (int index = 0; index < appointments.length; index++) {
-      if (statusFilter != null && appointments[index].status != statusFilter) {
-        appointmentsShown[index] = false;
-        continue;
-      }
-    }
+  void clearFilters(context) {
+    statusFilter = null;
+    doctorIdFilter = null;
+
+    from = null;
+    cashStatusFilter = null;
+    to = null;
+    selectedDoctorName = null;
+    getAppointments(context);
     notifyListeners();
   }
 
+  String _getFilterQueryParams() {
+    String queryParam = "?";
+    if (statusFilter != null) {
+      queryParam += "status=${statusFilter!}&";
+    }
+
+    if (cashStatusFilter != null) {
+      queryParam += "cash=${cashStatusFilter!}&";
+    }
+
+    if (doctorIdFilter != null) {
+      queryParam += "doctor_id=[${doctorIdFilter!}]&";
+    }
+
+    if (from != null) {
+      queryParam += "from=${DateFormat('yyyy-MM-dd').format(from!)}&";
+    }
+
+    if (to != null) {
+      queryParam += "to=${DateFormat('yyyy-MM-dd').format(to!)}&";
+    }
+
+    return queryParam;
+  }
+  int totalPrice = 0;
   Future<void> getAppointments(BuildContext context) async {
-    appointmentsShown = List.filled(appointments.length, true, growable: true);
+    // appointmentsShown = List.filled(appointments.length, true, growable: true);
+    print("link: " + "appointment${_getFilterQueryParams()}");
     AppointmentsResponse appointmentsResponse = AppointmentsResponse.fromJson(
-        await ApiService().get("appointment",
+        await ApiService().get("appointment${_getFilterQueryParams()}",
             context: context, componentName: "Appointment"));
 
     appointments = appointmentsResponse.data!;
-    filterAppointments();
+    totalPrice = 0;
+    appointments.forEach((element) {
+      totalPrice += element.price!;
+    });
+
     notifyListeners();
   }
 
@@ -76,15 +128,16 @@ class AppointmentsProvider extends ChangeNotifier {
         componentName: "Appointment",
         actionName: " Status changed");
     appointments[appointmentIndex].cash = cashStatus;
-    filterAppointments();
+    // filterAppointments();
     notifyListeners();
   }
 
   Future update(BuildContext context) async {
-
-    await ApiService().post("appointment/update",
-        updateAppointmentRequest!.toJson(), context:context,componentName:
-        "Appointment",operationName: "Updated");
+    await ApiService().post(
+        "appointment/update", updateAppointmentRequest!.toJson(),
+        context: context,
+        componentName: "Appointment",
+        operationName: "Updated");
 
     getAppointments(context);
   }
@@ -99,15 +152,52 @@ class AppointmentsProvider extends ChangeNotifier {
     Navigator.pop(context);
   }
 
+  Future complete(BuildContext context, int index) async {
+    await ApiService().getAction(
+        "appointment/complete/${Provider.of<AppointmentsProvider>(context, listen: false).appointments[index].id!}",
+        context: context,
+        componentName: "Appointment",
+        actionName: "Completed");
+    getAppointments(context);
+    Navigator.pop(context);
+  }
+
   void changeAppointmentStatusByIndex(int index, String status) {
     appointments[index].status = status;
-    filterAppointments();
+
     notifyListeners();
   }
 
   changeStatusFilter(String status) {
     statusFilter = status;
-    filterAppointments();
+    notifyListeners();
+  }
+
+  changeCashStatusFilter(String cashStatus) {
+    cashStatusFilter = cashStatus;
+    notifyListeners();
+  }
+
+  changeFromFilter(DateTime newFrom) {
+    from = newFrom;
+    notifyListeners();
+  }
+
+  changeToFilter(DateTime newTo) {
+    to = newTo;
+    notifyListeners();
+  }
+
+  changeDoctorFilter({required int id, required String name}) {
+    doctorIdFilter = id;
+    selectedDoctorName = name;
+    notifyListeners();
+  }
+
+  changeClientFilter({required int id, required String name}) {
+    clientIdFilter = id;
+    selectedClientName = name;
+    notifyListeners();
   }
 
   Future<void> delete(BuildContext context, int appointmentIndex) async {
@@ -115,7 +205,7 @@ class AppointmentsProvider extends ChangeNotifier {
         context: context, componentName: "User");
     Navigator.pop(context);
     appointments.removeAt(appointmentIndex);
-    appointmentsShown.removeAt(appointmentIndex);
+    // appointmentsShown.removeAt(appointmentIndex);
 
     notifyListeners();
     QuickAlert.show(
@@ -190,15 +280,15 @@ class AppointmentsProvider extends ChangeNotifier {
 
   void toggleServiceIdToPetForUpdateAppointmentRequest(int serviceId) {
     for (int index = 0;
-    index < updateAppointmentRequest!.petIds!.length;
-    index++) {
+        index < updateAppointmentRequest!.petIds!.length;
+        index++) {
       if (selectedPetId == updateAppointmentRequest!.petIds![index].petId) {
         for (int serviceIndex = 0;
-        serviceIndex <
-            updateAppointmentRequest!.petIds![index].serviceIds!.length;
-        serviceIndex++) {
+            serviceIndex <
+                updateAppointmentRequest!.petIds![index].serviceIds!.length;
+            serviceIndex++) {
           if (updateAppointmentRequest!
-              .petIds![index].serviceIds![serviceIndex] ==
+                  .petIds![index].serviceIds![serviceIndex] ==
               serviceId) {
             updateAppointmentRequest!.petIds![index].serviceIds!
                 .removeAt(serviceIndex);
@@ -216,22 +306,18 @@ class AppointmentsProvider extends ChangeNotifier {
   }
 
   double calculateTotalForUpdateAppointmentRequest(context) {
-
-
     double totalPrice = 0;
     for (int i = 0; i < updateAppointmentRequest!.petIds!.length; i++) {
-
       List<int> serviceIds = [];
       for (int serviceIndex = 0;
-      serviceIndex <
-          updateAppointmentRequest!.petIds![i].serviceIds!.length;
-      serviceIndex++) {
+          serviceIndex <
+              updateAppointmentRequest!.petIds![i].serviceIds!.length;
+          serviceIndex++) {
         serviceIds.add(
             updateAppointmentRequest!.petIds![i].serviceIds![serviceIndex]);
       }
-      totalPrice +=
-          Provider.of<CategoriesProvider>(context, listen: false)
-              .getTotalPriceForServiceIds(serviceIds);
+      totalPrice += Provider.of<CategoriesProvider>(context, listen: false)
+          .getTotalPriceForServiceIds(serviceIds);
     }
     return totalPrice;
   }
@@ -240,5 +326,4 @@ class AppointmentsProvider extends ChangeNotifier {
     selectedPetId = newPetId;
     notifyListeners();
   }
-
 }

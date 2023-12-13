@@ -1,6 +1,9 @@
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+
+import '../../controllers/AppointmentsProvider.dart';
 
 // ignore: must_be_immutable
 class StepperScreen extends StatefulWidget {
@@ -92,6 +95,9 @@ class _StepperScreenState extends State<StepperScreen> {
                 backgroundColor: statusToStepMap[widget.status]! >= 1
                     ? widget.stepperColor
                     : Colors.white,
+                // statusToStepMap[widget.status]! >= 1
+                //     ? widget.stepperColor
+                //     : Colors.white,
               ),
             ),
             customTitle: Text(
@@ -116,8 +122,12 @@ class _StepperScreenState extends State<StepperScreen> {
               textAlign: TextAlign.center,
             )),
       ],
-      onStepReached: (index) =>
-          setState(() => widget.status = getKeyByValue(index)!),
+      onStepReached: (index) {
+
+        Provider.of<AppointmentsProvider>(context, listen: false).changeStatusFilter(getKeyByValue(index)!);
+
+
+      },
     );
   }
 

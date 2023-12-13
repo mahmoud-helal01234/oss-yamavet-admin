@@ -43,12 +43,12 @@ class CategoriesProvider extends ChangeNotifier {
 
   }
 
-  Future<void> get(BuildContext context) async {
+  Future<void> get(BuildContext? context) async {
 
     CategoriesResponse categoriesResponse =
     CategoriesResponse.
     fromJson(await ApiService().
-    get("category",context: context, componentName: "Category"));
+    get("category",context: context));
     categories = categoriesResponse.categories!;
     notifyListeners();
 
@@ -78,7 +78,7 @@ class CategoriesProvider extends ChangeNotifier {
 
     await ApiService().postWithFiles("category", fields, files,context:context,componentName: "Category" );
 
-    get(context);
+    get(null);
 
   }
 
@@ -86,7 +86,7 @@ class CategoriesProvider extends ChangeNotifier {
 
     await ApiService().delete("category",categories[categoryIndex].id!,context: context,componentName: "Category");
     Navigator.pop(context);
-    get(context);
+    get(null);
     notifyListeners();
 
 
@@ -95,7 +95,7 @@ class CategoriesProvider extends ChangeNotifier {
   Future<void> deleteService(BuildContext context,int id) async {
 
     await ApiService().delete("service",id,context: context,componentName: "Service");
-    get(context);
+    get(null);
   }
 
   Future<void> createService(BuildContext context,AddServiceRequest addServiceRequest) async {
@@ -103,7 +103,7 @@ class CategoriesProvider extends ChangeNotifier {
     await ApiService().post("service", addServiceRequest.toJson(),context: context,componentName: "Service");
     addServiceOpened = false;
     notifyListeners();
-    get(context);
+    get(null);
   }
 
   Future updateService(BuildContext context,UpdateServiceRequest updateServiceRequest) async {
@@ -121,7 +121,7 @@ class CategoriesProvider extends ChangeNotifier {
         context: context,componentName: "Service",operationName:"Updated");
     serviceToUpdate = null;
     notifyListeners();
-    get(context);
+    get(null);
   }
 
 }

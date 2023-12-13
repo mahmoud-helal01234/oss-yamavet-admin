@@ -72,15 +72,16 @@ class _AppointmentContainerState extends State<AppointmentContainer> {
     return  Container(
 
             width: mediaWidth,
-            height: mediaHeight * 0.75,
+            height: 390.h,
             child: Consumer<AppointmentsProvider>(
                 builder: (context, appointmentsProvider, child) {
               return ListView.builder(
                 itemCount: appointmentsProvider.appointments.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return !appointmentsProvider.appointmentsShown[index]
-                      ? Container()
-                      : Stack(
+                  return
+                    // !appointmentsProvider.appointmentsShown[index]
+                    //   ? Container() :
+                  Stack(
                           children: [
                             Center(
                               child: GestureDetector(
@@ -364,14 +365,7 @@ class _AppointmentContainerState extends State<AppointmentContainer> {
                                         context,
                                         widget.textalign,
 
-                                        index,
-                                        () async {
-                                          await Provider.of<
-                                                      AppointmentsProvider>(
-                                                  context,
-                                                  listen: false)
-                                              .accept(context, index);
-                                        },
+                                        index
                                         // activeList[index],
                                       );
                                     },

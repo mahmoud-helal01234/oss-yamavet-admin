@@ -1,12 +1,14 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yama_vet_admin/controllers/AuthProvider.dart';
+import 'package:yama_vet_admin/controllers/SettingsProvider.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
 import 'package:yama_vet_admin/core/utils/strings.dart';
 import 'package:get/get.dart';
@@ -28,6 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     double mediaHeight = MediaQuery.sizeOf(context).height; //!900
     double mediaWidth = MediaQuery.sizeOf(context).width; //!400
 
@@ -45,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 width: 1 * MediaQuery.sizeOf(context).width,
               ),
-              Text("Login",
+              Text(Trans("login").tr,
                   style: GoogleFonts.roboto(
                       fontSize: mediaHeight > 900 ? 50.h : 30.h,
                       fontWeight: FontWeight.w500)),
@@ -134,6 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Provider.of<AuthProvider>(context,listen: false).
                   loginWogood(context, phone.text, "324-234-324");
 
+
                 },
                 buttomWidth:
                     mediaWidth > 400 ? .85 * mediaWidth : .75 * mediaWidth,
@@ -154,4 +158,5 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+
 }

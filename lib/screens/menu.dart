@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:yama_vet_admin/controllers/ConfigurationsProvider.dart';
+import 'package:yama_vet_admin/controllers/SettingsProvider.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
 
 import 'package:url_launcher/url_launcher.dart';
@@ -62,27 +63,34 @@ class _MenuScreenState extends State<MenuScreen> {
       ),
       body: Column(
         children: [
-          // Row(
-          //   children: [
-          //     IconButton(
-          //         onPressed: () {},
-          //         icon: Icon(
-          //           Icons.language,
-          //           color: lightpurple,
-          //         )),
-          //     const Text(
-          //       "English",
-          //       style: TextStyle(
-          //           fontFamily: 'futur', color: Colors.white, fontSize: 17),
-          //     ),
-          //     IconButton(
-          //         onPressed: () {},
-          //         icon: const Icon(
-          //           Icons.keyboard_arrow_down_outlined,
-          //           color: Colors.white,
-          //         ))
-          //   ],
-          // ),
+          InkWell(
+            onTap: (){
+              changeLanguage(context);
+            },
+            child: Row(
+              children: [
+                IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.language,
+                      color: lightpurple,
+                    )),
+                const Text(
+                  "English",
+                  style: TextStyle(
+                      fontFamily: 'futur', color: Colors.white, fontSize: 17),
+                ),
+                IconButton(
+                    onPressed: () {
+                      changeLanguage(context);
+                    },
+                    icon: const Icon(
+                      Icons.keyboard_arrow_down_outlined,
+                      color: Colors.white,
+                    ))
+              ],
+            ),
+          ),
           // SizedBox(
           //   height: .01 * MediaQuery.sizeOf(context).height,
           // ),
@@ -172,5 +180,18 @@ class _MenuScreenState extends State<MenuScreen> {
         ],
       ),
     );
+  }
+
+  changeLanguage(context) {
+    String currentLang = context.locale.toString();
+
+    if (currentLang == "en") {
+      // Provider.of<SettingsProvider>(context,listen: false).changeLang("en");
+      context.setLocale(const Locale('ar'));
+    } else {
+      context.setLocale(const Locale('en'));
+      // Provider.of<SettingsProvider>(context,listen: false).changeLang("ar");
+    }
+
   }
 }

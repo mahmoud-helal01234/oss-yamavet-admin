@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:yama_vet_admin/controllers/AppointmentsProvider.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
 import 'package:yama_vet_admin/data/models/doctor_models.dart';
 
@@ -17,31 +19,33 @@ class FilterRow extends StatelessWidget {
           ? MainAxisAlignment.spaceEvenly
           : MainAxisAlignment.spaceAround,
       children: [
-        // Row(
-        //   children: [
-        //     SizedBox(
-        //       width: mediaWidth > 650 ? .06 * mediaWidth : 0,
-        //     ),
-        //     MaterialButton(
-        //       minWidth: MediaQuery.sizeOf(context).width > 650 ? 70 : 50,
-        //       color: primary,
-        //       elevation: 5,
-        //       shape: RoundedRectangleBorder(
-        //           borderRadius: BorderRadius.circular(5)),
-        //       onPressed: () {
-        //         setDoctors();
-        //       },
-        //       child: const Text(
-        //         "Apply filter",
-        //         style: TextStyle(
-        //             fontSize: 15, color: Colors.white, fontFamily: 'futur'),
-        //       ),
-        //     )
-        //   ],
-        // ),
-        // SizedBox(
-        //   width: mediaWidth > 650 ? .15 * mediaWidth : 0,
-        // ),
+        Row(
+          children: [
+            SizedBox(
+              width: mediaWidth > 650 ? .06 * mediaWidth : 0,
+            ),
+            MaterialButton(
+              minWidth: MediaQuery.sizeOf(context).width > 650 ? 70 : 50,
+              color: primary,
+              elevation: 5,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5)),
+              onPressed: () {
+                Provider.of<AppointmentsProvider>(context,listen: false).getAppointments(context);
+                // Provider.of<AppointmentsProvider>(context,listen: false).filterAppointments();
+              },
+              child: const Text(
+                "Apply filter",
+                style: TextStyle(
+                    fontSize: 15, color: Colors.white, fontFamily: 'futur'),
+              ),
+            )
+          ],
+        ),
+        Text(Provider.of<AppointmentsProvider>(context, listen: true).totalPrice.toString() ),
+        SizedBox(
+          width: mediaWidth > 650 ? .15 * mediaWidth : 0,
+        ),
         // Row(
         //   children: [
         //     Text(
@@ -61,21 +65,23 @@ class FilterRow extends StatelessWidget {
         //   ],
         // ),
 
-        // SizedBox(
-        //   width: mediaWidth > 650 ? .1 * mediaWidth : 0,
-        // ),
-        // MaterialButton(
-        //   minWidth: MediaQuery.sizeOf(context).width > 650 ? 70 : 50,
-        //   color: primary,
-        //   elevation: 5,
-        //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-        //   onPressed: () {},
-        //   child: const Text(
-        //     "Clear filter",
-        //     style: TextStyle(
-        //         fontSize: 15, color: Colors.white, fontFamily: 'futur'),
-        //   ),
-        // )
+        SizedBox(
+          width: mediaWidth > 650 ? .1 * mediaWidth : 0,
+        ),
+        MaterialButton(
+          minWidth: MediaQuery.sizeOf(context).width > 650 ? 70 : 50,
+          color: primary,
+          elevation: 5,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+          onPressed: () {
+            Provider.of<AppointmentsProvider>(context, listen: false).clearFilters(context);
+          },
+          child: const Text(
+            "Clear filter",
+            style: TextStyle(
+                fontSize: 15, color: Colors.white, fontFamily: 'futur'),
+          ),
+        )
       ],
     );
   }

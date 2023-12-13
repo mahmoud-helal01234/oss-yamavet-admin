@@ -27,7 +27,7 @@ class SliderOffersProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> get(BuildContext context) async {
+  Future<void> get(BuildContext? context) async {
     SliderOffersResponse sliderOffersResponse = SliderOffersResponse.fromJson(
         await ApiService().get("slider_offer",
             context: context, componentName: "SliderOffer"));
@@ -42,7 +42,7 @@ class SliderOffersProvider extends ChangeNotifier {
         context: context, componentName: "SliderOffer");
     isAddingFormOpened = false;
     notifyListeners();
-    get(context);
+    get(null);
   }
 
   Future<void> delete(BuildContext context, int sliderOfferIndex) async {
@@ -62,6 +62,6 @@ class SliderOffersProvider extends ChangeNotifier {
         componentName: "SliderOffer",
         operationName: "Updated");
 
-    get(context);
+    get(null);
   }
 }

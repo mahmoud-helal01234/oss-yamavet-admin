@@ -15,6 +15,7 @@ import 'package:yama_vet_admin/widgets/order_over_view.dart';
 import 'package:yama_vet_admin/screens/appointments/widgets/LocationAndCashStatusRow.dart';
 
 import '../../controllers/AppointmentsProvider.dart';
+import '../../controllers/SettingsProvider.dart';
 
 // ignore: must_be_immutable
 class OrderReview extends StatefulWidget {
@@ -45,22 +46,13 @@ class _OrderReviewState extends State<OrderReview> {
   // String text = 'Notcollected';
   bool ontap = false;
   bool choosen = false;
-  String role = '';
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    initawaits();
   }
-  void initawaits() async{
-    SharedPreferences sharedPreferences =
-    await SharedPreferences.getInstance();
-    setState(() {
-      role = sharedPreferences.getString("role")!;
-    });
 
-    log(role);
-  }
   @override
   Widget build(BuildContext context) {
     double mediaHeight = MediaQuery
@@ -138,7 +130,7 @@ class _OrderReviewState extends State<OrderReview> {
                           )
                         ],
                       ),
-                      (role != 'vet')?Row(
+                      (Provider.of<SettingsProvider>(context, listen: true).role != 'vet') ? Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           MaterialButton(
@@ -243,7 +235,7 @@ class _OrderReviewState extends State<OrderReview> {
                         height: mediaHeight > 900 ? 20.h : 10.h,
                       ),
                       LocationAndCashStatusRow(
-                              appointmentIndex: widget.appointmentIndex,role:role),
+                              appointmentIndex: widget.appointmentIndex),
 
                       SizedBox(
                         height: mediaHeight > 900 ? 30.h : 10.h,

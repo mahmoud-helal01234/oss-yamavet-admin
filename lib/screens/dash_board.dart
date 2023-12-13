@@ -10,6 +10,7 @@ import 'package:yama_vet_admin/screens/menu.dart';
 import 'package:yama_vet_admin/widgets/dash_card.dart';
 
 import '../controllers/ConfigurationsProvider.dart';
+import '../controllers/SettingsProvider.dart';
 
 class DashBoard extends StatefulWidget {
   DashBoard({super.key});
@@ -20,24 +21,16 @@ class DashBoard extends StatefulWidget {
 
 class _DashBoardState extends State<DashBoard> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  String role = '';
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     Provider.of<ConfigurationsProvider>(context, listen: false).get(context);
-    initawaits();
+
   }
 
-  void initawaits() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    setState(() {
-      role = sharedPreferences.getString("role")!;
-    });
 
-    log(role);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +79,7 @@ class _DashBoardState extends State<DashBoard> {
               SizedBox(
                 height: mediaWidth > 650 ? 50.h : 10.h,
               ),
-              (role != "vet")
+              (Provider.of<SettingsProvider>(context, listen: true).role != "vet")
                   ? Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -144,7 +137,7 @@ class _DashBoardState extends State<DashBoard> {
               SizedBox(
                 height: mediaWidth > 650 ? 20.h : 10.h,
               ),
-              (role != "vet")
+              (Provider.of<SettingsProvider>(context, listen: true).role != "vet")
                   ? Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -192,7 +185,7 @@ class _DashBoardState extends State<DashBoard> {
               SizedBox(
                 height: mediaWidth > 650 ? 20.h : 10.h,
               ),
-              (role != "vet")
+              (Provider.of<SettingsProvider>(context, listen: true).role != "vet")
                   ? Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [

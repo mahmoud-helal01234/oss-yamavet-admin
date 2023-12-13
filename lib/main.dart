@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -22,8 +23,10 @@ import 'screens/splash.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   // await OneSignal.shared.setAppId('ab4cc51f-a93d-46db-99e3-d31408be0f72');
   await OneSignal.shared.setAppId('ab4cc51f-a93d-46db-99e3-d31408be0f72');
+
   return runApp(
     MultiProvider(
       providers: [
@@ -52,7 +55,25 @@ void main(List<String> args) async {
           create: (context) => SettingsProvider(),
         )
       ],
-      child: MyApp(),
+      child:
+      EasyLocalization(
+          supportedLocales: const [Locale('en'), Locale('ar')],
+          path: 'assets/lang',
+          fallbackLocale: const Locale('en'),
+          child: GlobalLoaderOverlay(
+              overlayColor: Colors.grey.withOpacity(0.8),
+              useDefaultLoading: false,
+              overlayWidgetBuilder: (_) {
+                //ignored progress for the moment
+                return const Center(
+                  child: SpinKitSquareCircle(
+                      color: Color(0xff792d75),
+                      size: 50.0
+                  ),
+                );
+              },
+              child: MyApp())
+      ),
     ),
   );
 }
@@ -100,79 +121,58 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return GlobalLoaderOverlay(
-      overlayColor: Colors.grey.withOpacity(0.8),
-      useDefaultLoading: false,
-      overlayWidgetBuilder: (_) {
-        //ignored progress for the moment
-        return const Center(
-          child: SpinKitSquareCircle(
-            color: Color(0xff792d75),
-            size: 50.0
-          ),
+    return ScreenUtilInit(
+      designSize: Size(390, 800), // Change depending on the XD
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp(
+
+          routes: {
+            '/': (context) => const SplashScreen(),
+            // 'OnBoarding': (context) => const OnBoardingScreen(),
+          },
+          initialRoute: '/',
+          onGenerateRoute: appRouter.generateRoute,
+          navigatorKey: navKey,
+          debugShowCheckedModeBanner: false,
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
+          //
+          // // locale: _locale,
+          // localeResolutionCallback: (locale, supportedLocales) {
+          //   for (var supportedLocaleLanguage in supportedLocales) {
+          //     if (supportedLocaleLanguage.languageCode ==
+          //             locale!.languageCode &&
+          //         supportedLocaleLanguage.countryCode == locale.countryCode) {
+          //       return supportedLocaleLanguage;
+          //     }
+          //   }
+          // },
+          // OR Locale('ar', 'AE') OR Other RTL locales,
+          theme: ThemeData(
+              primarySwatch: Colors.blue,
+              textTheme: TextTheme(button: TextStyle(fontSize: 18.sp)),
+              appBarTheme:
+                  AppBarTheme(iconTheme: IconThemeData(color: Colors.black))),
+          builder: (context, widget) {
+            // ScreenUtil.setContext(context);
+            return MediaQuery(
+              //Setting font does not change with system font size
+              data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+              child: widget!,
+            );
+          },
+
+          // home:  MyAppPPP(),
+          //  home: SplashScreen(),
+          // home: ChangeNotifierProvider<UnitsPurchaseProvider>.value(
+          //   value: sl<UnitsPurchaseProvider>(),
+          //   child: UnitsPurchaseScreen(),
+          // )
         );
       },
-      child: ScreenUtilInit(
-        designSize: Size(390, 800), // Change depending on the XD
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (context, child) {
-          return GetMaterialApp(
-            translations: LocalTranslations(),
-            locale:
-                Locale(Provider.of<SettingsProvider>(context, listen: true).lang),
-            routes: {
-              '/': (context) => const SplashScreen(),
-              // 'OnBoarding': (context) => const OnBoardingScreen(),
-            },
-            initialRoute: '/',
-            onGenerateRoute: appRouter.generateRoute,
-            navigatorKey: navKey,
-            debugShowCheckedModeBanner: false,
-            localizationsDelegates: [
-              // AppLocalizations.delegate,
-              // GlobalMaterialLocalizations.delegate,
-              // GlobalCupertinoLocalizations.delegate,
-              //  GlobalWidgetsLocalizations.delegate,
-            ],
-            supportedLocales: [
-              Locale('en', ''),
-              Locale('ar', ''),
-            ],
-            // locale: _locale,
-            localeResolutionCallback: (locale, supportedLocales) {
-              for (var supportedLocaleLanguage in supportedLocales) {
-                if (supportedLocaleLanguage.languageCode ==
-                        locale!.languageCode &&
-                    supportedLocaleLanguage.countryCode == locale.countryCode) {
-                  return supportedLocaleLanguage;
-                }
-              }
-            },
-            // OR Locale('ar', 'AE') OR Other RTL locales,
-            theme: ThemeData(
-                primarySwatch: Colors.blue,
-                textTheme: TextTheme(button: TextStyle(fontSize: 18.sp)),
-                appBarTheme:
-                    AppBarTheme(iconTheme: IconThemeData(color: Colors.black))),
-            builder: (context, widget) {
-              // ScreenUtil.setContext(context);
-              return MediaQuery(
-                //Setting font does not change with system font size
-                data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-                child: widget!,
-              );
-            },
-      
-            // home:  MyAppPPP(),
-            //  home: SplashScreen(),
-            // home: ChangeNotifierProvider<UnitsPurchaseProvider>.value(
-            //   value: sl<UnitsPurchaseProvider>(),
-            //   child: UnitsPurchaseScreen(),
-            // )
-          );
-        },
-      ),
     );
   }
 }

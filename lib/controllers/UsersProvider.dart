@@ -21,7 +21,7 @@ class UsersProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> get(BuildContext context) async {
+  Future<void> get(BuildContext? context ) async {
     UsersResponse usersResponse = UsersResponse.fromJson(await ApiService()
         .get("user", context: context, componentName: "User"));
     users = usersResponse.users!;

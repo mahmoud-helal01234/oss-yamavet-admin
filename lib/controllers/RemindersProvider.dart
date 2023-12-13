@@ -11,9 +11,9 @@ class RemindersProvider extends ChangeNotifier {
 
   List<Reminder> reminders = [];
 
-  Future<void> get(BuildContext context) async {
+  Future<void> get(BuildContext? context) async {
 
-    RemindersResponse remindersResponse = RemindersResponse.fromJson(await ApiService().get("reminder"));
+    RemindersResponse remindersResponse = RemindersResponse.fromJson(await ApiService().get("reminder",context: context));
     reminders = remindersResponse.reminders!;
     notifyListeners();
   }
@@ -26,7 +26,7 @@ class RemindersProvider extends ChangeNotifier {
 
     await ApiService().post("reminder", fields, context:context,componentName: "Reminder" );
 
-    get(context);
+    get(null);
 
   }
 

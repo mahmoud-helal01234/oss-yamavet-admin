@@ -1,10 +1,14 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:yama_vet_admin/core/utils/colors.dart';
 import 'package:yama_vet_admin/core/utils/strings.dart';
+
+import '../controllers/SettingsProvider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,29 +18,23 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  String role ='';
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    initawaits();
-  }
-  void initawaits() async{
-    SharedPreferences sharedPreferences =
-    await SharedPreferences.getInstance();
 
     Future.delayed(
-      Duration(seconds: 5),
-          () {
-            if(sharedPreferences.containsKey("token"))
-            { Navigator.of(context).pushNamedAndRemoveUntil(dash, (Route<dynamic> route) => false);}
-                else{
-                  Navigator.pushNamed(context, login);
-                }
+      const Duration(seconds: 2),
+      () {
+print("");
+          Provider.of<SettingsProvider>(context, listen: false).initUserData(context);
+
+
+
       },
     );
-    log(role);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

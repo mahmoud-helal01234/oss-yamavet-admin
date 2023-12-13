@@ -7,11 +7,11 @@ import 'package:yama_vet_admin/core/utils/colors.dart';
 import 'package:yama_vet_admin/data/models/dtos/Appointment.dart';
 
 import '../../../controllers/AppointmentsProvider.dart';
+import '../../../controllers/SettingsProvider.dart';
 
 class LocationAndCashStatusRow extends StatefulWidget {
-  LocationAndCashStatusRow({super.key, required this.appointmentIndex, required this.role});
+  LocationAndCashStatusRow({super.key, required this.appointmentIndex});
 
-  final String role;
   bool status = false;
   final int appointmentIndex;
 
@@ -21,21 +21,12 @@ class LocationAndCashStatusRow extends StatefulWidget {
 }
 
 class _LocationAndCashStatusRowState extends State<LocationAndCashStatusRow> {
-  String role = '';
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
   }
-  void initawaits() async{
-    SharedPreferences sharedPreferences =
-    await SharedPreferences.getInstance();
-    setState(() {
-      role = sharedPreferences.getString("role")!;
-    });
 
-    log(role);
-  }
   @override
   Widget build(BuildContext context) {
     double mediaHeight = MediaQuery
@@ -88,7 +79,7 @@ class _LocationAndCashStatusRowState extends State<LocationAndCashStatusRow> {
 
          Consumer<AppointmentsProvider>(
             builder: (context, appointmentsProvider, child) {
-              return (widget.role != "vet")?Container(
+              return (Provider.of<SettingsProvider>(context, listen: true).role != "vet")?Container(
                   margin: EdgeInsets.only(right: mediaWidth > 650 ? 30 : 20),
                   // width: appointmentsProvider.appointments[widget.appointmentIndex].cash == "not_collected"
                   //     ? mediaWidth > 650

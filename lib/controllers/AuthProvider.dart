@@ -1,27 +1,14 @@
 import 'dart:convert';
-import 'dart:developer';
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
-import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:quickalert/models/quickalert_type.dart';
-import 'package:quickalert/widgets/quickalert_dialog.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:yama_vet_admin/data/models/requests/AddUserRequest.dart';
-import 'package:yama_vet_admin/data/models/requests/AddServiceRequest.dart';
-import 'package:yama_vet_admin/screens/Auth/verify.dart';
-
-import '../core/utils/colors.dart';
 import '../core/utils/strings.dart';
-import '../data/models/dtos/User.dart';
 import '../data/models/requests/LoginRequest.dart';
-import '../data/models/requests/UpdateServiceRequest.dart';
-import '../data/models/requests/UpdateUserRequest.dart';
 import '../data/models/responses/LoginResponse.dart';
-import '../data/models/responses/UsersResponse.dart';
-import '../data/services/ApiService.dart';
 import 'package:http/http.dart' as http;
+
+import 'SettingsProvider.dart';
 
 class AuthProvider extends ChangeNotifier {
   LoginResponse? loginResponse;
@@ -48,8 +35,6 @@ class AuthProvider extends ChangeNotifier {
     if (response.statusCode == 200) {
       print('sucess');
       if (data['status'] == true) {
-        SharedPreferences sharedPreferences =
-        await SharedPreferences.getInstance();
 
         Navigator.pushNamed(context, verify);
       } else {
@@ -123,7 +108,11 @@ try {
     if (data['status'] == true) {
       SharedPreferences sharedPreferences =
       await SharedPreferences.getInstance();
+
       sharedPreferences.setString('token', data['data']['token']);
+      sharedPreferences.setString('role', data['data']['role']);
+      Provider.of<SettingsProvider>(context, listen: false).changeRole(data['data']['role']);
+      Provider.of<SettingsProvider>(context, listen: false).setToken(data['data']['token']);
       if (context != null) {
         context.loaderOverlay.hide();
       }
