@@ -39,7 +39,18 @@
   "Language": "Language",
   "English": "English",
   "Arabic": "Arabic",
-  "Logout":"Logout",
-  "Save":"Save"
+  "logout":"Logout",
+  "Save":"Save" , 
+  "offers":"offers", 
+  "categories":"categories" , 
+  "clients":"clients", 
+  "reminder":  " reminder ", 
+  "appointments":"appointments"   , 
+  "dashboard" :"Admin DashBoard ", 
+  "addoffer":"add offer", 
+  "add":"Add", 
+  "currentoffers":"Current Offers", 
+  "link":"Link", 
+  "contactus":"Contact Us "
 
 }

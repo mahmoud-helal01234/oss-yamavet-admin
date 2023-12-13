@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
 import 'package:dotted_border/dotted_border.dart';
@@ -97,7 +98,7 @@ class _OfferScreenState extends State<OfferScreen> {
                         mediaHeight > 900 ? .3 * mediaWidth : .15 * mediaWidth,
                   ),
                   Text(
-                    "Offers",
+                    "offers".tr(),
                     style: TextStyle(
                         fontFamily: 'futurBold',
                         color: primary,
@@ -128,7 +129,7 @@ class _OfferScreenState extends State<OfferScreen> {
                           });
                         },
                         child: Text(
-                          "Add Offer",
+                          "addoffer".tr(),
                           style: TextStyle(
                               fontFamily: 'futur',
                               color: Colors.white,
@@ -210,7 +211,7 @@ class _OfferScreenState extends State<OfferScreen> {
                                         controller: addLinkController,
                                         decoration: InputDecoration(
                                             border: InputBorder.none,
-                                            hintText: 'Link',
+                                            hintText: 'link'.tr(),
                                             hintStyle:
                                                 TextStyle(color: Colors.grey)),
                                       ),
@@ -239,7 +240,7 @@ class _OfferScreenState extends State<OfferScreen> {
                                                     img: choosen_file));
                                       },
                                       child: Text(
-                                        "Add ",
+                                        "add".tr(),
                                         style: TextStyle(
                                             fontFamily: 'futur',
                                             color: Colors.white,
@@ -259,7 +260,7 @@ class _OfferScreenState extends State<OfferScreen> {
                     left: mediaHeight > 900 ? 50.w : 20.w,
                     bottom: 10.h),
                 child: Text(
-                  "Current Offers",
+                  "currentoffers".tr(),
                   style: TextStyle(
                       fontWeight: FontWeight.w500,
                       color: Colors.black,
@@ -513,7 +514,7 @@ class _OfferScreenState extends State<OfferScreen> {
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  child: Text("Cancel",
+                                  child: Text("Cancel".tr(),
                                       style: TextStyle(
                                           fontFamily: 'futur',
                                           color: Colors.white,
@@ -534,7 +535,7 @@ class _OfferScreenState extends State<OfferScreen> {
                                                 BorderRadius.circular(5)),
                                         color: primary,
                                         onPressed: onUpdatePress,
-                                        child: Text("Update",
+                                        child: Text("Update".tr(),
                                             style: TextStyle(
                                                 fontFamily: 'futur',
                                                 color: Colors.white,
@@ -555,7 +556,7 @@ class _OfferScreenState extends State<OfferScreen> {
                                   borderRadius: BorderRadius.circular(5)),
                               color: Colors.red,
                               onPressed: onDeletePress,
-                              child: Text("Delete",
+                              child: Text("Delete".tr(),
                                   style: TextStyle(
                                       fontFamily: 'futur',
                                       color: Colors.white,

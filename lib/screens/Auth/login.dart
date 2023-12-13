@@ -1,18 +1,14 @@
-import 'dart:convert';
-import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:yama_vet_admin/controllers/AuthProvider.dart';
-import 'package:yama_vet_admin/controllers/SettingsProvider.dart';
-import 'package:yama_vet_admin/core/utils/colors.dart';
-import 'package:yama_vet_admin/core/utils/strings.dart';
-import 'package:get/get.dart';
-import 'package:yama_vet_admin/data/models/requests/LoginRequest.dart';
+
+
+
 
 import 'package:yama_vet_admin/widgets/custom_button.dart';
 import 'package:http/http.dart' as http;
@@ -48,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 width: 1 * MediaQuery.sizeOf(context).width,
               ),
-              Text(Trans("login").tr,
+              Text("login".tr(),
                   style: GoogleFonts.roboto(
                       fontSize: mediaHeight > 900 ? 50.h : 30.h,
                       fontWeight: FontWeight.w500)),
@@ -129,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               CustomButton(
                 size: 25.sp,
-                text: Trans("login").tr,
+                text: "login".tr(),
                 onTap: () async {
                   // Provider.of<AuthProvider>(context,listen: false).
                   // login(context, LoginRequest(phone: phone.text,deviceId: "324-234-324"));

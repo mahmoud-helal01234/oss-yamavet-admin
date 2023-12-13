@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +9,7 @@ import 'package:yama_vet_admin/core/utils/colors.dart';
 import 'package:yama_vet_admin/core/utils/strings.dart';
 import 'package:yama_vet_admin/screens/menu.dart';
 import 'package:yama_vet_admin/widgets/dash_card.dart';
+import 'package:yama_vet_admin/widgets/notification.dart';
 
 import '../controllers/ConfigurationsProvider.dart';
 import '../controllers/SettingsProvider.dart';
@@ -27,10 +29,7 @@ class _DashBoardState extends State<DashBoard> {
     // TODO: implement initState
     super.initState();
     Provider.of<ConfigurationsProvider>(context, listen: false).get(context);
-
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -66,10 +65,44 @@ class _DashBoardState extends State<DashBoard> {
                     child: Image.asset(
                       "assets/images/menuIcon.png",
                     )),
+                Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: GestureDetector(
+                      onTap: () {
+                        _dialogBuilder(context);
+                      },
+                      child: Stack(children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Image.asset("assets/images/Notification.png"),
+                        ),
+                        Positioned(
+                          // draw a red marble
+                          top: 0.0,
+                          left: 0.0,
+
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 15),
+                            child: Container(
+                                width: 20,
+                                height: 20,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.red),
+                                child: const Center(
+                                  child: Text(
+                                    "1",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                )),
+                          ),
+                        )
+                      ])),
+                ),
               ]),
               Center(
                 child: Text(
-                  "Admin Dashboard",
+                  "dashboard".tr(),
                   style: TextStyle(
                       fontFamily: 'futurBold',
                       color: primary,
@@ -79,7 +112,8 @@ class _DashBoardState extends State<DashBoard> {
               SizedBox(
                 height: mediaWidth > 650 ? 50.h : 10.h,
               ),
-              (Provider.of<SettingsProvider>(context, listen: true).role != "vet")
+              (Provider.of<SettingsProvider>(context, listen: true).role !=
+                      "vet")
                   ? Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -90,7 +124,7 @@ class _DashBoardState extends State<DashBoard> {
                           },
                           child: DashCard(
                             img: "assets/images/offers.png",
-                            text: 'Offers',
+                            text: 'offers'.tr(),
                             size: mediaWidth > 650 ? 25.sp : 17.sp,
                           ),
                         ),
@@ -101,7 +135,7 @@ class _DashBoardState extends State<DashBoard> {
                           },
                           child: DashCard(
                             img: "assets/images/services.png",
-                            text: 'Categories/Services',
+                            text: 'categories'.tr(),
                             size: mediaWidth > 650 ? 25.sp : 15.sp,
                           ),
                         ),
@@ -117,7 +151,7 @@ class _DashBoardState extends State<DashBoard> {
                           },
                           child: DashCard(
                             img: "assets/images/appointments.png",
-                            text: 'appointments',
+                            text: 'appointments'.tr(),
                             size: mediaWidth > 650 ? 25.sp : 17.sp,
                           ),
                         ),
@@ -128,7 +162,7 @@ class _DashBoardState extends State<DashBoard> {
                           },
                           child: DashCard(
                             img: "assets/images/reminder.png",
-                            text: 'Reminder',
+                            text: 'Reminder'.tr(),
                             size: mediaWidth > 650 ? 25.sp : 15.sp,
                           ),
                         )
@@ -137,7 +171,8 @@ class _DashBoardState extends State<DashBoard> {
               SizedBox(
                 height: mediaWidth > 650 ? 20.h : 10.h,
               ),
-              (Provider.of<SettingsProvider>(context, listen: true).role != "vet")
+              (Provider.of<SettingsProvider>(context, listen: true).role !=
+                      "vet")
                   ? Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -148,7 +183,7 @@ class _DashBoardState extends State<DashBoard> {
                           },
                           child: DashCard(
                             img: "assets/images/clients.png",
-                            text: 'Clients',
+                            text: 'clients'.tr(),
                             size: mediaWidth > 650 ? 25.sp : 17.sp,
                           ),
                         ),
@@ -159,7 +194,7 @@ class _DashBoardState extends State<DashBoard> {
                           },
                           child: DashCard(
                             img: "assets/images/vets.png",
-                            text: 'Vets',
+                            text: 'Vet'.tr(),
                             size: mediaWidth > 650 ? 25.sp : 15.sp,
                           ),
                         ),
@@ -175,7 +210,7 @@ class _DashBoardState extends State<DashBoard> {
                           },
                           child: DashCard(
                             img: "assets/images/offers.png",
-                            text: 'Offers',
+                            text: 'offers'.tr(),
                             size: mediaWidth > 650 ? 25.sp : 17.sp,
                           ),
                         ),
@@ -185,7 +220,8 @@ class _DashBoardState extends State<DashBoard> {
               SizedBox(
                 height: mediaWidth > 650 ? 20.h : 10.h,
               ),
-              (Provider.of<SettingsProvider>(context, listen: true).role != "vet")
+              (Provider.of<SettingsProvider>(context, listen: true).role !=
+                      "vet")
                   ? Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -196,7 +232,7 @@ class _DashBoardState extends State<DashBoard> {
                           },
                           child: DashCard(
                             img: "assets/images/appointments.png",
-                            text: 'appointments',
+                            text: 'appointments'.tr(),
                             size: mediaWidth > 650 ? 25.sp : 17.sp,
                           ),
                         ),
@@ -207,7 +243,7 @@ class _DashBoardState extends State<DashBoard> {
                           },
                           child: DashCard(
                             img: "assets/images/reminder.png",
-                            text: 'Reminder',
+                            text: 'reminder'.tr(),
                             size: mediaWidth > 650 ? 25.sp : 15.sp,
                           ),
                         )
@@ -222,4 +258,33 @@ class _DashBoardState extends State<DashBoard> {
               )
             ]))));
   }
+}
+
+Future<void> _dialogBuilder(BuildContext context) {
+  double mediaHeight = MediaQuery.sizeOf(context).height; //!900
+
+  return showDialog<void>(
+      barrierDismissible: true,
+      context: context,
+      builder: (BuildContext context) {
+        return Column(
+          // mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(0),
+              child: Container(
+                margin: const EdgeInsets.only(
+                    top: 60, bottom: 50, left: 20, right: 50),
+                height: mediaHeight > 900
+                    ? .5 * mediaHeight
+                    : .65 * MediaQuery.sizeOf(context).height,
+                width: MediaQuery.of(context).size.width,
+                color: primary,
+                child: Scaffold(
+                    backgroundColor: primary, body: NotificationBody()),
+              ),
+            )
+          ],
+        );
+      });
 }

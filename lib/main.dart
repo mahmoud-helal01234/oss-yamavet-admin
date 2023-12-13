@@ -4,7 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +16,7 @@ import 'package:yama_vet_admin/controllers/RemindersProvider.dart';
 import 'package:yama_vet_admin/controllers/SettingsProvider.dart';
 import 'package:yama_vet_admin/controllers/SliderOffersProvider.dart';
 import 'package:yama_vet_admin/controllers/UsersProvider.dart';
-import 'package:yama_vet_admin/core/translations/LocalTranslations.dart';
+
 import 'controllers/ConfigurationsProvider.dart';
 import 'core/utils/routes.dart';
 import 'screens/splash.dart';
@@ -58,7 +58,7 @@ void main(List<String> args) async {
       child:
       EasyLocalization(
           supportedLocales: const [Locale('en'), Locale('ar')],
-          path: 'assets/lang',
+          path: 'assets/translation',
           fallbackLocale: const Locale('en'),
           child: GlobalLoaderOverlay(
               overlayColor: Colors.grey.withOpacity(0.8),

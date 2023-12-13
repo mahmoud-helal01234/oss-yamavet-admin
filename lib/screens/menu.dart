@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -55,16 +56,17 @@ class _MenuScreenState extends State<MenuScreen> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon:  Icon(
+              icon: Icon(
                 Icons.close,
                 weight: 100.sp,
+                color: Colors.white,
               ))
         ],
       ),
       body: Column(
         children: [
           InkWell(
-            onTap: (){
+            onTap: () {
               changeLanguage(context);
             },
             child: Row(
@@ -75,19 +77,29 @@ class _MenuScreenState extends State<MenuScreen> {
                       Icons.language,
                       color: lightpurple,
                     )),
-                const Text(
-                  "English",
-                  style: TextStyle(
-                      fontFamily: 'futur', color: Colors.white, fontSize: 17),
-                ),
-                IconButton(
-                    onPressed: () {
-                      changeLanguage(context);
-                    },
-                    icon: const Icon(
-                      Icons.keyboard_arrow_down_outlined,
-                      color: Colors.white,
-                    ))
+                DropdownButton(
+                  dropdownColor: primary,
+                  value: EasyLocalization.of(context)!.locale,
+                  items: [
+                    DropdownMenuItem(
+                      child: Text(
+                        'English'.tr(),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      value: Locale('en'),
+                    ),
+                    DropdownMenuItem(
+                      child: Text(
+                        'Arabic'.tr(),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      value: Locale('ar'),
+                    ),
+                  ],
+                  onChanged: (locale) {
+                    EasyLocalization.of(context)!.setLocale(locale!);
+                  },
+                )
               ],
             ),
           ),
@@ -120,8 +132,7 @@ class _MenuScreenState extends State<MenuScreen> {
               onTap: () async {
                 await launchUrl(Uri.parse(Platform.isAndroid
                     ? "https://wa.me/${configurationsProvider.configurations!.whatsappNumber!}/"
-                    : "https://api.whatsapp.com/send")
-                );
+                    : "https://api.whatsapp.com/send"));
               },
               child: Row(
                 children: [
@@ -131,10 +142,12 @@ class _MenuScreenState extends State<MenuScreen> {
                         Icons.send_to_mobile_sharp,
                         color: lightpurple,
                       )),
-                   Text(
-                    "Contact Us",
+                  Text(
+                    "contactus".tr(),
                     style: TextStyle(
-                        fontFamily: 'futur', color: Colors.white, fontSize: 20.sp),
+                        fontFamily: 'futur',
+                        color: Colors.white,
+                        fontSize: 20.sp),
                   ),
                 ],
               ),
@@ -146,33 +159,34 @@ class _MenuScreenState extends State<MenuScreen> {
                 : .49 * MediaQuery.sizeOf(context).height,
           ),
           InkWell(
-            onTap: () async{
-              log("log out");
+            onTap: () async {
+              log("logout".tr());
               SharedPreferences sharedPreferences =
                   await SharedPreferences.getInstance();
               sharedPreferences.clear();
-              Navigator.of(context).pushNamedAndRemoveUntil(login, (Route<dynamic> route) => false);
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  login, (Route<dynamic> route) => false);
 
               // api logout
             },
             child: Row(
               children: [
-                 SizedBox(
+                SizedBox(
                   width: 20.w,
                 ),
                 //* go to register screen
                 IconButton(
-                    onPressed: ()  {
-
-                    },
+                    onPressed: () {},
                     icon: Icon(
                       Icons.exit_to_app,
                       color: lightpurple,
                     )),
-                 Text(
-                  "Logout",
+                Text(
+                  "logout".tr(),
                   style: TextStyle(
-                      fontFamily: 'futur', color: Colors.white, fontSize: 17.sp),
+                      fontFamily: 'futur',
+                      color: Colors.white,
+                      fontSize: 17.sp),
                 )
               ],
             ),
@@ -192,6 +206,5 @@ class _MenuScreenState extends State<MenuScreen> {
       context.setLocale(const Locale('en'));
       // Provider.of<SettingsProvider>(context,listen: false).changeLang("ar");
     }
-
   }
 }

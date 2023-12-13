@@ -123,10 +123,8 @@ class _StepperScreenState extends State<StepperScreen> {
             )),
       ],
       onStepReached: (index) {
-
-        Provider.of<AppointmentsProvider>(context, listen: false).changeStatusFilter(getKeyByValue(index)!);
-
-
+        Provider.of<AppointmentsProvider>(context, listen: false)
+            .changeStatusFilter(getKeyByValue(index)!);
       },
     );
   }
