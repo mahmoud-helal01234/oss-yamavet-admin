@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -150,7 +151,7 @@ class _UpdateServicesState extends State<UpdateService> {
                                         right: 5.w, top: mediaWidth > 650 ? 15.h : 10.h),
                                     child: TextField(
                                       controller: name_ar,
-                                      textDirection: TextDirection.rtl,
+                                      // textDirection: TextDirection.rtl,
                                       decoration: InputDecoration(
 
                                           border: InputBorder.none,
@@ -159,7 +160,8 @@ class _UpdateServicesState extends State<UpdateService> {
                                               color: Colors.grey,
                                               fontWeight: FontWeight.w500),
                                           hintText: 'تطعيم الكلاب ضد الانفلونزا',
-                                          hintTextDirection: TextDirection.rtl),
+                                          // hintTextDirection: TextDirection.rtl),
+                                      )
                                     ),
                                   ),
                                 )
@@ -190,7 +192,7 @@ class _UpdateServicesState extends State<UpdateService> {
 
                                   },
                                   child: Text(
-                                    "Update ",
+                                    "Update".tr(),
                                     style: TextStyle(
                                         fontFamily: 'futur',
                                         color: Colors.white,
@@ -211,7 +213,7 @@ class _UpdateServicesState extends State<UpdateService> {
                                         .deleteService(context,Provider.of<CategoriesProvider>(context,listen: false).serviceToUpdate!.id!);
                                   },
                                   child: Text(
-                                    "Delete",
+                                    "Delete".tr(),
                                     style: TextStyle(
                                         fontFamily: 'futur',
                                         color: Colors.white,

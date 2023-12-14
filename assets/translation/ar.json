@@ -50,7 +50,61 @@
   "add":"اضافة", 
   "currentoffers":"العروض الحالية " , 
   "link":"الرابط", 
-  "contactus":"اتصل بنا  "
+  "contactus":"اتصل بنا  ", 
+  "addcategory": "اضافة\nفئة", 
+  "services":"الخدمات", 
+  "vaccination":"التلقيح/ الخدمات", 
+  "addservices":"اضافة خدمات", 
+  "price":"السعر", 
+  "clientprofiles":"الملفات الشخصية للعملاء ", 
+  "active":"نشط ", 
+  "profile":"الملف الشخصي", 
+  "pets":"الحيوانات", 
+  "vetprofile":" الملف الشخصي للطبيب البيطري" , 
+  "createaccount":"انشاء حساب", 
+  "rating":"تقيم", 
+  "role":"الدور", 
+  "orders":"الطلبات", 
+  "create":"انشاء", 
+  "Appointments":"المواعيد", 
+  "Clearfilter":"حذف الفلتر", 
+  "Applyfilter":"تطبيق الفلتر", 
+  "Completed":"مكتمله", 
+  "Accepted":"تم القبول", 
+  "Initiated":"تم البدأ", 
+  "Not Collected": "لم يتم جمعها",
+  "Collected":"تم الجمع", 
+  "Moredetails":"المزيد", 
+  "totalprice": "السعر الكلي :", 
+  "cash":"النقدي : " , 
+  "Send Reminder":"ارسال تذكير", 
+  "Reminder message":"رسالة التذكير ", 
+  "Change Image":"تغير الصورة", 
+  "Select Client":"اختار العميل", 
+  "Book an appointment":"قم بحجز معاد"
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

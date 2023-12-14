@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker_widget/image_picker_widget.dart';
@@ -197,13 +198,18 @@ class _CategoryChooseState extends State<CategoryChoose> {
                         color: Colors.black,
                       )),
                   SizedBox(
-                    width:
-                        mediaHeight > 900 ? .3 * mediaWidth : .15 * mediaWidth,
+                    width: mediaHeight > 900
+                        ? .3 * mediaWidth
+                        : .3 * mediaWidth.sp,
                   ),
-                  Text(
-                    "Category/Service",
-                    style: TextStyle(
-                        fontFamily: 'futurBold', color: primary, fontSize: 20.sp),
+                  Center(
+                    child: Text(
+                      "categories".tr(),
+                      style: TextStyle(
+                          fontFamily: 'futurBold',
+                          color: primary,
+                          fontSize: 20.sp),
+                    ),
                   ),
                   SizedBox(
                     height: mediaHeight > 900 ? 20.sp : 0,
@@ -211,10 +217,12 @@ class _CategoryChooseState extends State<CategoryChoose> {
                 ],
               ),
               Padding(
-                padding:
-                    EdgeInsets.only(left: mediaHeight > 900 ? 50.w : 20.w, top: 10.h),
+                padding: EdgeInsets.only(
+                    left: mediaHeight > 900 ? 50.w : 30.w,
+                    top: 10.h,
+                    right: 10.w),
                 child: Text(
-                  "Categories",
+                  "categories".tr(),
                   style: TextStyle(
                       fontSize: mediaHeight > 900 ? 25.sp : 17.sp,
                       fontWeight: FontWeight.w600),
@@ -257,7 +265,7 @@ class _CategoryChooseState extends State<CategoryChoose> {
                                                   categoryIndex: index)));
                                     },
                                     child: Padding(
-                                      padding:  EdgeInsets.all(8.0.sp),
+                                      padding: EdgeInsets.all(8.0.sp),
                                       child: CircleAvatar(
                                         radius: 40.sp,
                                         backgroundImage: NetworkImage(
@@ -272,7 +280,7 @@ class _CategoryChooseState extends State<CategoryChoose> {
                         );
                       }),
                     ),
-               SizedBox(
+              SizedBox(
                 height: 20.h,
               ),
               Row(
@@ -301,11 +309,11 @@ class _CategoryChooseState extends State<CategoryChoose> {
                                   child: Image.asset("assets/images/add.png"))),
                         ),
                       ),
-                       SizedBox(
+                      SizedBox(
                         height: 10.h,
                       ),
                       Text(
-                        "Add\nCategory",
+                        "addcategory".tr(),
                         style: TextStyle(
                             color: primary, fontWeight: FontWeight.w500),
                         textAlign: TextAlign.center,
@@ -314,7 +322,7 @@ class _CategoryChooseState extends State<CategoryChoose> {
                   ),
                 ],
               ),
-               SizedBox(
+              SizedBox(
                 height: 20.h,
               ),
               ontap
@@ -343,7 +351,7 @@ class _CategoryChooseState extends State<CategoryChoose> {
                                     width: 300.w,
                                     child: Center(
                                       child: ImagePickerWidget(
-                                        editIcon:  Icon(
+                                        editIcon: Icon(
                                           Icons.camera_alt,
                                           color: Colors.white,
                                           size: 25.sp,
@@ -369,9 +377,7 @@ class _CategoryChooseState extends State<CategoryChoose> {
                                     ),
                                   )),
                             ),
-                            SizedBox(
-                              height: 10.h
-                            ),
+                            SizedBox(height: 10.h),
                             EditAndAddContainer(
                               enText: 'Category name',
                               arText: 'اسم الفئة',

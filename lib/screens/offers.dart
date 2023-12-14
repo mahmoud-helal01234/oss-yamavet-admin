@@ -455,7 +455,7 @@ class _OfferScreenState extends State<OfferScreen> {
                                                   MainAxisAlignment.spaceAround,
                                               children: [
                                                 Text(
-                                                  "Change Image",
+                                                  "Change Image".tr(),
                                                   style: TextStyle(
                                                       fontFamily: 'futur',
                                                       color: Colors.white,

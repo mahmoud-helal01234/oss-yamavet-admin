@@ -55,8 +55,7 @@ void main(List<String> args) async {
           create: (context) => SettingsProvider(),
         )
       ],
-      child:
-      EasyLocalization(
+      child: EasyLocalization(
           supportedLocales: const [Locale('en'), Locale('ar')],
           path: 'assets/translation',
           fallbackLocale: const Locale('en'),
@@ -66,14 +65,11 @@ void main(List<String> args) async {
               overlayWidgetBuilder: (_) {
                 //ignored progress for the moment
                 return const Center(
-                  child: SpinKitSquareCircle(
-                      color: Color(0xff792d75),
-                      size: 50.0
-                  ),
+                  child:
+                      SpinKitSquareCircle(color: Color(0xff792d75), size: 50.0),
                 );
               },
-              child: MyApp())
-      ),
+              child: MyApp())),
     ),
   );
 }
@@ -127,7 +123,6 @@ class _MyAppState extends State<MyApp> {
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
-
           routes: {
             '/': (context) => const SplashScreen(),
             // 'OnBoarding': (context) => const OnBoardingScreen(),

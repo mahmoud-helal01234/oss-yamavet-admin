@@ -1,4 +1,5 @@
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -138,7 +139,7 @@ Future<void> dialogBuilder(
                        onPressed: () {
                          Navigator.pop(context);
                        },
-                       child: Text("Cancel",
+                       child: Text("Cancel".tr(),
                            style: TextStyle(
                                fontFamily: 'futur',
                                color: Colors.white,
@@ -155,7 +156,7 @@ Future<void> dialogBuilder(
                            borderRadius: BorderRadius.circular(5)),
                        color: primary,
                        onPressed: onUpdatePress,
-                       child: Text("Update",
+                       child: Text("Update".tr(),
                            style: TextStyle(
                                fontFamily: 'futur',
                                color: Colors.white,
@@ -174,7 +175,7 @@ Future<void> dialogBuilder(
                        borderRadius: BorderRadius.circular(5)),
                    color: Colors.red,
                    onPressed: onDeletePress,
-                   child: Text("Delete",
+                   child: Text("Delete".tr(),
                        style: TextStyle(
                            fontFamily: 'futur',
                            color: Colors.white,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,7 +42,7 @@ class _NotificationStepperState extends State<NotificationStepper> {
             ),
             // title: 'Initiated',
             customTitle: Text(
-              "Initiated",
+              "Initiated".tr(),
               style: TextStyle(color: Colors.white, fontFamily: 'futuraMd'),
               textAlign: TextAlign.center,
             )),
@@ -58,7 +59,7 @@ class _NotificationStepperState extends State<NotificationStepper> {
               ),
             ),
             customTitle: Text(
-              "Accepted",
+              "Accepted".tr(),
               style: TextStyle(fontFamily: 'futuraMd', color: Colors.white),
               textAlign: TextAlign.center,
             )),
@@ -72,7 +73,7 @@ class _NotificationStepperState extends State<NotificationStepper> {
               ),
             ),
             customTitle: Text(
-              "Completed",
+              "Completed".tr(),
               style: TextStyle(fontFamily: 'futuraMd', color: Colors.white),
               textAlign: TextAlign.center,
             )),

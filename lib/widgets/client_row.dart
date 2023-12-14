@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -49,9 +50,11 @@ class _ClientRowState extends State<ClientRow> {
                     // );
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ClientProfile(clientIndex: index)),
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              ClientProfile(clientIndex: index)),
                     );
-                    },
+                  },
                   child: Row(
                     // mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -66,7 +69,7 @@ class _ClientRowState extends State<ClientRow> {
                             borderRadius: BorderRadius.circular(5.sp)),
                         child: Center(
                           child: Padding(
-                            padding:EdgeInsets.only(bottom: 10.h),
+                            padding: EdgeInsets.only(bottom: 10.h),
                             child: Image.asset("assets/images/female_one.png"),
                           ),
                         ),
@@ -79,7 +82,7 @@ class _ClientRowState extends State<ClientRow> {
                       Row(
                         children: [
                           Text(
-                            "Active",
+                            "active".tr(),
                             style: TextStyle(fontWeight: FontWeight.w500),
                           ),
                           Switch(

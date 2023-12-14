@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -238,8 +239,8 @@ class NotificationBody extends StatelessWidget {
                     //^backend
                     Row(
                       children: [
-                        const Text(
-                          "Rating",
+                         Text(
+                          "rating".tr(),
                           style: TextStyle(
                               fontWeight: FontWeight.w300, color: Colors.white),
                         ),

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -58,7 +59,7 @@ class _VaccinationState extends State<Vaccination> {
     return Scaffold(
         key: scaffoldKey,
         backgroundColor: scaffoldColor,
-        drawer:  Drawer(
+        drawer: Drawer(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50.sp),
@@ -70,258 +71,282 @@ class _VaccinationState extends State<Vaccination> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                          SizedBox(
-            height: .02 * MediaQuery.sizeOf(context).height,
-                          ),
-                          Row(children: [
-            SizedBox(
-              width: .05 * MediaQuery.sizeOf(context).width,
-            ),
-            GestureDetector(
-                onTap: () {
-                  scaffoldKey.currentState!.openDrawer();
-                },
-                child: Image.asset("assets/images/menuIcon.png")),
-                          ]),
-                           SizedBox(
-            height: 20.h,
-                          ),
-                          Row(
-            children: [
               SizedBox(
-                width: mediaWidth > 650 ? 30.w : 0,
+                height: .02 * MediaQuery.sizeOf(context).height,
               ),
-              IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(
-                    Icons.arrow_back_ios_new_rounded,
-                    size: mediaWidth > 650 ? 30.sp : 20.sp,
-                    weight: 100.5,
-                    color: Colors.black,
-                  )),
+              Row(children: [
+                SizedBox(
+                  width: .05 * MediaQuery.sizeOf(context).width,
+                ),
+                GestureDetector(
+                    onTap: () {
+                      scaffoldKey.currentState!.openDrawer();
+                    },
+                    child: Image.asset("assets/images/menuIcon.png")),
+              ]),
               SizedBox(
-                width:
-                    mediaHeight > 900 ? .3 * mediaWidth : .15 * mediaWidth,
+                height: 20.h,
               ),
-              Text(
-                "Vaccination/Services",
-                style: TextStyle(
-                    fontFamily: 'futurBold', color: primary, fontSize: 20),
-              ),
-              SizedBox(
-                height: mediaHeight > 900 ? 20.h : 0,
-              ),
-            ],
-                          ),
-                          Padding(
-            padding: EdgeInsets.only(
-                left: mediaWidth > 650 ? 50.w : 20.w, top: 10.h, bottom: 10.h),
-            child: Text(
-              "Category",
-              style: TextStyle(
-                  fontSize: mediaHeight > 900 ? 25.sp : 17.sp,
-                  fontWeight: FontWeight.w600),
-            ),
-                          ),
-                          SizedBox(
-            height: mediaWidth > 650 ? 20.h : 0,
-                          ),
-                          Stack(
-            children: [
-              Padding(
-                padding:  EdgeInsets.all(8.0.sp),
-                child: Card(
-                  elevation: 7,
-                  margin:  EdgeInsets.only(left: 20.w),
-                  child: Container(
-                    // margin: EdgeInsets.only(left: 20),
-                    // width: .6 * mediaWidth,
-                    height: .1 * mediaHeight,
-                    decoration: BoxDecoration(
-                        color: primary,
-                        borderRadius: BorderRadius.circular(7.sp)),
-                    child: Row(
-                      children: [
-                         SizedBox(
-                          width: 10.w,
-                        ),
-                         Consumer<CategoriesProvider>(builder:
-                                (context, categoriesProvider, child) {
-                                return CircleAvatar(
-                                  backgroundImage: NetworkImage(
-                                      "https://yama-vet.com/${categoriesProvider.categories[widget.categoryIndex].imgPath}"),
-                                  radius: 30.sp,
-                                );
-                              }),
-                        SizedBox(
-                          width: 10.w,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Consumer<CategoriesProvider>(builder:
-                                (context, categoriesProvider, child) {
-                              return Text(
-                                categoriesProvider
-                                    .categories[widget.categoryIndex]
-                                    .nameEn! + " - " +
-                                    categoriesProvider
-                                        .categories[widget.categoryIndex]
-                                        .nameAr!,
-                                style: TextStyle(
-                                    color: Colors.grey[300],
-                                    fontSize: mediaWidth > 650 ? 20.sp : 15.sp),
-                              );
-                            }),
-                             SizedBox(
-                              height: 7.h,
-                            ),
-                            // Row(
-                            //   children: [
-                            //     Text(
-                            //       "Edit",
-                            //       style: TextStyle(
-                            //           color: Colors.grey[400],
-                            //           fontSize: mediaWidth > 650 ? 17 : 12),
-                            //     ),
-                            //     const SizedBox(
-                            //       width: 5,
-                            //     ),
-                            //     GestureDetector(
-                            //       onTap: () {
-                            //         setState(() {
-                            //           ontap = !ontap;
-                            //         });
-                            //       },
-                            //       child: SvgPicture.asset(
-                            //           "assets/images/edit_one.svg"),
-                            //     )
-                            //   ],
-                            // )
-                          ],
-                        )
-                      ],
-                    ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: mediaWidth > 650 ? 30.w : 0,
                   ),
+                  IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                        size: mediaWidth > 650 ? 30.sp : 20.sp,
+                        weight: 100.5,
+                        color: Colors.black,
+                      )),
+                  SizedBox(
+                    width:
+                        mediaHeight > 900 ? .3 * mediaWidth : .15 * mediaWidth,
+                  ),
+                  Text(
+                    "vaccination".tr(),
+                    style: TextStyle(
+                        fontFamily: 'futurBold', color: primary, fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: mediaHeight > 900 ? 20.h : 0,
+                  ),
+                ],
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                    left: mediaWidth > 650 ? 50.w : 20.w,
+                    top: 10.h,
+                    bottom: 10.h,
+                    right: 10.w),
+                child: Text(
+                  "categories".tr(),
+                  style: TextStyle(
+                      fontSize: mediaHeight > 900 ? 25.sp : 17.sp,
+                      fontWeight: FontWeight.w600),
                 ),
               ),
-              Positioned(
-                right: 1,
-                child: GestureDetector(
-                  onTap: () async {
-                    Provider.of<CategoriesProvider>(context, listen: false)
-                        .delete(context, widget.categoryIndex);
-                  },
-                  child: Container(
-                    width: 20.w,
-                    height: 20.h,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.red),
-                    child:  Center(
-                      child: Icon(
-                        Icons.close,
-                        color: Colors.white,
-                        size: 15.sp,
+              SizedBox(
+                height: mediaWidth > 650 ? 20.h : 0,
+              ),
+              Stack(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(8.0.sp),
+                    child: Card(
+                      elevation: 7,
+                      margin: EdgeInsets.only(left: 20.w),
+                      child: Container(
+                        // margin: EdgeInsets.only(left: 20),
+                        // width: .6 * mediaWidth,
+                        height: .1 * mediaHeight,
+                        decoration: BoxDecoration(
+                            color: primary,
+                            borderRadius: BorderRadius.circular(7.sp)),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            Consumer<CategoriesProvider>(
+                                builder: (context, categoriesProvider, child) {
+                              return CircleAvatar(
+                                backgroundImage: NetworkImage(
+                                    "https://yama-vet.com/${categoriesProvider.categories[widget.categoryIndex].imgPath}"),
+                                radius: 30.sp,
+                              );
+                            }),
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Consumer<CategoriesProvider>(builder:
+                                    (context, categoriesProvider, child) {
+                                  return Text(
+                                    categoriesProvider
+                                            .categories[widget.categoryIndex]
+                                            .nameEn! +
+                                        " - " +
+                                        categoriesProvider
+                                            .categories[widget.categoryIndex]
+                                            .nameAr!,
+                                    style: TextStyle(
+                                        color: Colors.grey[300],
+                                        fontSize:
+                                            mediaWidth > 650 ? 20.sp : 15.sp),
+                                  );
+                                }),
+                                SizedBox(
+                                  height: 7.h,
+                                ),
+                                // Row(
+                                //   children: [
+                                //     Text(
+                                //       "Edit",
+                                //       style: TextStyle(
+                                //           color: Colors.grey[400],
+                                //           fontSize: mediaWidth > 650 ? 17 : 12),
+                                //     ),
+                                //     const SizedBox(
+                                //       width: 5,
+                                //     ),
+                                //     GestureDetector(
+                                //       onTap: () {
+                                //         setState(() {
+                                //           ontap = !ontap;
+                                //         });
+                                //       },
+                                //       child: SvgPicture.asset(
+                                //           "assets/images/edit_one.svg"),
+                                //     )
+                                //   ],
+                                // )
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
+                  Positioned(
+                    right: 1,
+                    child: GestureDetector(
+                      onTap: () async {
+                        Provider.of<CategoriesProvider>(context, listen: false)
+                            .delete(context, widget.categoryIndex);
+                      },
+                      child: Container(
+                        width: 20.w,
+                        height: 20.h,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.red),
+                        child: Center(
+                          child: Icon(
+                            Icons.close,
+                            color: Colors.white,
+                            size: 15.sp,
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              ontap ? EditCategory() : Container(),
+              Padding(
+                padding: EdgeInsets.only(
+                    left: 20.w, top: 10.h, bottom: 10.h, right: 10.w),
+                child: Text(
+                  "services".tr(),
+                  style:
+                      TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
                 ),
-              )
-            ],
-                          ),
-                          ontap ? EditCategory() : Container(),
-                           Padding(
-            padding: EdgeInsets.only(left: 20.w, top: 10.h, bottom: 10.h),
-            child: Text(
-              "Services",
-              style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
-            ),
-                          ),
-                          Container(
-            width: 500.w,
-            height: 200.h,
-            child: Consumer<CategoriesProvider>(
-                builder: (context, categoriesProvider, child) {
-              return ListView.builder(
-                itemCount: categoriesProvider
-                    .categories[widget.categoryIndex].services!.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return SelectRow(
-                    ontap: () {
-                      setState(() {
-                        if (Provider.of<CategoriesProvider>(context,listen: false).serviceToUpdate != null) {
-                          Provider.of<CategoriesProvider>(context,listen: false).serviceToUpdate = null;
-                        } else {
-                          Provider.of<CategoriesProvider>(context,listen: false).serviceToUpdate = categoriesProvider
-                              .categories[widget.categoryIndex]
-                              .services![index];
-                        }
-                      });
-                    },
-                    text: categoriesProvider
-                        .categories[widget.categoryIndex]
-                        .services![index]
-                        .nameEn! + " - " + categoriesProvider
-                        .categories[widget.categoryIndex]
-                        .services![index]
-                        .nameAr!,
-                    price: categoriesProvider
-                        .categories[widget.categoryIndex]
-                        .services![index]
-                        .price
-                        .toString(),
-                    checkbox: false,
-                  );
-                },
-              );
-            }),
-                          ),
-                          SizedBox(
-            height: 5.h,
-                          ),
-                          Provider.of<CategoriesProvider>(context,listen: true).serviceToUpdate != null
-              ? UpdateService()
-              : Container(),
-                          SizedBox(
-            height: 20.h,
-                          ),
-            Provider.of<CategoriesProvider>(context,listen: true).addServiceOpened
-              ? GestureDetector(onTap: () {
-                  setState(() {
-                    Provider.of<CategoriesProvider>(context,listen: false).toggleAddServiceOpened();
-                  });
-                }, child: AddServices(categoryIndex: widget.categoryIndex))
-              : Center(
-                  child: DottedBorder(
-                      radius:  Radius.circular(20.sp),
-                      color: primary,
-                      dashPattern:  [10, 5],
-                      strokeWidth: 1,
-                      child: GestureDetector(
-                        onTap: () {
+              ),
+              Container(
+                width: 500.w,
+                height: 200.h,
+                child: Consumer<CategoriesProvider>(
+                    builder: (context, categoriesProvider, child) {
+                  return ListView.builder(
+                    itemCount: categoriesProvider
+                        .categories[widget.categoryIndex].services!.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return SelectRow(
+                        ontap: () {
                           setState(() {
-                            Provider.of<CategoriesProvider>(context,listen: false).toggleAddServiceOpened();
+                            if (Provider.of<CategoriesProvider>(context,
+                                        listen: false)
+                                    .serviceToUpdate !=
+                                null) {
+                              Provider.of<CategoriesProvider>(context,
+                                      listen: false)
+                                  .serviceToUpdate = null;
+                            } else {
+                              Provider.of<CategoriesProvider>(context,
+                                          listen: false)
+                                      .serviceToUpdate =
+                                  categoriesProvider
+                                      .categories[widget.categoryIndex]
+                                      .services![index];
+                            }
                           });
                         },
-                        child: Container(
-                            width: .9 * MediaQuery.sizeOf(context).width,
-                            height: .03 * MediaQuery.sizeOf(context).height,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Center(
-                              child: Text(
-                                "Add Services",
-                                style: TextStyle(
-                                    color: primary,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            )),
-                      )),
-                ),
-                        ]))));
+                        text: categoriesProvider
+                                .categories[widget.categoryIndex]
+                                .services![index]
+                                .nameEn! +
+                            " - " +
+                            categoriesProvider.categories[widget.categoryIndex]
+                                .services![index].nameAr!,
+                        price: categoriesProvider
+                            .categories[widget.categoryIndex]
+                            .services![index]
+                            .price
+                            .toString(),
+                        checkbox: false,
+                      );
+                    },
+                  );
+                }),
+              ),
+              SizedBox(
+                height: 5.h,
+              ),
+              Provider.of<CategoriesProvider>(context, listen: true)
+                          .serviceToUpdate !=
+                      null
+                  ? UpdateService()
+                  : Container(),
+              SizedBox(
+                height: 20.h,
+              ),
+              Provider.of<CategoriesProvider>(context, listen: true)
+                      .addServiceOpened
+                  ? GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          Provider.of<CategoriesProvider>(context,
+                                  listen: false)
+                              .toggleAddServiceOpened();
+                        });
+                      },
+                      child: AddServices(categoryIndex: widget.categoryIndex))
+                  : Center(
+                      child: DottedBorder(
+                          radius: Radius.circular(20.sp),
+                          color: primary,
+                          dashPattern: [10, 5],
+                          strokeWidth: 1,
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                Provider.of<CategoriesProvider>(context,
+                                        listen: false)
+                                    .toggleAddServiceOpened();
+                              });
+                            },
+                            child: Container(
+                                width: .9 * MediaQuery.sizeOf(context).width,
+                                height: .03 * MediaQuery.sizeOf(context).height,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Center(
+                                  child: Text(
+                                    "addservices".tr(),
+                                    style: TextStyle(
+                                        color: primary,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                )),
+                          )),
+                    ),
+            ]))));
   }
 }

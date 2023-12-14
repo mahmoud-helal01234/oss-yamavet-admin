@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
@@ -67,7 +68,7 @@ class ReminderBody extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5.sp)),
                 color: Colors.red,
                 onPressed: () {},
-                child:Text("Delete",
+                child:Text("Delete".tr(),
                     style: TextStyle(
                         fontFamily: 'futur',
                         color: Colors.white,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -80,10 +81,10 @@ class _ClientProfileState extends State<ClientProfile> {
                             SizedBox(
                               width: mediaHeight > 900
                                   ? .35 * mediaWidth
-                                  : .15 * mediaWidth,
+                                  : .2 * mediaWidth.w,
                             ),
                             Text(
-                              ' Profile',
+                              'profile'.tr(),
                               style: TextStyle(
                                   fontFamily: 'futurBold',
                                   color: primary,
@@ -103,7 +104,7 @@ class _ClientProfileState extends State<ClientProfile> {
                                     "assets/images/female_one.png"),
                               )),
                               Positioned(
-                                  right: mediaWidth > 650 ? 380.w : 100.w,
+                                  right: mediaWidth > 650 ? 380.w : 120.w,
                                   bottom: 0,
                                   child: Container(
                                     width: 40.w,
@@ -143,7 +144,8 @@ class _ClientProfileState extends State<ClientProfile> {
                                 color: Colors.grey),
                           )),
                           Card(
-                            margin: EdgeInsets.only(left: 20, top: 20),
+                            margin:
+                                EdgeInsets.only(left: 20, top: 20, right: 10),
                             elevation: 10,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5)),
@@ -155,7 +157,7 @@ class _ClientProfileState extends State<ClientProfile> {
                                   borderRadius: BorderRadius.circular(5)),
                               child: Center(
                                 child: Text(
-                                  "Pets",
+                                  "pets".tr(),
                                   style: TextStyle(
                                       fontFamily: 'futur', color: Colors.white),
                                 ),

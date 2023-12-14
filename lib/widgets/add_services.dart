@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -24,18 +25,13 @@ class AddServices extends StatefulWidget {
 }
 
 class _AddServicesState extends State<AddServices> {
-
-
   TextEditingController name_ar = TextEditingController();
   TextEditingController name_en = TextEditingController();
   TextEditingController price = TextEditingController();
 
-
   @override
   void initState() {
     super.initState();
-
-
   }
 
   @override
@@ -76,7 +72,7 @@ class _AddServicesState extends State<AddServices> {
                                   fontSize: 15.sp,
                                   color: Colors.grey,
                                   fontWeight: FontWeight.w500),
-                              hintText: 'Service'),
+                              hintText: 'services'),
                         ),
                       ),
                     ),
@@ -109,7 +105,7 @@ class _AddServicesState extends State<AddServices> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Container(
-                      width: mediaWidth > 650 ? 400.w : 250.w,
+                      width: mediaWidth > 650 ? 400.w : 350.w,
                       height: 30.h,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5.sp),
@@ -117,17 +113,18 @@ class _AddServicesState extends State<AddServices> {
                       child: Padding(
                         padding: EdgeInsets.only(right: 5.w, top: 10.h),
                         child: TextField(
-                          textDirection: TextDirection.rtl,
-                          controller: name_ar,
-                          decoration: InputDecoration(
+                            // textDirection: TextDirection.rtl,
+                            controller: name_ar,
+                            decoration: InputDecoration(
                               border: InputBorder.none,
                               hintStyle: TextStyle(
                                   fontSize: 15.sp,
                                   color: Colors.grey,
                                   fontWeight: FontWeight.w500),
                               hintText: 'خدمة',
-                              hintTextDirection: TextDirection.rtl),
-                        ),
+                            )
+                            // hintTextDirection: TextDirection.rtl),
+                            ),
                       ),
                     )
                   ],
@@ -145,18 +142,21 @@ class _AddServicesState extends State<AddServices> {
                     height: mediaWidth > 650 ? 35.h : 30.h,
                     color: primary,
                     onPressed: () async {
-
                       Provider.of<CategoriesProvider>(context, listen: false)
-                          .createService(context,
-                          AddServiceRequest(context, categoryId:
-                          Provider.of<CategoriesProvider>(context, listen: false).
-                          categories[widget.categoryIndex!].id!,
-                              nameAr: name_ar.text,
-                              nameEn: name_en.text,
-                              price: double.tryParse(price.text) ));
+                          .createService(
+                              context,
+                              AddServiceRequest(context,
+                                  categoryId: Provider.of<CategoriesProvider>(
+                                          context,
+                                          listen: false)
+                                      .categories[widget.categoryIndex!]
+                                      .id!,
+                                  nameAr: name_ar.text,
+                                  nameEn: name_en.text,
+                                  price: double.tryParse(price.text)));
                     },
                     child: Text(
-                      "Add ",
+                      "add".tr(),
                       style: TextStyle(
                           fontFamily: 'futur',
                           color: Colors.white,

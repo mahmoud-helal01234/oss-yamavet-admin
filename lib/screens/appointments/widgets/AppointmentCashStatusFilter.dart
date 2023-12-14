@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yama_vet_admin/controllers/AppointmentsProvider.dart';
@@ -15,28 +16,30 @@ class AppointmentCashStatusFilter extends StatelessWidget {
         width: mediaWidth,
         child: Center(
           child: SingleChildScrollView(
-
             scrollDirection: Axis.horizontal,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
-
               children: [
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     Provider.of<AppointmentsProvider>(context, listen: false)
                         .changeCashStatusFilter("collected");
                   },
                   child: Container(
                     width: mediaWidth > 650 ? 120 : 100,
                     decoration: BoxDecoration(
-                        color: Provider.of<AppointmentsProvider>(context, listen: true).cashStatusFilter == "collected" ?
-                        primary:Colors.white,
+                        color: Provider.of<AppointmentsProvider>(context,
+                                        listen: true)
+                                    .cashStatusFilter ==
+                                "collected"
+                            ? primary
+                            : Colors.white,
                         borderRadius: BorderRadius.circular(7),
                         border: Border.all(color: primary, width: 1.5)),
-                    child: const Center(
+                    child: Center(
                       child: Text(
-                        "Collected",
+                        "Collected".tr(),
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: 'futur',
@@ -45,25 +48,28 @@ class AppointmentCashStatusFilter extends StatelessWidget {
                     ),
                   ),
                 ),
-
-                SizedBox(width: 10,),
-
+                SizedBox(
+                  width: 10,
+                ),
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     Provider.of<AppointmentsProvider>(context, listen: false)
                         .changeCashStatusFilter("not_collected");
                   },
                   child: Container(
-
                     width: mediaWidth > 650 ? 130 : 110,
                     decoration: BoxDecoration(
-                        color: Provider.of<AppointmentsProvider>(context, listen: true).cashStatusFilter == "not_collected" ?
-                        primary:Colors.white,
+                        color: Provider.of<AppointmentsProvider>(context,
+                                        listen: true)
+                                    .cashStatusFilter ==
+                                "not_collected"
+                            ? primary
+                            : Colors.white,
                         borderRadius: BorderRadius.circular(7),
                         border: Border.all(color: primary, width: 1.5)),
-                    child: const Center(
+                    child: Center(
                       child: Text(
-                        "Not Collected",
+                        "Not Collected".tr(),
                         style: TextStyle(
                             fontSize: 15,
                             fontFamily: 'futur',

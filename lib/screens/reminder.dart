@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
@@ -23,7 +24,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
     return Scaffold(
         key: scaffoldKey,
         backgroundColor: scaffoldColor,
-        drawer:  Drawer(
+        drawer: Drawer(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50.sp),
@@ -35,99 +36,103 @@ class _ReminderScreenState extends State<ReminderScreen> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                          SizedBox(
-            height: .02 * MediaQuery.sizeOf(context).height,
-                          ),
-                          Row(children: [
-            SizedBox(
-              width: .05 * MediaQuery.sizeOf(context).width,
-            ),
-            GestureDetector(
-                onTap: () {
-                  scaffoldKey.currentState!.openDrawer();
-                },
-                child: Image.asset("assets/images/menuIcon.png")),
-                          ]),
-                           SizedBox(
-            height: 20.h,
-                          ),
-                          Row(
-            children: [
               SizedBox(
-                width: mediaWidth > 650 ? 30.w : 0,
+                height: .02 * MediaQuery.sizeOf(context).height,
               ),
-              IconButton(
+              Row(children: [
+                SizedBox(
+                  width: .05 * MediaQuery.sizeOf(context).width,
+                ),
+                GestureDetector(
+                    onTap: () {
+                      scaffoldKey.currentState!.openDrawer();
+                    },
+                    child: Image.asset("assets/images/menuIcon.png")),
+              ]),
+              SizedBox(
+                height: 20.h,
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: mediaWidth > 650 ? 30.w : 0,
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                        size: 20.sp,
+                        weight: 100.5,
+                        color: Colors.black,
+                      )),
+                  SizedBox(
+                    width:
+                        mediaHeight > 900 ? .27 * mediaWidth : .1 * mediaWidth,
+                  ),
+                  Text(
+                    "reminder".tr(),
+                    style: TextStyle(
+                        fontFamily: 'futurBold',
+                        color: primary,
+                        fontSize: 20.sp),
+                  ),
+                  SizedBox(
+                    height: mediaHeight > 900 ? 20.sp : 0,
+                  ),
+                ],
+              ),
+              Center(
+                child: MaterialButton(
+                  color: primary,
+                  minWidth: MediaQuery.sizeOf(context).width > 650
+                      ? .9 * MediaQuery.sizeOf(context).width
+                      : .9 * MediaQuery.sizeOf(context).width,
+                  elevation: 10,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.sp)),
                   onPressed: () {
-                    Navigator.pop(context);
+                    dialogBuilder(context, false);
                   },
-                  icon:  Icon(
-                    Icons.arrow_back_ios_new_rounded,
-                    size: 20.sp,
-                    weight: 100.5,
-                    color: Colors.black,
-                  )),
-              SizedBox(
-                width:
-                    mediaHeight > 900 ? .27 * mediaWidth : .1 * mediaWidth,
+                  child: Text(
+                    "Send Reminder".tr(),
+                    style: TextStyle(
+                        fontSize: 17.sp,
+                        color: Colors.white,
+                        fontFamily: 'futur'),
+                  ),
+                ),
               ),
-              Text(
-                "Reminder",
-                style: TextStyle(
-                    fontFamily: 'futurBold', color: primary, fontSize: 20.sp),
-              ),
-              SizedBox(
-                height: mediaHeight > 900 ? 20.sp : 0,
-              ),
-            ],
-                          ),
-                          Center(
-            child: MaterialButton(
-              color: primary,
-              minWidth: MediaQuery.sizeOf(context).width > 650
-                  ? .9 * MediaQuery.sizeOf(context).width
-                  : .9 * MediaQuery.sizeOf(context).width,
-              elevation: 10,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.sp)),
-              onPressed: () {
-                dialogBuilder(context, false);
-              },
-              child:  Text(
-                "Send Reminder",
-                style: TextStyle(
-                    fontSize: 17.sp, color: Colors.white, fontFamily: 'futur'),
-              ),
-            ),
-                          ),
-                          ReminderBody(
-            doctorName: 'Rachel Green',
-            sendDate: 'sent : 17/5/2023',
-            text: """Hi Rachel Green,
+              ReminderBody(
+                doctorName: 'Rachel Green',
+                sendDate: 'sent : 17/5/2023',
+                text: """Hi Rachel Green,
             We hope you and your furry friend are doing well. A friendly reminder about your pet's upcoming health check-in on [20/7/2023] at [1:23 pm]. Ensure your pet is comfortable, and feel free to jot down any specific concerns or questions.""",
-            width: MediaQuery.sizeOf(context).width > 650
-                ? .7 * mediaWidth
-                : .9 * MediaQuery.sizeOf(context).width,
-            height: MediaQuery.sizeOf(context).width > 650 ? 200.h : 150.h,
-            textAlign: TextAlign.center,
-                          ),
-                          ReminderBody(
-            doctorName: 'Monica Geller',
-            sendDate: 'sent : 15/5/2023',
-            text: "Pet Health Check-in Tomorrow!",
-            width: mediaWidth > 650 ? .7 * mediaWidth : .45 * mediaWidth,
-            height: mediaWidth > 650 ? 50.h : 40.h,
-            textAlign: TextAlign.start,
-                          ),
-                          ReminderBody(
-            doctorName: 'Rachel Green',
-            sendDate: 'sent : 17/5/2023',
-            text: """Hi Rachel Green,
+                width: MediaQuery.sizeOf(context).width > 650
+                    ? .7 * mediaWidth
+                    : .9 * MediaQuery.sizeOf(context).width,
+                height: MediaQuery.sizeOf(context).width > 650 ? 200.h : 150.h,
+                textAlign: TextAlign.center,
+              ),
+              ReminderBody(
+                doctorName: 'Monica Geller',
+                sendDate: 'sent : 15/5/2023',
+                text: "Pet Health Check-in Tomorrow!",
+                width: mediaWidth > 650 ? .7 * mediaWidth : .45 * mediaWidth,
+                height: mediaWidth > 650 ? 50.h : 40.h,
+                textAlign: TextAlign.start,
+              ),
+              ReminderBody(
+                doctorName: 'Rachel Green',
+                sendDate: 'sent : 17/5/2023',
+                text: """Hi Rachel Green,
             We hope you and your furry friend are doing well. A friendly reminder about your pet's upcoming health check-in on [20/7/2023] at [1:23 pm]. Ensure your pet is comfortable, and feel free to jot down any specific concerns or questions.""",
-            width: mediaWidth > 650 ? .7 * mediaWidth : .45 * mediaWidth,
-            height: mediaWidth > 650 ? 200.h : 180.h,
-            textAlign: TextAlign.center,
-                          ),
-                        ]))));
+                width: mediaWidth > 650 ? .7 * mediaWidth : .45 * mediaWidth,
+                height: mediaWidth > 650 ? 200.h : 180.h,
+                textAlign: TextAlign.center,
+              ),
+            ]))));
   }
 }
 
@@ -148,7 +153,7 @@ Future<void> dialogBuilder(BuildContext context, bool selected) {
                 margin: EdgeInsets.only(
                     top: ontap ? 20.h : .45 * mediaHeight,
                     bottom: ontap ? 150.h : 0),
-                shape:RoundedRectangleBorder(
+                shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(30.sp),
                         topRight: Radius.circular(30.sp))),
@@ -158,7 +163,7 @@ Future<void> dialogBuilder(BuildContext context, bool selected) {
                   child: Container(
                     width: mediaWidth,
                     height: .5 * mediaHeight,
-                    decoration:BoxDecoration(
+                    decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(30.sp),
                             topRight: Radius.circular(30.sp)),
@@ -186,7 +191,7 @@ Future<void> dialogBuilder(BuildContext context, bool selected) {
                                 borderRadius: BorderRadius.circular(5.sp)),
                             child: Center(
                               child: Padding(
-                                padding:  EdgeInsets.only(bottom: 10.h),
+                                padding: EdgeInsets.only(bottom: 10.h),
                                 child:
                                     Image.asset("assets/images/female_one.png"),
                               ),
@@ -217,8 +222,8 @@ Future<void> dialogBuilder(BuildContext context, bool selected) {
                                                 const Color(0xffefefef),
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(
-                                                        10.sp)), //this right here
+                                                    BorderRadius.circular(10
+                                                        .sp)), //this right here
                                             child: Container(
                                               height: 350.h,
                                               width: mediaWidth,
@@ -351,7 +356,7 @@ Future<void> dialogBuilder(BuildContext context, bool selected) {
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(color: Colors.grey)),
                           child: Padding(
-                            padding:  EdgeInsets.all(8.0.sp),
+                            padding: EdgeInsets.all(8.0.sp),
                             child: GestureDetector(
                               child: TextField(
                                 onTap: () {
@@ -370,7 +375,7 @@ Future<void> dialogBuilder(BuildContext context, bool selected) {
                                 },
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: 'Reminder message...',
+                                    hintText: 'Reminder message...'.tr(),
                                     hintStyle: TextStyle(
                                       color: Colors.grey,
                                     )),

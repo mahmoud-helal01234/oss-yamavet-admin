@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yama_vet_admin/controllers/AppointmentsProvider.dart';
@@ -15,28 +16,30 @@ class AppointmentStatusFilter extends StatelessWidget {
         width: mediaWidth,
         child: Center(
           child: SingleChildScrollView(
-
             scrollDirection: Axis.horizontal,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
-
               children: [
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     Provider.of<AppointmentsProvider>(context, listen: false)
                         .changeStatusFilter("initiated");
                   },
                   child: Container(
                     width: mediaWidth > 650 ? 120 : 100,
                     decoration: BoxDecoration(
-                        color: Provider.of<AppointmentsProvider>(context, listen: true).statusFilter == "initiated" ?
-                        primary:Colors.white,
+                        color: Provider.of<AppointmentsProvider>(context,
+                                        listen: true)
+                                    .statusFilter ==
+                                "initiated"
+                            ? primary
+                            : Colors.white,
                         borderRadius: BorderRadius.circular(7),
                         border: Border.all(color: primary, width: 1.5)),
-                    child: const Center(
+                    child: Center(
                       child: Text(
-                        "Initiated",
+                        "Initiated".tr(),
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: 'futur',
@@ -45,22 +48,28 @@ class AppointmentStatusFilter extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: 10,),
+                SizedBox(
+                  width: 10,
+                ),
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     Provider.of<AppointmentsProvider>(context, listen: false)
                         .changeStatusFilter("accepted");
                   },
                   child: Container(
                     width: mediaWidth > 650 ? 120 : 100,
                     decoration: BoxDecoration(
-                        color: Provider.of<AppointmentsProvider>(context, listen: true).statusFilter == "accepted" ?
-                        primary:Colors.white,
+                        color: Provider.of<AppointmentsProvider>(context,
+                                        listen: true)
+                                    .statusFilter ==
+                                "accepted"
+                            ? primary
+                            : Colors.white,
                         borderRadius: BorderRadius.circular(7),
                         border: Border.all(color: primary, width: 1.5)),
-                    child: const Center(
+                    child: Center(
                       child: Text(
-                        "Accepted",
+                        "Accepted".tr(),
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: 'futur',
@@ -69,24 +78,28 @@ class AppointmentStatusFilter extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: 10,),
-
+                SizedBox(
+                  width: 10,
+                ),
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     Provider.of<AppointmentsProvider>(context, listen: false)
                         .changeStatusFilter("completed");
                   },
                   child: Container(
-
                     width: mediaWidth > 650 ? 120 : 100,
                     decoration: BoxDecoration(
-                        color: Provider.of<AppointmentsProvider>(context, listen: true).statusFilter == "completed" ?
-                        primary:Colors.white,
+                        color: Provider.of<AppointmentsProvider>(context,
+                                        listen: true)
+                                    .statusFilter ==
+                                "completed"
+                            ? primary
+                            : Colors.white,
                         borderRadius: BorderRadius.circular(7),
                         border: Border.all(color: primary, width: 1.5)),
-                    child: const Center(
+                    child: Center(
                       child: Text(
-                        "Completed",
+                        "Completed".tr(),
                         style: TextStyle(
                             fontSize: 15,
                             fontFamily: 'futur',

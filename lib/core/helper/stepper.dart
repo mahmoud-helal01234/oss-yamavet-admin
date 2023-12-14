@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -82,7 +83,7 @@ class _StepperScreenState extends State<StepperScreen> {
             ),
             // title: 'Initiated',
             customTitle: Text(
-              "Initiated",
+              "Initiated".tr(),
               style: TextStyle(color: widget.textColor, fontFamily: 'futuraMd'),
               textAlign: TextAlign.center,
             )),
@@ -101,7 +102,7 @@ class _StepperScreenState extends State<StepperScreen> {
               ),
             ),
             customTitle: Text(
-              "Accepted",
+              "Accepted".tr(),
               style: TextStyle(fontFamily: 'futuraMd', color: widget.textColor),
               textAlign: TextAlign.center,
             )),
@@ -117,7 +118,7 @@ class _StepperScreenState extends State<StepperScreen> {
               ),
             ),
             customTitle: Text(
-              "Completed",
+              "Completed".tr(),
               style: TextStyle(fontFamily: 'futuraMd', color: widget.textColor),
               textAlign: TextAlign.center,
             )),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -72,7 +73,7 @@ class _VetRowState extends State<VetRow> {
                       Row(
                         children: [
                           Image.asset("assets/images/icon_doctor.png"),
-                           SizedBox(
+                          SizedBox(
                             width: 5.w,
                           ),
                           Text(usersProvider.users[index].name!),
@@ -92,7 +93,7 @@ class _VetRowState extends State<VetRow> {
                               .delete(context, index);
                         },
                         child: Text(
-                          "Delete",
+                          "Delete".tr(),
                           style: TextStyle(
                               fontFamily: 'futur', color: Colors.white),
                         ),
@@ -109,8 +110,8 @@ class _VetRowState extends State<VetRow> {
                   children: [
                     Row(
                       children: [
-                        const Text(
-                          "Rating",
+                        Text(
+                          "rating".tr(),
                           style: TextStyle(fontWeight: FontWeight.w500),
                         ),
                         Icon(

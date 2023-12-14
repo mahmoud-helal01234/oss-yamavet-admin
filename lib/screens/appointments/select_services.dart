@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -86,7 +87,7 @@ class _SelectServicesState extends State<SelectServices> {
                         color: Colors.black,
                       )),
                   Text(
-                    "Book an appointment",
+                    "Book an appointment".tr(),
                     style: TextStyle(
                         fontFamily: 'futurBold', color: primary, fontSize: 20.sp),
                   )
@@ -139,7 +140,7 @@ class _SelectServicesState extends State<SelectServices> {
               ),
               Padding(
                 padding:EdgeInsets.only(left: 20.w, bottom: 10.h),
-                child: Text("Choose Specialties",
+                child: Text("Choose Specialties".tr(),
                     style: GoogleFonts.roboto(
                         fontSize: 17.sp, fontWeight: FontWeight.w600)),
               ),
@@ -187,7 +188,7 @@ class _SelectServicesState extends State<SelectServices> {
                       Padding(
                         padding:
                              EdgeInsets.only(left: 20.w, top: 5.h, bottom: 5.h),
-                        child: Text("Select Services",
+                        child: Text("Select Services".tr(),
                             style: GoogleFonts.roboto(
                                 fontSize: 17.sp, fontWeight: FontWeight.w600)),
                       ),
@@ -287,7 +288,7 @@ class _SelectServicesState extends State<SelectServices> {
                           children: [
                             Padding(
                               padding:EdgeInsets.only(left: 20.w, top: 20.h),
-                              child: Text("Total",
+                              child: Text("Total".tr(),
                                   style: TextStyle(
                                     fontSize: 15.sp,
                                     color: primary,

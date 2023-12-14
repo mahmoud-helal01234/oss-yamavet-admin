@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,18 +32,21 @@ class FilterRow extends StatelessWidget {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5)),
               onPressed: () {
-                Provider.of<AppointmentsProvider>(context,listen: false).getAppointments(context);
+                Provider.of<AppointmentsProvider>(context, listen: false)
+                    .getAppointments(context);
                 // Provider.of<AppointmentsProvider>(context,listen: false).filterAppointments();
               },
-              child: const Text(
-                "Apply filter",
+              child: Text(
+                "Applyfilter".tr(),
                 style: TextStyle(
                     fontSize: 15, color: Colors.white, fontFamily: 'futur'),
               ),
             )
           ],
         ),
-        Text(Provider.of<AppointmentsProvider>(context, listen: true).totalPrice.toString() ),
+        Text(Provider.of<AppointmentsProvider>(context, listen: true)
+            .totalPrice
+            .toString()),
         SizedBox(
           width: mediaWidth > 650 ? .15 * mediaWidth : 0,
         ),
@@ -74,10 +78,11 @@ class FilterRow extends StatelessWidget {
           elevation: 5,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
           onPressed: () {
-            Provider.of<AppointmentsProvider>(context, listen: false).clearFilters(context);
+            Provider.of<AppointmentsProvider>(context, listen: false)
+                .clearFilters(context);
           },
-          child: const Text(
-            "Clear filter",
+          child: Text(
+            "Clearfilter".tr(),
             style: TextStyle(
                 fontSize: 15, color: Colors.white, fontFamily: 'futur'),
           ),

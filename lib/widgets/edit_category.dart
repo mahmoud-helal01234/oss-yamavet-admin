@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker_widget/image_picker_widget.dart';
@@ -168,7 +169,7 @@ class _EditCategoryState extends State<EditCategory> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Text("Cancel",
+                    child: Text("Cancel".tr(),
                         style: TextStyle(
                             fontFamily: 'futur',
                             color: Colors.white,
@@ -194,7 +195,7 @@ class _EditCategoryState extends State<EditCategory> {
                           });
                           await updateCategories();
                         },
-                        child: Text("Update",
+                        child: Text("Update".tr(),
                             style: TextStyle(
                                 fontFamily: 'futur',
                                 color: Colors.white,

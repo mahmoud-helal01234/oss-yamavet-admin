@@ -173,6 +173,7 @@
 
 import 'dart:convert';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_pin_field/otp_pin_field.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
@@ -238,8 +239,8 @@ class _VerifyScreenState extends State<VerifyScreen> {
                 SizedBox(
                   width: 2 * MediaQuery.sizeOf(context).width,
                 ),
-                const Text(
-                  "Verification",
+                 Text(
+                  "Verification".tr(),
                   style: TextStyle(fontFamily: 'futur', fontSize: 30),
                 ),
                 //! add photo here

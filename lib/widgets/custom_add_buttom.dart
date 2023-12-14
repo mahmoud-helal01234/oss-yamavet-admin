@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../core/utils/colors.dart';
@@ -20,7 +21,7 @@ class CustomAddButton extends StatelessWidget {
         color: primary,
         onPressed: onPress,
         child: Text(
-          "Add ",
+          "add".tr(),
           style: TextStyle(
               fontFamily: 'futur',
               color: Colors.white,

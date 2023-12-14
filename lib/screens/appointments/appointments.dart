@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:date_field/date_field.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:map_launcher/map_launcher.dart';
@@ -101,10 +102,10 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                     color: Colors.black,
                   )),
               SizedBox(
-                width: mediaHeight > 900 ? .35 * mediaWidth : .15 * mediaWidth,
+                width: mediaHeight > 900 ? .35 * mediaWidth : .2 * mediaWidth.w,
               ),
               Text(
-                "Appointments",
+                "Appointments".tr(),
                 style: TextStyle(
                     fontFamily: 'futurBold', color: primary, fontSize: 20.sp),
               ),
@@ -114,35 +115,33 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
           FilterRow(),
 
           const AppointmentStatusFilter(),
-                  SizedBox(height: 5.h,),
-                  const AppointmentCashStatusFilter(),
-                  // SizedBox(height: 5.h,),
+          SizedBox(
+            height: 5.h,
+          ),
+          const AppointmentCashStatusFilter(),
+          // SizedBox(height: 5.h,),
           Consumer<AppointmentsProvider>(
               builder: (context, appointmentsProvider, child) {
             return Row(
               mainAxisAlignment: MainAxisAlignment.center,
-
               children: [
                 Container(
                   height: 60.h,
                   width: 180.w,
                   child: DateTimeField(
                       mode: DateTimeFieldPickerMode.date,
-                      decoration:  InputDecoration(
+                      decoration: InputDecoration(
                         hintStyle: TextStyle(color: Colors.black45),
                         errorStyle: TextStyle(color: Colors.redAccent),
                         border: OutlineInputBorder(),
                         suffixIcon: Icon(Icons.event_note),
-
                       ),
                       selectedDate: appointmentsProvider.from,
-                      dateTextStyle:TextStyle(fontSize: 10.sp),
+                      dateTextStyle: TextStyle(fontSize: 10.sp),
                       onDateSelected: (DateTime value) {
-
                         Provider.of<AppointmentsProvider>(context,
-                            listen: false)
+                                listen: false)
                             .changeFromFilter(value);
-
                       }),
                 ),
                 Container(
@@ -150,35 +149,30 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   width: 180.w,
                   child: DateTimeField(
                       mode: DateTimeFieldPickerMode.date,
-
-                      decoration:  InputDecoration(
-
+                      decoration: InputDecoration(
                         hintStyle: TextStyle(color: Colors.black45),
                         errorStyle: TextStyle(color: Colors.redAccent),
                         border: OutlineInputBorder(),
                         suffixIcon: Icon(Icons.event_note),
-
                       ),
-                      dateTextStyle:TextStyle(fontSize: 10.sp),
+                      dateTextStyle: TextStyle(fontSize: 10.sp),
                       selectedDate: appointmentsProvider.to,
                       onDateSelected: (DateTime value) {
                         Provider.of<AppointmentsProvider>(context,
                                 listen: false)
                             .changeToFilter(value);
-
                       }),
                 )
               ],
             );
           }),
 
-        // SizedBox(
-        //   height: 5.h,
-        // ),
-        // SizedBox(
+          // SizedBox(
+          //   height: 5.h,
+          // ),
+          // SizedBox(
           //   height: mediaWidth > 650 ? 15.h : 5.h,
           // ),
-
 
           Provider.of<SettingsProvider>(context, listen: true).role != "admin"
               ? Container()
@@ -215,44 +209,44 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                     ),
                   ),
                 ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Provider.of<SettingsProvider>(context, listen: true).role != "admin"
-                      ? Container()
-                      : Center(
-                    child: Container(
-                      width: .95 * mediaWidth,
-                      height: 40.h,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          border: Border.all(color: primary, width: 1.5)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              Provider.of<AppointmentsProvider>(context,
-                                  listen: true)
-                                  .selectedClientName ??
-                                  "Select Client",
-                              style: const TextStyle(
-                                  fontFamily: 'futur',
-                                  fontSize: 17,
-                                  color: Colors.black),
-                            ),
+          SizedBox(
+            height: 10.h,
+          ),
+          Provider.of<SettingsProvider>(context, listen: true).role != "admin"
+              ? Container()
+              : Center(
+                  child: Container(
+                    width: .95 * mediaWidth,
+                    height: 40.h,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(color: primary, width: 1.5)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            Provider.of<AppointmentsProvider>(context,
+                                        listen: true)
+                                    .selectedClientName ??
+                                "Select Client".tr(),
+                            style: const TextStyle(
+                                fontFamily: 'futur',
+                                fontSize: 17,
+                                color: Colors.black),
                           ),
-                          IconButton(
-                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                            onPressed: () {
-                              clientsMenu(context);
-                            },
-                          )
-                        ],
-                      ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                          onPressed: () {
+                            clientsMenu(context);
+                          },
+                        )
+                      ],
                     ),
                   ),
+                ),
           SizedBox(height: 5.h),
 
           // Center(
@@ -307,7 +301,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   void doctorMenu(
     BuildContext context,
   ) async {
-    if(Provider.of<UsersProvider>(context, listen: false).users.isEmpty)
+    if (Provider.of<UsersProvider>(context, listen: false).users.isEmpty)
       await Provider.of<UsersProvider>(context, listen: false).get(context);
     // bool choosen = false;
     double mediaWidth = MediaQuery.sizeOf(context).width;

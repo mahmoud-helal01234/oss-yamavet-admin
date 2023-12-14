@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -111,7 +112,7 @@ class _OrderOverViewContainerState extends State<OrderOverViewContainer> {
             children: [
               Padding(
                 padding:  EdgeInsets.only(left: 10.w, top: 10.h),
-                child: Text("Total",
+                child: Text("Total".tr(),
                     style: TextStyle(
                       fontSize: 15.sp,
                       color: primary,
