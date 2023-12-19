@@ -3,7 +3,7 @@ class Service {
   int? id;
   String? nameAr;
   String? nameEn;
-  int? price;
+  double? price;
   int? categoryId;
 
   Service({this.id, this.nameAr, this.nameEn, this.price, this.categoryId});
