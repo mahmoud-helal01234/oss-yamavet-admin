@@ -29,7 +29,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50.sp),
                     bottomLeft: Radius.circular(40.sp))),
-            width: mediaWidth > 650 ? 150.w : 200.w,
+            width: mediaHeight > 900 ? 150.w : 200.w,
             child: MenuScreen()),
         body: SafeArea(
             child: SingleChildScrollView(
@@ -70,14 +70,14 @@ class _ReminderScreenState extends State<ReminderScreen> {
                   SizedBox(
                     width: mediaHeight > 900
                         ? .08 * mediaWidth.w
-                        : .1 * mediaWidth,
+                        : .09 * mediaWidth,
                   ),
                   Text(
                     "reminder".tr(),
                     style: TextStyle(
                         fontFamily: 'futurBold',
                         color: primary,
-                        fontSize: mediaWidth > 650 ? 17.sp : 20.sp),
+                        fontSize: mediaHeight > 900 ? 17.sp : 20.sp),
                   ),
                   SizedBox(
                     height: mediaHeight > 900 ? 20.sp : 0,
@@ -102,7 +102,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
                   child: Text(
                     "Send Reminder".tr(),
                     style: TextStyle(
-                        fontSize: mediaWidth > 650 ? 15.sp : 17.sp,
+                        fontSize: mediaHeight > 900 ? 15.sp : 20.sp,
                         color: Colors.white,
                         fontFamily: 'futur'),
                   ),

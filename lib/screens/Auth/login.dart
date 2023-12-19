@@ -64,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Padding(
                   padding: EdgeInsets.only(
                       top: mediaHeight > 900 ? 8.h : 0,
-                      bottom: mediaHeight > 900 ? 8.h : 0),
+                      bottom: mediaHeight > 900 ? 8.h : 2.h),
                   child: TextFormField(
                     controller: phone,
                     keyboardType: TextInputType.phone,
@@ -75,8 +75,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           icon: const Icon(Icons.phone),
                           onPressed: () {},
                         ),
-                        hintStyle:
-                            TextStyle(fontSize: mediaWidth > 650 ? 9.sp : 7.sp),
+                        hintStyle: TextStyle(
+                            fontSize: mediaWidth > 650 ? 9.sp : 15.sp),
                         hintText: 'Phone Number'),
                   ),
                 ),

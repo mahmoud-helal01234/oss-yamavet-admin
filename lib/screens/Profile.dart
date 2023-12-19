@@ -226,7 +226,7 @@ class _ProfileState extends State<Profile> {
                                         .users[widget.userIndex!].role!,
                                     style: TextStyle(
                                         fontSize:
-                                            mediaWidth > 650 ? 10.sp : 7.sp,
+                                            mediaWidth > 650 ? 10.sp : 20.sp,
                                         color: Colors.black,
                                         fontWeight: FontWeight.w500),
                                   ),
@@ -254,7 +254,7 @@ class _ProfileState extends State<Profile> {
                                         .toString(),
                                     style: TextStyle(
                                         fontSize:
-                                            mediaWidth > 650 ? 10.sp : 7.sp,
+                                            mediaWidth > 650 ? 10.sp : 20.sp,
                                         color: Colors.black,
                                         fontWeight: FontWeight.w500),
                                   ),
@@ -574,7 +574,7 @@ class _ProfileState extends State<Profile> {
                                 },
                                 text: 'Update'.tr(),
                                 buttomWidth: .8 * mediaWidth,
-                                size: mediaWidth > 650 ? 10.sp : 7.sp,
+                                size: mediaWidth > 650 ? 10.sp : 20.sp,
                                 height: mediaWidth > 650 ? 45.h : 40.h),
                           )
                         ],

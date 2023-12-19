@@ -34,7 +34,7 @@ class CustomTextField extends StatelessWidget {
               hintText: hinttext,
               hintStyle: TextStyle(
                   fontSize:
-                      MediaQuery.sizeOf(context).width > 650 ? 10.sp : 7.sp,
+                      MediaQuery.sizeOf(context).width > 650 ? 10.sp : 20.sp,
                   color: Colors.grey,
                   fontWeight: FontWeight.w500)),
         ),

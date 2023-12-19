@@ -31,7 +31,7 @@ class EditAndAddContainer extends StatelessWidget {
                   border: InputBorder.none,
                   hintText: enText,
                   hintStyle: TextStyle(
-                      fontSize: mediaWidth > 650 ? 10.sp : 13.sp,
+                      fontSize: mediaWidth > 650 ? 10.sp : 20.sp,
                       fontWeight: FontWeight.w500,
                       color: Colors.grey)),
             ),
@@ -56,7 +56,7 @@ class EditAndAddContainer extends StatelessWidget {
                   hintText: arText,
                   hintTextDirection: TextDirection.rtl,
                   hintStyle: TextStyle(
-                      fontSize: mediaWidth > 650 ? 10.sp : 15.sp,
+                      fontSize: mediaWidth > 650 ? 10.sp : 20.sp,
                       fontWeight: FontWeight.w600,
                       color: Colors.grey)),
             ),

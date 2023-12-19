@@ -55,7 +55,7 @@ class _OfferScreenState extends State<OfferScreen> {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50.w),
                     bottomLeft: Radius.circular(40.w))),
-            width: mediaWidth > 650 ? 150.w : 200.w,
+            width: mediaHeight > 900 ? 150.w : 200.w,
             child: MenuScreen()),
         body: SafeArea(
             child: SingleChildScrollView(
@@ -101,7 +101,7 @@ class _OfferScreenState extends State<OfferScreen> {
                     style: TextStyle(
                         fontFamily: 'futurBold',
                         color: primary,
-                        fontSize: mediaHeight > 900 ? 20.sp : 20.sp),
+                        fontSize: mediaHeight > 900 ? 20.sp : 22.sp),
                   ),
                 ],
               ),
@@ -132,7 +132,7 @@ class _OfferScreenState extends State<OfferScreen> {
                           style: TextStyle(
                               fontFamily: 'futur',
                               color: Colors.white,
-                              fontSize: mediaHeight > 900 ? 20.sp : 17.sp),
+                              fontSize: mediaHeight > 900 ? 20.sp : 22.sp),
                         ),
                       ),
                     )

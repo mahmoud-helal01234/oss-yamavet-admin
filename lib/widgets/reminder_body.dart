@@ -21,7 +21,7 @@ class ReminderBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double mediaWidth = MediaQuery.sizeOf(context).height;
+    double mediaWidth = MediaQuery.sizeOf(context).width;
     return Column(
       children: [
         Row(
@@ -49,13 +49,13 @@ class ReminderBody extends StatelessWidget {
                 Text(
                   doctorName,
                   style: TextStyle(
-                      fontSize: mediaWidth > 650 ? 10.sp : 7.sp,
+                      fontSize: mediaWidth > 650 ? 15.sp : 17.sp,
                       fontWeight: FontWeight.w500),
                 ),
                 Text(
                   sendDate,
                   style: TextStyle(
-                      fontSize: mediaWidth > 650 ? 8.sp : 6.sp,
+                      fontSize: mediaWidth > 650 ? 10.sp : 12.sp,
                       color: Colors.grey[400],
                       fontWeight: FontWeight.w500),
                 )

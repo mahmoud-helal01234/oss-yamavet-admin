@@ -79,7 +79,7 @@ class _VetRowState extends State<VetRow> {
                           Text(
                             usersProvider.users[index].name!,
                             style: TextStyle(
-                                fontSize: mediaWidth > 650 ? 10.sp : 7.sp),
+                                fontSize: mediaWidth > 650 ? 10.sp : 20.sp),
                           ),
                           SizedBox(
                             width: .1 * MediaQuery.sizeOf(context).width,
@@ -99,7 +99,7 @@ class _VetRowState extends State<VetRow> {
                         child: Text(
                           "Delete".tr(),
                           style: TextStyle(
-                              fontSize: mediaWidth > 650 ? 15.sp : 7.sp,
+                              fontSize: mediaWidth > 650 ? 15.sp : 20.sp,
                               fontFamily: 'futur',
                               color: Colors.white),
                         ),

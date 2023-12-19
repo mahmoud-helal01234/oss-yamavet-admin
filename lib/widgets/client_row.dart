@@ -31,7 +31,7 @@ class _ClientRowState extends State<ClientRow> {
         builder: (context, clientsProvider, child) {
       return Container(
         width: 400.w,
-        height: MediaQuery.sizeOf(context).height > 900 ? 700.h : 500.h,
+        height: MediaQuery.sizeOf(context).height > 900 ? 700.h : 600.h,
         child: ListView.builder(
           itemCount: clientsProvider.clients.length,
           itemBuilder: (BuildContext context, int index) {
@@ -82,7 +82,7 @@ class _ClientRowState extends State<ClientRow> {
                         style: TextStyle(
                             fontSize: MediaQuery.sizeOf(context).width > 650
                                 ? 10.sp
-                                : 7.sp),
+                                : 15.sp),
                       ),
                       Spacer(),
                       Row(
@@ -92,7 +92,7 @@ class _ClientRowState extends State<ClientRow> {
                             style: TextStyle(
                                 fontSize: MediaQuery.sizeOf(context).width > 650
                                     ? 10.sp
-                                    : 7.sp,
+                                    : 15.sp,
                                 fontWeight: FontWeight.w500),
                           ),
                           Switch(

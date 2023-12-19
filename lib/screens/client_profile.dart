@@ -81,7 +81,7 @@ class _ClientProfileState extends State<ClientProfile> {
                             SizedBox(
                               width: mediaHeight > 900
                                   ? .12 * mediaWidth.w
-                                  : .2 * mediaWidth.w,
+                                  : .3 * mediaWidth.w,
                             ),
                             Text(
                               'profile'.tr(),
@@ -91,7 +91,7 @@ class _ClientProfileState extends State<ClientProfile> {
                                   fontSize:
                                       MediaQuery.sizeOf(context).width > 650
                                           ? 15.sp
-                                          : 7.sp),
+                                          : 20.sp),
                             ),
                           ]),
                           SizedBox(
@@ -162,7 +162,8 @@ class _ClientProfileState extends State<ClientProfile> {
                                 child: Text(
                                   "pets".tr(),
                                   style: TextStyle(
-                                      fontSize: mediaWidth > 650 ? 10.sp : 5.sp,
+                                      fontSize:
+                                          mediaWidth > 650 ? 10.sp : 20.sp,
                                       fontFamily: 'futur',
                                       color: Colors.white),
                                 ),

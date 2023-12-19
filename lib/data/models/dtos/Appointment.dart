@@ -1,4 +1,3 @@
-
 import 'AppointmentDetails.dart';
 import 'ClientLocation.dart';
 import 'Doctor.dart';
@@ -9,7 +8,7 @@ class Appointment {
   String? content;
   int? appointmentNumber;
   String? cash;
-  double? price;
+  int? price;
   String? status;
   double? doctorRate;
   double? appointmentRate;
@@ -22,20 +21,20 @@ class Appointment {
 
   Appointment(
       {this.id,
-        this.type,
-        this.content,
-        this.appointmentNumber,
-        this.cash,
-        this.price,
-        this.status,
-        this.doctorRate,
-        this.appointmentRate,
-        this.rateDescription,
-        this.day,
-        this.petsImages,
-        this.appointmentDetails,
-        this.clientLocation,
-        this.doctor});
+      this.type,
+      this.content,
+      this.appointmentNumber,
+      this.cash,
+      this.price,
+      this.status,
+      this.doctorRate,
+      this.appointmentRate,
+      this.rateDescription,
+      this.day,
+      this.petsImages,
+      this.appointmentDetails,
+      this.clientLocation,
+      this.doctor});
 
   Appointment.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -59,8 +58,7 @@ class Appointment {
     clientLocation = json['client_location'] != null
         ? ClientLocation.fromJson(json['client_location'])
         : null;
-    doctor =
-    json['doctor'] != null ? Doctor.fromJson(json['doctor']) : null;
+    doctor = json['doctor'] != null ? Doctor.fromJson(json['doctor']) : null;
   }
 
   Map<String, dynamic> toJson() {

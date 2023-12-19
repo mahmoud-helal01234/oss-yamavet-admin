@@ -159,7 +159,7 @@ class _CategoryChooseState extends State<CategoryChoose> {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50.sp),
                     bottomLeft: Radius.circular(40.sp))),
-          width: mediaWidth > 650 ? 150.w : 200.w,
+            width: mediaWidth > 650 ? 150.w : 200.w,
             child: MenuScreen()),
         body: SafeArea(
             child: SingleChildScrollView(
@@ -224,7 +224,7 @@ class _CategoryChooseState extends State<CategoryChoose> {
                 child: Text(
                   "categories".tr(),
                   style: TextStyle(
-                      fontSize: mediaHeight > 900 ? 20.sp : 17.sp,
+                      fontSize: mediaHeight > 900 ? 20.sp : 20.sp,
                       fontWeight: FontWeight.w600),
                 ),
               ),
@@ -276,7 +276,7 @@ class _CategoryChooseState extends State<CategoryChoose> {
                                   categoriesProvider.categories[index].nameEn!,
                                   style: TextStyle(
                                       fontSize:
-                                          mediaWidth > 650 ? 10.sp : 5.sp),
+                                          mediaWidth > 650 ? 10.sp : 15.sp),
                                 ),
                               ],
                             );
@@ -320,7 +320,7 @@ class _CategoryChooseState extends State<CategoryChoose> {
                       Text(
                         "addcategory".tr(),
                         style: TextStyle(
-                            fontSize: mediaWidth > 650 ? 10.sp : 5.sp,
+                            fontSize: mediaWidth > 650 ? 10.sp : 15.sp,
                             color: primary,
                             fontWeight: FontWeight.w500),
                         textAlign: TextAlign.center,
