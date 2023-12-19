@@ -2,7 +2,7 @@ class AppointmentDetailsPetService {
   int? id;
   String? nameAr;
   String? nameEn;
-  int? price;
+  double? price;
   int? categoryId;
 
   AppointmentDetailsPetService({this.id, this.nameAr, this.nameEn, this.price, this.categoryId});

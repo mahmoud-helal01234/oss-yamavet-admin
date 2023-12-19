@@ -103,7 +103,7 @@ class AppointmentsProvider extends ChangeNotifier {
 
     return queryParam;
   }
-  int totalPrice = 0;
+  double totalPrice = 0;
   Future<void> getAppointments(BuildContext context) async {
     // appointmentsShown = List.filled(appointments.length, true, growable: true);
     print("link: " + "appointment${_getFilterQueryParams()}");

@@ -9,7 +9,7 @@ class Appointment {
   String? content;
   int? appointmentNumber;
   String? cash;
-  int? price;
+  double? price;
   String? status;
   double? doctorRate;
   double? appointmentRate;
