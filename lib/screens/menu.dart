@@ -84,14 +84,22 @@ class _MenuScreenState extends State<MenuScreen> {
                     DropdownMenuItem(
                       child: Text(
                         'English'.tr(),
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                            fontSize: MediaQuery.sizeOf(context).width > 650
+                                ? 10.sp
+                                : 20.sp,
+                            color: Colors.white),
                       ),
                       value: Locale('en'),
                     ),
                     DropdownMenuItem(
                       child: Text(
                         'Arabic'.tr(),
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                            fontSize: MediaQuery.sizeOf(context).width > 650
+                                ? 10.sp
+                                : 20.sp,
+                            color: Colors.white),
                       ),
                       value: Locale('ar'),
                     ),
@@ -145,9 +153,12 @@ class _MenuScreenState extends State<MenuScreen> {
                   Text(
                     "contactus".tr(),
                     style: TextStyle(
-                        fontFamily: 'futur',
-                        color: Colors.white,
-                        fontSize: 20.sp),
+                      fontFamily: 'futur',
+                      color: const Color.fromRGBO(255, 255, 255, 1),
+                      fontSize: MediaQuery.sizeOf(context).width > 650
+                          ? 12.sp
+                          : 20.sp,
+                    ),
                   ),
                 ],
               ),
@@ -184,9 +195,11 @@ class _MenuScreenState extends State<MenuScreen> {
                 Text(
                   "logout".tr(),
                   style: TextStyle(
-                      fontFamily: 'futur',
-                      color: Colors.white,
-                      fontSize: 17.sp),
+                    fontFamily: 'futur',
+                    color: Colors.white,
+                    fontSize:
+                        MediaQuery.sizeOf(context).width > 650 ? 12.sp : 17.sp,
+                  ),
                 )
               ],
             ),

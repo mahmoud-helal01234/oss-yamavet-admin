@@ -40,8 +40,9 @@ class _AddServicesState extends State<AddServices> {
     double mediaHeight = MediaQuery.sizeOf(context).height;
     return Center(
       child: Container(
+        margin: EdgeInsets.only(bottom: 20),
         width: .95 * mediaWidth,
-        height: .2 * mediaHeight,
+        height: mediaHeight > 900 ? .25 * mediaHeight : .2 * mediaHeight,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5.sp),
             border: Border.all(color: primary, width: 2.w)),
@@ -57,7 +58,7 @@ class _AddServicesState extends State<AddServices> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Container(
-                      width: mediaWidth > 650 ? 400.w : 250.w,
+                      width: mediaWidth > 650 ? 200.w : 250.w,
                       height: 30.h,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5.sp),
@@ -69,7 +70,7 @@ class _AddServicesState extends State<AddServices> {
                           decoration: InputDecoration(
                               border: InputBorder.none,
                               hintStyle: TextStyle(
-                                  fontSize: 15.sp,
+                                  fontSize: mediaWidth > 650 ? 10.sp : 15.sp,
                                   color: Colors.grey,
                                   fontWeight: FontWeight.w500),
                               hintText: 'services'),
@@ -89,7 +90,7 @@ class _AddServicesState extends State<AddServices> {
                           decoration: InputDecoration(
                               border: InputBorder.none,
                               hintStyle: TextStyle(
-                                  fontSize: 14.sp,
+                                  fontSize: mediaWidth > 650 ? 10.sp : 14.sp,
                                   color: Colors.grey,
                                   fontWeight: FontWeight.w500),
                               hintText: 'Price\t\t\t\t\t \$'),
@@ -105,7 +106,7 @@ class _AddServicesState extends State<AddServices> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Container(
-                      width: mediaWidth > 650 ? 400.w : 350.w,
+                      width: mediaWidth > 650 ? 300.w : 350.w,
                       height: 30.h,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5.sp),
@@ -118,7 +119,7 @@ class _AddServicesState extends State<AddServices> {
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintStyle: TextStyle(
-                                  fontSize: 15.sp,
+                                  fontSize: mediaWidth > 650 ? 10.sp : 15.sp,
                                   color: Colors.grey,
                                   fontWeight: FontWeight.w500),
                               hintText: 'خدمة',
@@ -134,12 +135,12 @@ class _AddServicesState extends State<AddServices> {
                 ),
                 Container(
                   width: .8 * mediaWidth,
-                  height: 30.h,
+                  height: mediaWidth > 650 ? 40.h : 30.h,
                   child: MaterialButton(
                     elevation: 5,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5.sp)),
-                    height: mediaWidth > 650 ? 35.h : 30.h,
+                    height: mediaWidth > 650 ? 40.h : 30.h,
                     color: primary,
                     onPressed: () async {
                       Provider.of<CategoriesProvider>(context, listen: false)
@@ -160,10 +161,10 @@ class _AddServicesState extends State<AddServices> {
                       style: TextStyle(
                           fontFamily: 'futur',
                           color: Colors.white,
-                          fontSize: mediaWidth > 650 ? 22.sp : 17.sp),
+                          fontSize: mediaWidth > 650 ? 20.sp : 17.sp),
                     ),
                   ),
-                )
+                ),
               ],
             );
           },

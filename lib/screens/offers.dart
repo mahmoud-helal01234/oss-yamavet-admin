@@ -55,7 +55,7 @@ class _OfferScreenState extends State<OfferScreen> {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50.w),
                     bottomLeft: Radius.circular(40.w))),
-            width: 200,
+            width: mediaWidth > 650 ? 150.w : 200.w,
             child: MenuScreen()),
         body: SafeArea(
             child: SingleChildScrollView(
@@ -94,15 +94,14 @@ class _OfferScreenState extends State<OfferScreen> {
                         color: Colors.black,
                       )),
                   SizedBox(
-                    width:
-                        mediaHeight > 900 ? .3 * mediaWidth : .15 * mediaWidth,
+                    width: mediaHeight > 900 ? 80.w : .15 * mediaWidth,
                   ),
                   Text(
                     "offers".tr(),
                     style: TextStyle(
                         fontFamily: 'futurBold',
                         color: primary,
-                        fontSize: mediaHeight > 900 ? 25.sp : 20.sp),
+                        fontSize: mediaHeight > 900 ? 20.sp : 20.sp),
                   ),
                 ],
               ),
@@ -133,7 +132,7 @@ class _OfferScreenState extends State<OfferScreen> {
                           style: TextStyle(
                               fontFamily: 'futur',
                               color: Colors.white,
-                              fontSize: mediaHeight > 900 ? 25.sp : 17.sp),
+                              fontSize: mediaHeight > 900 ? 20.sp : 17.sp),
                         ),
                       ),
                     )
@@ -150,7 +149,9 @@ class _OfferScreenState extends State<OfferScreen> {
                         // },
                         child: Container(
                             width: .85 * MediaQuery.sizeOf(context).width,
-                            height: .25 * MediaQuery.sizeOf(context).height,
+                            height: mediaWidth > 650
+                                ? .27 * mediaHeight.h
+                                : .25 * MediaQuery.sizeOf(context).height,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.sp),
                                 border: Border.all(color: primary, width: 2.w)),
@@ -171,7 +172,7 @@ class _OfferScreenState extends State<OfferScreen> {
                                             editIcon: Icon(
                                               Icons.camera_alt,
                                               color: Colors.white,
-                                              size: 25.sp,
+                                              size: 20.sp,
                                             ),
                                             backgroundColor: Colors.white,
                                             diameter: 70.sp,
@@ -245,7 +246,7 @@ class _OfferScreenState extends State<OfferScreen> {
                                             fontFamily: 'futur',
                                             color: Colors.white,
                                             fontSize: mediaHeight > 900
-                                                ? 25.sp
+                                                ? 20.sp
                                                 : 17.sp),
                                       ),
                                     ),
@@ -264,7 +265,7 @@ class _OfferScreenState extends State<OfferScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.w500,
                       color: Colors.black,
-                      fontSize: mediaHeight > 900 ? 25.sp : 17.sp),
+                      fontSize: mediaHeight > 900 ? 20.sp : 17.sp),
                 ),
               ),
               Center(
@@ -305,7 +306,7 @@ class _OfferScreenState extends State<OfferScreen> {
                                             editIcon: Icon(
                                               Icons.camera_alt,
                                               color: Colors.white,
-                                              size: 25.sp,
+                                              size: 20.sp,
                                             ),
                                             backgroundColor: Color(0xff213442),
                                             diameter: 25.sp,
@@ -506,7 +507,7 @@ class _OfferScreenState extends State<OfferScreen> {
                               children: [
                                 MaterialButton(
                                   elevation: 10,
-                                  minWidth: mediaWidth > 650 ? 200 : 140,
+                                  minWidth: mediaWidth > 650 ? 400 : 140,
                                   height: mediaWidth > 650 ? 35 : 25,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(5)),

@@ -62,7 +62,7 @@ class _ProfileState extends State<Profile> {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50.sp),
                     bottomLeft: Radius.circular(40.sp))),
-            width: 200.w,
+            width: mediaWidth > 650 ? 150.w : 200.w,
             child: MenuScreen()),
         body: SafeArea(
             child: SingleChildScrollView(
@@ -101,12 +101,14 @@ class _ProfileState extends State<Profile> {
                     )),
                 SizedBox(
                   width:
-                      mediaHeight > 900 ? .38 * mediaWidth : .22 * mediaWidth,
+                      mediaHeight > 900 ? .12 * mediaWidth.w : .22 * mediaWidth,
                 ),
                 Text(
                   'profile'.tr(),
                   style: TextStyle(
-                      fontFamily: 'futurBold', color: primary, fontSize: 20.sp),
+                      fontFamily: 'futurBold',
+                      color: primary,
+                      fontSize: mediaWidth > 650 ? 15.sp : 20.sp),
                 ),
               ]),
               SizedBox(
@@ -139,21 +141,22 @@ class _ProfileState extends State<Profile> {
                         );
                   }),
                   Positioned(
-                      right: mediaWidth > 650 ? 380.w : 120.w,
+                      right: mediaWidth > 650 ? 200.w : 120.w,
                       bottom: 0,
                       child: Container(
-                        width: 35.w,
-                        height: 35.h,
+                        width: mediaWidth > 650 ? 27.w : 35.w,
+                        height: mediaWidth > 650 ? 40.h : 35.h,
                         decoration: BoxDecoration(
                             color: primary,
                             border: Border.all(color: Colors.white),
-                            borderRadius: BorderRadius.circular(20.sp)),
+                            borderRadius: BorderRadius.circular(
+                                mediaWidth > 650 ? 15.sp : 20.sp)),
                         child: ImagePickerWidget(
                           editIcon: Center(
                             child: Icon(
                               Icons.camera_alt,
                               color: Colors.white,
-                              size: 25.sp,
+                              size: mediaWidth > 650 ? 17.sp : 25.sp,
                             ),
                           ),
                           backgroundColor: primary,
@@ -222,6 +225,8 @@ class _ProfileState extends State<Profile> {
                                     usersProvider
                                         .users[widget.userIndex!].role!,
                                     style: TextStyle(
+                                        fontSize:
+                                            mediaWidth > 650 ? 10.sp : 7.sp,
                                         color: Colors.black,
                                         fontWeight: FontWeight.w500),
                                   ),
@@ -248,6 +253,8 @@ class _ProfileState extends State<Profile> {
                                         .appointmentNumber!
                                         .toString(),
                                     style: TextStyle(
+                                        fontSize:
+                                            mediaWidth > 650 ? 10.sp : 7.sp,
                                         color: Colors.black,
                                         fontWeight: FontWeight.w500),
                                   ),
@@ -567,6 +574,7 @@ class _ProfileState extends State<Profile> {
                                 },
                                 text: 'Update'.tr(),
                                 buttomWidth: .8 * mediaWidth,
+                                size: mediaWidth > 650 ? 10.sp : 7.sp,
                                 height: mediaWidth > 650 ? 45.h : 40.h),
                           )
                         ],

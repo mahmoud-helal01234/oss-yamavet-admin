@@ -42,7 +42,7 @@ class _DashBoardState extends State<DashBoard> {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50.w),
                     bottomLeft: Radius.circular(40.w))),
-            width: 200.w,
+            width: mediaWidth > 650 ? 150.w : 200.w,
             child: MenuScreen()),
         body: SafeArea(
             child: SingleChildScrollView(
@@ -106,7 +106,7 @@ class _DashBoardState extends State<DashBoard> {
                   style: TextStyle(
                       fontFamily: 'futurBold',
                       color: primary,
-                      fontSize: mediaWidth > 650 ? 25.sp : 20.sp),
+                      fontSize: mediaWidth > 650 ? 20.sp : 20.sp),
                 ),
               ),
               SizedBox(
@@ -125,7 +125,7 @@ class _DashBoardState extends State<DashBoard> {
                           child: DashCard(
                             img: "assets/images/offers.png",
                             text: 'offers'.tr(),
-                            size: mediaWidth > 650 ? 25.sp : 17.sp,
+                            size: mediaWidth > 650 ? 20.sp : 17.sp,
                           ),
                         ),
                         //* categories screen
@@ -136,7 +136,7 @@ class _DashBoardState extends State<DashBoard> {
                           child: DashCard(
                             img: "assets/images/services.png",
                             text: 'categories'.tr(),
-                            size: mediaWidth > 650 ? 25.sp : 15.sp,
+                            size: mediaWidth > 650 ? 20.sp : 15.sp,
                           ),
                         ),
                       ],
@@ -152,7 +152,7 @@ class _DashBoardState extends State<DashBoard> {
                           child: DashCard(
                             img: "assets/images/appointments.png",
                             text: 'appointments'.tr(),
-                            size: mediaWidth > 650 ? 25.sp : 17.sp,
+                            size: mediaWidth > 650 ? 20.sp : 17.sp,
                           ),
                         ),
                         //*reminder screen
@@ -163,7 +163,7 @@ class _DashBoardState extends State<DashBoard> {
                           child: DashCard(
                             img: "assets/images/reminder.png",
                             text: 'Reminder'.tr(),
-                            size: mediaWidth > 650 ? 25.sp : 15.sp,
+                            size: mediaWidth > 650 ? 20.sp : 15.sp,
                           ),
                         )
                       ],
@@ -184,7 +184,7 @@ class _DashBoardState extends State<DashBoard> {
                           child: DashCard(
                             img: "assets/images/clients.png",
                             text: 'clients'.tr(),
-                            size: mediaWidth > 650 ? 25.sp : 17.sp,
+                            size: mediaWidth > 650 ? 20.sp : 17.sp,
                           ),
                         ),
                         //* vet screen
@@ -195,7 +195,7 @@ class _DashBoardState extends State<DashBoard> {
                           child: DashCard(
                             img: "assets/images/vets.png",
                             text: 'Vet'.tr(),
-                            size: mediaWidth > 650 ? 25.sp : 15.sp,
+                            size: mediaWidth > 650 ? 20.sp : 15.sp,
                           ),
                         ),
                       ],
@@ -211,7 +211,7 @@ class _DashBoardState extends State<DashBoard> {
                           child: DashCard(
                             img: "assets/images/offers.png",
                             text: 'offers'.tr(),
-                            size: mediaWidth > 650 ? 25.sp : 17.sp,
+                            size: mediaWidth > 650 ? 20.sp : 17.sp,
                           ),
                         ),
                         //* categories screen
@@ -233,7 +233,7 @@ class _DashBoardState extends State<DashBoard> {
                           child: DashCard(
                             img: "assets/images/appointments.png",
                             text: 'appointments'.tr(),
-                            size: mediaWidth > 650 ? 25.sp : 17.sp,
+                            size: mediaWidth > 650 ? 20.sp : 17.sp,
                           ),
                         ),
                         //*reminder screen
@@ -244,7 +244,7 @@ class _DashBoardState extends State<DashBoard> {
                           child: DashCard(
                             img: "assets/images/reminder.png",
                             text: 'reminder'.tr(),
-                            size: mediaWidth > 650 ? 25.sp : 15.sp,
+                            size: mediaWidth > 650 ? 20.sp : 15.sp,
                           ),
                         )
                       ],

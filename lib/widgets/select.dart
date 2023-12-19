@@ -33,8 +33,9 @@ class _SelectRowState extends State<SelectRow> {
       child: Row(
         children: [
           SizedBox(
-            width:
-                mediaHeight > 900 ? 10.h : .05 * MediaQuery.sizeOf(context).width,
+            width: mediaHeight > 900
+                ? 10.h
+                : .05 * MediaQuery.sizeOf(context).width,
           ),
           Text(widget.text,
               style: TextStyle(
@@ -46,7 +47,10 @@ class _SelectRowState extends State<SelectRow> {
           Spacer(),
           Text(
             "${widget.price}\$",
-            style: TextStyle(height: 0, color: Colors.green[600]),
+            style: TextStyle(
+                fontSize: mediaHeight > 900 ? 20 : 15,
+                height: 0,
+                color: Colors.green[600]),
           ),
           GestureDetector(
             onTap: widget.ontap,
@@ -77,7 +81,8 @@ class _SelectRowState extends State<SelectRow> {
                     width: 25.w,
                     height: 50.h,
                     decoration: BoxDecoration(
-                        color: primary, borderRadius: BorderRadius.circular(2.sp)),
+                        color: primary,
+                        borderRadius: BorderRadius.circular(2.sp)),
                     child: Center(
                       child: SvgPicture.asset(
                         "assets/images/edit.svg",

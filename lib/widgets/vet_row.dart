@@ -33,7 +33,7 @@ class _VetRowState extends State<VetRow> {
     return Consumer<UsersProvider>(builder: (context, usersProvider, child) {
       return Container(
         width: mediaWidth,
-        height: 500,
+        height: mediaWidth > 650 ? 900 : 500,
         child: ListView.builder(
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
@@ -61,7 +61,7 @@ class _VetRowState extends State<VetRow> {
                 ),
                 SizedBox(
                   width: mediaWidth > 650
-                      ? .1 * mediaWidth
+                      ? .03 * mediaWidth.w
                       : .05 * MediaQuery.sizeOf(context).width,
                 ),
                 Padding(
@@ -76,7 +76,11 @@ class _VetRowState extends State<VetRow> {
                           SizedBox(
                             width: 5.w,
                           ),
-                          Text(usersProvider.users[index].name!),
+                          Text(
+                            usersProvider.users[index].name!,
+                            style: TextStyle(
+                                fontSize: mediaWidth > 650 ? 10.sp : 7.sp),
+                          ),
                           SizedBox(
                             width: .1 * MediaQuery.sizeOf(context).width,
                           ),
@@ -95,14 +99,16 @@ class _VetRowState extends State<VetRow> {
                         child: Text(
                           "Delete".tr(),
                           style: TextStyle(
-                              fontFamily: 'futur', color: Colors.white),
+                              fontSize: mediaWidth > 650 ? 15.sp : 7.sp,
+                              fontFamily: 'futur',
+                              color: Colors.white),
                         ),
                       )
                     ],
                   ),
                 ),
                 SizedBox(
-                  width: mediaWidth > 650 ? .35 * mediaWidth : 0,
+                  width: mediaWidth > 650 ? .05 * mediaWidth.w : 0,
                 ),
                 Spacer(),
                 Column(

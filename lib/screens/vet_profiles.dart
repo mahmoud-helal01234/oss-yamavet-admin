@@ -53,7 +53,7 @@ class _VetProfilesState extends State<VetProfiles> {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50.w),
                     bottomLeft: Radius.circular(40.w))),
-            width: 200.w,
+            width: mediaWidth > 650 ? 150.w : 200.w,
             child: MenuScreen()),
         body: SafeArea(
             child: SingleChildScrollView(
@@ -91,13 +91,16 @@ class _VetProfilesState extends State<VetProfiles> {
                       color: Colors.black,
                     )),
                 SizedBox(
-                  width:
-                      mediaHeight > 900 ? .25 * mediaWidth : .05 * mediaWidth.w,
+                  width: mediaHeight > 900
+                      ? .1 * mediaWidth.w
+                      : .05 * mediaWidth.w,
                 ),
                 Text(
                   'vetprofile'.tr(),
                   style: TextStyle(
-                      fontFamily: 'futurBold', color: primary, fontSize: 20.sp),
+                      fontFamily: 'futurBold',
+                      color: primary,
+                      fontSize: mediaWidth > 650 ? 15.sp : 20.sp),
                 ),
               ]),
               Container(
@@ -185,11 +188,11 @@ class _VetProfilesState extends State<VetProfiles> {
                 // mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Card(
-                    // margin: EdgeInsets.only(
-                    //   top: mediaWidth > 650
-                    //       ? .3 * mediaHeight
-                    //       : .25 * mediaHeight,
-                    // ),
+                    margin: EdgeInsets.only(
+                      top: mediaWidth > 650
+                          ? .3 * mediaHeight
+                          : .25 * mediaHeight,
+                    ),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(30.w),
@@ -376,7 +379,7 @@ class _VetProfilesState extends State<VetProfiles> {
                                                                     void
                                                                         Function())
                                                                 setState) {
-                                                          return  Text(
+                                                          return Text(
                                                               "Vet".tr());
                                                         },
                                                       )),
@@ -395,7 +398,8 @@ class _VetProfilesState extends State<VetProfiles> {
                                                                     void
                                                                         Function())
                                                                 setState) {
-                                                          return Text("Admin".tr());
+                                                          return Text(
+                                                              "Admin".tr());
                                                         },
                                                       )),
                                                 ]);
