@@ -29,7 +29,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50.sp),
                     bottomLeft: Radius.circular(40.sp))),
-            width: 200.w,
+            width: mediaWidth > 650 ? 150.w : 200.w,
             child: MenuScreen()),
         body: SafeArea(
             child: SingleChildScrollView(
@@ -68,20 +68,24 @@ class _ReminderScreenState extends State<ReminderScreen> {
                         color: Colors.black,
                       )),
                   SizedBox(
-                    width:
-                        mediaHeight > 900 ? .27 * mediaWidth : .1 * mediaWidth,
+                    width: mediaHeight > 900
+                        ? .08 * mediaWidth.w
+                        : .1 * mediaWidth,
                   ),
                   Text(
                     "reminder".tr(),
                     style: TextStyle(
                         fontFamily: 'futurBold',
                         color: primary,
-                        fontSize: 20.sp),
+                        fontSize: mediaWidth > 650 ? 17.sp : 20.sp),
                   ),
                   SizedBox(
                     height: mediaHeight > 900 ? 20.sp : 0,
                   ),
                 ],
+              ),
+              SizedBox(
+                height: mediaHeight > 900 ? 10.h : 0,
               ),
               Center(
                 child: MaterialButton(
@@ -98,11 +102,14 @@ class _ReminderScreenState extends State<ReminderScreen> {
                   child: Text(
                     "Send Reminder".tr(),
                     style: TextStyle(
-                        fontSize: 17.sp,
+                        fontSize: mediaWidth > 650 ? 15.sp : 17.sp,
                         color: Colors.white,
                         fontFamily: 'futur'),
                   ),
                 ),
+              ),
+              SizedBox(
+                height: 10,
               ),
               ReminderBody(
                 doctorName: 'Rachel Green',
@@ -200,9 +207,13 @@ Future<void> dialogBuilder(BuildContext context, bool selected) {
                           SizedBox(
                             width: 5.w,
                           ),
-                          const Text(
+                          Text(
                             "Select Client \n\n",
-                            style: TextStyle(color: Colors.grey),
+                            style: TextStyle(
+                                fontSize: MediaQuery.sizeOf(context).width > 650
+                                    ? 10.sp
+                                    : 15,
+                                color: Colors.grey),
                           ),
                           const Spacer(),
                           IconButton(
@@ -323,9 +334,12 @@ Future<void> dialogBuilder(BuildContext context, bool selected) {
                           SizedBox(
                             width: 20.w,
                           ),
-                          const Text(
+                          Text(
                             "DD/MM/YY",
                             style: TextStyle(
+                                fontSize: MediaQuery.sizeOf(context).width > 650
+                                    ? 10.sp
+                                    : 15,
                                 color: Colors.grey,
                                 fontWeight: FontWeight.w600),
                           ),
@@ -377,6 +391,10 @@ Future<void> dialogBuilder(BuildContext context, bool selected) {
                                     border: InputBorder.none,
                                     hintText: 'Reminder message...'.tr(),
                                     hintStyle: TextStyle(
+                                      fontSize:
+                                          MediaQuery.sizeOf(context).width > 650
+                                              ? 10.sp
+                                              : 15,
                                       color: Colors.grey,
                                     )),
                               ),

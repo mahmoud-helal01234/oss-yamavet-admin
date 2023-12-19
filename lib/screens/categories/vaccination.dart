@@ -64,7 +64,7 @@ class _VaccinationState extends State<Vaccination> {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50.sp),
                     bottomLeft: Radius.circular(40.sp))),
-            width: 200.w,
+            width: mediaWidth > 650 ? 150.w : 200.w,
             child: MenuScreen()),
         body: SafeArea(
             child: SingleChildScrollView(
@@ -103,13 +103,16 @@ class _VaccinationState extends State<Vaccination> {
                         color: Colors.black,
                       )),
                   SizedBox(
-                    width:
-                        mediaHeight > 900 ? .3 * mediaWidth : .15 * mediaWidth,
+                    width: mediaHeight > 900
+                        ? .1 * mediaWidth.w
+                        : .15 * mediaWidth,
                   ),
                   Text(
                     "vaccination".tr(),
                     style: TextStyle(
-                        fontFamily: 'futurBold', color: primary, fontSize: 20),
+                        fontFamily: 'futurBold',
+                        color: primary,
+                        fontSize: mediaWidth > 650 ? 15.sp : 20),
                   ),
                   SizedBox(
                     height: mediaHeight > 900 ? 20.h : 0,
@@ -125,7 +128,7 @@ class _VaccinationState extends State<Vaccination> {
                 child: Text(
                   "categories".tr(),
                   style: TextStyle(
-                      fontSize: mediaHeight > 900 ? 25.sp : 17.sp,
+                      fontSize: mediaHeight > 900 ? 20.sp : 17.sp,
                       fontWeight: FontWeight.w600),
                 ),
               ),
@@ -142,7 +145,9 @@ class _VaccinationState extends State<Vaccination> {
                       child: Container(
                         // margin: EdgeInsets.only(left: 20),
                         // width: .6 * mediaWidth,
-                        height: .1 * mediaHeight,
+                        height: mediaWidth > 650
+                            ? .15 * mediaHeight
+                            : .1 * mediaHeight,
                         decoration: BoxDecoration(
                             color: primary,
                             borderRadius: BorderRadius.circular(7.sp)),
@@ -185,28 +190,31 @@ class _VaccinationState extends State<Vaccination> {
                                 SizedBox(
                                   height: 7.h,
                                 ),
-                                // Row(
-                                //   children: [
-                                //     Text(
-                                //       "Edit",
-                                //       style: TextStyle(
-                                //           color: Colors.grey[400],
-                                //           fontSize: mediaWidth > 650 ? 17 : 12),
-                                //     ),
-                                //     const SizedBox(
-                                //       width: 5,
-                                //     ),
-                                //     GestureDetector(
-                                //       onTap: () {
-                                //         setState(() {
-                                //           ontap = !ontap;
-                                //         });
-                                //       },
-                                //       child: SvgPicture.asset(
-                                //           "assets/images/edit_one.svg"),
-                                //     )
-                                //   ],
-                                // )
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Edit",
+                                      style: TextStyle(
+                                          color: Colors.grey[400],
+                                          fontSize:
+                                              mediaWidth > 650 ? 15.sp : 12),
+                                    ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          ontap = !ontap;
+                                        });
+                                      },
+                                      child: SvgPicture.asset(
+                                        "assets/images/edit_one.svg",
+                                        width: mediaWidth > 650 ? 35 : 20,
+                                      ),
+                                    )
+                                  ],
+                                )
                               ],
                             )
                           ],
@@ -222,8 +230,8 @@ class _VaccinationState extends State<Vaccination> {
                             .delete(context, widget.categoryIndex);
                       },
                       child: Container(
-                        width: 20.w,
-                        height: 20.h,
+                        width: mediaWidth > 650 ? 15.w : 20.w,
+                        height: mediaWidth > 650 ? 20.h : 20.h,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color: Colors.red),
@@ -341,12 +349,16 @@ class _VaccinationState extends State<Vaccination> {
                                   child: Text(
                                     "addservices".tr(),
                                     style: TextStyle(
+                                        fontSize: mediaWidth > 650 ? 10.sp : 15,
                                         color: primary,
                                         fontWeight: FontWeight.w600),
                                   ),
                                 )),
                           )),
                     ),
+              SizedBox(
+                height: 10,
+              ),
             ]))));
   }
 }

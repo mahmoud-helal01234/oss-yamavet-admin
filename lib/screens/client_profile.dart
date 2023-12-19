@@ -36,7 +36,7 @@ class _ClientProfileState extends State<ClientProfile> {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50.sp),
                     bottomLeft: Radius.circular(40.sp))),
-            width: 200.w,
+            width: mediaWidth > 650 ? 150.w : 200.w,
             child: MenuScreen()),
         body: SafeArea(
             child: widget.clientIndex == null
@@ -80,7 +80,7 @@ class _ClientProfileState extends State<ClientProfile> {
                                 )),
                             SizedBox(
                               width: mediaHeight > 900
-                                  ? .35 * mediaWidth
+                                  ? .12 * mediaWidth.w
                                   : .2 * mediaWidth.w,
                             ),
                             Text(
@@ -88,11 +88,14 @@ class _ClientProfileState extends State<ClientProfile> {
                               style: TextStyle(
                                   fontFamily: 'futurBold',
                                   color: primary,
-                                  fontSize: 20),
+                                  fontSize:
+                                      MediaQuery.sizeOf(context).width > 650
+                                          ? 15.sp
+                                          : 7.sp),
                             ),
                           ]),
                           SizedBox(
-                            height: 10.h,
+                            height: mediaWidth > 650 ? 15.h : 10.h,
                           ),
                           Stack(
                             children: [
@@ -104,11 +107,11 @@ class _ClientProfileState extends State<ClientProfile> {
                                     "assets/images/female_one.png"),
                               )),
                               Positioned(
-                                  right: mediaWidth > 650 ? 380.w : 120.w,
+                                  right: mediaWidth > 650 ? 210.w : 120.w,
                                   bottom: 0,
                                   child: Container(
-                                    width: 40.w,
-                                    height: 40.h,
+                                    width: mediaWidth > 650 ? 35.w : 40.w,
+                                    height: mediaWidth > 650 ? 35.h : 40.h,
                                     decoration: BoxDecoration(
                                         color: primary,
                                         border: Border.all(color: Colors.white),
@@ -159,7 +162,9 @@ class _ClientProfileState extends State<ClientProfile> {
                                 child: Text(
                                   "pets".tr(),
                                   style: TextStyle(
-                                      fontFamily: 'futur', color: Colors.white),
+                                      fontSize: mediaWidth > 650 ? 10.sp : 5.sp,
+                                      fontFamily: 'futur',
+                                      color: Colors.white),
                                 ),
                               ),
                             ),

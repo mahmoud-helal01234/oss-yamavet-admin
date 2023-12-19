@@ -48,12 +48,16 @@ class ReminderBody extends StatelessWidget {
               children: [
                 Text(
                   doctorName,
-                  style: TextStyle(fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      fontSize: mediaWidth > 650 ? 10.sp : 7.sp,
+                      fontWeight: FontWeight.w500),
                 ),
                 Text(
                   sendDate,
                   style: TextStyle(
-                      color: Colors.grey[400], fontWeight: FontWeight.w500),
+                      fontSize: mediaWidth > 650 ? 8.sp : 6.sp,
+                      color: Colors.grey[400],
+                      fontWeight: FontWeight.w500),
                 )
               ],
             ),
@@ -68,7 +72,7 @@ class ReminderBody extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5.sp)),
                 color: Colors.red,
                 onPressed: () {},
-                child:Text("Delete".tr(),
+                child: Text("Delete".tr(),
                     style: TextStyle(
                         fontFamily: 'futur',
                         color: Colors.white,
@@ -83,8 +87,8 @@ class ReminderBody extends StatelessWidget {
         Center(
           child: Card(
             elevation: 7,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.sp)),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.sp)),
             child: Container(
               width: width,
               height: height,
@@ -98,7 +102,7 @@ class ReminderBody extends StatelessWidget {
                   style: TextStyle(
                       height: 2.h,
                       fontSize:
-                          MediaQuery.sizeOf(context).width > 650 ? 17.w : 13.w),
+                          MediaQuery.sizeOf(context).width > 650 ? 9.w : 13.w),
                   textAlign: textAlign,
                 ),
               ),

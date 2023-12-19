@@ -3,7 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EditAndAddContainer extends StatelessWidget {
   const EditAndAddContainer(
-      {super.key, required this.enText, required this.arText, required this.arController, required this.enController});
+      {super.key,
+      required this.enText,
+      required this.arText,
+      required this.arController,
+      required this.enController});
   final String enText;
   final String arText;
   final TextEditingController arController;
@@ -14,7 +18,7 @@ class EditAndAddContainer extends StatelessWidget {
     return Column(
       children: [
         Container(
-          width: .35 * mediaWidth,
+          width: mediaWidth > 650 ? 300.w : .35 * mediaWidth,
           height: 30.h,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5.sp),
@@ -27,7 +31,7 @@ class EditAndAddContainer extends StatelessWidget {
                   border: InputBorder.none,
                   hintText: enText,
                   hintStyle: TextStyle(
-                      fontSize: 13.sp,
+                      fontSize: mediaWidth > 650 ? 10.sp : 13.sp,
                       fontWeight: FontWeight.w500,
                       color: Colors.grey)),
             ),
@@ -37,7 +41,7 @@ class EditAndAddContainer extends StatelessWidget {
           height: 10.h,
         ),
         Container(
-          width: .35 * mediaWidth,
+          width: mediaWidth > 650 ? 300.w : .35 * mediaWidth,
           height: 30.h,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
@@ -46,14 +50,13 @@ class EditAndAddContainer extends StatelessWidget {
             padding: EdgeInsets.only(right: 10.w, top: 8.h),
             child: TextField(
               controller: arController,
-              textDirection:TextDirection.rtl,
+              textDirection: TextDirection.rtl,
               decoration: InputDecoration(
-
                   border: InputBorder.none,
                   hintText: arText,
                   hintTextDirection: TextDirection.rtl,
                   hintStyle: TextStyle(
-                      fontSize: 15.sp,
+                      fontSize: mediaWidth > 650 ? 10.sp : 15.sp,
                       fontWeight: FontWeight.w600,
                       color: Colors.grey)),
             ),

@@ -21,7 +21,7 @@ class Clients extends StatelessWidget {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50),
                     bottomLeft: Radius.circular(40))),
-            width: 200.w,
+           width: mediaWidth > 650 ? 150.w : 200.w,
             child: MenuScreen()),
         body: SafeArea(
             child: SingleChildScrollView(
@@ -60,12 +60,14 @@ class Clients extends StatelessWidget {
                     )),
                 SizedBox(
                   width:
-                      mediaHeight > 900 ? .35 * mediaWidth : .15 * mediaWidth,
+                      mediaHeight > 900 ? .1 * mediaWidth.w : .15 * mediaWidth,
                 ),
                 Text(
                   'clientprofiles'.tr(),
                   style: TextStyle(
-                      fontFamily: 'futurBold', color: primary, fontSize: 20.sp),
+                      fontFamily: 'futurBold',
+                      color: primary,
+                      fontSize: mediaWidth > 650 ? 17.sp : 20.sp),
                 ),
               ]),
               SizedBox(

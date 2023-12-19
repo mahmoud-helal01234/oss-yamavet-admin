@@ -1,4 +1,3 @@
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,9 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'package:yama_vet_admin/controllers/AuthProvider.dart';
-
-
-
 
 import 'package:yama_vet_admin/widgets/custom_button.dart';
 import 'package:http/http.dart' as http;
@@ -26,7 +22,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     double mediaHeight = MediaQuery.sizeOf(context).height; //!900
     double mediaWidth = MediaQuery.sizeOf(context).width; //!400
 
@@ -46,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Text("login".tr(),
                   style: GoogleFonts.roboto(
-                      fontSize: mediaHeight > 900 ? 50.h : 30.h,
+                      fontSize: mediaWidth > 650 ? 25.sp : 30.h,
                       fontWeight: FontWeight.w500)),
               SizedBox(
                 height: mediaHeight > 800
@@ -72,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       bottom: mediaHeight > 900 ? 8.h : 0),
                   child: TextFormField(
                     controller: phone,
-                    keyboardType:TextInputType.phone,
+                    keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
                         border: InputBorder.none,
                         prefixIcon: IconButton(
@@ -80,6 +75,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           icon: const Icon(Icons.phone),
                           onPressed: () {},
                         ),
+                        hintStyle:
+                            TextStyle(fontSize: mediaWidth > 650 ? 9.sp : 7.sp),
                         hintText: 'Phone Number'),
                   ),
                 ),
@@ -124,24 +121,21 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: .05 * MediaQuery.sizeOf(context).height,
               ),
               CustomButton(
-                size: 25.sp,
+                size: mediaWidth > 650 ? 20.sp : 25.sp,
                 text: "login".tr(),
                 onTap: () async {
                   // Provider.of<AuthProvider>(context,listen: false).
                   // login(context, LoginRequest(phone: phone.text,deviceId: "324-234-324"));
 
-                  Provider.of<AuthProvider>(context,listen: false).
-                  loginWogood(context, phone.text, "324-234-324");
-
-
+                  Provider.of<AuthProvider>(context, listen: false)
+                      .loginWogood(context, phone.text, "324-234-324");
                 },
                 buttomWidth:
                     mediaWidth > 400 ? .85 * mediaWidth : .75 * mediaWidth,
                 height: .061 * mediaHeight,
               ),
               SizedBox(
-                height:
-                   100.h,
+                height: 100.h,
               ),
               Image.asset(
                 "assets/images/footer.png",
@@ -154,5 +148,4 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
 }

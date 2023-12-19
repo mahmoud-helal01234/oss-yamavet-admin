@@ -6,7 +6,8 @@ class CustomTextField extends StatelessWidget {
       {super.key,
       required this.hinttext,
       required this.icon,
-      required this.width, required this.controller});
+      required this.width,
+      required this.controller});
   final String hinttext;
   final IconData icon;
   final double width;
@@ -27,12 +28,15 @@ class CustomTextField extends StatelessWidget {
               border: InputBorder.none,
               prefixIcon: Icon(
                 icon,
-                size: 30.sp,
+                size: MediaQuery.sizeOf(context).width > 650 ? 20.sp : 30.sp,
                 color: Colors.grey,
               ),
               hintText: hinttext,
-              hintStyle:
-                  TextStyle(color: Colors.grey, fontWeight: FontWeight.w500)),
+              hintStyle: TextStyle(
+                  fontSize:
+                      MediaQuery.sizeOf(context).width > 650 ? 10.sp : 7.sp,
+                  color: Colors.grey,
+                  fontWeight: FontWeight.w500)),
         ),
       ),
     );

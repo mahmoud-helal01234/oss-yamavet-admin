@@ -38,8 +38,6 @@ class _EditCategoryState extends State<EditCategory> {
     setState(() {});
   }
 
-
-
   int? id;
   int? ddd;
 
@@ -74,9 +72,9 @@ class _EditCategoryState extends State<EditCategory> {
     double mediaWidth = MediaQuery.sizeOf(context).height;
     return Center(
       child: Container(
-        margin: EdgeInsets.only(right: 30),
-        width: .42 * mediaWidth,
-        height: .3 * mediaHeight,
+        margin: EdgeInsets.only(right: 30.sp, left: 30.sp),
+        width: mediaWidth > 650 ? .5 * mediaWidth.w : .42 * mediaWidth,
+        height: mediaWidth > 650 ? .35 * mediaHeight : .3 * mediaHeight,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5.sp),
             border: Border.all(color: primary, width: 2.w)),
@@ -90,7 +88,7 @@ class _EditCategoryState extends State<EditCategory> {
               Stack(
                 children: [
                   Padding(
-                    padding:EdgeInsets.all(5.sp),
+                    padding: EdgeInsets.all(5.sp),
                     child: DottedBorder(
                       color: primary,
                       strokeWidth: 2,
@@ -180,29 +178,26 @@ class _EditCategoryState extends State<EditCategory> {
                   ),
                   Consumer<CategoriesProvider>(
                       builder: (context, categoriesProvider, child) {
-                        return MaterialButton(
-                        elevation: 10,
-                        minWidth: 140.w,
-                        height: 25.h,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.sp)),
-                        color: primary,
-                        onPressed: () async {
-
-
-                          setState(() {
-                            id = categoriesProvider.categories[index].id;
-                          });
-                          await updateCategories();
-                        },
-                        child: Text("Update".tr(),
-                            style: TextStyle(
-                                fontFamily: 'futur',
-                                color: Colors.white,
-                                fontSize: 15.sp)),
-                      );
-                    }
-                  ),
+                    return MaterialButton(
+                      elevation: 10,
+                      minWidth: 140.w,
+                      height: 25.h,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.sp)),
+                      color: primary,
+                      onPressed: () async {
+                        setState(() {
+                          id = categoriesProvider.categories[index].id;
+                        });
+                        await updateCategories();
+                      },
+                      child: Text("Update".tr(),
+                          style: TextStyle(
+                              fontFamily: 'futur',
+                              color: Colors.white,
+                              fontSize: 15.sp)),
+                    );
+                  }),
                 ],
               ),
             ]);

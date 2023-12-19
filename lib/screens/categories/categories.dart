@@ -159,7 +159,7 @@ class _CategoryChooseState extends State<CategoryChoose> {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50.sp),
                     bottomLeft: Radius.circular(40.sp))),
-            width: 200.w,
+          width: mediaWidth > 650 ? 150.w : 200.w,
             child: MenuScreen()),
         body: SafeArea(
             child: SingleChildScrollView(
@@ -199,7 +199,7 @@ class _CategoryChooseState extends State<CategoryChoose> {
                       )),
                   SizedBox(
                     width: mediaHeight > 900
-                        ? .3 * mediaWidth
+                        ? .1 * mediaWidth.w
                         : .3 * mediaWidth.sp,
                   ),
                   Center(
@@ -224,7 +224,7 @@ class _CategoryChooseState extends State<CategoryChoose> {
                 child: Text(
                   "categories".tr(),
                   style: TextStyle(
-                      fontSize: mediaHeight > 900 ? 25.sp : 17.sp,
+                      fontSize: mediaHeight > 900 ? 20.sp : 17.sp,
                       fontWeight: FontWeight.w600),
                 ),
               ),
@@ -239,7 +239,7 @@ class _CategoryChooseState extends State<CategoryChoose> {
                     )
                   : Container(
                       width: 400.w,
-                      height: 150.h,
+                      height: mediaHeight > 900 ? 200.h : 150.h,
                       child: Consumer<CategoriesProvider>(
                           builder: (context, categoriesProvider, child) {
                         return ListView.builder(
@@ -272,8 +272,12 @@ class _CategoryChooseState extends State<CategoryChoose> {
                                             "https://yama-vet.com/${categoriesProvider.categories[index].imgPath}"),
                                       ),
                                     )),
-                                Text(categoriesProvider
-                                    .categories[index].nameEn!),
+                                Text(
+                                  categoriesProvider.categories[index].nameEn!,
+                                  style: TextStyle(
+                                      fontSize:
+                                          mediaWidth > 650 ? 10.sp : 5.sp),
+                                ),
                               ],
                             );
                           },
@@ -287,7 +291,8 @@ class _CategoryChooseState extends State<CategoryChoose> {
                 // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
-                    width: mediaWidth > 650 ? .2 * mediaWidth : .1 * mediaWidth,
+                    width:
+                        mediaWidth > 650 ? .05 * mediaWidth : .1 * mediaWidth,
                   ),
                   Column(
                     children: [
@@ -298,8 +303,8 @@ class _CategoryChooseState extends State<CategoryChoose> {
                           });
                         },
                         child: Container(
-                          width: 70.w,
-                          height: 65.h,
+                          width: mediaWidth > 650 ? 100.w : 70.w,
+                          height: mediaWidth > 650 ? 80.h : 65.h,
                           child: DottedBorder(
                               color: primary,
                               strokeWidth: 2,
@@ -315,7 +320,9 @@ class _CategoryChooseState extends State<CategoryChoose> {
                       Text(
                         "addcategory".tr(),
                         style: TextStyle(
-                            color: primary, fontWeight: FontWeight.w500),
+                            fontSize: mediaWidth > 650 ? 10.sp : 5.sp,
+                            color: primary,
+                            fontWeight: FontWeight.w500),
                         textAlign: TextAlign.center,
                       )
                     ],
@@ -329,7 +336,9 @@ class _CategoryChooseState extends State<CategoryChoose> {
                   ? Center(
                       child: Container(
                         width: .8 * mediaWidth,
-                        height: .3 * mediaHeight,
+                        height: mediaHeight > 900
+                            ? .35 * mediaHeight
+                            : .3 * mediaHeight,
                         decoration: BoxDecoration(
                             // color: Colors.white,
                             borderRadius: BorderRadius.circular(5),
@@ -340,8 +349,8 @@ class _CategoryChooseState extends State<CategoryChoose> {
                               height: 10.h,
                             ),
                             Container(
-                              width: 70.w,
-                              height: 70.h,
+                              width: mediaWidth > 650 ? 100.w : 70.w,
+                              height: mediaWidth > 650 ? 90.h : 65.h,
                               child: DottedBorder(
                                   color: primary,
                                   strokeWidth: 1,
@@ -404,6 +413,9 @@ class _CategoryChooseState extends State<CategoryChoose> {
                       ),
                     )
                   : Container(),
+              SizedBox(
+                height: 10.h,
+              )
             ]))));
   }
 }

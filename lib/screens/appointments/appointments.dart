@@ -67,7 +67,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50.sp),
                     bottomLeft: Radius.circular(40.sp))),
-            width: 200.w,
+            width: mediaWidth > 650 ? 150.w : 200.w,
             child: MenuScreen()),
         body: SafeArea(
             child:
@@ -102,12 +102,15 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                     color: Colors.black,
                   )),
               SizedBox(
-                width: mediaHeight > 900 ? .35 * mediaWidth : .2 * mediaWidth.w,
+                width:
+                    mediaHeight > 900 ? .1 * mediaWidth.w : .2 * mediaWidth.w,
               ),
               Text(
                 "Appointments".tr(),
                 style: TextStyle(
-                    fontFamily: 'futurBold', color: primary, fontSize: 20.sp),
+                    fontFamily: 'futurBold',
+                    color: primary,
+                    fontSize: mediaWidth > 650 ? 15.sp : 20.sp),
               ),
             ],
           ),
