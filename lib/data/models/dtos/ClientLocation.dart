@@ -6,8 +6,8 @@ class ClientLocation {
   ClientLocation({this.longitude, this.latitude, this.description});
 
   ClientLocation.fromJson(Map<String, dynamic> json) {
-    longitude = json['longitude'];
-    latitude = json['latitude'];
+    longitude = double.parse(json['longitude'].toString());
+    latitude = double.parse(json['latitude'].toString());
     description = json['description'];
   }
 

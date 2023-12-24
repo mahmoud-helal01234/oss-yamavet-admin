@@ -15,11 +15,12 @@ import 'package:yama_vet_admin/data/services/api.dart';
 import 'package:yama_vet_admin/widgets/custom_containers.dart';
 import 'package:http/http.dart' as http;
 
+import '../data/models/requests/UpdateCategoryRequest.dart';
 import '../data/models/responses/CategoriesResponse.dart';
 
 class EditCategory extends StatefulWidget {
-  EditCategory({super.key});
-
+  EditCategory({super.key,this.categoryIndex});
+  int? categoryIndex;
   @override
   State<EditCategory> createState() => _EditCategoryState();
 }
@@ -41,30 +42,32 @@ class _EditCategoryState extends State<EditCategory> {
   int? id;
   int? ddd;
 
-  Future updateCategories() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    String json = sharedPreferences.getString("token")!;
-    print(json);
-    var request = http.MultipartRequest("POST", Uri.parse(updateCategoryLink));
-    request.headers['api-token'] = 'yama-vets';
-    request.fields['id'] = id.toString();
-    request.fields['name_ar'] = name_er.text;
-    request.fields['name_en'] = name_en.text;
-    request.headers['Authorization'] = 'Bearer${json}';
-    request.files.add(await http.MultipartFile.fromPath(
-      'img_path',
-      updated_file!.path,
-    ));
-    return await request.send().then((response) async {
-      if (response.statusCode == 200) {
-        print("updated categories ********* !!!!!!!!!!!");
-        return true;
-      } else {
-        print("error-----${await response.stream.bytesToString()}");
-        return false;
-      }
-    });
-  }
+  // Future updateCategories() async {
+  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  //   String json = sharedPreferences.getString("token")!;
+  //   print(json);
+  //   var request = http.MultipartRequest("POST", Uri.parse(updateCategoryLink));
+  //   request.headers['api-token'] = 'yama-vets';
+  //   request.fields['id'] = id.toString();
+  //   request.fields['name_ar'] = name_er.text;
+  //   request.fields['name_en'] = name_en.text;
+  //   request.headers['Authorization'] = 'Bearer${json}';
+  //   if(updated_file != null) {
+  //     request.files.add(await http.MultipartFile.fromPath(
+  //       'img_path',
+  //       updated_file!.path,
+  //     ));
+  //   }
+  //   return await request.send().then((response) async {
+  //     if (response.statusCode == 200) {
+  //       print("updated categories ********* !!!!!!!!!!!");
+  //       return true;
+  //     } else {
+  //       print("error-----${await response.stream.bytesToString()}");
+  //       return false;
+  //     }
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -149,8 +152,14 @@ class _EditCategoryState extends State<EditCategory> {
                 height: 10.sp,
               ),
               EditAndAddContainer(
-                enText: 'Vaccination',
-                arText: 'تلقيح',
+                enText: widget.categoryIndex != null?
+                Provider.of<CategoriesProvider>(context,
+                    listen: true)
+                    .categories[widget.categoryIndex!].nameEn! : 'Category name',
+                arText: widget.categoryIndex != null?
+                Provider.of<CategoriesProvider>(context,
+                    listen: true)
+                    .categories[widget.categoryIndex!].nameAr! : 'اسم القسم',
                 arController: name_er,
                 enController: name_en,
               ),
@@ -165,7 +174,9 @@ class _EditCategoryState extends State<EditCategory> {
                         borderRadius: BorderRadius.circular(5.sp)),
                     color: Color(0xffba94b9),
                     onPressed: () {
-                      Navigator.pop(context);
+                      Provider.of<CategoriesProvider>(context,
+                          listen: false)
+                          .toggleEditCategoryOpened();
                     },
                     child: Text("Cancel".tr(),
                         style: TextStyle(
@@ -186,10 +197,14 @@ class _EditCategoryState extends State<EditCategory> {
                           borderRadius: BorderRadius.circular(5.sp)),
                       color: primary,
                       onPressed: () async {
-                        setState(() {
-                          id = categoriesProvider.categories[index].id;
-                        });
-                        await updateCategories();
+                        Provider.of<CategoriesProvider>(context, listen: false)
+                            .update(
+                                context,
+                                UpdateCategoryRequest(context,
+                                    id: categoriesProvider.categories[index].id,
+                                    file: choosen_file,
+                                    nameAr: name_er.text,
+                                    nameEn: name_en.text));
                       },
                       child: Text("Update".tr(),
                           style: TextStyle(

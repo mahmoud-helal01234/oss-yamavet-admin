@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import 'package:yama_vet_admin/controllers/AuthProvider.dart';
 
 import 'package:yama_vet_admin/widgets/custom_button.dart';
-import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

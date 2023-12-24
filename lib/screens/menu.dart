@@ -10,7 +10,6 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:yama_vet_admin/controllers/ConfigurationsProvider.dart';
-import 'package:yama_vet_admin/controllers/SettingsProvider.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
 
 import 'package:url_launcher/url_launcher.dart';

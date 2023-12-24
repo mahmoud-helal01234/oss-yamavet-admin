@@ -1,12 +1,8 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:yama_vet_admin/core/utils/colors.dart';
-import 'package:yama_vet_admin/core/utils/strings.dart';
 
 import '../controllers/SettingsProvider.dart';
 

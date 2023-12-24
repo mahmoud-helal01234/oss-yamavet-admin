@@ -291,8 +291,6 @@ class ApiService {
       log("response status code:" + response.statusCode.toString());
 
       log('$baseApiUrl$endPoint/$itemId');
-      log(response.statusCode.toString());
-      log("response: " + response.body);
       if (response.statusCode == 200) {
         if (context != null) {
           context.loaderOverlay.hide();

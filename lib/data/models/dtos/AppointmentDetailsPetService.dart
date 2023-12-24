@@ -11,7 +11,7 @@ class AppointmentDetailsPetService {
   id = json['id'];
   nameAr = json['name_ar'];
   nameEn = json['name_en'];
-  price = json['price'];
+  price = double.parse(json['price'].toString());
   categoryId = json['category_id'];
   }
 

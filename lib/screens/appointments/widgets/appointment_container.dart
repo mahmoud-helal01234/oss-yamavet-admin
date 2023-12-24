@@ -183,11 +183,11 @@ class _AppointmentContainerState extends State<AppointmentContainer> {
                                     const SizedBox(
                                       height: 5,
                                     ),
-                                    Padding(
-                                        padding: (appointmentsProvider.appointments![index].type != 'emergancy')?widget.paddingtext: EdgeInsets.only(left: 100,right: 100),
-                                        child:  (appointmentsProvider.appointments![index].type == 'emergancy')?Text("Vet Emergency",style: TextStyle(color: Colors.red,fontSize: 20),):Row(
-                                          children:betName(index),
-                                        )),
+                                    // Padding(
+                                    //     padding: (appointmentsProvider.appointments![index].type != 'emergancy')?widget.paddingtext: EdgeInsets.only(left: 100,right: 100),
+                                    //     child:  (appointmentsProvider.appointments![index].type == 'emergancy')?Text("Vet Emergency",style: TextStyle(color: Colors.red,fontSize: 20),):Row(
+                                    //       children:betName(index),
+                                    //     )),
                                     const SizedBox(
                                       height: 10,
                                     ),
@@ -396,22 +396,22 @@ class _AppointmentContainerState extends State<AppointmentContainer> {
           );
   }
 
-  List<Widget> betName(int index) {
-    List<Widget> names = [];
-    Provider.of<AppointmentsProvider>(context, listen: false).appointments;
-
-    for (var i = 0;
-        i <
-            Provider.of<AppointmentsProvider>(context, listen: false)
-                .appointments[index]
-                .petsImages!
-                .length;
-        i++) {
-      names.add(Text(
-          "${Provider.of<AppointmentsProvider>(context, listen: false).appointments[index].appointmentDetails![i].pet!.name} \t"));
-    }
-    return names;
-  }
+  // List<Widget> betName(int index) {
+  //   List<Widget> names = [];
+  //   Provider.of<AppointmentsProvider>(context, listen: false).appointments;
+  //
+  //   for (var i = 0;
+  //       i <
+  //           Provider.of<AppointmentsProvider>(context, listen: false)
+  //               .appointments[index]
+  //               .petsImages!
+  //               .length;
+  //       i++) {
+  //     names.add(Text(
+  //         "${Provider.of<AppointmentsProvider>(context, listen: false).appointments[index].appointmentDetails![i].pet!.name} \t"));
+  //   }
+  //   return names;
+  // }
 
   List<Widget> betimg(int index) {
     List<Widget> imgs = [];

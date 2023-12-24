@@ -32,8 +32,6 @@ class Vaccination extends StatefulWidget {
 class _VaccinationState extends State<Vaccination> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-  bool ontap = false;
-  bool? _isLoadingc;
   File? updated_file;
   Category? categoriesModel;
   List<Category> categoriesList = [];
@@ -43,7 +41,6 @@ class _VaccinationState extends State<Vaccination> {
   @override
   void initState() {
     super.initState();
-    _isLoadingc = true;
     setState(() {});
 
     // getServices();
@@ -204,9 +201,9 @@ class _VaccinationState extends State<Vaccination> {
                                     ),
                                     GestureDetector(
                                       onTap: () {
-                                        setState(() {
-                                          ontap = !ontap;
-                                        });
+                                        Provider.of<CategoriesProvider>(context,
+                                            listen: false)
+                                            .toggleEditCategoryOpened();
                                       },
                                       child: SvgPicture.asset(
                                         "assets/images/edit_one.svg",
@@ -247,7 +244,9 @@ class _VaccinationState extends State<Vaccination> {
                   )
                 ],
               ),
-              ontap ? EditCategory() : Container(),
+            Provider.of<CategoriesProvider>(context,
+                listen: true)
+                .editCategoryOpened ? EditCategory(categoryIndex:widget.categoryIndex!) : Container(),
               Padding(
                 padding: EdgeInsets.only(
                     left: 20.w, top: 10.h, bottom: 10.h, right: 10.w),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class EditAndAddContainer extends StatelessWidget {
+class EditAndAddContainer extends StatefulWidget {
   const EditAndAddContainer(
       {super.key,
       required this.enText,
@@ -12,8 +12,24 @@ class EditAndAddContainer extends StatelessWidget {
   final String arText;
   final TextEditingController arController;
   final TextEditingController enController;
+
+  @override
+  State<EditAndAddContainer> createState() => _EditAndAddContainerState();
+}
+
+class _EditAndAddContainerState extends State<EditAndAddContainer> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    widget.arController.text = widget.arText;
+    widget.enController.text = widget.enText;
+  }
+
   @override
   Widget build(BuildContext context) {
+
     double mediaWidth = MediaQuery.sizeOf(context).height;
     return Column(
       children: [
@@ -26,10 +42,10 @@ class EditAndAddContainer extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.only(left: 10.w),
             child: TextField(
-              controller: enController,
+              controller: widget.enController,
               decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: enText,
+                  hintText: widget.enText,
                   hintStyle: TextStyle(
                       fontSize: mediaWidth > 650 ? 10.sp : 20.sp,
                       fontWeight: FontWeight.w500,
@@ -49,11 +65,11 @@ class EditAndAddContainer extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.only(right: 10.w, top: 8.h),
             child: TextField(
-              controller: arController,
+              controller: widget.arController,
               textDirection: TextDirection.rtl,
               decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: arText,
+                  hintText: widget.arText,
                   hintTextDirection: TextDirection.rtl,
                   hintStyle: TextStyle(
                       fontSize: mediaWidth > 650 ? 10.sp : 20.sp,

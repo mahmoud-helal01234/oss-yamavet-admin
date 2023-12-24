@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
 import 'package:yama_vet_admin/screens/menu.dart';
-import 'package:yama_vet_admin/widgets/client_row.dart';
 import 'package:yama_vet_admin/widgets/client_row_search.dart';
 import 'package:yama_vet_admin/widgets/reminder_body.dart';
 
