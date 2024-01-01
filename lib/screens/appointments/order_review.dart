@@ -65,7 +65,7 @@ class _OrderReviewState extends State<OrderReview> {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50.sp),
                     bottomLeft: Radius.circular(40.sp))),
-          width: mediaWidth > 650 ? 150.w : 200.w,
+            width: mediaWidth > 650 ? 150.w : 200.w,
             child: MenuScreen()),
         body: SafeArea(
             child: SingleChildScrollView(
@@ -106,15 +106,15 @@ class _OrderReviewState extends State<OrderReview> {
                   Consumer<AppointmentsProvider>(
                       builder: (context, appointmentsProvider, child) {
                     return Text(
-                      "Appointments Overview #[${appointmentsProvider.appointments[widget.appointmentIndex].appointmentNumber}]",
+                      "${"Appointments Overview".tr()} #[${appointmentsProvider.appointments[widget.appointmentIndex].appointmentNumber}]",
                       style: TextStyle(
                           fontFamily: 'futurBold',
                           color: primary,
-                          fontSize: 17.sp),
+                          fontSize: mediaWidth > 650 ? 15.sp : 17.sp),
                     );
                   }),
                   SizedBox(
-                    height: mediaHeight > 900 ? 20.h : 0,
+                    height: 20,
                   )
                 ],
               ),
@@ -123,23 +123,29 @@ class _OrderReviewState extends State<OrderReview> {
                   ? Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        MaterialButton(
-                          // elevation: 5,
-                          minWidth: mediaWidth > 650 ? 400.w : 150.w,
-                          height: mediaWidth > 650 ? 40.h : 30.h,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5.sp)),
-                          color: Colors.red,
-                          onPressed: () {
-                            Provider.of<AppointmentsProvider>(context,
-                                    listen: false)
-                                .delete(context, widget.appointmentIndex);
-                          },
-                          child: Text("Delete".tr(),
-                              style: TextStyle(
-                                  fontFamily: 'futur',
-                                  color: Colors.white,
-                                  fontSize: mediaWidth > 650 ? 20.sp : 15.sp)),
+                        SizedBox(
+                          width: mediaWidth > 650 ? 30 : 0,
+                        ),
+                        Center(
+                          child: MaterialButton(
+                            // elevation: 5,
+                            minWidth: mediaWidth > 650 ? 300.w : 150.w,
+                            height: mediaWidth > 650 ? 20.h : 30.h,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.sp)),
+                            color: Colors.red,
+                            onPressed: () {
+                              Provider.of<AppointmentsProvider>(context,
+                                      listen: false)
+                                  .delete(context, widget.appointmentIndex);
+                            },
+                            child: Text("Delete".tr(),
+                                style: TextStyle(
+                                    fontFamily: 'futur',
+                                    color: Colors.white,
+                                    fontSize:
+                                        mediaWidth > 650 ? 15.sp : 15.sp)),
+                          ),
                         ),
                         SizedBox(
                           width: 30.w,
@@ -197,12 +203,12 @@ class _OrderReviewState extends State<OrderReview> {
                           .appointments[widget.appointmentIndex].day!,
                       style: GoogleFonts.roboto(
                           fontWeight: FontWeight.w500,
-                          fontSize: mediaWidth > 650 ? 20.sp : 17.sp),
+                          fontSize: mediaWidth > 650 ? 15.sp : 17.sp),
                     );
                   }),
                   SizedBox(
                     width: mediaWidth > 650
-                        ? .6 * mediaWidth
+                        ? .45 * mediaWidth
                         : .2 * MediaQuery.sizeOf(context).width,
                   ),
                   Row(
@@ -211,14 +217,16 @@ class _OrderReviewState extends State<OrderReview> {
                         "totalprice".tr(),
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: mediaWidth > 650 ? 20.sp : 17.sp),
+                            fontSize: mediaWidth > 650 ? 15.sp : 17.sp),
                       ),
                       Consumer<AppointmentsProvider>(
                           builder: (context, appointmentsProvider, child) {
                         return Text(
                           "${appointmentsProvider.appointments[widget.appointmentIndex].price}\$",
                           style: TextStyle(
-                              color: primary, fontWeight: FontWeight.bold),
+                              fontSize: mediaWidth > 650 ? 13.sp : 17.sp,
+                              color: primary,
+                              fontWeight: FontWeight.bold),
                         );
                       }),
                     ],
@@ -277,9 +285,11 @@ class _OrderReviewState extends State<OrderReview> {
                     children: [
                       Row(
                         children: [
-                           Text(
+                          Text(
                             "rating".tr(),
-                            style: TextStyle(fontWeight: FontWeight.w500),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: mediaWidth > 650 ? 13.sp : 17.sp),
                           ),
                           Icon(
                             Icons.star,

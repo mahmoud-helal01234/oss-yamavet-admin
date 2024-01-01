@@ -195,7 +195,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                             Provider.of<AppointmentsProvider>(context,
                                         listen: true)
                                     .selectedDoctorName ??
-                                "Select Dr",
+                                "Select Dr".tr(),
                             style: const TextStyle(
                                 fontFamily: 'futur',
                                 fontSize: 17,

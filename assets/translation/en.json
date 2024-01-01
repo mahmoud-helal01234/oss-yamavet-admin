@@ -84,5 +84,9 @@
   "Select Client":"Select Client",
   "Book an appointment":"Book an appointment",
   "test": "test",
-  "vets":"Vets"
+  "vets":"Vets",
+  "Select Dr":"Select Dr", 
+  "Order":"Order", 
+  "Appointments Overview":"Appointments Overview", 
+  "Accept":"Accept"
 }

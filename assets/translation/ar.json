@@ -82,7 +82,11 @@
   "Reminder message":"رسالة التذكير ", 
   "Change Image":"تغير الصورة", 
   "Select Client":"اختار العميل", 
-  "Book an appointment":"قم بحجز معاد"
+  "Book an appointment":"قم بحجز معاد", 
+  "Select Dr":"اختار الطبيب ", 
+  "Order":"رقم الطلب", 
+  "Appointments Overview":"نظرة عامة على المواعيد", 
+  "Accept":"قبول"
 
   
 

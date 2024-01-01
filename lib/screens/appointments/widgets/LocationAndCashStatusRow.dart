@@ -133,7 +133,7 @@ class _LocationAndCashStatusRowState extends State<LocationAndCashStatusRow> {
                                       borderRadius: BorderRadius.circular(5),
                                       side: BorderSide(color: primary)),
                                   position: const RelativeRect.fromLTRB(
-                                      150, 270, 1, 4),
+                                      220, 270, 220, 4),
                                   items: [
                                     PopupMenuItem(
                                         onTap: () {
@@ -187,7 +187,7 @@ class _LocationAndCashStatusRowState extends State<LocationAndCashStatusRow> {
                                                   MainAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  "Not collected".tr(),
+                                                  "Not Collected".tr(),
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.w600,
