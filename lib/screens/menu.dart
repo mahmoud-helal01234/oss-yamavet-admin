@@ -14,6 +14,7 @@ import 'package:yama_vet_admin/core/utils/colors.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
+import '../controllers/MyFatoorahController.dart';
 import '../core/utils/strings.dart';
 
 class MenuScreen extends StatefulWidget {
@@ -198,6 +199,38 @@ class _MenuScreenState extends State<MenuScreen> {
                     color: Colors.white,
                     fontSize:
                         MediaQuery.sizeOf(context).width > 650 ? 12.sp : 17.sp,
+                  ),
+                )
+              ],
+            ),
+          ),
+
+          InkWell(
+            onTap: () async {
+              log("myFatoorah");
+              MyFatoorahController().initiatePayment();
+
+              // api logout
+            },
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 20.w,
+                ),
+                //* go to register screen
+                IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.exit_to_app,
+                      color: lightpurple,
+                    )),
+                Text(
+                  "MyFatoorah".tr(),
+                  style: TextStyle(
+                    fontFamily: 'futur',
+                    color: Colors.white,
+                    fontSize:
+                    MediaQuery.sizeOf(context).width > 650 ? 12.sp : 17.sp,
                   ),
                 )
               ],

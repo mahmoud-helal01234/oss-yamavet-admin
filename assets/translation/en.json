@@ -1,7 +1,9 @@
 {
+
   "login": "Login",
   "open":"Open",
   "Cancel":"Cancel",
+  "Select Client": "Select Client",
   "Update":"Update",
   "Delete":"Delete",
   "Vet":"Vet",
@@ -44,7 +46,7 @@
   "offers":"offers", 
   "categories":"categories" , 
   "clients":"clients", 
-  "reminder":  " reminder ", 
+  "reminder":  "Reminders",
   "appointments":"appointments"   , 
   "dashboard" :"Admin DashBoard ", 
   "addoffer":"add offer", 

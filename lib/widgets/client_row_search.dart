@@ -1,65 +1,71 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:yama_vet_admin/controllers/AppointmentsProvider.dart';
+import 'package:yama_vet_admin/controllers/ClientsProvider.dart';
+import 'package:yama_vet_admin/controllers/RemindersProvider.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
 
 class ClientSearch extends StatefulWidget {
-  const ClientSearch({super.key});
+
+  ClientSearch({super.key, required this.clientIndex});
+
+  int clientIndex;
 
   @override
   State<ClientSearch> createState() => _ClientSearchState();
 }
 
 class _ClientSearchState extends State<ClientSearch> {
-  bool selected = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SizedBox(
-          width: 10.w,
-        ),
-        Container(
-          width: 50.w,
-          height: 55.h,
-          decoration: BoxDecoration(
-              color: primary, borderRadius: BorderRadius.circular(5)),
-          child: Center(
-            child: Padding(
-              padding:  EdgeInsets.only(bottom: 10.h),
-              child: Image.asset("assets/images/female_one.png"),
-            ),
+    return InkWell(
+      onTap: (){
+        Provider.of<RemindersProvider>(context, listen: false).changeSelectedClient(context,widget.clientIndex);
+      },
+      child: Container(
+      child: Column(
+        children: [
+          Row(
+            children: [
+              SizedBox(
+                width: 10.w,
+              ),
+              Container(
+                width: 50.w,
+                height: 55.h,
+                decoration: BoxDecoration(
+                    color: primary, borderRadius: BorderRadius.circular(5)),
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 10.h),
+                    child: Image.asset("assets/images/female_one.png"),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 5.w,
+              ),
+              Text(
+                Provider.of<ClientsProvider>(context, listen: true).
+                clients[widget.clientIndex].name!,
+                style: TextStyle(),
+              )
+            ],
           ),
-        ),
-        SizedBox(
-          width: 5.w,
-        ),
-        const Text(
-          "Rachel Green \n\n",
-          style: TextStyle(),
-        ),
-        Spacer(),
-        Checkbox(
-            fillColor: MaterialStateProperty.resolveWith((states) {
-              if (!states.contains(MaterialState.selected)) {
-                return Colors.white;
-              }
-              return null;
-            }),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-            side: BorderSide(
-              color: primary,
-              width: 1,
-            ),
-            activeColor: primary,
-            checkColor: Colors.white,
-            value: selected,
-            onChanged: (val) {
-              setState(() {
-                selected = val!;
-              });
-            }),
-      ],
-    );
+          const Divider(
+            color: Colors.white,
+            thickness: 2,
+          )
+        ],
+      ),
+    ),);
   }
 }

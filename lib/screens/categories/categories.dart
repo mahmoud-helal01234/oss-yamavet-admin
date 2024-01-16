@@ -394,7 +394,6 @@ class _CategoryChooseState extends State<CategoryChoose> {
                             ),
                             CustomAddButton(
                               onPress: () async {
-                                print("before");
                                 Provider.of<CategoriesProvider>(context,
                                         listen: false)
                                     .create(
@@ -403,7 +402,6 @@ class _CategoryChooseState extends State<CategoryChoose> {
                                             file: choosen_file,
                                             nameAr: name_er.text,
                                             nameEn: name_en.text));
-                                print("after");
                               },
                               minwidth: .7 * mediaWidth,
                             ),

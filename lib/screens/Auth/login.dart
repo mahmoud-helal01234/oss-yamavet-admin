@@ -19,8 +19,16 @@ class _LoginScreenState extends State<LoginScreen> {
   bool remeberMe = false;
   TextEditingController phone = TextEditingController();
 
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+  }
   @override
   Widget build(BuildContext context) {
+
     double mediaHeight = MediaQuery.sizeOf(context).height; //!900
     double mediaWidth = MediaQuery.sizeOf(context).width; //!400
 
@@ -28,7 +36,8 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
+          child:
+          Column(
             children: [
               SizedBox(
                 height: mediaHeight > 800
@@ -125,6 +134,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 onTap: () async {
                   // Provider.of<AuthProvider>(context,listen: false).
                   // login(context, LoginRequest(phone: phone.text,deviceId: "324-234-324"));
+
+
+
+
 
                   Provider.of<AuthProvider>(context, listen: false)
                       .loginWogood(context, phone.text, "324-234-324");

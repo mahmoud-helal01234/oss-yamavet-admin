@@ -37,15 +37,11 @@ class ApiService {
           headers: {"api-token": "yama-vets", "Authorization": "Bearer$token"});
       log("response body:" + response.body);
       log("response status code:" + response.statusCode.toString());
+      if (context != null) context.loaderOverlay.hide();
+
       if (response.statusCode == 200) {
-        if (context != null) {
-          context.loaderOverlay.hide();
-        }
         return jsonDecode(response.body);
       } else {
-        if (context != null) {
-          context.loaderOverlay.hide();
-        }
         throw Exception('Failed to fetch items');
       }
     } catch (ex) {
@@ -54,6 +50,16 @@ class ApiService {
       }
       throw Exception('Failed to fetch items');
     }
+  }
+
+  void showFailureAlert(BuildContext context, String componentName) {
+    QuickAlert.show(
+        context: context,
+        type: QuickAlertType.error,
+        text: '$componentName failure, Try again later',
+        autoCloseDuration: const Duration(seconds: 2),
+        showConfirmBtn: true,
+        confirmBtnColor: primary);
   }
 
   Future<dynamic?> getAction(String endPoint,
@@ -70,11 +76,11 @@ class ApiService {
           headers: {"api-token": "yama-vets", "Authorization": "Bearer$token"});
       log("response body:" + response.body);
       log("response status code:" + response.statusCode.toString());
+      if (context != null) {
+        context.loaderOverlay.hide();
+      }
       if (response.statusCode == 200) {
         if (context != null) {
-          if (context != null) {
-            context.loaderOverlay.hide();
-          }
           QuickAlert.show(
               context: context,
               type: QuickAlertType.success,
@@ -85,50 +91,44 @@ class ApiService {
         }
       } else {
         if (context != null) {
-          context.loaderOverlay.hide();
+          showFailureAlert(context, componentName);
         }
 
         throw Exception('Failed to add item');
       }
     } catch (ex) {
       if (context != null) {
+        showFailureAlert(context, componentName);
+
         context.loaderOverlay.hide();
       }
 
       throw Exception('Failed to fetch items');
-    } finally {
-      if (context != null) {
-        context.loaderOverlay.hide();
-      }
     }
   }
 
   Future<dynamic> postNotAuth(String endPoint, Map<String, dynamic> itemData,
       {BuildContext? context,
-        String componentName = "",
-        String operationName = "Logged in"}) async {
+      String componentName = "",
+      String operationName = "Logged in"}) async {
     try {
-
       if (context != null) {
         context.loaderOverlay.show();
       }
 
-
       final response = await http.post(
         Uri.parse('$baseApiUrl$endPoint'),
         body: jsonEncode(itemData),
-        headers: {
-          'Content-Type': 'application/json',
-          'api-token': 'yama-vets'
-        },
+        headers: {'Content-Type': 'application/json', 'api-token': 'yama-vets'},
       );
+      if (context != null) {
+        context.loaderOverlay.hide();
+      }
       log("response body:" + response.body);
       log("response status code:" + response.statusCode.toString());
 
       if (response.statusCode == 200) {
-
         if (context != null) {
-          context.loaderOverlay.hide();
           QuickAlert.show(
               context: context,
               type: QuickAlertType.success,
@@ -139,7 +139,7 @@ class ApiService {
           return jsonDecode(response.body);
         } else {
           if (context != null) {
-            context.loaderOverlay.hide();
+            showFailureAlert(context, componentName);
           }
 
           throw Exception('Failed to add item');
@@ -157,7 +157,6 @@ class ApiService {
       String componentName = "",
       String operationName = "Added"}) async {
     try {
-
       if (context != null) {
         context.loaderOverlay.show();
       }
@@ -173,13 +172,14 @@ class ApiService {
           'api-token': 'yama-vets'
         },
       );
+      if (context != null) {
+        context.loaderOverlay.hide();
+      }
       log("response body:" + response.body);
       log("response status code:" + response.statusCode.toString());
 
       if (response.statusCode == 200) {
-
         if (context != null) {
-          context.loaderOverlay.hide();
           QuickAlert.show(
               context: context,
               type: QuickAlertType.success,
@@ -190,20 +190,23 @@ class ApiService {
           return jsonDecode(response.body);
         } else {
           if (context != null) {
-            context.loaderOverlay.hide();
+            showFailureAlert(context, componentName);
           }
 
           throw Exception('Failed to add item');
+        }
+      } else {
+        if (context != null) {
+          showFailureAlert(context, componentName);
         }
       }
     } catch (ex) {
       if (context != null) {
         context.loaderOverlay.hide();
+        showFailureAlert(context, componentName);
       }
     }
   }
-
-
 
   Future<void> postWithFiles(String endPoint, Map<String, String> itemData,
       Map<String, File> filesData,
@@ -232,9 +235,11 @@ class ApiService {
       return await request.send().then((response) async {
         log("response body:" + await response.stream.bytesToString());
         log("response status code:" + response.statusCode.toString());
+        if (context != null) {
+          context.loaderOverlay.hide();
+        }
         if (response.statusCode == 200) {
           if (context != null) {
-            context.loaderOverlay.hide();
             QuickAlert.show(
                 context: context,
                 type: QuickAlertType.success,
@@ -245,7 +250,7 @@ class ApiService {
           }
         } else {
           if (context != null) {
-            context.loaderOverlay.hide();
+            showFailureAlert(context, componentName);
           }
           print("error-----${await response.stream.bytesToString()}");
           throw Exception("error adding");
@@ -254,6 +259,7 @@ class ApiService {
     } catch (ex) {
       if (context != null) {
         context.loaderOverlay.hide();
+        showFailureAlert(context, componentName);
       }
       throw Exception("error adding ${ex.toString()}");
     }
@@ -289,11 +295,12 @@ class ApiService {
           headers: {"api-token": "yama-vets", "Authorization": "Bearer$token"});
       log("response body:" + response.body);
       log("response status code:" + response.statusCode.toString());
-
+      if (context != null) {
+        context.loaderOverlay.hide();
+      }
       log('$baseApiUrl$endPoint/$itemId');
       if (response.statusCode == 200) {
         if (context != null) {
-          context.loaderOverlay.hide();
 
           QuickAlert.show(
               context: context,
@@ -305,15 +312,8 @@ class ApiService {
         }
       } else {
         if (context != null) {
-          context.loaderOverlay.hide();
 
-          QuickAlert.show(
-              context: context,
-              type: QuickAlertType.error,
-              text: '$componentName not deleted, Try again later',
-              autoCloseDuration: const Duration(seconds: 2),
-              showConfirmBtn: true,
-              confirmBtnColor: primary);
+          showFailureAlert(context, componentName);
         }
 
         throw Exception('Failed to delete item');
@@ -321,6 +321,7 @@ class ApiService {
     } catch (ex) {
       if (context != null) {
         context.loaderOverlay.hide();
+        showFailureAlert(context, componentName);
       }
     }
   }

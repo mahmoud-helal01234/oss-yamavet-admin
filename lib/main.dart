@@ -8,6 +8,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yama_vet_admin/controllers/AppointmentsProvider.dart';
 import 'package:yama_vet_admin/controllers/AuthProvider.dart';
 import 'package:yama_vet_admin/controllers/CategoriesProvider.dart';
@@ -24,8 +25,64 @@ import 'screens/splash.dart';
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  // await OneSignal.shared.setAppId('ab4cc51f-a93d-46db-99e3-d31408be0f72');
-  await OneSignal.shared.setAppId('ab4cc51f-a93d-46db-99e3-d31408be0f72');
+  OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
+
+  OneSignal.shared.setAppId("a21feae4-9172-46a6-aef5-7f6d26e1125b");
+
+// The promptForPushNotificationsWithUserResponse function will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
+  OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
+    print("Accepted permission: $accepted");
+    log("setNotificationWillShowInForegroundHandler");
+  });
+
+  OneSignal.shared.setNotificationWillShowInForegroundHandler((OSNotificationReceivedEvent event) {
+    // Will be called whenever a notification is received in foreground
+    // Display Notification, pass null param for not displaying the notification
+    event.complete(event.notification);
+    log("setNotificationWillShowInForegroundHandler");
+  });
+
+
+
+  OneSignal.shared.setPermissionObserver((OSPermissionStateChanges changes) {
+    // Will be called whenever the permission changes
+    // (ie. user taps Allow on the permission prompt in iOS)
+    log("setSubscriptionObserver");
+  });
+
+  OneSignal.shared.setSubscriptionObserver((OSSubscriptionStateChanges changes) {
+    // Will be called whenever the subscription changes
+    // (ie. user gets registered with OneSignal and gets a user ID)
+    String? onesignalUserId = changes.to.userId;
+    //log("setSubscriptionObserver");
+    SharedPreferences.getInstance().then((value){
+      log("Shared Prefs");
+      value.setString("device_token",onesignalUserId!);
+      value.setString("first_time","First Time ");
+      if(value.containsKey("device_token")) log("Et5zn");
+      log("PREFS " + value.getString("device_token")!);
+      log("Stored");
+      log("Token " + onesignalUserId);
+    });
+  });
+
+  OneSignal.shared.setNotificationOpenedHandler((OSNotificationOpenedResult result) {
+    //_MyAppState.handleClickNotification(result);
+    log("Opened");
+  });
+  OneSignal.shared.setEmailSubscriptionObserver((OSEmailSubscriptionStateChanges emailChanges) {
+    // Will be called whenever then user's email subscription changes
+    // (ie. OneSignal.setEmail(email) is called and the user gets registered
+  });
+  OneSignal.shared.getDeviceState().then((deviceState) {
+    print("DeviceState: ${deviceState?.jsonRepresentation()}");
+    SharedPreferences.getInstance().then((value){
+      value.setString("device_token",deviceState!.userId!);
+      log("Token " + deviceState.userId!);
+    });
+    //log(deviceState!.pushToken!);
+  });
+
 
   return runApp(
     MultiProvider(
@@ -117,6 +174,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+
     return ScreenUtilInit(
       designSize: Size(390, 800), // Change depending on the XD
       minTextAdapt: true,
@@ -170,4 +228,5 @@ class _MyAppState extends State<MyApp> {
       },
     );
   }
+
 }

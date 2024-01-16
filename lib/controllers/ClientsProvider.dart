@@ -11,6 +11,7 @@ import '../data/models/responses/ClientsResponse.dart';
 import '../data/services/ApiService.dart';
 
 class ClientsProvider extends ChangeNotifier {
+
   List<Client> clients = [];
 
   void replace(List<Client> newClients) {

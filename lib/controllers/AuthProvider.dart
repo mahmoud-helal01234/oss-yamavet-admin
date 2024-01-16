@@ -27,7 +27,7 @@ class AuthProvider extends ChangeNotifier {
 
   Future<void> login(BuildContext context, LoginRequest loginRequest) async {
     http.Response response =
-    await http.post(Uri.parse(loginLink), body: {}, headers: {
+        await http.post(Uri.parse(loginLink), body: {}, headers: {
       "api-token": "yama-vets",
     });
 
@@ -35,7 +35,6 @@ class AuthProvider extends ChangeNotifier {
     if (response.statusCode == 200) {
       print('sucess');
       if (data['status'] == true) {
-
         Navigator.pushNamed(context, verify);
       } else {
         print('fail to load data');
@@ -92,48 +91,50 @@ class AuthProvider extends ChangeNotifier {
   //   get(context);
   // }
 
-  loginWogood(BuildContext context,String phone,String deviceId) async {
+  loginWogood(BuildContext context, String phone, String deviceId) async {
     if (context != null) {
       context.loaderOverlay.show();
     }
-try {
-  http.Response response = await http.post(Uri.parse(loginLink), body: {
-    "phone": phone,
-    "device_id": deviceId,
-  }, headers: {
-    "api-token": "yama-vets",
-  });
-  Map<String, dynamic> data = jsonDecode(response.body);
-  if (response.statusCode == 200) {
-    if (data['status'] == true) {
-      SharedPreferences sharedPreferences =
-      await SharedPreferences.getInstance();
+    try {
+      http.Response response = await http.post(Uri.parse(loginLink), body: {
+        "phone": phone,
+        "device_id": deviceId,
+      }, headers: {
+        "api-token": "yama-vets",
+      });
+      Map<String, dynamic> data = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        if (data['status'] == true) {
+          SharedPreferences sharedPreferences =
+              await SharedPreferences.getInstance();
 
-      sharedPreferences.setString('token', data['data']['token']);
-      sharedPreferences.setString('role', data['data']['role']);
-      Provider.of<SettingsProvider>(context, listen: false).changeRole(data['data']['role']);
-      Provider.of<SettingsProvider>(context, listen: false).setToken(data['data']['token']);
-      if (context != null) {
-        context.loaderOverlay.hide();
+          sharedPreferences.setString('token', data['data']['token']);
+          sharedPreferences.setString('role', data['data']['role']);
+          Provider.of<SettingsProvider>(context, listen: false)
+              .changeRole(data['data']['role']);
+          Provider.of<SettingsProvider>(context, listen: false)
+              .setToken(data['data']['token']);
+          if (context != null) {
+            context.loaderOverlay.hide();
+          }
+          Navigator.pushNamed(context, verify);
+        } else {
+          print('fail to load data');
+          print(data);
+          if (context != null) {
+            context.loaderOverlay.hide();
+          }
+        }
+      } else {
+        print(response.statusCode);
+        if (context != null) {
+          context.loaderOverlay.hide();
+        }
       }
-      Navigator.pushNamed(context, verify);
-    } else {
-      print('fail to load data');
-      print(data);
+    } catch (ex) {
       if (context != null) {
         context.loaderOverlay.hide();
       }
     }
-  } else {
-    print(response.statusCode);
-    if (context != null) {
-      context.loaderOverlay.hide();
-    }
-  }
-}catch(ex){
-  if (context != null) {
-    context.loaderOverlay.hide();
-  }
-}
   }
 }

@@ -47,6 +47,7 @@ dependencies:
   http: ^1.1.0
   image_picker_widget: ^2.4.1
   shared_preferences: ^2.2.2
+
   provider: ^6.1.1
   quickalert: ^1.0.2
   loader_overlay: ^4.0.0
@@ -57,6 +58,8 @@ dependencies:
   onesignal_flutter: ^3.5.0
   liquid_pull_to_refresh: ^3.0.1
   date_field: ^3.0.5
+  my_fatoorah: ^3.3.0
+  myfatoorah_flutter: ^3.0.7
 #  google_maps_flutter: ^2.5.0
 #  location: ^5.0.3
 #  geocoding: ^2.1.1

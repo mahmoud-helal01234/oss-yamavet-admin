@@ -1,20 +1,19 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
+
+import '../controllers/RemindersProvider.dart';
 
 class ReminderBody extends StatelessWidget {
   const ReminderBody(
       {super.key,
-      required this.doctorName,
-      required this.sendDate,
-      required this.text,
+      required this.reminderIndex,
       required this.width,
       required this.height,
       required this.textAlign});
-  final String doctorName;
-  final String sendDate;
-  final String text;
+  final int reminderIndex;
   final double width;
   final double height;
   final TextAlign textAlign;
@@ -47,13 +46,21 @@ class ReminderBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  doctorName,
+                  Provider.of<RemindersProvider>(context, listen: true).reminders[reminderIndex].client !=
+                      null &&
+                      Provider.of<RemindersProvider>(context, listen: true).reminders[reminderIndex]
+                          .client!.name !=
+                          null
+                      ? Provider.of<RemindersProvider>(context, listen: true)
+                      .reminders[reminderIndex].client!.name!
+                      : "client",
                   style: TextStyle(
                       fontSize: mediaWidth > 650 ? 15.sp : 17.sp,
                       fontWeight: FontWeight.w500),
                 ),
                 Text(
-                  sendDate,
+                  Provider.of<RemindersProvider>(context, listen: true)
+                      .reminders[reminderIndex].appointmentDate!,
                   style: TextStyle(
                       fontSize: mediaWidth > 650 ? 10.sp : 12.sp,
                       color: Colors.grey[400],
@@ -71,7 +78,10 @@ class ReminderBody extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.sp)),
                 color: Colors.red,
-                onPressed: () {},
+                onPressed: () {
+                  Provider.of<RemindersProvider>(context, listen: false)
+                      .delete(context, reminderIndex);
+                },
                 child: Text("Delete".tr(),
                     style: TextStyle(
                         fontFamily: 'futur',
@@ -98,7 +108,8 @@ class ReminderBody extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.all(8.0.sp),
                 child: Text(
-                  text,
+                  Provider.of<RemindersProvider>(context, listen: true)
+                      .reminders[reminderIndex].description!,
                   style: TextStyle(
                       height: 2.h,
                       fontSize:
