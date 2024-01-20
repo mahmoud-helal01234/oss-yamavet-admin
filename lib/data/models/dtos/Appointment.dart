@@ -14,6 +14,9 @@ class Appointment {
   String? status;
   double? doctorRate;
   double? appointmentRate;
+  String? paymentType;
+  int? paymentStatus;
+
   String? rateDescription;
   String? day;
   String? date;
@@ -40,7 +43,7 @@ class Appointment {
       this.clientLocation,
       this.doctor,
         this.client,
-        this.date
+        this.date,this.paymentType,this.paymentStatus
       });
 
   Appointment.fromJson(Map<String, dynamic> json) {
@@ -55,6 +58,9 @@ class Appointment {
     // doctorRate = json['doctor_rate'];
     // appointmentRate = json['appointment_rate'];
     rateDescription = json['rate_description'];
+    paymentType = json['payment_type'];
+    paymentStatus = json['payment_status'];
+
     day = json['day'];
     petsImages = json['petsImages'].cast<String>();
     if (json['appointment_details'] != null) {
@@ -73,6 +79,9 @@ class Appointment {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+
+    data['payment_type'] = paymentType;
+    data['payment_status'] = paymentStatus;
     data['id'] = id;
     data['type'] = type;
     data['date'] = date;

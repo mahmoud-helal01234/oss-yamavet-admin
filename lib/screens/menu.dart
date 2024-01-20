@@ -211,30 +211,7 @@ class _MenuScreenState extends State<MenuScreen> {
               MyFatoorahController().initiatePayment();
 
               // api logout
-            },
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 20.w,
-                ),
-                //* go to register screen
-                IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.exit_to_app,
-                      color: lightpurple,
-                    )),
-                Text(
-                  "MyFatoorah".tr(),
-                  style: TextStyle(
-                    fontFamily: 'futur',
-                    color: Colors.white,
-                    fontSize:
-                        MediaQuery.sizeOf(context).width > 650 ? 12.sp : 17.sp,
-                  ),
-                )
-              ],
-            ),
+            }
           )
         ],
       ),

@@ -228,28 +228,51 @@ class _AppointmentContainerState extends State<AppointmentContainer> {
                                   )
                           ],
                         ),
-                        InkWell(
-                          onTap: () {
-                            print("off a7");
-                            Provider.of<AppointmentsProvider>(context,
-                                    listen: false)
-                                .launchLocationOnGoogleMap(
-                                    appointmentsProvider.appointments![index]
-                                        .clientLocation!.latitude
-                                        .toString(),
-                                    appointmentsProvider.appointments![index]
-                                        .clientLocation!.longitude
-                                        .toString());
-                          },
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.location_on,
-                                size: 27,
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                print("off a7");
+                                Provider.of<AppointmentsProvider>(context,
+                                        listen: false)
+                                    .launchLocationOnGoogleMap(
+                                        appointmentsProvider.appointments![index]
+                                            .clientLocation!.latitude
+                                            .toString(),
+                                        appointmentsProvider.appointments![index]
+                                            .clientLocation!.longitude
+                                            .toString());
+                              },
+                              child: Row(
+                                children: [
+                                  const Icon(
+                                    Icons.location_on,
+                                    size: 27,
+                                  ),
+                                  Text(
+                                      "${appointmentsProvider.appointments![index].clientLocation!.description}")
+                                ],
                               ),
-                              Text(
-                                  "${appointmentsProvider.appointments![index].clientLocation!.description}")
-                            ],
+                            ),
+                          ],
+                        ),
+                        Container(
+                          width: 0.8.sw,
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(appointmentsProvider
+                                    .appointments![index]
+                                    .paymentStatus == 0
+                                    ?"Not paid".tr() : "Paid".tr()),
+                                Text(appointmentsProvider
+                                    .appointments![index]
+                                    .paymentType.toString().tr() ?? ""
+                                )
+
+                              ],
+                            ),
                           ),
                         ),
                         appointmentsProvider.appointments![index].status !=
