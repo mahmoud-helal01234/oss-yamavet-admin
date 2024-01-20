@@ -37,16 +37,7 @@ void main(List<String> args) async {
     log("setNotificationWillShowInForegroundHandler");
   });
 
-  OneSignal.shared.setNotificationWillShowInForegroundHandler(
-      (OSNotificationReceivedEvent event) {
-    // Will be called whenever a notification is received in foreground
-    // Display Notification, pass null param for not displaying the notification
-    OSNotification notification = event.notification;
-    notification.sound = 'notification_sound.wav'; // Replace with your custom sound file
 
-    event.complete(notification);
-    log("setNotificationWillShowInForegroundHandler");
-  });
 
   OneSignal.shared.setPermissionObserver((OSPermissionStateChanges changes) {
     // Will be called whenever the permission changes
@@ -71,11 +62,6 @@ void main(List<String> args) async {
     });
   });
 
-  OneSignal.shared
-      .setNotificationOpenedHandler((OSNotificationOpenedResult result) {
-    //_MyAppState.handleClickNotification(result);
-    log("Opened");
-  });
   OneSignal.shared.setEmailSubscriptionObserver(
       (OSEmailSubscriptionStateChanges emailChanges) {
     // Will be called whenever then user's email subscription changes
@@ -159,8 +145,26 @@ class _MyAppState extends State<MyApp> {
     // TODO: implement initState
     super.initState();
 
-    Provider.of<NotificationsProvider>(context, listen: false)
-        .handleNotificationWhenAppInBackground(context);
+
+    OneSignal.shared
+        .setNotificationOpenedHandler((OSNotificationOpenedResult result) {
+      print("Notification opened: ${result.notification.body}");
+      Provider.of<NotificationsProvider>(context, listen: false)
+          .setNewNotificationStatus(true);
+
+      // Navigate to NotificationScreen
+      // navigatorKey.currentState!.pushReplacement(MaterialPageRoute(builder: (_) => const NotificationScreen()));
+    });
+
+    // handle when notification received
+    OneSignal.shared.setNotificationWillShowInForegroundHandler((event) {
+      OSNotificationDisplayType.notification;
+      log("background:" + event.notification.title.toString());
+
+
+      Provider.of<NotificationsProvider>(context, listen: false)
+          .setNewNotificationStatus(true);
+    });
   }
 
   @override
