@@ -202,7 +202,7 @@ class _VaccinationState extends State<Vaccination> {
                                     GestureDetector(
                                       onTap: () {
                                         Provider.of<CategoriesProvider>(context,
-                                            listen: false)
+                                                listen: false)
                                             .toggleEditCategoryOpened();
                                       },
                                       child: SvgPicture.asset(
@@ -244,9 +244,10 @@ class _VaccinationState extends State<Vaccination> {
                   )
                 ],
               ),
-            Provider.of<CategoriesProvider>(context,
-                listen: true)
-                .editCategoryOpened ? EditCategory(categoryIndex:widget.categoryIndex!) : Container(),
+              Provider.of<CategoriesProvider>(context, listen: true)
+                      .editCategoryOpened
+                  ? EditCategory(categoryIndex: widget.categoryIndex!)
+                  : Container(),
               Padding(
                 padding: EdgeInsets.only(
                     left: 20.w, top: 10.h, bottom: 10.h, right: 10.w),

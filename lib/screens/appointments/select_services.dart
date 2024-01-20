@@ -11,8 +11,6 @@ import 'package:yama_vet_admin/screens/appointments/widgets/SelectServiceRow.dar
 import 'package:yama_vet_admin/screens/menu.dart';
 import 'package:yama_vet_admin/widgets/choose_spec.dart';
 import 'package:yama_vet_admin/widgets/custom_button.dart';
-import 'package:yama_vet_admin/widgets/pets_container.dart';
-import 'package:yama_vet_admin/widgets/select.dart';
 
 import '../../controllers/AppointmentsProvider.dart';
 
@@ -46,12 +44,12 @@ class _SelectServicesState extends State<SelectServices> {
 
     return Scaffold(
         key: scaffoldKey,
-        drawer:  Drawer(
+        drawer: Drawer(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50.sp),
                     bottomLeft: Radius.circular(40.sp))),
-             width: mediaWidth > 650 ? 150.w : 200.w,
+            width: mediaWidth > 650 ? 150.w : 200.w,
             child: MenuScreen()),
         body: SafeArea(
             child: SingleChildScrollView(
@@ -71,7 +69,7 @@ class _SelectServicesState extends State<SelectServices> {
                     },
                     child: Image.asset("assets/images/menuIcon.png")),
               ]),
-             SizedBox(
+              SizedBox(
                 height: 10.h,
               ),
               Row(
@@ -80,7 +78,7 @@ class _SelectServicesState extends State<SelectServices> {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon:  Icon(
+                      icon: Icon(
                         Icons.arrow_back_ios_new_rounded,
                         size: 20.sp,
                         weight: 100.5,
@@ -89,7 +87,9 @@ class _SelectServicesState extends State<SelectServices> {
                   Text(
                     "Book an appointment".tr(),
                     style: TextStyle(
-                        fontFamily: 'futurBold', color: primary, fontSize: 20.sp),
+                        fontFamily: 'futurBold',
+                        color: primary,
+                        fontSize: 20.sp),
                   )
                 ],
               ),
@@ -139,7 +139,7 @@ class _SelectServicesState extends State<SelectServices> {
                 height: .02 * MediaQuery.sizeOf(context).height,
               ),
               Padding(
-                padding:EdgeInsets.only(left: 20.w, bottom: 10.h),
+                padding: EdgeInsets.only(left: 20.w, bottom: 10.h),
                 child: Text("Choose Specialties".tr(),
                     style: GoogleFonts.roboto(
                         fontSize: 17.sp, fontWeight: FontWeight.w600)),
@@ -187,7 +187,7 @@ class _SelectServicesState extends State<SelectServices> {
                       ),
                       Padding(
                         padding:
-                             EdgeInsets.only(left: 20.w, top: 5.h, bottom: 5.h),
+                            EdgeInsets.only(left: 20.w, top: 5.h, bottom: 5.h),
                         child: Text("Select Services".tr(),
                             style: GoogleFonts.roboto(
                                 fontSize: 17.sp, fontWeight: FontWeight.w600)),
@@ -271,7 +271,7 @@ class _SelectServicesState extends State<SelectServices> {
 
                   Container(
                     width: mediaWidth,
-                    decoration:BoxDecoration(
+                    decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(30.sp),
                             topRight: Radius.circular(30.sp)),
@@ -287,7 +287,7 @@ class _SelectServicesState extends State<SelectServices> {
                         Row(
                           children: [
                             Padding(
-                              padding:EdgeInsets.only(left: 20.w, top: 20.h),
+                              padding: EdgeInsets.only(left: 20.w, top: 20.h),
                               child: Text("Total".tr(),
                                   style: TextStyle(
                                     fontSize: 15.sp,
@@ -297,7 +297,7 @@ class _SelectServicesState extends State<SelectServices> {
                             ),
                             const Spacer(),
                             Padding(
-                              padding:EdgeInsets.only(
+                              padding: EdgeInsets.only(
                                   left: 20.w, top: 20.h, right: 10.w),
                               child: Consumer<AppointmentsProvider>(builder:
                                   (context, appointmentsProvider, child) {
@@ -323,7 +323,6 @@ class _SelectServicesState extends State<SelectServices> {
                             Provider.of<AppointmentsProvider>(context,
                                     listen: false)
                                 .update(context);
-
                           },
                           text: 'Update',
                           size: 20.sp,

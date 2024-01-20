@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:yama_vet_admin/controllers/NotificationsProvider.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
 import 'package:yama_vet_admin/core/utils/strings.dart';
 import 'package:yama_vet_admin/screens/menu.dart';
@@ -25,6 +29,9 @@ class _DashBoardState extends State<DashBoard> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    Provider.of<NotificationsProvider>(context, listen: false)
+        .handleNotificationWhenAppInBackground(context);
+
     Provider.of<ConfigurationsProvider>(context, listen: false).get(context);
   }
 
@@ -66,17 +73,20 @@ class _DashBoardState extends State<DashBoard> {
                   padding: const EdgeInsets.only(right: 20),
                   child: GestureDetector(
                       onTap: () {
+                        Provider.of<NotificationsProvider>(context, listen: false)
+                            .setNewNotificationStatus(false);
                         _dialogBuilder(context);
                       },
-                      child: Stack(children: [
+                      child:
+                      Stack(children: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Image.asset("assets/images/Notification.png"),
                         ),
-                        Positioned(
+                        if (Provider.of<NotificationsProvider>(context, listen: true).newNotificationStatus) Positioned(
                           // draw a red marble
                           top: 0.0,
-                          left: 0.0,
+                          right: 0.0,
 
                           child: Padding(
                             padding: const EdgeInsets.only(bottom: 15),
@@ -86,14 +96,15 @@ class _DashBoardState extends State<DashBoard> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     color: Colors.red),
-                                child: const Center(
-                                  child: Text(
-                                    "1",
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                )),
+                                // child: const Center(
+                                //   child: Text(
+                                //     "1",
+                                //     style: TextStyle(color: Colors.white),
+                                //   ),
+                                // )
+                            ),
                           ),
-                        )
+                        ) else const SizedBox()
                       ])),
                 ),
               ]),
@@ -257,9 +268,10 @@ class _DashBoardState extends State<DashBoard> {
   }
 }
 
-Future<void> _dialogBuilder(BuildContext context) {
+Future<void> _dialogBuilder(BuildContext context) async {
   double mediaHeight = MediaQuery.sizeOf(context).height; //!900
-
+  await Provider.of<NotificationsProvider>(context, listen: false).get(context);
+  print("length:" + Provider.of<NotificationsProvider>(context, listen: false).notifications.length.toString());
   return showDialog<void>(
       barrierDismissible: true,
       context: context,
@@ -274,7 +286,7 @@ Future<void> _dialogBuilder(BuildContext context) {
                     top: 60, bottom: 50, left: 20, right: 50),
                 height: mediaHeight > 900
                     ? .5 * mediaHeight
-                    : .65 * MediaQuery.sizeOf(context).height,
+                    : .65 * mediaHeight,
                 width: MediaQuery.of(context).size.width,
                 color: primary,
                 child: Scaffold(

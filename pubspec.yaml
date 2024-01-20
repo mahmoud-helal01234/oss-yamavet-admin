@@ -60,6 +60,8 @@ dependencies:
   date_field: ^3.0.5
   my_fatoorah: ^3.3.0
   myfatoorah_flutter: ^3.0.7
+  flutter_local_notifications: ^16.3.1+1
+
 #  google_maps_flutter: ^2.5.0
 #  location: ^5.0.3
 #  geocoding: ^2.1.1
@@ -91,6 +93,7 @@ flutter:
   assets:
     - assets/images/
     - assets/translation/
+    - assets/notification_sound.wav
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

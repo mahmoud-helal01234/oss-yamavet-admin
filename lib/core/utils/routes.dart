@@ -20,8 +20,6 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => SplashScreen());
       case login:
         return MaterialPageRoute(builder: (_) => LoginScreen());
-      case verify:
-        return MaterialPageRoute(builder: (_) => VerifyScreen());
       case dash:
         return MaterialPageRoute(builder: (_) => DashBoard());
       case offers:

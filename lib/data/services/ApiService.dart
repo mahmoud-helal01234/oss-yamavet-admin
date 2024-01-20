@@ -129,13 +129,7 @@ class ApiService {
 
       if (response.statusCode == 200) {
         if (context != null) {
-          QuickAlert.show(
-              context: context,
-              type: QuickAlertType.success,
-              text: '$componentName $operationName Successfully',
-              autoCloseDuration: const Duration(seconds: 2),
-              showConfirmBtn: true,
-              confirmBtnColor: primary);
+
           return jsonDecode(response.body);
         } else {
           if (context != null) {

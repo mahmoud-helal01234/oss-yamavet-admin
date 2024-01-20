@@ -10,7 +10,9 @@ import '../controllers/ClientsProvider.dart';
 
 class ClientProfile extends StatefulWidget {
   ClientProfile({super.key, required this.clientIndex});
+
   int? clientIndex;
+
   @override
   State<ClientProfile> createState() => _ClientProfileState();
 }

@@ -1,3 +1,5 @@
+import 'package:yama_vet_admin/data/models/dtos/Client.dart';
+
 import 'AppointmentDetails.dart';
 import 'ClientLocation.dart';
 import 'Doctor.dart';
@@ -14,10 +16,12 @@ class Appointment {
   double? appointmentRate;
   String? rateDescription;
   String? day;
+  String? date;
   List<String>? petsImages;
   List<AppointmentDetails>? appointmentDetails;
   ClientLocation? clientLocation;
   Doctor? doctor;
+  Client? client;
 
   Appointment(
       {this.id,
@@ -34,11 +38,15 @@ class Appointment {
       this.petsImages,
       this.appointmentDetails,
       this.clientLocation,
-      this.doctor});
+      this.doctor,
+        this.client,
+        this.date
+      });
 
   Appointment.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     type = json['type'];
+    date = json['date'];
     content = json['content'];
     appointmentNumber = json['appointment_number'];
     cash = json['cash'];
@@ -59,12 +67,15 @@ class Appointment {
         ? ClientLocation.fromJson(json['client_location'])
         : null;
     doctor = json['doctor'] != null ? Doctor.fromJson(json['doctor']) : null;
+
+    client = json['client'] != null ? Client.fromJson(json['client']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['type'] = type;
+    data['date'] = date;
     data['content'] = content;
     data['appointment_number'] = appointmentNumber;
     data['cash'] = cash;
@@ -81,6 +92,9 @@ class Appointment {
     }
     if (clientLocation != null) {
       data['client_location'] = clientLocation!.toJson();
+    }
+    if (client != null) {
+      data['client'] = client!.toJson();
     }
     if (doctor != null) {
       data['doctor'] = doctor!.toJson();

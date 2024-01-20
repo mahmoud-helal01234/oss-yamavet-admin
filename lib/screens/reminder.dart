@@ -38,7 +38,8 @@ class _ReminderScreenState extends State<ReminderScreen> {
   Future<void> getReminders() async {}
 
   @override
-  Widget build(BuildContext context) {context.loaderOverlay.hide();
+  Widget build(BuildContext context) {
+    context.loaderOverlay.hide();
     double mediaHeight = MediaQuery.sizeOf(context).height;
     double mediaWidth = MediaQuery.sizeOf(context).height;
     return Scaffold(
@@ -434,7 +435,8 @@ Future<void> dialogBuilder(BuildContext context, bool selected) {
                                         listen: false)
                                     .changeAddReminderRequest(
                                         appointmentDate:
-                                        DateFormat('yyyy-MM-dd').format(value));
+                                            DateFormat('yyyy-MM-dd')
+                                                .format(value));
                               },
                               selectedDate: DateTime.tryParse(
                                   Provider.of<RemindersProvider>(context,
@@ -518,9 +520,10 @@ Future<void> dialogBuilder(BuildContext context, bool selected) {
                                           context,
                                           listen: false)
                                       .clients[Provider.of<RemindersProvider>(
-                                          context,
-                                          listen: false)
-                                      .selectedClientIndex!].id);
+                                              context,
+                                              listen: false)
+                                          .selectedClientIndex!]
+                                      .id);
 
                           Provider.of<RemindersProvider>(context, listen: false)
                               .create(

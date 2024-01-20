@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,11 +21,9 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(
       const Duration(seconds: 2),
       () {
-print("");
-          Provider.of<SettingsProvider>(context, listen: false).initUserData(context);
-
-
-
+        print("");
+        Provider.of<SettingsProvider>(context, listen: false)
+            .initUserData(context);
       },
     );
   }

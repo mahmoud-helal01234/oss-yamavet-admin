@@ -7,6 +7,7 @@ import 'package:yama_vet_admin/widgets/client_row.dart';
 
 class Clients extends StatelessWidget {
   Clients({super.key});
+
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -21,7 +22,7 @@ class Clients extends StatelessWidget {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50),
                     bottomLeft: Radius.circular(40))),
-           width: mediaWidth > 650 ? 150.w : 200.w,
+            width: mediaWidth > 650 ? 150.w : 200.w,
             child: MenuScreen()),
         body: SafeArea(
             child: SingleChildScrollView(

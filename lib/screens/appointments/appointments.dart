@@ -478,8 +478,8 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   void clientsMenu(
     BuildContext context,
   ) async {
-    print("test here");
-    await Provider.of<ClientsProvider>(context, listen: false).get(context);
+    if (Provider.of<ClientsProvider>(context, listen: false).clients.isEmpty)
+      await Provider.of<ClientsProvider>(context, listen: false).get(context);
     // bool choosen = false;
     double mediaWidth = MediaQuery.sizeOf(context).width;
     showMenu(

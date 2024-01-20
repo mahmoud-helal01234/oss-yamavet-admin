@@ -230,7 +230,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     fontFamily: 'futur',
                     color: Colors.white,
                     fontSize:
-                    MediaQuery.sizeOf(context).width > 650 ? 12.sp : 17.sp,
+                        MediaQuery.sizeOf(context).width > 650 ? 12.sp : 17.sp,
                   ),
                 )
               ],

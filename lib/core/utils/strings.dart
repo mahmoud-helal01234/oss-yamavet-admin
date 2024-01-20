@@ -17,8 +17,8 @@ const String reminder = '/reminder.dart';
 
 String baseApiUrl = 'https://yama-vet.com/api/';
 //*APis
-String loginLink = 'https://yama-vet.com/api/login'; //*done
-String otpLink = 'https://yama-vet.com/api/sendOtp'; //*done
+String loginLink = 'login'; //*done
+String otpLink = 'sendOtp'; //*done
 String offersLink = 'https://yama-vet.com/api/slider_offer'; //*done
 String addOfferLink = 'https://yama-vet.com/api/slider_offer'; //*done
 String deletOfferLink = 'https://yama-vet.com/api/slider_offer'; //*done

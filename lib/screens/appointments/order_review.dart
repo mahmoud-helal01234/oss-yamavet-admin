@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:yama_vet_admin/core/helper/stepper.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
 import 'package:yama_vet_admin/core/utils/strings.dart';
@@ -35,6 +36,7 @@ class OrderReview extends StatefulWidget {
 
   // final Widget widgetrow;
   final void Function()? onTap;
+
   // final Widget servicewidget;
 
   @override
@@ -238,6 +240,68 @@ class _OrderReviewState extends State<OrderReview> {
               ),
               LocationAndCashStatusRow(
                   appointmentIndex: widget.appointmentIndex),
+              Row(
+                // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  // Image.asset("assets/images/dr.png"),
+                  SizedBox(
+                    width: mediaWidth > 400
+                        ? .06 * MediaQuery.sizeOf(context).width
+                        : .02 * mediaWidth,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Image.asset("assets/images/icon_doctor.png"),
+                          SizedBox(
+                            width: 5.w,
+                          ),
+                          Consumer<AppointmentsProvider>(
+                              builder: (context, appointmentsProvider, child) {
+                            return Text(appointmentsProvider
+                                .appointments[widget.appointmentIndex]
+                                .client!
+                                .name!);
+                          }),
+                          SizedBox(
+                            width: mediaWidth > 650
+                                ? .53 * mediaWidth
+                                : .1 * MediaQuery.sizeOf(context).width,
+                          ),
+                          Consumer<AppointmentsProvider>(
+                              builder: (context, appointmentsProvider, child) {
+                              return InkWell(
+                                onTap: () {
+                                  String url =
+                                      "tel:${appointmentsProvider.appointments[widget.appointmentIndex].client!.phone!}";
+                                  launchUrl(Uri.parse(url));
+                                },
+                                child: Container(
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.phone,
+                                        size: 18,
+                                      ),
+                                      Text(appointmentsProvider
+                                          .appointments[widget.appointmentIndex]
+                                          .client!
+                                          .phone!),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }
+                          ),
+
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
               SizedBox(
                 height: mediaHeight > 900 ? 30.h : 10.h,
               ),

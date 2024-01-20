@@ -75,6 +75,7 @@ class AppointmentsProvider extends ChangeNotifier {
     cashStatusFilter = null;
     to = null;
     selectedDoctorName = null;
+    selectedClientName = null;
     getAppointments(context);
     notifyListeners();
   }
@@ -103,7 +104,9 @@ class AppointmentsProvider extends ChangeNotifier {
 
     return queryParam;
   }
+
   double totalPrice = 0;
+
   Future<void> getAppointments(BuildContext context) async {
     // appointmentsShown = List.filled(appointments.length, true, growable: true);
     print("link: " + "appointment${_getFilterQueryParams()}");
@@ -199,6 +202,7 @@ class AppointmentsProvider extends ChangeNotifier {
     selectedClientName = name;
     notifyListeners();
   }
+
 
   Future<void> delete(BuildContext context, int appointmentIndex) async {
     await ApiService().delete("appointment", appointments[appointmentIndex].id!,
