@@ -27,7 +27,6 @@ class _AppointmentContainerState extends State<AppointmentContainer> {
 
   // TestModel? testModel;
   Api api = Api();
-  bool? _isLoading;
 
   @override
   void initState() {
@@ -124,7 +123,7 @@ class _AppointmentContainerState extends State<AppointmentContainer> {
                                 bottomRight: Radius.circular(10))),
                         child: Center(
                           child: Text(
-                            appointmentsProvider.appointments![index].cash!,
+                            appointmentsProvider.appointments![index].cash!.tr(),
                             style: const TextStyle(color: Colors.white),
                           ),
                         ),
@@ -160,40 +159,7 @@ class _AppointmentContainerState extends State<AppointmentContainer> {
                             style:
                                 GoogleFonts.roboto(fontWeight: FontWeight.w500),
                           ),
-                          SizedBox(
-                            width: mediaHeight > 900
-                                ? .57 * mediaWidth
-                                : .16 * MediaQuery.sizeOf(context).width,
-                          ),
-                          false
-                              ? Stack(
-                                  children: [
-                                    SizedBox(
-                                      width: 150,
-                                      height: 55,
-                                      child: Image.asset(
-                                        "assets/images/spoty.png",
-                                        width: 50,
-                                        height: 40,
-                                      ),
-                                    ),
-                                    Positioned(
-                                      right: 75,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            bottom: 5, right: 6, top: 2),
-                                        child: Image.asset(
-                                          "assets/images/fluffy.png",
-                                          width: 50,
-                                          height: 50,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              : Row(
-                                  children: betimg(index),
-                                )
+
                         ],
                       ),
                       Row(
@@ -244,66 +210,57 @@ class _AppointmentContainerState extends State<AppointmentContainer> {
                               appointmentsProvider
                                       .appointments![index].doctor !=
                                   null
-                          ? Container(
-                              height: 200,
-                              child: Column(
+                          ? Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      appointmentsProvider.appointments![index]
-                                                      .doctor !=
-                                                  null &&
-                                              appointmentsProvider
-                                                      .appointments![index]
-                                                      .doctor!
-                                                      .imgPath !=
-                                                  null
-                                          ? Container(
-                                              width: 50,
-                                              height: 50,
-                                              child: CircleAvatar(
-                                                  radius: 25,
-                                                  backgroundImage: NetworkImage(
-                                                      "https://yama-vet.com/${appointmentsProvider.appointments![index].doctor!.imgPath}")),
-                                            )
-                                          : Container(),
-                                      // Image.asset("assets/images/dr.png"),
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
-                                      // Image.asset(
-                                      //     "assets/images/icon_doctor.png"),
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                          "Dr ${appointmentsProvider.appointments![index].doctor!.name!}"),
-                                      SizedBox(
-                                        width: mediaHeight > 900
-                                            ? .45 * mediaWidth
-                                            : .09 *
-                                                MediaQuery.sizeOf(context)
-                                                    .width,
-                                      ),
-                                      // const Text(
-                                      //   "Rating",
-                                      //   style: TextStyle(
-                                      //       fontWeight: FontWeight.w500),
-                                      // ),
-                                      // Icon(
-                                      //   Icons.star,
-                                      //   color: Colors.yellow[600],
-                                      // ),
-                                    ],
-                                  )
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  appointmentsProvider.appointments![index]
+                                                  .doctor !=
+                                              null &&
+                                          appointmentsProvider
+                                                  .appointments![index]
+                                                  .doctor!
+                                                  .imgPath !=
+                                              null
+                                      ? Container(
+                                          width: 50,
+                                          height: 50,
+                                          child: CircleAvatar(
+                                              radius: 25,
+                                              backgroundImage: NetworkImage(
+                                                  "https://yama-vet.com/${appointmentsProvider.appointments![index].doctor!.imgPath}")),
+                                        )
+                                      : Container(),
+                                  // Image.asset("assets/images/dr.png"),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  // Image.asset(
+                                  //     "assets/images/icon_doctor.png"),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                      "Dr ${appointmentsProvider.appointments![index].doctor!.name!}"),
+
+                                  // const Text(
+                                  //   "Rating",
+                                  //   style: TextStyle(
+                                  //       fontWeight: FontWeight.w500),
+                                  // ),
+                                  // Icon(
+                                  //   Icons.star,
+                                  //   color: Colors.yellow[600],
+                                  // ),
                                 ],
-                              ),
-                            )
+                              )
+                            ],
+                          )
                           : Container(),
                       StepperScreen(
                           lineColor: primary,
@@ -311,7 +268,7 @@ class _AppointmentContainerState extends State<AppointmentContainer> {
                           textColor: Colors.black,
                           status:
                               appointmentsProvider.appointments![index].status!)
-                      // 9999
+
                       ,
                       GestureDetector(
                         onTap: () async {

@@ -45,47 +45,49 @@ class _SelectedServicesContainerState extends State<SelectedServicesContainer> {
                       itemCount: appointmentsProvider
                           .updateAppointmentRequest!.petIds!.length,
                       itemBuilder: (BuildContext context, int index) {
-
                         return Column(
                           children: [
                             Text(appointmentsProvider.updateAppointmentRequest!
                                 .petIds![index].pet!.name!),
                             Column(
-                              children: appointmentsProvider.updateAppointmentRequest!
-                                  .petIds![index].services!.values!.map((service) => Container(
-
-                                child: Row(
-                                  children: [
-                                    Text("- "),
-                                    Container(
-                                      width: 0.6.sw,
-                                      child: Text(
-                                        context.locale.toString() == "ar"
-                                            ? "${service!.nameAr} \t"
-                                            : "${service!.nameEn} \t",
-                                        overflow: TextOverflow.clip,
-                                      ),
-                                    ),
-                                    Spacer(),
-                                    Text(
-                                        "${service!.price}"),
-                                    Padding(
-                                      padding: EdgeInsets.only(right: 5.sp),
-                                      child: const Text(
-                                        "\$",
-                                        style:
-                                        TextStyle(color: Colors.green),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              )).toList()
-                            ),
+                                children: appointmentsProvider
+                                    .updateAppointmentRequest!
+                                    .petIds![index]
+                                    .services!
+                                    .values!
+                                    .map((service) => Container(
+                                          child: Row(
+                                            children: [
+                                              Text("- "),
+                                              Container(
+                                                width: 0.6.sw,
+                                                child: Text(
+                                                  context.locale.toString() ==
+                                                          "ar"
+                                                      ? "${service!.nameAr} \t"
+                                                      : "${service!.nameEn} \t",
+                                                  overflow: TextOverflow.clip,
+                                                ),
+                                              ),
+                                              Spacer(),
+                                              Text("${service!.price}"),
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    right: 5.sp),
+                                                child: const Text(
+                                                  "\$",
+                                                  style: TextStyle(
+                                                      color: Colors.green),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ))
+                                    .toList()),
                           ],
                         );
                       },
                     )),
-
               ],
             );
           },
