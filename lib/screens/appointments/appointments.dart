@@ -290,14 +290,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
           // SizedBox(
           //   height: 10,
           // ),
-          AppointmentContainer(
-            textEmergancy: 'Max',
-            textColor: Colors.white,
-            textalign: TextAlign.start,
-            paddingtext: EdgeInsets.only(left: 5.w),
-            init: true,
-            pic: 1,
-          ),
+          AppointmentContainer(),
         ])));
   }
 

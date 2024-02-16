@@ -1,20 +1,15 @@
+import 'dart:collection';
+
+import 'package:yama_vet_admin/data/models/responses/CategoriesResponse.dart';
+
+import '../dtos/Pet.dart';
+import '../dtos/Service.dart';
+
 class UpdateAppointmentRequest {
   String? id;
   List<PetIds>? petIds;
 
   UpdateAppointmentRequest({this.id,  this.petIds});
-
-  UpdateAppointmentRequest.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-
-
-    if (json['pet_ids'] != null) {
-      petIds = <PetIds>[];
-      json['pet_ids'].forEach((v) {
-        petIds!.add(new PetIds.fromJson(v));
-      });
-    }
-  }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
@@ -29,19 +24,17 @@ class UpdateAppointmentRequest {
 
 class PetIds {
   int? petId;
-  List<int>? serviceIds;
+  Pet? pet;
+  HashMap<int,Service>? services;
 
-  PetIds({this.petId, this.serviceIds});
+  PetIds({this.petId,this.pet, this.services});
 
-  PetIds.fromJson(Map<String, dynamic> json) {
-    petId = json['pet_id'];
-    serviceIds = json['service_ids'].cast<int>();
-  }
+
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['pet_id'] = this.petId;
-    data['service_ids'] = this.serviceIds;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['pet_id'] = petId;
+    data['service_ids'] = services!.keys.toList();
     return data;
   }
 }

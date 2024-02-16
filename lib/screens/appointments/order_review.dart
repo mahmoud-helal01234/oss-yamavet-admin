@@ -70,488 +70,507 @@ class _OrderReviewState extends State<OrderReview> {
             width: mediaWidth > 650 ? 150.w : 200.w,
             child: MenuScreen()),
         body: SafeArea(
-            child: SingleChildScrollView(
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-              SizedBox(
-                height: .02 * MediaQuery.sizeOf(context).height,
-              ),
-              Row(children: [
+            child: Container(
+          padding: EdgeInsets.only(left: 0.01.sw, right: 0.01.sw),
+          child: SingleChildScrollView(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                 SizedBox(
-                  width: .05 * MediaQuery.sizeOf(context).width,
+                  height: .02 * MediaQuery.sizeOf(context).height,
                 ),
-                GestureDetector(
-                    onTap: () {
-                      scaffoldKey.currentState!.openDrawer();
-                    },
-                    child: Image.asset("assets/images/menuIcon.png")),
-              ]),
-              SizedBox(
-                height: mediaWidth > 650 ? 10.h : 5.h,
-              ),
-              Row(
-                children: [
+                Row(children: [
                   SizedBox(
-                    width: mediaWidth > 650 ? 30.w : 0,
+                    width: .05 * MediaQuery.sizeOf(context).width,
                   ),
-                  IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
+                  GestureDetector(
+                      onTap: () {
+                        scaffoldKey.currentState!.openDrawer();
                       },
-                      icon: Icon(
-                        Icons.arrow_back_ios_new_rounded,
-                        size: 20.sp,
-                        weight: 100.5,
-                        color: Colors.black,
-                      )),
-                  Consumer<AppointmentsProvider>(
-                      builder: (context, appointmentsProvider, child) {
-                    return Text(
-                      "${"Appointments Overview".tr()} #[${appointmentsProvider.appointments[widget.appointmentIndex].appointmentNumber}]",
-                      style: TextStyle(
-                          fontFamily: 'futurBold',
-                          color: primary,
-                          fontSize: mediaWidth > 650 ? 15.sp : 17.sp),
-                    );
-                  }),
-                  SizedBox(
-                    height: 20,
-                  )
-                ],
-              ),
-              (Provider.of<SettingsProvider>(context, listen: true).role !=
-                      'vet')
-                  ? Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: mediaWidth > 650 ? 30 : 0,
-                        ),
-                        Center(
-                          child: MaterialButton(
-                            // elevation: 5,
-                            minWidth: mediaWidth > 650 ? 300.w : 150.w,
-                            height: mediaWidth > 650 ? 20.h : 30.h,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5.sp)),
-                            color: Colors.red,
-                            onPressed: () {
-                              Provider.of<AppointmentsProvider>(context,
-                                      listen: false)
-                                  .delete(context, widget.appointmentIndex);
-                            },
-                            child: Text("Delete".tr(),
-                                style: TextStyle(
-                                    fontFamily: 'futur',
-                                    color: Colors.white,
-                                    fontSize:
-                                        mediaWidth > 650 ? 15.sp : 15.sp)),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 30.w,
-                        ),
-                        Provider.of<AppointmentsProvider>(context, listen: true)
-                                    .appointments[widget.appointmentIndex]
-                                    .type ==
-                                "emergancy"
-                            ? Container()
-                            : MaterialButton(
-                                // elevation: 5,
-                                minWidth: mediaWidth > 650 ? 400.w : 150.w,
-                                height: mediaWidth > 650 ? 40.h : 30.h,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5.sp)),
-                                color: primary,
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SelectServices(
-                                              appointmentIndex:
-                                                  widget.appointmentIndex,
-                                            )),
-                                  );
-                                },
-                                child: Text("Update".tr(),
-                                    style: TextStyle(
-                                        fontFamily: 'futur',
-                                        color: Colors.white,
-                                        fontSize:
-                                            mediaWidth > 650 ? 20.sp : 15.sp)),
-                              ),
-                      ],
-                    )
-                  : Container(),
-              SizedBox(
-                height: mediaWidth > 650 ? 20.h : 5.h,
-              ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: mediaWidth > 400
-                        ? .05 * MediaQuery.sizeOf(context).width
-                        : .02 * mediaWidth,
-                  ),
-                  Icon(
-                    Icons.calendar_month_outlined,
-                    weight: 30.sp,
-                  ),
-                  Consumer<AppointmentsProvider>(
-                      builder: (context, appointmentsProvider, child) {
-                    return Text(
-                      appointmentsProvider
-                          .appointments[widget.appointmentIndex].day!,
-                      style: GoogleFonts.roboto(
-                          fontWeight: FontWeight.w500,
-                          fontSize: mediaWidth > 650 ? 15.sp : 17.sp),
-                    );
-                  }),
-                  SizedBox(
-                    width: mediaWidth > 650
-                        ? .45 * mediaWidth
-                        : .2 * MediaQuery.sizeOf(context).width,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        "totalprice".tr(),
+                      child: Image.asset("assets/images/menuIcon.png")),
+                ]),
+                SizedBox(
+                  height: mediaWidth > 650 ? 10.h : 5.h,
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: mediaWidth > 650 ? 30.w : 0,
+                    ),
+                    IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(
+                          Icons.arrow_back_ios_new_rounded,
+                          size: 20.sp,
+                          weight: 100.5,
+                          color: Colors.black,
+                        )),
+                    Consumer<AppointmentsProvider>(
+                        builder: (context, appointmentsProvider, child) {
+                      return Text(
+                        "${"Appointments Overview".tr()} #[${appointmentsProvider.appointments[widget.appointmentIndex].appointmentNumber}]",
                         style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                            fontFamily: 'futurBold',
+                            color: primary,
                             fontSize: mediaWidth > 650 ? 15.sp : 17.sp),
-                      ),
-                      Consumer<AppointmentsProvider>(
-                          builder: (context, appointmentsProvider, child) {
-                        return Text(
-                          "${appointmentsProvider.appointments[widget.appointmentIndex].price}\$",
-                          style: TextStyle(
-                              fontSize: mediaWidth > 650 ? 13.sp : 17.sp,
-                              color: primary,
-                              fontWeight: FontWeight.bold),
-                        );
-                      }),
-                    ],
-                  )
-                ],
-              ),
-              SizedBox(
-                height: mediaHeight > 900 ? 20.h : 10.h,
-              ),
-              LocationAndCashStatusRow(
-                  appointmentIndex: widget.appointmentIndex),
-              Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  // Image.asset("assets/images/dr.png"),
-                  SizedBox(
-                    width: mediaWidth > 400
-                        ? .06 * MediaQuery.sizeOf(context).width
-                        : .02 * mediaWidth,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
+                      );
+                    }),
+                    SizedBox(
+                      height: 20,
+                    )
+                  ],
+                ),
+                (Provider.of<SettingsProvider>(context, listen: true).role !=
+                        'vet')
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset("assets/images/icon_doctor.png"),
                           SizedBox(
-                            width: 5.w,
+                            width: mediaWidth > 650 ? 30 : 0,
                           ),
-                          Consumer<AppointmentsProvider>(
-                              builder: (context, appointmentsProvider, child) {
-                            return Text(appointmentsProvider
-                                .appointments[widget.appointmentIndex]
-                                .client!
-                                .name!);
-                          }),
-                          SizedBox(
-                            width: mediaWidth > 650
-                                ? .53 * mediaWidth
-                                : .1 * MediaQuery.sizeOf(context).width,
-                          ),
-                          Consumer<AppointmentsProvider>(
-                              builder: (context, appointmentsProvider, child) {
-                              return InkWell(
-                                onTap: () {
-                                  String url =
-                                      "tel:${appointmentsProvider.appointments[widget.appointmentIndex].client!.phone!}";
-                                  launchUrl(Uri.parse(url));
-                                },
-                                child: Container(
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.phone,
-                                        size: 18,
-                                      ),
-                                      Text(appointmentsProvider
-                                          .appointments[widget.appointmentIndex]
-                                          .client!
-                                          .phone!),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            }
-                          ),
-
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: mediaHeight > 900 ? 30.h : 10.h,
-              ),
-              Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SizedBox(
-                    width: .05 * MediaQuery.sizeOf(context).width,
-                  ),
-                  Image.asset("assets/images/dr.png"),
-                  SizedBox(
-                    width: .05 * MediaQuery.sizeOf(context).width,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Image.asset("assets/images/icon_doctor.png"),
-                          SizedBox(
-                            width: 5.w,
-                          ),
-                          Consumer<AppointmentsProvider>(
-                              builder: (context, appointmentsProvider, child) {
-                            return appointmentsProvider
-                                        .appointments[widget.appointmentIndex]
-                                        .doctor !=
-                                    null
-                                ? Text(appointmentsProvider
-                                    .appointments[widget.appointmentIndex]
-                                    .doctor!
-                                    .name!)
-                                : Container();
-                          }),
-                          SizedBox(
-                            width: mediaWidth > 650
-                                ? .53 * mediaWidth
-                                : .1 * MediaQuery.sizeOf(context).width,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            "rating".tr(),
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: mediaWidth > 650 ? 13.sp : 17.sp),
-                          ),
-                          Icon(
-                            Icons.star,
-                            color: Colors.yellow[600],
-                          ),
-                        ],
-                      ),
-                      Provider.of<AppointmentsProvider>(context, listen: true)
-                                      .appointments[widget.appointmentIndex]
-                                      .doctor !=
-                                  null &&
-                              Provider.of<AppointmentsProvider>(context,
-                                          listen: true)
-                                      .appointments[widget.appointmentIndex]
-                                      .doctor!
-                                      .totalRate !=
-                                  null
-                          ? Row(
-                              children: [
-                                Text(
-                                  Provider.of<AppointmentsProvider>(context,
-                                          listen: true)
-                                      .appointments[widget.appointmentIndex]
-                                      .doctor!
-                                      .totalRate!
-                                      .toString(),
+                          Center(
+                            child: MaterialButton(
+                              // elevation: 5,
+                              minWidth: mediaWidth > 650 ? 300.w : 150.w,
+                              height: mediaWidth > 650 ? 20.h : 30.h,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.sp)),
+                              color: Colors.red,
+                              onPressed: () {
+                                Provider.of<AppointmentsProvider>(context,
+                                        listen: false)
+                                    .delete(context, widget.appointmentIndex);
+                              },
+                              child: Text("Delete".tr(),
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18.sp),
+                                      fontFamily: 'futur',
+                                      color: Colors.white,
+                                      fontSize:
+                                          mediaWidth > 650 ? 15.sp : 15.sp)),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 30.w,
+                          ),
+                          Provider.of<AppointmentsProvider>(context,
+                                          listen: true)
+                                      .appointments[widget.appointmentIndex]
+                                      .type ==
+                                  "emergancy"
+                              ? Container()
+                              : MaterialButton(
+                                  // elevation: 5,
+                                  minWidth: mediaWidth > 650 ? 400.w : 150.w,
+                                  height: mediaWidth > 650 ? 40.h : 30.h,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(5.sp)),
+                                  color: primary,
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SelectServices(
+                                                appointmentIndex:
+                                                    widget.appointmentIndex,
+                                              )),
+                                    );
+                                  },
+                                  child: Text("Update".tr(),
+                                      style: TextStyle(
+                                          fontFamily: 'futur',
+                                          color: Colors.white,
+                                          fontSize: mediaWidth > 650
+                                              ? 20.sp
+                                              : 15.sp)),
                                 ),
-                                Text(
-                                  "/5",
-                                  style: TextStyle(fontSize: 15.sp),
-                                ),
-                              ],
-                            )
-                          : Container(),
-                    ],
-                  ),
-                  // GestureDetector(
-                  //     onTap: () {
-                  //       setState(() {
-                  //         ontap = !ontap;
-                  //       });
-                  //       showDialog(
-                  //           context: context,
-                  //           builder: (BuildContext context) {
-                  //             return Dialog(
-                  //               alignment: Alignment.centerRight,
-                  //               backgroundColor: const Color(0xffefefef),
-                  //               shape: RoundedRectangleBorder(
-                  //                   borderRadius: BorderRadius.circular(
-                  //                       10)), //this right here
-                  //               child: Container(
-                  //                 height: 350,
-                  //                 width: mediaWidth,
-                  //                 color: const Color(0xffefefef),
-                  //                 child: SingleChildScrollView(
-                  //                   child: Column(
-                  //                     mainAxisAlignment:
-                  //                         MainAxisAlignment.start,
-                  //                     crossAxisAlignment:
-                  //                         CrossAxisAlignment.start,
-                  //                     children: [
-                  //                       Container(
-                  //                         width: mediaWidth > 650 ? 820 : 600,
-                  //                         height: 40,
-                  //                         decoration: BoxDecoration(
-                  //                             color: const Color(0xffefefef),
-                  //                             border:
-                  //                                 Border.all(color: primary)),
-                  //                         child: TextField(
-                  //                           decoration: InputDecoration(
-                  //                               border: InputBorder.none,
-                  //                               prefixIcon: RotatedBox(
-                  //                                   quarterTurns: 1,
-                  //                                   child: Icon(
-                  //                                     Icons.search,
-                  //                                     color: primary,
-                  //                                   )),
-                  //                               hintText:
-                  //                                   'Search Doctors by Name ',
-                  //                               hintStyle: TextStyle(
-                  //                                   color: Colors.grey[500],
-                  //                                   fontWeight: FontWeight.w500,
-                  //                                   fontSize: 15)),
-                  //                         ),
-                  //                       ),
-                  //                       SizedBox(
-                  //                         height: mediaWidth > 650 ? 10 : 5,
-                  //                       ),
-                  //                       DoctorsChooseMenu(
-                  //                         choosen: choosen,
-                  //                       ),
-                  //                       DoctorsChooseMenu(
-                  //                         choosen: choosen,
-                  //                       ),
-                  //                       DoctorsChooseMenu(
-                  //                         choosen: choosen,
-                  //                       ),
-                  //                       DoctorsChooseMenu(
-                  //                         choosen: choosen,
-                  //                       ),
-                  //                       DoctorsChooseMenu(
-                  //                         choosen: choosen,
-                  //                       ),
-                  //                     ],
-                  //                   ),
-                  //                 ),
-                  //               ),
-                  //             );
-                  //           });
-                  //     },
-                  //     child: Icon(!ontap
-                  //         ? Icons.arrow_forward_ios
-                  //         : Icons.keyboard_arrow_down_outlined)),
-                ],
-              ),
-              SizedBox(
-                height: mediaHeight > 900 ? 40.h : 20.h,
-              ),
-              Consumer<AppointmentsProvider>(
-                  builder: (context, appointmentsProvider, child) {
-                return StepperScreen(
-                  lineColor: primary,
-                  stepperColor: primary,
-                  textColor: Colors.black,
-                  status: appointmentsProvider
-                      .appointments[widget.appointmentIndex].status!,
-                );
-              }),
-              SizedBox(
-                height: mediaHeight > 900 ? 40.h : 20.h,
-              ),
-              GestureDetector(
-                onTap: widget.onTap,
-                child: Container(
-                    width: 500.w,
-                    height: 100.h,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.sp)),
-                    child: Column(
+                        ],
+                      )
+                    : Container(),
+                SizedBox(
+                  height: mediaWidth > 650 ? 20.h : 5.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
                       children: [
+                        Icon(
+                          Icons.calendar_month_outlined,
+                          weight: 30.sp,
+                        ),
                         Consumer<AppointmentsProvider>(
                             builder: (context, appointmentsProvider, child) {
-                          return Container(
-                            height: 80.h,
-                            width: MediaQuery.of(context).size.width * 0.9,
-                            child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: appointmentsProvider
-                                    .appointments[widget.appointmentIndex]
-                                    .appointmentDetails!
-                                    .length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Container(
-                                    width: 100.w,
-                                    child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          SizedBox(
-                                            width: 3.w,
-                                          ),
-                                          SizedBox(
-                                            child: Column(
-                                              children: [
-                                                CircleAvatar(
-                                                  radius: 25.sp,
-                                                  backgroundImage: NetworkImage(
-                                                    "https://yama-vet.com/${appointmentsProvider.appointments[widget.appointmentIndex].appointmentDetails![index].pet!.imgPath}",
-                                                  ),
-                                                ),
-                                                Text(
-                                                    "${appointmentsProvider.appointments[widget.appointmentIndex].appointmentDetails![index].pet!.name}")
-                                              ],
-                                            ),
-                                          )
-                                        ]),
-                                  );
-                                }),
+                          return Text(
+                            appointmentsProvider
+                                .appointments[widget.appointmentIndex].day!,
+                            style: GoogleFonts.roboto(
+                                fontWeight: FontWeight.w500,
+                                fontSize: mediaWidth > 650 ? 15.sp : 17.sp),
                           );
-                        })
+                        }),
                       ],
-                    )),
-              ),
-              Center(
-                  child: Text(
-                "services".tr(),
-                style: TextStyle(
-                    color: primary,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17.sp),
-              )),
-              OrderOverViewContainer(
-                appointmentIndex: widget.appointmentIndex,
-              ),
-            ]))));
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "totalprice".tr(),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: mediaWidth > 650 ? 15.sp : 17.sp),
+                        ),
+                        Consumer<AppointmentsProvider>(
+                            builder: (context, appointmentsProvider, child) {
+                          return Text(
+                            "${appointmentsProvider.appointments[widget.appointmentIndex].price}\$",
+                            style: TextStyle(
+                                fontSize: mediaWidth > 650 ? 13.sp : 17.sp,
+                                color: primary,
+                                fontWeight: FontWeight.bold),
+                          );
+                        }),
+                      ],
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: mediaHeight > 900 ? 20.h : 10.h,
+                ),
+                LocationAndCashStatusRow(
+                    appointmentIndex: widget.appointmentIndex),
+                Consumer<AppointmentsProvider>(
+                    builder: (context, appointmentsProvider, child) {
+                  return InkWell(
+                    onTap: () {
+                      String url =
+                          "tel:${appointmentsProvider.appointments[widget.appointmentIndex].client!.phone!}";
+                      launchUrl(Uri.parse(url));
+                    },
+                    child: Row(
+                      children: [
+                        // Image.asset("assets/images/dr.png"),
+                        Icon(
+                          Icons.phone,
+                          size: 18,
+                        ),
+                        Text(appointmentsProvider
+                            .appointments[widget.appointmentIndex]
+                            .client!
+                            .name!),
+                        Text(" - "),
+                        Container(
+                          child: Row(
+                            children: [
+                              Text(appointmentsProvider
+                                  .appointments[widget.appointmentIndex]
+                                  .client!
+                                  .phone!),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                }),
+                SizedBox(
+                  height: mediaHeight > 900 ? 30.h : 10.h,
+                ),
+                Consumer<AppointmentsProvider>(
+                    builder: (context, appointmentsProvider, child) {
+                  return appointmentsProvider
+                              .appointments[widget.appointmentIndex].doctor !=
+                          null
+                      ? Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            SizedBox(
+                              width: .05 * MediaQuery.sizeOf(context).width,
+                            ),
+                            Image.asset("assets/images/dr.png"),
+                            SizedBox(
+                              width: .05 * MediaQuery.sizeOf(context).width,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Image.asset(
+                                        "assets/images/icon_doctor.png"),
+                                    SizedBox(
+                                      width: 5.w,
+                                    ),
+                                    Text(appointmentsProvider
+                                        .appointments[widget.appointmentIndex]
+                                        .doctor!
+                                        .name!),
+                                    SizedBox(
+                                      width: mediaWidth > 650
+                                          ? .53 * mediaWidth
+                                          : .1 *
+                                              MediaQuery.sizeOf(context).width,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      "rating".tr(),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize:
+                                              mediaWidth > 650 ? 13.sp : 17.sp),
+                                    ),
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.yellow[600],
+                                    ),
+                                  ],
+                                ),
+                                Provider.of<AppointmentsProvider>(context,
+                                                    listen: true)
+                                                .appointments[
+                                                    widget.appointmentIndex]
+                                                .doctor !=
+                                            null &&
+                                        Provider.of<AppointmentsProvider>(
+                                                    context,
+                                                    listen: true)
+                                                .appointments[
+                                                    widget.appointmentIndex]
+                                                .doctor!
+                                                .totalRate !=
+                                            null
+                                    ? Row(
+                                        children: [
+                                          Text(
+                                            Provider.of<AppointmentsProvider>(
+                                                    context,
+                                                    listen: true)
+                                                .appointments[
+                                                    widget.appointmentIndex]
+                                                .doctor!
+                                                .totalRate!
+                                                .toString(),
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18.sp),
+                                          ),
+                                          Text(
+                                            "/5",
+                                            style: TextStyle(fontSize: 15.sp),
+                                          ),
+                                        ],
+                                      )
+                                    : Container(),
+                              ],
+                            ),
+                            // GestureDetector(
+                            //     onTap: () {
+                            //       setState(() {
+                            //         ontap = !ontap;
+                            //       });
+                            //       showDialog(
+                            //           context: context,
+                            //           builder: (BuildContext context) {
+                            //             return Dialog(
+                            //               alignment: Alignment.centerRight,
+                            //               backgroundColor: const Color(0xffefefef),
+                            //               shape: RoundedRectangleBorder(
+                            //                   borderRadius: BorderRadius.circular(
+                            //                       10)), //this right here
+                            //               child: Container(
+                            //                 height: 350,
+                            //                 width: mediaWidth,
+                            //                 color: const Color(0xffefefef),
+                            //                 child: SingleChildScrollView(
+                            //                   child: Column(
+                            //                     mainAxisAlignment:
+                            //                         MainAxisAlignment.start,
+                            //                     crossAxisAlignment:
+                            //                         CrossAxisAlignment.start,
+                            //                     children: [
+                            //                       Container(
+                            //                         width: mediaWidth > 650 ? 820 : 600,
+                            //                         height: 40,
+                            //                         decoration: BoxDecoration(
+                            //                             color: const Color(0xffefefef),
+                            //                             border:
+                            //                                 Border.all(color: primary)),
+                            //                         child: TextField(
+                            //                           decoration: InputDecoration(
+                            //                               border: InputBorder.none,
+                            //                               prefixIcon: RotatedBox(
+                            //                                   quarterTurns: 1,
+                            //                                   child: Icon(
+                            //                                     Icons.search,
+                            //                                     color: primary,
+                            //                                   )),
+                            //                               hintText:
+                            //                                   'Search Doctors by Name ',
+                            //                               hintStyle: TextStyle(
+                            //                                   color: Colors.grey[500],
+                            //                                   fontWeight: FontWeight.w500,
+                            //                                   fontSize: 15)),
+                            //                         ),
+                            //                       ),
+                            //                       SizedBox(
+                            //                         height: mediaWidth > 650 ? 10 : 5,
+                            //                       ),
+                            //                       DoctorsChooseMenu(
+                            //                         choosen: choosen,
+                            //                       ),
+                            //                       DoctorsChooseMenu(
+                            //                         choosen: choosen,
+                            //                       ),
+                            //                       DoctorsChooseMenu(
+                            //                         choosen: choosen,
+                            //                       ),
+                            //                       DoctorsChooseMenu(
+                            //                         choosen: choosen,
+                            //                       ),
+                            //                       DoctorsChooseMenu(
+                            //                         choosen: choosen,
+                            //                       ),
+                            //                     ],
+                            //                   ),
+                            //                 ),
+                            //               ),
+                            //             );
+                            //           });
+                            //     },
+                            //     child: Icon(!ontap
+                            //         ? Icons.arrow_forward_ios
+                            //         : Icons.keyboard_arrow_down_outlined)),
+                          ],
+                        )
+                      : Container();
+                }),
+                SizedBox(
+                  height: mediaHeight > 900 ? 40.h : 20.h,
+                ),
+                Consumer<AppointmentsProvider>(
+                    builder: (context, appointmentsProvider, child) {
+                  return StepperScreen(
+                    lineColor: primary,
+                    stepperColor: primary,
+                    textColor: Colors.black,
+                    status: appointmentsProvider
+                        .appointments[widget.appointmentIndex].status!,
+                  );
+                }),
+                SizedBox(
+                  height: mediaHeight > 900 ? 40.h : 20.h,
+                ),
+                GestureDetector(
+                  onTap: widget.onTap,
+                  child: Container(
+                      width: 500.w,
+                      height: 100.h,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20.sp)),
+                      child: Column(
+                        children: [
+                          Consumer<AppointmentsProvider>(
+                              builder: (context, appointmentsProvider, child) {
+                            return Container(
+                              height: 80.h,
+                              width: MediaQuery.of(context).size.width * 0.9,
+                              child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: appointmentsProvider
+                                      .appointments[widget.appointmentIndex]
+                                      .appointmentDetails!
+                                      .length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return Container(
+                                      width: 100.w,
+                                      child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            SizedBox(
+                                              width: 3.w,
+                                            ),
+                                            SizedBox(
+                                              child: Column(
+                                                children: [
+                                                  CircleAvatar(
+                                                    radius: 25.sp,
+                                                    backgroundImage:
+                                                        NetworkImage(
+                                                      "https://yama-vet.com/${appointmentsProvider.appointments[widget.appointmentIndex].appointmentDetails![index].pet!.imgPath}",
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                      "${appointmentsProvider.appointments[widget.appointmentIndex].appointmentDetails![index].pet!.name}")
+                                                ],
+                                              ),
+                                            )
+                                          ]),
+                                    );
+                                  }),
+                            );
+                          })
+                        ],
+                      )),
+                ),
+                Center(
+                    child: Text(
+                  "services".tr(),
+                  style: TextStyle(
+                      color: primary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17.sp),
+                )),
+                OrderOverViewContainer(
+                  appointmentIndex: widget.appointmentIndex,
+                ),
+
+                Container(
+                  width: mediaWidth,
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(left: 20.w, top: 20.h),
+                            child: Text("Total".tr(),
+                                style: TextStyle(
+                                  fontSize: 15.sp,
+                                  color: primary,
+                                  fontWeight: FontWeight.w500,
+                                )),
+                          ),
+                          const Spacer(),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: 20.w, top: 20.h, right: 10.w),
+                            child: Consumer<AppointmentsProvider>(builder:
+                                (context, appointmentsProvider, child) {
+                              return Text(
+                                "${appointmentsProvider.appointments[widget.appointmentIndex].price}\$",
+                                style: TextStyle(
+                                    fontSize: mediaWidth > 650 ? 13.sp : 17.sp,
+                                    color: primary,
+                                    fontWeight: FontWeight.bold),
+                              );
+                            }),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                )
+              ])),
+        )));
   }
 }
 

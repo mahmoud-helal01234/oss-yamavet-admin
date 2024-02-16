@@ -44,12 +44,12 @@ class FilterRow extends StatelessWidget {
             )
           ],
         ),
-        Text(Provider.of<AppointmentsProvider>(context, listen: true)
-            .totalPrice
-            .toString()),
-        SizedBox(
-          width: mediaWidth > 650 ? .15 * mediaWidth : 0,
-        ),
+        Text("${Provider.of<AppointmentsProvider>(context, listen: true)
+            .totalPrice}"),
+
+        Text("(${Provider.of<AppointmentsProvider>(context, listen: true)
+            .appointments.length})"),
+
         // Row(
         //   children: [
         //     Text(

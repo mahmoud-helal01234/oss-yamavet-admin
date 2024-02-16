@@ -41,7 +41,6 @@ class _MenuScreenState extends State<MenuScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double mediaHeight = MediaQuery.sizeOf(context).height; //!900
 
     //! change all icons in this page
     return Scaffold(
@@ -147,7 +146,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   IconButton(
                       onPressed: () {},
                       icon: Icon(
-                        Icons.send_to_mobile_sharp,
+                        Icons.message,
                         color: lightpurple,
                       )),
                   Text(
@@ -164,11 +163,7 @@ class _MenuScreenState extends State<MenuScreen> {
               ),
             );
           }),
-          SizedBox(
-            height: mediaHeight > 900
-                ? .6 * mediaHeight
-                : .49 * MediaQuery.sizeOf(context).height,
-          ),
+
           InkWell(
             onTap: () async {
               log("logout".tr());
@@ -204,15 +199,11 @@ class _MenuScreenState extends State<MenuScreen> {
               ],
             ),
           ),
+          Spacer(),
+          Text("powered by",style: TextStyle(color: Colors.white),),
 
-          InkWell(
-            onTap: () async {
-              log("myFatoorah");
-              MyFatoorahController().initiatePayment();
-
-              // api logout
-            }
-          )
+          Text("Only Smart - Digi Dove",style: TextStyle(color: Colors.white)),
+          SizedBox(height: 10,)
         ],
       ),
     );

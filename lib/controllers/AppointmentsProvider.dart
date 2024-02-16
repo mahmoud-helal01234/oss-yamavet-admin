@@ -1,4 +1,5 @@
-import 'dart:developer';
+import 'dart:collection';
+import 'dart:developer' as dartDev;
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,9 +13,11 @@ import '../data/models/dtos/Appointment.dart';
 import 'dart:convert';
 
 import 'package:provider/provider.dart';
+import '../data/models/dtos/Service.dart';
 import '../data/models/requests/UpdateAppointmentRequest.dart';
 import '../data/models/responses/AppointmentResponse.dart';
 
+import '../data/models/responses/CategoriesResponse.dart';
 import '../data/services/ApiService.dart';
 
 class AppointmentsProvider extends ChangeNotifier {
@@ -38,6 +41,8 @@ class AppointmentsProvider extends ChangeNotifier {
   UpdateAppointmentRequest? updateAppointmentRequest;
 
   int? selectedPetId = 0;
+
+  getPetNameByIdFrom() {}
 
   void launchLocationOnGoogleMap(String lat, String long) {
     String url = "https://www.google.com/maps/search/?api=1&query=$lat,$long";
@@ -203,7 +208,6 @@ class AppointmentsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
   Future<void> delete(BuildContext context, int appointmentIndex) async {
     await ApiService().delete("appointment", appointments[appointmentIndex].id!,
         context: context, componentName: "User");
@@ -224,35 +228,23 @@ class AppointmentsProvider extends ChangeNotifier {
   isServiceIdForSelectedPetIdAndAppointmentUpdateRequest(int serviceId) {
     for (int i = 0; i < updateAppointmentRequest!.petIds!.length; i++) {
       if (updateAppointmentRequest!.petIds![i].petId == selectedPetId) {
-        print(updateAppointmentRequest!.petIds![i].petId.toString() +
-            " == " +
-            selectedPetId.toString());
-        for (int serviceIndex = 0;
-            serviceIndex <
-                updateAppointmentRequest!.petIds![i].serviceIds!.length;
-            serviceIndex++) {
-          if (serviceId ==
-              updateAppointmentRequest!.petIds![i].serviceIds![serviceIndex]) {
-            print(updateAppointmentRequest!.petIds![i].serviceIds![serviceIndex]
-                    .toString() +
-                " == " +
-                serviceId.toString());
-
-            return true;
-          }
-        }
+        return updateAppointmentRequest!.petIds![i].services!
+            .containsKey(serviceId);
       }
     }
     return false;
   }
 
   void initiateUpdateAppointmentRequest(int appointmentIndex) {
+    updateAppointmentRequest = null;
+    print("initiateUpdateAppointmentRequest");
     List<PetIds> petIds = [];
-
+    selectedPetId =
+        appointments[appointmentIndex].appointmentDetails![0].pet!.id!;
     for (int index = 0;
         index < appointments[appointmentIndex].appointmentDetails!.length;
         index++) {
-      List<int> petServices = [];
+      HashMap<int, Service>? petServices = HashMap<int, Service>();
 
       for (int serviceIndex = 0;
           serviceIndex <
@@ -261,67 +253,81 @@ class AppointmentsProvider extends ChangeNotifier {
                   .services!
                   .length;
           serviceIndex++) {
-        petServices.add(appointments[appointmentIndex]
-            .appointmentDetails![index]
-            .services![serviceIndex]
-            .id!);
+        petServices!.putIfAbsent(
+            appointments[appointmentIndex]
+                .appointmentDetails![index]
+                .services![serviceIndex]
+                .id!, () {
+          return Service(
+              id: appointments[appointmentIndex]
+                  .appointmentDetails![index]
+                  .services![serviceIndex]
+                  .id,
+              price: appointments[appointmentIndex]
+                  .appointmentDetails![index]
+                  .services![serviceIndex]
+                  .price,
+              nameEn: appointments[appointmentIndex]
+                  .appointmentDetails![index]
+                  .services![serviceIndex]
+                  .nameEn,
+              nameAr: appointments[appointmentIndex]
+                  .appointmentDetails![index]
+                  .services![serviceIndex]
+                  .nameAr,
+              categoryId: appointments[appointmentIndex]
+                  .appointmentDetails![index]
+                  .services![serviceIndex]
+                  .categoryId);
+        });
       }
-
+      petServices.forEach((key, value) {
+        print("key " + key.toString() + " - " + value.nameEn!);
+      });
       petIds.add(PetIds(
+          pet: appointments[appointmentIndex].appointmentDetails![index].pet!,
           petId: appointments[appointmentIndex]
               .appointmentDetails![index]
               .pet!
               .id!,
-          serviceIds: petServices));
+          services: petServices));
     }
 
     updateAppointmentRequest = UpdateAppointmentRequest(
         id: appointments[appointmentIndex].id.toString(), petIds: petIds);
 
-    log("updateAppointmentRequest:");
-    log(jsonEncode(updateAppointmentRequest!.toJson()));
+    notifyListeners();
+    dartDev.log("updateAppointmentRequest:");
+    dartDev.log(jsonEncode(updateAppointmentRequest!.toJson()));
   }
 
-  void toggleServiceIdToPetForUpdateAppointmentRequest(int serviceId) {
+  void toggleServiceIdToPetForUpdateAppointmentRequest(
+      int serviceId, Service service) {
     for (int index = 0;
         index < updateAppointmentRequest!.petIds!.length;
         index++) {
       if (selectedPetId == updateAppointmentRequest!.petIds![index].petId) {
-        for (int serviceIndex = 0;
-            serviceIndex <
-                updateAppointmentRequest!.petIds![index].serviceIds!.length;
-            serviceIndex++) {
-          if (updateAppointmentRequest!
-                  .petIds![index].serviceIds![serviceIndex] ==
-              serviceId) {
-            updateAppointmentRequest!.petIds![index].serviceIds!
-                .removeAt(serviceIndex);
-            notifyListeners();
-            return;
-          }
+        if (updateAppointmentRequest!.petIds![index].services!
+            .containsKey(serviceId)) {
+          updateAppointmentRequest!.petIds![index].services!.remove(serviceId);
+        } else {
+          updateAppointmentRequest!.petIds![index].services![serviceId] =
+              service;
         }
-        updateAppointmentRequest!.petIds![index].serviceIds!.add(serviceId);
+
         notifyListeners();
-        return;
       }
     }
-    log("updateAppointmentRequest:");
-    log(jsonEncode(updateAppointmentRequest!.toJson()));
+    dartDev.log("updateAppointmentRequest:");
+    dartDev.log(jsonEncode(updateAppointmentRequest!.toJson()));
   }
 
-  double calculateTotalForUpdateAppointmentRequest(context) {
+  double calculateTotalForUpdateAppointmentRequest() {
     double totalPrice = 0;
     for (int i = 0; i < updateAppointmentRequest!.petIds!.length; i++) {
-      List<int> serviceIds = [];
-      for (int serviceIndex = 0;
-          serviceIndex <
-              updateAppointmentRequest!.petIds![i].serviceIds!.length;
-          serviceIndex++) {
-        serviceIds.add(
-            updateAppointmentRequest!.petIds![i].serviceIds![serviceIndex]);
-      }
-      totalPrice += Provider.of<CategoriesProvider>(context, listen: false)
-          .getTotalPriceForServiceIds(serviceIds);
+      updateAppointmentRequest!.petIds![i].services!.forEach((key, service) {
+        totalPrice += service.price!;
+      });
     }
     return totalPrice;
   }

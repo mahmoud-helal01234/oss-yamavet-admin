@@ -1,4 +1,4 @@
-import 'dart:developer';
+import 'dart:developer' as dartDev;
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -7,6 +7,7 @@ import 'package:quickalert/widgets/quickalert_dialog.dart';
 import 'package:yama_vet_admin/data/models/requests/AddCategoryRequest.dart';
 import 'package:yama_vet_admin/data/models/requests/AddServiceRequest.dart';
 
+import '../data/models/dtos/Service.dart';
 import '../data/models/requests/UpdateCategoryRequest.dart';
 import '../data/models/requests/UpdateServiceRequest.dart';
 import '../data/models/responses/CategoriesResponse.dart';
@@ -19,6 +20,22 @@ class CategoriesProvider extends ChangeNotifier {
   bool addServiceOpened = false;
   bool editCategoryOpened = false;
 
+  CategoryService? getServiceByServiceId(int serviceId){
+    if(categories.isEmpty){
+      get();
+    }
+
+    for( Category category in categories ){
+        for(CategoryService service in category!.services!){
+          if(serviceId == service.id) {
+            return service;
+          }
+        }
+    }
+    return null;
+
+  }
+
   void toggleEditCategoryOpened() {
     editCategoryOpened = !editCategoryOpened;
     notifyListeners();
@@ -29,7 +46,7 @@ class CategoriesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  double getTotalPriceForServiceIds(List<int> serviceIds) {
+  double getTotalPriceForServiceIds(List<Service> serviceIds) {
     double totalPrice = 0;
     for (int index = 0; index < categories.length; index++) {
       for (int serviceIndex = 0;
@@ -48,7 +65,7 @@ class CategoriesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> get(BuildContext? context) async {
+  Future<void> get({BuildContext? context}) async {
     CategoriesResponse categoriesResponse = CategoriesResponse.fromJson(
         await ApiService().get("category", context: context));
     categories = categoriesResponse.categories!;
@@ -78,7 +95,7 @@ class CategoriesProvider extends ChangeNotifier {
     await ApiService().postWithFiles("category", fields, files,
         context: context, componentName: "Category");
 
-    get(null);
+    get();
   }
 
   Future<void> update(
@@ -92,7 +109,7 @@ class CategoriesProvider extends ChangeNotifier {
     await ApiService().postWithFiles("category/update", fields, files,
         context: context, componentName: "Category",operationName: "Updated");
 
-    get(null);
+    get();
     toggleEditCategoryOpened();
   }
 
@@ -101,7 +118,7 @@ class CategoriesProvider extends ChangeNotifier {
         context: context, componentName: "Category");
     Navigator.pop(context);
 
-    get(null);
+    get();
 
     notifyListeners();
   }
@@ -109,7 +126,7 @@ class CategoriesProvider extends ChangeNotifier {
   Future<void> deleteService(BuildContext context, int id) async {
     await ApiService()
         .delete("service", id, context: context, componentName: "Service");
-    get(null);
+    get();
   }
 
   Future<void> createService(
@@ -118,7 +135,7 @@ class CategoriesProvider extends ChangeNotifier {
         context: context, componentName: "Service");
     addServiceOpened = false;
     notifyListeners();
-    get(null);
+    get();
   }
 
   Future updateService(
@@ -134,6 +151,6 @@ class CategoriesProvider extends ChangeNotifier {
         context: context, componentName: "Service", operationName: "Updated");
     serviceToUpdate = null;
     notifyListeners();
-    get(null);
+    get();
   }
 }

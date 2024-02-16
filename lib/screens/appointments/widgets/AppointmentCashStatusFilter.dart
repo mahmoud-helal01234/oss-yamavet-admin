@@ -39,7 +39,7 @@ class AppointmentCashStatusFilter extends StatelessWidget {
                         border: Border.all(color: primary, width: 1.5)),
                     child: Center(
                       child: Text(
-                        "Collected".tr(),
+                        "collected".tr(),
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: 'futur',
@@ -69,7 +69,7 @@ class AppointmentCashStatusFilter extends StatelessWidget {
                         border: Border.all(color: primary, width: 1.5)),
                     child: Center(
                       child: Text(
-                        "Not Collected".tr(),
+                        "not_collected".tr(),
                         style: TextStyle(
                             fontSize: 15,
                             fontFamily: 'futur',

@@ -5,14 +5,17 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:yama_vet_admin/controllers/CategoriesProvider.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
+import 'package:yama_vet_admin/data/models/dtos/Service.dart';
 import 'package:yama_vet_admin/screens/appointments/widgets/AppointmentPet.dart';
 import 'package:yama_vet_admin/screens/appointments/widgets/SelectServiceRow.dart';
+import 'package:yama_vet_admin/screens/appointments/widgets/SelectedServicesContainer.dart';
 
 import 'package:yama_vet_admin/screens/menu.dart';
 import 'package:yama_vet_admin/widgets/choose_spec.dart';
 import 'package:yama_vet_admin/widgets/custom_button.dart';
 
 import '../../controllers/AppointmentsProvider.dart';
+import '../../widgets/order_over_view.dart';
 
 class SelectServices extends StatefulWidget {
   SelectServices({super.key, required this.appointmentIndex});
@@ -30,7 +33,8 @@ class _SelectServicesState extends State<SelectServices> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Provider.of<CategoriesProvider>(context, listen: false).get(context);
+    Provider.of<CategoriesProvider>(context, listen: false)
+        .get(context: context);
     Provider.of<AppointmentsProvider>(context, listen: false)
         .initiateUpdateAppointmentRequest(widget.appointmentIndex!);
   }
@@ -56,9 +60,6 @@ class _SelectServicesState extends State<SelectServices> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-              // SizedBox(
-              //   height: .02 * MediaQuery.sizeOf(context).height,
-              // ),
               Row(children: [
                 SizedBox(
                   width: .05 * MediaQuery.sizeOf(context).width,
@@ -69,9 +70,6 @@ class _SelectServicesState extends State<SelectServices> {
                     },
                     child: Image.asset("assets/images/menuIcon.png")),
               ]),
-              SizedBox(
-                height: 10.h,
-              ),
               Row(
                 children: [
                   IconButton(
@@ -93,9 +91,6 @@ class _SelectServicesState extends State<SelectServices> {
                   )
                 ],
               ),
-              SizedBox(
-                height: 10.h,
-              ),
               Container(
                 height: 90.h,
                 child: Consumer<AppointmentsProvider>(
@@ -113,30 +108,11 @@ class _SelectServicesState extends State<SelectServices> {
                       });
                 }),
               ),
-
-              SizedBox(
-                height: 10.h,
-              ),
               Divider(
                 thickness: 1,
                 color: Colors.grey[400],
                 endIndent: 20,
                 indent: 20,
-              ),
-              SizedBox(
-                height: 5.h,
-              ),
-              Center(
-                child: Text(
-                  "Fluffy’s Services",
-                  style: GoogleFonts.roboto(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w600,
-                      color: primary),
-                ),
-              ),
-              SizedBox(
-                height: .02 * MediaQuery.sizeOf(context).height,
               ),
               Padding(
                 padding: EdgeInsets.only(left: 20.w, bottom: 10.h),
@@ -160,7 +136,9 @@ class _SelectServicesState extends State<SelectServices> {
                           },
                           child: SpecialtiesContainer(
                             img: 'assets/images/vaci.png',
-                            text: categoriesProvider.categories[index].nameAr!,
+                            text: context.locale.toString() == "ar"
+                                ? categoriesProvider.categories[index].nameAr!
+                                : categoriesProvider.categories[index].nameEn!,
                             textColor: selectedCategoryIndex == index
                                 ? Colors.white
                                 : Colors.black,
@@ -173,7 +151,6 @@ class _SelectServicesState extends State<SelectServices> {
                       }),
                 );
               }),
-
               Column(
                 children: [
                   Column(
@@ -195,7 +172,7 @@ class _SelectServicesState extends State<SelectServices> {
                       Consumer<CategoriesProvider>(
                           builder: (context, categoriesProvider, child) {
                         return Container(
-                          height: 200.h,
+                          height: 150.h,
                           child: ListView.builder(
                               itemCount: categoriesProvider
                                   .categories[selectedCategoryIndex]
@@ -204,7 +181,6 @@ class _SelectServicesState extends State<SelectServices> {
                               itemBuilder: (BuildContext context, int index) {
                                 return SelectServiceRow(
                                     ontap: () {
-                                      print("onTap");
                                       Provider.of<AppointmentsProvider>(context,
                                               listen: false)
                                           .toggleServiceIdToPetForUpdateAppointmentRequest(
@@ -212,10 +188,38 @@ class _SelectServicesState extends State<SelectServices> {
                                                   .categories[
                                                       selectedCategoryIndex]
                                                   .services![index]!
-                                                  .id!);
+                                                  .id!,
+                                              Service(
+                                                  categoryId: categoriesProvider
+                                                      .categories[
+                                                          selectedCategoryIndex]
+                                                      .services![index]!
+                                                      .categoryId,
+                                                  nameAr: categoriesProvider
+                                                      .categories[
+                                                          selectedCategoryIndex]
+                                                      .services![index]!
+                                                      .nameAr,
+                                                  nameEn: categoriesProvider
+                                                      .categories[
+                                                          selectedCategoryIndex]
+                                                      .services![index]!
+                                                      .nameEn,
+                                                  price: categoriesProvider
+                                                      .categories[
+                                                          selectedCategoryIndex]
+                                                      .services![index]!
+                                                      .price));
                                     },
-                                    text:
-                                        "${categoriesProvider.categories[selectedCategoryIndex].services![index]!.nameAr!} - ${categoriesProvider.categories[selectedCategoryIndex].services![index]!.nameEn!}",
+                                    text: context.locale.toString() == "ar"
+                                        ? categoriesProvider
+                                            .categories[selectedCategoryIndex]
+                                            .services![index]!
+                                            .nameAr!
+                                        : categoriesProvider
+                                            .categories[selectedCategoryIndex]
+                                            .services![index]!
+                                            .nameEn!,
                                     price: categoriesProvider
                                         .categories[selectedCategoryIndex]
                                         .services![index]!
@@ -269,6 +273,10 @@ class _SelectServicesState extends State<SelectServices> {
                   //   ],
                   // ),
 
+                  SelectedServicesContainer(
+                    appointmentIndex: widget.appointmentIndex!,
+                  ),
+
                   Container(
                     width: mediaWidth,
                     decoration: BoxDecoration(
@@ -303,8 +311,7 @@ class _SelectServicesState extends State<SelectServices> {
                                   (context, appointmentsProvider, child) {
                                 return Text(
                                   appointmentsProvider
-                                      .calculateTotalForUpdateAppointmentRequest(
-                                          context)
+                                      .calculateTotalForUpdateAppointmentRequest()
                                       .toString(),
                                   style: TextStyle(color: primary),
                                 );

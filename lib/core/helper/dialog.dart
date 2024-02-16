@@ -9,6 +9,7 @@ import '../utils/colors.dart';
 import '../../data/models/offers_model.dart';
 
 List<OffersModel> offerList = [];
+
 Future<void> dialogBuilder(
     BuildContext context,
     String img,
@@ -198,11 +199,12 @@ Future<void> dialogBuilderOrder(
           child: Column(
               // mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
+                Container(
+                  width: 0.3.sw,
+                  height: mediaWidth > 650 ? 0.4.sh : 0.5.sh,
+                ),
                 Card(
-                  margin: EdgeInsets.only(
-                      top: mediaWidth > 650
-                          ? .6 * mediaHeight
-                          : .56 * mediaHeight),
+                  color: Colors.red,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(30),
@@ -210,209 +212,193 @@ Future<void> dialogBuilderOrder(
                   elevation: 30,
                   // color: Colors.white,
                   child: Container(
+                    padding: EdgeInsets.all(0.01.sw),
                     width: mediaWidth,
-                    height: .38 * mediaHeight,
+                    height: 0.45.sh,
                     decoration: BoxDecoration(
                         borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(30),
                             topRight: Radius.circular(30)),
                         color: primary,
                         boxShadow: []),
-                    child: Stack(
-                      children: [
-                        Positioned(
-                            left: 20,
-                            top: 10,
-                            child: Container(
-                              width: .03 * MediaQuery.sizeOf(context).width,
-                              height: mediaHeight > 900
-                                  ? .37 * mediaHeight
-                                  : .35 * MediaQuery.sizeOf(context).height,
-                              decoration: BoxDecoration(
-                                  color: primary,
-                                  borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(10),
-                                      bottomLeft: Radius.circular(10))),
-                            )),
-                        Positioned(
-                            top: mediaWidth > 650 ? 30 : 20,
-                            left: mediaHeight > 900 ? 60 : 20,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Consumer<AppointmentsProvider>(builder:
-                                        (context, appointmentsProvider, child) {
-                                      return Text(
-                                        "${"Order".tr()} #${appointmentsProvider.appointments[appointmentIndex].id.toString()}",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: 'futuraMd',
-                                            fontSize:
-                                                mediaWidth > 650 ? 20 : 15,
-                                            fontWeight: FontWeight.bold),
-                                      );
-                                    }),
-                                    SizedBox(
-                                      width: mediaWidth > 650
-                                          ? .7 * mediaWidth
-                                          : .5 *
-                                              MediaQuery.sizeOf(context).width,
-                                    ),
-                                    Consumer<AppointmentsProvider>(builder:
-                                        (context, appointmentsProvider, child) {
-                                      return Text(
-                                        "${appointmentsProvider.appointments[appointmentIndex].price}\$",
-                                        style: TextStyle(
-                                            fontSize:
-                                                mediaWidth > 650 ? 20 : 15,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      );
-                                    })
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: mediaWidth > 650 ? 20 : 10,
-                                ),
-                                SizedBox(
-                                  height: mediaWidth > 650 ? 20 : 10,
-                                ),
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.calendar_month_outlined,
-                                      weight: 30,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(children: [
+                            Spacer(),
+                            CircleAvatar(
+
+                              child: IconButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  icon: Icon(Icons.close,color: primary,)),
+                              backgroundColor: Colors.white,
+                            )
+                          ]),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Consumer<AppointmentsProvider>(builder:
+                                  (context, appointmentsProvider, child) {
+                                return Text(
+                                  "${"Order".tr()} #${appointmentsProvider.appointments[appointmentIndex].id.toString()}",
+                                  style: TextStyle(
                                       color: Colors.white,
-                                    ),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    Consumer<AppointmentsProvider>(builder:
-                                        (context, appointmentsProvider, child) {
-                                      return Text(
-                                        appointmentsProvider
-                                            .appointments[appointmentIndex]!
-                                            .day!,
-                                        style: GoogleFonts.roboto(
-                                            fontSize:
-                                                mediaWidth > 650 ? 20 : 15,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w500),
-                                      );
-                                    }),
-                                    SizedBox(
-                                      width: mediaHeight > 900
-                                          ? .4 * mediaWidth
-                                          : .3 *
-                                              MediaQuery.sizeOf(context).width,
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: mediaWidth > 650 ? 20 : 10,
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.location_on,
-                                      size: 27,
+                                      fontFamily: 'futuraMd',
+                                      fontSize: mediaWidth > 650 ? 20 : 15,
+                                      fontWeight: FontWeight.bold),
+                                );
+                              }),
+                              Consumer<AppointmentsProvider>(builder:
+                                  (context, appointmentsProvider, child) {
+                                return Text(
+                                  "${appointmentsProvider.appointments[appointmentIndex].price}\$",
+                                  style: TextStyle(
+                                      fontSize: mediaWidth > 650 ? 20 : 15,
                                       color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                );
+                              })
+                            ],
+                          ),
+                          SizedBox(
+                            height: mediaWidth > 650 ? 20 : 10,
+                          ),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.calendar_month_outlined,
+                                weight: 30,
+                                color: Colors.white,
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Consumer<AppointmentsProvider>(builder:
+                                  (context, appointmentsProvider, child) {
+                                return Text(
+                                  appointmentsProvider
+                                      .appointments[appointmentIndex]!.day!,
+                                  style: GoogleFonts.roboto(
+                                      fontSize: mediaWidth > 650 ? 20 : 15,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500),
+                                  overflow: TextOverflow.clip,
+                                );
+                              }),
+                              SizedBox(
+                                width: mediaHeight > 900
+                                    ? .4 * mediaWidth
+                                    : .3 * MediaQuery.sizeOf(context).width,
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: mediaWidth > 650 ? 20 : 10,
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.location_on,
+                                size: 27,
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              SizedBox(
+                                width: 0.85.sw,
+                                child: Consumer<AppointmentsProvider>(builder:
+                                    (context, appointmentsProvider, child) {
+                                  return Text(
+                                    appointmentsProvider
+                                        .appointments[appointmentIndex]
+                                        .clientLocation!
+                                        .description!,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: mediaWidth > 650 ? 20 : 15,
                                     ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Consumer<AppointmentsProvider>(builder:
-                                        (context, appointmentsProvider, child) {
-                                      return Text(
-                                        appointmentsProvider
-                                            .appointments[appointmentIndex]
-                                            .clientLocation!
-                                            .description!,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: mediaWidth > 650 ? 20 : 15,
-                                        ),
-                                      );
-                                    })
-                                  ],
-                                ),
-                              ],
-                            )),
-                        Positioned(
-                            left: mediaHeight > 900
-                                ? 70.w
-                                : mediaWidth > 350
-                                    ? 60
-                                    : 40,
-                            bottom: mediaWidth > 650 ? 120 : 70,
+                                  );
+                                }),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 0.05.sh,
+                          ),
+                          Consumer<AppointmentsProvider>(
+                              builder: (context, appointmentsProvider, child) {
+                            return StepperScreen(
+                              lineColor: Colors.white,
+                              stepperColor: Colors.red,
+                              textColor: Colors.white,
+                              status: appointmentsProvider
+                                  .appointments[appointmentIndex]!.status!,
+                            );
+                          }),
+                          Center(
                             child: Consumer<AppointmentsProvider>(builder:
                                 (context, appointmentsProvider, child) {
-                              return StepperScreen(
-                                lineColor: Colors.white,
-                                stepperColor: Colors.red,
-                                textColor: Colors.white,
-                                status: appointmentsProvider
-                                    .appointments[appointmentIndex]!.status!,
-                              );
-                            })),
-                        Consumer<AppointmentsProvider>(
-                            builder: (context, appointmentsProvider, child) {
-                          return appointmentsProvider
-                                          .appointments[appointmentIndex]
-                                          .status ==
-                                      "initiated" ||
-                                  appointmentsProvider
-                                          .appointments[appointmentIndex]
-                                          .status ==
-                                      "accepted"
-                              ? Positioned(
-                                  bottom: 20,
-                                  left: mediaWidth > 650 ? 200 : 40,
-                                  child: MaterialButton(
-                                    color: Colors.white,
-                                    minWidth: mediaWidth > 650 ? 470 : 300,
-                                    height: 30,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(5)),
-                                    onPressed: () async {
-                                      if (Provider.of<AppointmentsProvider>(
-                                                  context,
-                                                  listen: false)
+                              return appointmentsProvider
                                               .appointments[appointmentIndex]
                                               .status ==
-                                          "initiated") {
-                                        await Provider.of<AppointmentsProvider>(
-                                                context,
-                                                listen: false)
-                                            .accept(context, appointmentIndex);
-                                      } else {
-                                        await Provider.of<AppointmentsProvider>(
-                                                context,
-                                                listen: false)
-                                            .complete(
-                                                context, appointmentIndex);
-                                      }
-                                    },
-                                    child: Text(
+                                          "initiated" ||
                                       appointmentsProvider
-                                                  .appointments[
-                                                      appointmentIndex]
-                                                  .status ==
-                                              "initiated".tr()
-                                          ? "Accept".tr()
-                                          : "Complete".tr(),
-                                      style: TextStyle(
-                                          color: primary,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 17),
-                                    ),
-                                  ),
-                                )
-                              : Container();
-                        })
-                      ],
+                                              .appointments[appointmentIndex]
+                                              .status ==
+                                          "accepted"
+                                  ? MaterialButton(
+                                      color: Colors.white,
+                                      minWidth: mediaWidth > 650 ? 470 : 300,
+                                      height: 30,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      onPressed: () async {
+                                        if (Provider.of<AppointmentsProvider>(
+                                                    context,
+                                                    listen: false)
+                                                .appointments[appointmentIndex]
+                                                .status ==
+                                            "initiated") {
+                                          await Provider.of<
+                                                      AppointmentsProvider>(
+                                                  context,
+                                                  listen: false)
+                                              .accept(
+                                                  context, appointmentIndex);
+                                        } else {
+                                          await Provider.of<
+                                                      AppointmentsProvider>(
+                                                  context,
+                                                  listen: false)
+                                              .complete(
+                                                  context, appointmentIndex);
+                                        }
+                                      },
+                                      child: Text(
+                                        appointmentsProvider
+                                                    .appointments[
+                                                        appointmentIndex]
+                                                    .status ==
+                                                "initiated".tr()
+                                            ? "Accept".tr()
+                                            : "Complete".tr(),
+                                        style: TextStyle(
+                                            color: primary,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 17),
+                                      ),
+                                    )
+                                  : Container();
+                            }),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 )

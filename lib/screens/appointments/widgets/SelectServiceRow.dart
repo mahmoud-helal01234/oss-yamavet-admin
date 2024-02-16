@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
 // import 'package:google_fonts/google_fonts.dart';
@@ -11,6 +12,7 @@ class SelectServiceRow extends StatefulWidget {
       required this.text,
       required this.price,
       required this.checkbox});
+
   final String text;
   final String price;
   void Function()? ontap;
@@ -25,51 +27,62 @@ class _SelectServiceRowState extends State<SelectServiceRow> {
 
   @override
   Widget build(BuildContext context) {
-    double mediaHeight = MediaQuery.sizeOf(context).height; //!900
 
     return Container(
-      height: 25,
+      padding: EdgeInsets.only(left: .02.sw, right: .02.sw),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(
-            width:
-                mediaHeight > 900 ? 10 : .05 * MediaQuery.sizeOf(context).width,
-          ),
-          Text(widget.text,
+            width: 0.65.sw,
+            child: Text(
+              widget.text,
               style: TextStyle(
                 height: 0,
                 fontSize: 13,
                 color: remeberMe ? primary : Colors.black,
                 fontWeight: FontWeight.w400,
-              )),
-          Spacer(),
-          Text(
-            "${widget.price}\$",
-            style: TextStyle(height: 0, color: Colors.green[600]),
+              ),
+              overflow: TextOverflow.clip,
+            ),
           ),
-          Checkbox(
-                  fillColor: MaterialStateProperty.resolveWith((states) {
-                    if (!states.contains(MaterialState.selected)) {
-                      return Colors.white;
-                    }
-                    return null;
-                  }),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5)),
-                  side: BorderSide(
-                    color: primary,
-                    width: 1,
-                  ),
-                  activeColor: primary,
-                  checkColor: Colors.white,
-                  value: widget.checkbox,
-                  onChanged: (val) {
+          Row(
+            children: [
+              SizedBox(
+                width: 0.15.sw,
+                child: Text(
+                  "${widget.price}\$",
+                  style: TextStyle(height: 0, color: Colors.green[600]),
+                ),
+              ),
+              SizedBox(
+                width: 0.07.sw,
+                child: Checkbox(
+                    fillColor: MaterialStateProperty.resolveWith((states) {
+                      if (!states.contains(MaterialState.selected)) {
+                        return Colors.white;
+                      }
+                      return null;
+                    }),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                    side: BorderSide(
+                      color: primary,
+                      width: 1,
+                    ),
+                    activeColor: primary,
+                    checkColor: Colors.white,
+                    value: widget.checkbox,
+                    onChanged: (val) {
+                      widget.ontap!.call();
+                      setState(() {
+                        widget.checkbox = val!;
+                      });
+                    }),
+              ),
+            ],
+          ),
 
-                    widget.ontap!.call();
-                    setState(() {
-                      widget.checkbox = val!;
-                    });
-                  }),
         ],
       ),
     );

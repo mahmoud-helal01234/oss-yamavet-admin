@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yama_vet_admin/core/utils/colors.dart';
@@ -33,6 +34,7 @@ class _LocationAndCashStatusRowState extends State<LocationAndCashStatusRow> {
     double mediaHeight = MediaQuery.sizeOf(context).height; //!900
     double mediaWidth = MediaQuery.sizeOf(context).width;
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         InkWell(
           onTap: () {
@@ -52,22 +54,21 @@ class _LocationAndCashStatusRowState extends State<LocationAndCashStatusRow> {
           child: Container(
             child: Row(
               children: [
-                SizedBox(
-                  width: mediaWidth > 400
-                      ? .05 * MediaQuery.sizeOf(context).width
-                      : .01 * mediaWidth,
-                ),
                 const Icon(
                   Icons.location_on,
                   size: 27,
                 ),
                 Consumer<AppointmentsProvider>(
                     builder: (context, appointmentsProvider, child) {
-                  return Text(
-                    appointmentsProvider.appointments[widget.appointmentIndex]
-                        .clientLocation!.description!,
-                    style: TextStyle(
-                      fontSize: mediaWidth > 650 ? 20 : 13,
+                  return SizedBox(
+                    width: 0.5.sw,
+                    child: Text(
+                      appointmentsProvider.appointments[widget.appointmentIndex]
+                          .clientLocation!.description!,
+                      style: TextStyle(
+                        fontSize: mediaWidth > 650 ? 20 : 13,
+                      ),
+                      overflow: TextOverflow.clip,
                     ),
                   );
                 }),
@@ -75,18 +76,12 @@ class _LocationAndCashStatusRowState extends State<LocationAndCashStatusRow> {
             ),
           ),
         ),
-        Spacer(),
+
         Consumer<AppointmentsProvider>(
             builder: (context, appointmentsProvider, child) {
           return (Provider.of<SettingsProvider>(context, listen: true).role !=
                   "vet")
               ? Container(
-                  margin: EdgeInsets.only(right: mediaWidth > 650 ? 30 : 20),
-                  // width: appointmentsProvider.appointments[widget.appointmentIndex].cash == "not_collected"
-                  //     ? mediaWidth > 650
-                  //         ? 170
-                  //         : .34 * mediaWidth
-                  //     : 150,
                   height: 30,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
@@ -95,22 +90,29 @@ class _LocationAndCashStatusRowState extends State<LocationAndCashStatusRow> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 2),
+                          padding: const EdgeInsets.all(4),
                           child: Row(
                             children: [
-                              Text(
-                                "cash".tr(),
-                                style: TextStyle(
-                                    fontFamily: 'futur',
-                                    fontSize: mediaWidth > 650 ? 20 : 15,
-                                    color: Colors.black),
-                              ),
                               Consumer<AppointmentsProvider>(builder:
                                   (context, appointmentsProvider, child) {
                                 return Text(
                                   appointmentsProvider
-                                      .appointments[widget.appointmentIndex]
-                                      .cash!,
+                                                  .appointments[
+                                                      widget.appointmentIndex]
+                                                  .cash! ==
+                                              "collected" ||
+                                          appointmentsProvider
+                                                  .appointments[
+                                                      widget.appointmentIndex]
+                                                  .cash! ==
+                                              "not_collected"
+                                      ? appointmentsProvider
+                                          .appointments[widget.appointmentIndex]
+                                          .cash!
+                                          .tr()
+                                      : appointmentsProvider
+                                          .appointments[widget.appointmentIndex]
+                                          .cash!,
                                   style: TextStyle(
                                       fontFamily: 'futur',
                                       fontSize: mediaWidth > 650 ? 15 : 12,
@@ -156,11 +158,11 @@ class _LocationAndCashStatusRowState extends State<LocationAndCashStatusRow> {
                                                   padding: EdgeInsets.only(
                                                       bottom: 10),
                                                   child: Text(
-                                                    "Collected".tr(),
+                                                    "collected".tr(),
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w600,
-                                                        fontSize: 15),
+                                                        fontSize: 12),
                                                   ),
                                                 ),
                                               ],
@@ -187,7 +189,7 @@ class _LocationAndCashStatusRowState extends State<LocationAndCashStatusRow> {
                                                   MainAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  "Not Collected".tr(),
+                                                  "not_collected".tr(),
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.w600,

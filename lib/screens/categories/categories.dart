@@ -48,7 +48,7 @@ class _CategoryChooseState extends State<CategoryChoose> {
       _isLoading = true;
     });
 
-    Provider.of<CategoriesProvider>(context, listen: false).get(context);
+    Provider.of<CategoriesProvider>(context, listen: false).get(context: context);
     setState(() {
       _isLoading = false;
     });
