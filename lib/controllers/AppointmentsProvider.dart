@@ -19,6 +19,7 @@ import '../data/models/responses/AppointmentResponse.dart';
 
 import '../data/models/responses/CategoriesResponse.dart';
 import '../data/services/ApiService.dart';
+import 'ConfigurationsProvider.dart';
 
 class AppointmentsProvider extends ChangeNotifier {
   List<Appointment> appointments = [];
@@ -114,7 +115,6 @@ class AppointmentsProvider extends ChangeNotifier {
 
   Future<void> getAppointments(BuildContext context) async {
     // appointmentsShown = List.filled(appointments.length, true, growable: true);
-    print("link: " + "appointment${_getFilterQueryParams()}");
     AppointmentsResponse appointmentsResponse = AppointmentsResponse.fromJson(
         await ApiService().get("appointment${_getFilterQueryParams()}",
             context: context, componentName: "Appointment"));
@@ -172,7 +172,6 @@ class AppointmentsProvider extends ChangeNotifier {
 
   void changeAppointmentStatusByIndex(int index, String status) {
     appointments[index].status = status;
-
     notifyListeners();
   }
 
@@ -322,12 +321,19 @@ class AppointmentsProvider extends ChangeNotifier {
     dartDev.log(jsonEncode(updateAppointmentRequest!.toJson()));
   }
 
-  double calculateTotalForUpdateAppointmentRequest() {
+  double calculateTotalForUpdateAppointmentRequest(context) {
+
     double totalPrice = 0;
     for (int i = 0; i < updateAppointmentRequest!.petIds!.length; i++) {
       updateAppointmentRequest!.petIds![i].services!.forEach((key, service) {
         totalPrice += service.price!;
       });
+    }
+    totalPrice += Provider.of<ConfigurationsProvider>(context, listen: false).configurations!.ordinaryPrice!;
+    if(updateAppointmentRequest!.petIds!.length > Provider.of<ConfigurationsProvider>(context, listen: false).configurations!.petsNumber!){
+
+      int extraPets = updateAppointmentRequest!.petIds!.length - Provider.of<ConfigurationsProvider>(context, listen: false).configurations!.petsNumber!;
+      totalPrice += (extraPets * Provider.of<ConfigurationsProvider>(context, listen: false).configurations!.maxPrice!);
     }
     return totalPrice;
   }

@@ -21,13 +21,11 @@ class ConfigurationsProvider extends ChangeNotifier {
 
   Future<void> create(BuildContext context,AddReminderRequest addReminderRequest) async {
 
-
     Map<String,dynamic> fields = addReminderRequest.toJson();
 
     await ApiService().post("reminder", fields, context:context,componentName: "Reminder" );
 
     get(context);
-
   }
 
 

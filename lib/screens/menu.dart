@@ -137,9 +137,12 @@ class _MenuScreenState extends State<MenuScreen> {
               builder: (context, configurationsProvider, child) {
             return InkWell(
               onTap: () async {
-                await launchUrl(Uri.parse(Platform.isAndroid
-                    ? "https://wa.me/${configurationsProvider.configurations!.whatsappNumber!}/"
-                    : "https://api.whatsapp.com/send"));
+                final Uri whatsappLaunchUri =
+                Uri(scheme: 'https', host: 'wa.me', path: configurationsProvider.configurations!.whatsappNumber!);
+                if (!await launchUrl(whatsappLaunchUri)) {
+                  throw Exception('Could not launch $whatsappLaunchUri');
+                }
+
               },
               child: Row(
                 children: [

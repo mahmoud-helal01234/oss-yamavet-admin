@@ -311,7 +311,7 @@ class _SelectServicesState extends State<SelectServices> {
                                   (context, appointmentsProvider, child) {
                                 return Text(
                                   appointmentsProvider
-                                      .calculateTotalForUpdateAppointmentRequest()
+                                      .calculateTotalForUpdateAppointmentRequest(context)
                                       .toString(),
                                   style: TextStyle(color: primary),
                                 );
